@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8q3v652k20r7"]
+
+[ext_resource type="Script" uid="uid://dsw6rm0p2wcvh" path="res://data/scenes_and_scripts/phoenix/main_menu_2.gd" id="1_we2cn"]
+[ext_resource type="PackedScene" uid="uid://ms43gnmmu3g3" path="res://data/scenes_and_scripts/phoenix/login_screen.tscn" id="2_we2cn"]
+[ext_resource type="Script" uid="uid://cbq3a06yqhqij" path="res://data/scenes_and_scripts/phoenix/client_running_games.gd" id="3_43mna"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_we2cn")
+
+[node name="LoginScreen" parent="." instance=ExtResource("2_we2cn")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="RunningGames" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("3_43mna")

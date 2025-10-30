@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cyqux5urfqgpp"]
+
+[node name="Background" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+offset_right = 2000.0
+offset_bottom = 3000.0
+color = Color(0.97883, 1, 0.917905, 1)

@@ -1,0 +1,137 @@
+[gd_scene load_steps=18 format=3 uid="uid://bmm23rwsctf0d"]
+
+[ext_resource type="Script" uid="uid://bybtum2gen2sn" path="res://piano_controller.gd" id="1_dhja5"]
+[ext_resource type="AudioStream" uid="uid://x2gmv6k7865v" path="res://data/sound_effects/PianoA.wav" id="2_no1mx"]
+[ext_resource type="AudioStream" uid="uid://dld4yrmiciygi" path="res://data/sound_effects/PianoA#.wav" id="3_16xhs"]
+[ext_resource type="AudioStream" uid="uid://drag3lq35lub4" path="res://data/sound_effects/PianoB.wav" id="4_mtk6g"]
+[ext_resource type="AudioStream" uid="uid://deyguymvohnxb" path="res://data/sound_effects/PianoC.wav" id="5_f1a17"]
+[ext_resource type="AudioStream" uid="uid://c5n2emc4npgjk" path="res://data/sound_effects/PianoC#.wav" id="6_31ffx"]
+[ext_resource type="AudioStream" uid="uid://c6b6j0l8mvsc" path="res://data/sound_effects/PianoD.wav" id="7_iqopi"]
+[ext_resource type="AudioStream" uid="uid://b12woabbgw3r0" path="res://data/sound_effects/PianoD#.wav" id="8_w1jhv"]
+[ext_resource type="AudioStream" uid="uid://ch0ljosbirgu0" path="res://data/sound_effects/PianoE.wav" id="9_26kta"]
+[ext_resource type="AudioStream" uid="uid://crfxr4t4walt2" path="res://data/sound_effects/PianoF.wav" id="10_30mtg"]
+[ext_resource type="AudioStream" uid="uid://di5ou6vy1bllb" path="res://data/sound_effects/PianoF#.wav" id="11_n5pun"]
+[ext_resource type="AudioStream" uid="uid://511vanjkq50o" path="res://data/sound_effects/PianoG.wav" id="12_gv1bp"]
+[ext_resource type="AudioStream" uid="uid://csysnwoh4rv1c" path="res://data/sound_effects/PianoG#.wav" id="13_6h7kh"]
+[ext_resource type="AudioStream" uid="uid://bey1462tawh4m" path="res://data/sound_effects/PianoGMajor.wav" id="14_kdv8y"]
+[ext_resource type="AudioStream" uid="uid://begbg0fq8gkf0" path="res://data/sound_effects/PianoCMajor.wav" id="15_b04oo"]
+[ext_resource type="AudioStream" uid="uid://djgg2qyk52w5g" path="res://data/sound_effects/PianoDMajor.wav" id="16_iq32n"]
+[ext_resource type="AudioStream" uid="uid://c3a0lxtt84whv" path="res://data/sound_effects/PianoEMinor.wav" id="17_v0k4r"]
+
+[node name="PianoController" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dhja5")
+
+[node name="PianoNotes" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="A" type="AudioStreamPlayer" parent="PianoNotes"]
+unique_name_in_owner = true
+stream = ExtResource("2_no1mx")
+volume_db = -11.03
+max_polyphony = 50
+
+[node name="Asharp" type="AudioStreamPlayer" parent="PianoNotes"]
+unique_name_in_owner = true
+stream = ExtResource("3_16xhs")
+volume_db = -11.03
+max_polyphony = 50
+
+[node name="B" type="AudioStreamPlayer" parent="PianoNotes"]
+unique_name_in_owner = true
+stream = ExtResource("4_mtk6g")
+volume_db = -11.03
+max_polyphony = 50
+
+[node name="C" type="AudioStreamPlayer" parent="PianoNotes"]
+unique_name_in_owner = true
+stream = ExtResource("5_f1a17")
+volume_db = -11.03
+max_polyphony = 50
+
+[node name="Csharp" type="AudioStreamPlayer" parent="PianoNotes"]
+unique_name_in_owner = true
+stream = ExtResource("6_31ffx")
+volume_db = -11.03
+max_polyphony = 50
+
+[node name="D" type="AudioStreamPlayer" parent="PianoNotes"]
+unique_name_in_owner = true
+stream = ExtResource("7_iqopi")
+volume_db = -11.03
+max_polyphony = 50
+
+[node name="Dsharp" type="AudioStreamPlayer" parent="PianoNotes"]
+unique_name_in_owner = true
+stream = ExtResource("8_w1jhv")
+volume_db = -11.03
+max_polyphony = 50
+
+[node name="E" type="AudioStreamPlayer" parent="PianoNotes"]
+unique_name_in_owner = true
+stream = ExtResource("9_26kta")
+volume_db = -11.03
+max_polyphony = 50
+
+[node name="F" type="AudioStreamPlayer" parent="PianoNotes"]
+unique_name_in_owner = true
+stream = ExtResource("10_30mtg")
+volume_db = -11.03
+max_polyphony = 50
+
+[node name="Fsharp" type="AudioStreamPlayer" parent="PianoNotes"]
+unique_name_in_owner = true
+stream = ExtResource("11_n5pun")
+volume_db = -11.03
+max_polyphony = 50
+
+[node name="G" type="AudioStreamPlayer" parent="PianoNotes"]
+unique_name_in_owner = true
+stream = ExtResource("12_gv1bp")
+volume_db = -11.03
+max_polyphony = 50
+
+[node name="Gsharp" type="AudioStreamPlayer" parent="PianoNotes"]
+unique_name_in_owner = true
+stream = ExtResource("13_6h7kh")
+volume_db = -11.03
+max_polyphony = 50
+
+[node name="PianoChords" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Gmajor" type="AudioStreamPlayer" parent="PianoChords"]
+unique_name_in_owner = true
+stream = ExtResource("14_kdv8y")
+volume_db = -5.705
+max_polyphony = 50
+
+[node name="Cmajor" type="AudioStreamPlayer" parent="PianoChords"]
+unique_name_in_owner = true
+stream = ExtResource("15_b04oo")
+volume_db = -5.705
+max_polyphony = 50
+
+[node name="Dmajor" type="AudioStreamPlayer" parent="PianoChords"]
+unique_name_in_owner = true
+stream = ExtResource("16_iq32n")
+volume_db = -5.705
+max_polyphony = 50
+
+[node name="Eminor" type="AudioStreamPlayer" parent="PianoChords"]
+unique_name_in_owner = true
+stream = ExtResource("17_v0k4r")
+volume_db = -5.705
+max_polyphony = 50

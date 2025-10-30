@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://fxj4uwra3npf"]
+
+[ext_resource type="Script" uid="uid://c0hty5vcqqs2j" path="res://data/scenes_and_scripts/wordsearch/splitter.gd" id="1_ccxq8"]
+
+[node name="Splitter" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ccxq8")

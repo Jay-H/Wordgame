@@ -1,0 +1,43 @@
+GDCODE remembrance
+
+1320
+2868
+
+To load scene
+
+var a = load('res://....)
+
+then in the function
+
+var b = a.instantiate()
+add_child(b)
+
+
+property constants 
+add_theme_constant_override("separation", 10")
+
+add_theme_color_override
+
+can use await get_tree().process_frame
+this will wait a little so that layout and stuff are updated if having issues
+
+use bind in connect to send values
+
+
+// --- THIS IS THE FIX ---
+	// Multiply our shader's alpha by the incoming alpha from the node's
+	// modulate property. This allows us to fade the node from GDScript.
+	final_color.a *= COLOR.a;
+
+
+await get_tree().create_timer(1.0).timeout
+
+
+for rpc stuff
+need to make sure that both server and client nodes have the exact same name and location on the tree
+both have to have the same function that you're trying to rpc, even if they do different things. 
+
+
+
+Bugs to remember
+Issue when pressing bonus letter and then clearing or submitting a false word, it's still changing the bonus letter.

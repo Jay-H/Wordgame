@@ -1,0 +1,160 @@
+[gd_scene load_steps=8 format=3 uid="uid://ca1a4c5jmd3nr"]
+
+[ext_resource type="Script" uid="uid://cki3vil7bjwia" path="res://data/scenes_and_scripts/phoenix/finding_match.gd" id="1_u67om"]
+[ext_resource type="Shader" uid="uid://dd0rvhyrgod8s" path="res://data/scenes_and_scripts/phoenix/ocean_waves.gdshader" id="2_2hk30"]
+[ext_resource type="PackedScene" uid="uid://dptsatxug1hhb" path="res://data/scenes_and_scripts/multiplayertesting/profile_picture.tscn" id="3_w5enl"]
+[ext_resource type="FontFile" uid="uid://dskmx2extevrw" path="res://data/fonts/times.ttf" id="4_eg0yy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ss7o6"]
+shader = ExtResource("2_2hk30")
+shader_parameter/DEEP_WATER_COLOR = Color(1, 1, 1, 1)
+shader_parameter/SHALLOW_WATER_COLOR = Color(0.571433, 0.759327, 0.966839, 1)
+shader_parameter/WAVE_FREQUENCY = Vector2(2.065, 6.645)
+shader_parameter/WAVE_SPEED = 0.905
+shader_parameter/WAVE_HEIGHT = 0.205
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u67om"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2hk30"]
+bg_color = Color(1, 1, 1, 0.282353)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+expand_margin_left = 15.0
+expand_margin_top = 15.0
+expand_margin_right = 15.0
+expand_margin_bottom = 15.0
+
+[node name="FindingMatch" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u67om")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_ss7o6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.871112, 0.999836, 1, 1)
+
+[node name="ProfilePicture" parent="CanvasLayer" instance=ExtResource("3_w5enl")]
+unique_name_in_owner = true
+offset_left = 102.0
+offset_top = 686.0
+offset_right = 602.0
+offset_bottom = 1186.0
+
+[node name="OpponentProfilePicture" parent="CanvasLayer" instance=ExtResource("3_w5enl")]
+unique_name_in_owner = true
+offset_left = 100.0
+offset_top = 1626.0
+offset_right = 600.0
+offset_bottom = 2126.0
+
+[node name="Status" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 77.0
+offset_top = 1353.0
+offset_right = 1243.0
+offset_bottom = 1460.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_eg0yy")
+theme_override_font_sizes/font_size = 96
+text = "Waiting for Opponent"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="BackToMenu" type="Button" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 368.0
+offset_top = 2654.0
+offset_right = 949.0
+offset_bottom = 2774.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_eg0yy")
+theme_override_font_sizes/font_size = 101
+theme_override_styles/focus = SubResource("StyleBoxEmpty_u67om")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_u67om")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_u67om")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_u67om")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_u67om")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_u67om")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_u67om")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_u67om")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_u67om")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_u67om")
+theme_override_styles/normal = SubResource("StyleBoxFlat_2hk30")
+text = "Back to Menu"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_left = 646.0
+offset_top = 794.0
+offset_right = 950.0
+offset_bottom = 1054.0
+
+[node name="playername" type="Label" parent="CanvasLayer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_eg0yy")
+theme_override_font_sizes/font_size = 75
+text = "Username"
+
+[node name="playerrank" type="Label" parent="CanvasLayer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_eg0yy")
+theme_override_font_sizes/font_size = 75
+text = "Rank:"
+
+[node name="playerlevel" type="Label" parent="CanvasLayer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_eg0yy")
+theme_override_font_sizes/font_size = 75
+text = "Level: "
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer"]
+offset_left = 656.0
+offset_top = 1743.0
+offset_right = 960.0
+offset_bottom = 2003.0
+
+[node name="opponentname" type="Label" parent="CanvasLayer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_eg0yy")
+theme_override_font_sizes/font_size = 75
+text = "Username"
+
+[node name="opponentlevel" type="Label" parent="CanvasLayer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_eg0yy")
+theme_override_font_sizes/font_size = 75
+text = "Level: "
+
+[node name="opponentrank" type="Label" parent="CanvasLayer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_eg0yy")
+theme_override_font_sizes/font_size = 75
+text = "Rank:"
+
+[connection signal="pressed" from="CanvasLayer/BackToMenu" to="." method="_on_back_to_menu_pressed"]

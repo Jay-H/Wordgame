@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://b02qwe3qmvpyk"]
+
+[ext_resource type="Shader" uid="uid://dn5xvxyms36lw" path="res://data/scenes_and_scripts/backgrounds/jupiter5.gdshader" id="1_0lp7e"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kbxvx"]
+shader = ExtResource("1_0lp7e")
+shader_parameter/band_A_color_1 = Color(0.83, 0.75, 0.64, 1)
+shader_parameter/band_A_color_2 = Color(0.65, 0.53, 0.41, 1)
+shader_parameter/band_B_color_1 = Color(0.91, 0.85, 0.76, 1)
+shader_parameter/band_B_color_2 = Color(0.53, 0.44, 0.35, 1)
+shader_parameter/band_C_color_1 = Color(0.75, 0.6, 0.5, 1)
+shader_parameter/band_C_color_2 = Color(0.45, 0.35, 0.3, 1)
+shader_parameter/band_D_color_1 = Color(1, 0.95, 0.9, 1)
+shader_parameter/band_D_color_2 = Color(0.8, 0.7, 0.6, 1)
+shader_parameter/band_frequency = 8.0
+shader_parameter/band_sharpness = 20.0
+shader_parameter/band_height_variation = 1.0
+shader_parameter/band_definition_variation = 5.0
+shader_parameter/band_blend_softness = 0.1
+shader_parameter/band_type_transition_softness = 0.2
+shader_parameter/noise_scale = 5.0
+shader_parameter/vortex_curl_strength = 2.0
+shader_parameter/vortex_evolution_speed = 0.05
+shader_parameter/turbulence_intensity = 0.15
+shader_parameter/band_flow_speeds = Vector4(0.02, -0.015, 0.03, 0.01)
+shader_parameter/band_vortex_strengths = Vector4(0.05, 0.04, 0.06, 0.03)
+shader_parameter/band_vortex_feedbacks = Vector4(0.3, 0.5, 0.2, 0.4)
+shader_parameter/band_turbulence_details = Vector4(2.5, 3.5, 2, 4)
+
+[node name="Jupiter" type="ColorRect"]
+material = SubResource("ShaderMaterial_kbxvx")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -1,0 +1,151 @@
+[gd_scene load_steps=11 format=3 uid="uid://bmdk40rq4mpvo"]
+
+[ext_resource type="Shader" uid="uid://bvu5fm87f67vl" path="res://data/scenes_and_scripts/multiplayertesting/colours_collection_title.gdshader" id="1_nbgfm"]
+[ext_resource type="Script" uid="uid://buh5netl1gw01" path="res://data/scenes_and_scripts/multiplayertesting/colours_collection.gd" id="1_ylk4l"]
+[ext_resource type="Shader" uid="uid://b1auqm7an25c3" path="res://data/scenes_and_scripts/multiplayertesting/flashlight.gdshader" id="2_6dpj3"]
+[ext_resource type="Script" uid="uid://bl3l3l5wcjc58" path="res://data/scenes_and_scripts/multiplayertesting/painting.gd" id="3_6dpj3"]
+[ext_resource type="Texture2D" uid="uid://3ke4a8qp2ax4" path="res://data/images/starry_night.jpg" id="3_tioic"]
+[ext_resource type="FontFile" uid="uid://csa2vdskduyio" path="res://data/fonts/OtherFonts/Kiddie-Store.otf" id="5_4qv4s"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4qv4s"]
+shader = ExtResource("2_6dpj3")
+shader_parameter/light_position_pixels = Vector2(500, 500)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/light_radius_pixels = 136.078
+shader_parameter/softness_pixels = 0.0
+shader_parameter/ambient_light = 0.09
+
+[sub_resource type="Gradient" id="Gradient_6dpj3"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.593909, 0.832487)
+colors = PackedColorArray(0, 0, 0, 0, 0.982343, 0.982342, 0.982342, 1, 0.196078, 0.247059, 0.145098, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4qv4s"]
+gradient = SubResource("Gradient_6dpj3")
+width = 490
+height = 490
+fill = 1
+fill_from = Vector2(0.512821, 0.491453)
+fill_to = Vector2(0.752137, 0.82906)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qa4nb"]
+shader = ExtResource("1_nbgfm")
+shader_parameter/speed = 0.113
+shader_parameter/frequency = 1.134
+shader_parameter/saturation = 1.0
+shader_parameter/brightness = 0.245
+
+[node name="ColoursCollection" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("1_ylk4l")
+
+[node name="Painting" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_4qv4s")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_tioic")
+expand_mode = 1
+stretch_mode = 2
+script = ExtResource("3_6dpj3")
+
+[node name="Reticle" type="TextureRect" parent="Painting"]
+unique_name_in_owner = true
+light_mask = 2
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -417.0
+offset_top = -1180.0
+offset_right = 83.0
+offset_bottom = -680.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_4qv4s")
+
+[node name="ColourPreview" type="ColorRect" parent="Painting/Reticle"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -77.0
+offset_right = 57.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.281187, 0.281187, 0.281187, 1)
+
+[node name="Title" type="RichTextLabel" parent="."]
+material = SubResource("ShaderMaterial_qa4nb")
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -622.0
+offset_bottom = 296.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("5_4qv4s")
+theme_override_font_sizes/normal_font_size = 175
+text = "Colours Collection"
+fit_content = true
+horizontal_alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="Title"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.419608)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.905216, 0.131522, 5.39064e-06, 1)
+
+[node name="ChangePainting" type="Button" parent="."]
+layout_mode = 0
+offset_left = 828.0
+offset_top = 2708.0
+offset_right = 1283.0
+offset_bottom = 2794.0
+theme_override_font_sizes/font_size = 57
+text = "Change Painting"
+
+[node name="ConfirmColour" type="Button" parent="."]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 2705.0
+offset_right = 496.0
+offset_bottom = 2791.0
+theme_override_font_sizes/font_size = 57
+text = "Confirm Colour"
+
+[node name="PaintingList" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 838.0
+offset_top = 2476.0
+offset_right = 1084.0
+offset_bottom = 2648.0
+
+[connection signal="pressed" from="ChangePainting" to="Painting" method="_on_change_painting_pressed"]
+[connection signal="pressed" from="ConfirmColour" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="ConfirmColour" to="." method="_on_confirm_colour_pressed"]

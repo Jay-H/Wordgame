@@ -1,0 +1,142 @@
+[gd_scene load_steps=5 format=3 uid="uid://byygniunflqkg"]
+
+[ext_resource type="Script" uid="uid://biu5kvwqt8340" path="res://data/scenes_and_scripts/scramble/c_scramble_bonus_obscurity.gd" id="1_27so8"]
+[ext_resource type="PackedScene" uid="uid://bmf84m0ti532o" path="res://data/scenes_and_scripts/scramble/c_found_words.tscn" id="2_wexru"]
+[ext_resource type="Script" uid="uid://dns0abvhudt52" path="res://data/scenes_and_scripts/scramble/label.gd" id="3_cmep1"]
+[ext_resource type="AudioStream" uid="uid://pclwk720i0ch" path="res://data/music/Piano1.wav" id="4_wexru"]
+
+[node name="CScramble" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_27so8")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+color = Color(0.945237, 1, 0.955877, 1)
+
+[node name="Control" parent="." instance=ExtResource("2_wexru")]
+
+[node name="Control2" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Control2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -82.5
+offset_right = 0.5
+offset_bottom = 82.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 120
+
+[node name="Control3" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Timer" type="Timer" parent="Control3"]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="Label" type="Label" parent="Control3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 130
+text = "00:45"
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -136.0
+offset_right = -19.0
+offset_bottom = 137.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CenterContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 200
+
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="CenterContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+
+[node name="BonusValueTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 10.0
+one_shot = true
+
+[node name="BonusValueLabel" type="Label" parent="BonusValueTimer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 151)
+offset_left = 777.0
+offset_top = 2060.0
+offset_right = 1277.0
+offset_bottom = 2211.0
+pivot_offset = Vector2(250, 75.5)
+theme_override_colors/font_color = Color(0.962525, 0.495748, 0.67845, 1)
+theme_override_font_sizes/font_size = 110
+text = "+ 0 + 1"
+horizontal_alignment = 1
+script = ExtResource("3_cmep1")
+
+[node name="BonusReminder" type="Label" parent="BonusValueTimer"]
+offset_left = 877.0
+offset_top = 2211.0
+offset_right = 1187.0
+offset_bottom = 2352.0
+theme_override_colors/font_color = Color(0.352763, 0.552752, 1, 1)
+theme_override_font_sizes/font_size = 50
+text = "Bonus Letter
+Value"
+horizontal_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_wexru")
+autoplay = true

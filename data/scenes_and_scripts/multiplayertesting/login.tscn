@@ -1,0 +1,198 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqvj1l8tdmplc"]
+
+[ext_resource type="Script" uid="uid://5klifeu5bwek" path="res://data/scenes_and_scripts/multiplayertesting/login.gd" id="1_htnum"]
+
+[node name="Login" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_htnum")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1320.0
+offset_bottom = 2868.0
+color = Color(0.165656, 0.165656, 0.165656, 1)
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 433.0
+offset_top = 785.0
+offset_right = 937.0
+offset_bottom = 922.0
+theme_override_font_sizes/font_size = 100
+text = "Username"
+
+[node name="Submit" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 228.0
+offset_top = 1563.0
+offset_right = 580.0
+offset_bottom = 1708.0
+theme_override_font_sizes/font_size = 100
+text = "Submit"
+
+[node name="Connect" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 99.0
+offset_top = 180.0
+offset_right = 1269.0
+offset_bottom = 373.0
+theme_override_font_sizes/font_size = 135
+text = "Connect to Server"
+
+[node name="PlayOffline" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 825.0
+offset_top = 1518.0
+offset_right = 1169.0
+offset_bottom = 1795.0
+theme_override_font_sizes/font_size = 100
+text = "Play
+Offline"
+horizontal_alignment = 1
+
+[node name="NewAccount" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 1939.0
+offset_right = 1238.0
+offset_bottom = 2216.0
+theme_override_font_sizes/normal_font_size = 101
+bbcode_enabled = true
+text = "[url][u]Don't have an account?[/u][/url]"
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 424.0
+offset_top = 1156.0
+offset_right = 928.0
+offset_bottom = 1293.0
+theme_override_font_sizes/font_size = 100
+text = "Password"
+
+[node name="UsernameInput" type="LineEdit" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 202.0
+offset_top = 910.0
+offset_right = 1215.0
+offset_bottom = 1055.0
+theme_override_font_sizes/font_size = 100
+placeholder_text = "XXXXXXXXXXXXXX"
+
+[node name="PasswordInput" type="LineEdit" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 192.0
+offset_top = 1289.0
+offset_right = 1205.0
+offset_bottom = 1434.0
+theme_override_font_sizes/font_size = 100
+placeholder_text = "XXXXXXXXXXXXXX"
+
+[node name="NewAccountScreen" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_right = 1320.0
+offset_bottom = 2868.0
+color = Color(0.165656, 0.165656, 0.165656, 1)
+
+[node name="ChooseAUsername" type="Label" parent="NewAccountScreen"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 191.0
+offset_top = 785.0
+offset_right = 1144.0
+offset_bottom = 922.0
+theme_override_font_sizes/font_size = 100
+text = "Choose a username"
+
+[node name="Available" type="Label" parent="NewAccountScreen"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 191.0
+offset_top = 1428.0
+offset_right = 1156.0
+offset_bottom = 1565.0
+theme_override_font_sizes/font_size = 100
+horizontal_alignment = 1
+
+[node name="ChooseAPassword" type="Label" parent="NewAccountScreen"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 197.0
+offset_top = 1830.0
+offset_right = 1150.0
+offset_bottom = 1967.0
+theme_override_font_sizes/font_size = 100
+text = "Choose a password"
+
+[node name="CheckAvailability" type="Button" parent="NewAccountScreen"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 234.0
+offset_top = 1245.0
+offset_right = 1081.0
+offset_bottom = 1390.0
+theme_override_font_sizes/font_size = 100
+text = "Check availability"
+
+[node name="NewUsernameInput" type="LineEdit" parent="NewAccountScreen"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 216.0
+offset_top = 965.0
+offset_right = 1108.0
+offset_bottom = 1110.0
+theme_override_font_sizes/font_size = 100
+placeholder_text = "XXXXXXXXXXXXXX"
+
+[node name="NewPasswordInput" type="LineEdit" parent="NewAccountScreen"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 222.0
+offset_top = 2000.0
+offset_right = 1114.0
+offset_bottom = 2145.0
+theme_override_font_sizes/font_size = 100
+placeholder_text = "XXXXXXXXXXXXXX"
+
+[node name="NewPasswordSubmit" type="Button" parent="NewAccountScreen"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 488.0
+offset_top = 2181.0
+offset_right = 840.0
+offset_bottom = 2326.0
+theme_override_font_sizes/font_size = 100
+text = "Submit"
+
+[node name="BackButton" type="Button" parent="NewAccountScreen"]
+layout_mode = 0
+offset_left = 893.0
+offset_top = 49.0
+offset_right = 1254.0
+offset_bottom = 243.0
+theme_override_font_sizes/font_size = 136
+text = "BACK"
+
+[connection signal="pressed" from="Submit" to="." method="_on_submit_pressed"]
+[connection signal="pressed" from="Connect" to="." method="_on_connect_pressed"]
+[connection signal="meta_clicked" from="NewAccount" to="." method="_on_new_account_meta_clicked"]
+[connection signal="pressed" from="NewAccountScreen/CheckAvailability" to="." method="_on_check_availability_pressed"]
+[connection signal="pressed" from="NewAccountScreen/NewPasswordSubmit" to="." method="_on_new_password_submit_pressed"]
+[connection signal="pressed" from="NewAccountScreen/BackButton" to="." method="_on_back_button_pressed"]

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://d03td6jhdmsd3"]
+
+[ext_resource type="Script" uid="uid://bl258xiysa6ls" path="res://data/scenes_and_scripts/multiplayertesting/round_end_timer.gd" id="1_bxit2"]
+
+[node name="RoundEndTimer" type="Timer"]
+wait_time = 5.0
+one_shot = true
+script = ExtResource("1_bxit2")
+
+[connection signal="timeout" from="." to="." method="_on_timeout"]

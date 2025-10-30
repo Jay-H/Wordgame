@@ -1,0 +1,35 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://b0ga7ela6vk8s"
+path="res://.godot/imported/Devil Breeze Bold.ttf-3a28c3444f59bb0733ebaa6203409665.fontdata"
+
+[deps]
+
+source_file="res://data/fonts/devil-breeze/Devil Breeze Bold.ttf"
+dest_files=["res://.godot/imported/Devil Breeze Bold.ttf-3a28c3444f59bb0733ebaa6203409665.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+disable_embedded_bitmaps=true
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=4
+keep_rounding_remainders=true
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}

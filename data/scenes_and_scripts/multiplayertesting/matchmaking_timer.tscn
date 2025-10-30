@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c65vui5pgdw1w"]
+
+[ext_resource type="Script" uid="uid://bdpn1ptd3bwp" path="res://data/scenes_and_scripts/multiplayertesting/matchmaking_timer.gd" id="1_34ujq"]
+
+[node name="MatchmakingTimer" type="Timer"]
+wait_time = 2.5
+one_shot = true
+script = ExtResource("1_34ujq")
+
+[connection signal="timeout" from="." to="." method="_on_timeout"]

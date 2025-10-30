@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcpdfwwravnls"]
+
+[ext_resource type="Script" uid="uid://dhhkdlipym336" path="res://data/scenes_and_scripts/multiplayertesting/Client.gd" id="1_akpb4"]
+
+[node name="FirstScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_akpb4")
+
+[node name="IdLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 235.0
+offset_top = 438.0
+offset_right = 1108.0
+offset_bottom = 636.0
+theme_override_font_sizes/font_size = 100
+
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 375.0
+offset_top = 1571.0
+offset_right = 980.0
+offset_bottom = 1716.0
+theme_override_font_sizes/font_size = 100
+text = "Start Server "
+
+[node name="ReadyButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 499.0
+offset_top = 1136.0
+offset_right = 802.0
+offset_bottom = 1281.0
+theme_override_font_sizes/font_size = 100
+text = "Ready"
+
+[connection signal="pressed" from="ReadyButton" to="." method="_on_ready_button_pressed"]

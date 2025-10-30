@@ -1,0 +1,263 @@
+[gd_scene load_steps=5 format=3 uid="uid://easanlfl7ixe"]
+
+[ext_resource type="Script" uid="uid://c4aih58456852" path="res://data/scenes_and_scripts/multiplayertesting/scroll_container.gd" id="1_a1iiy"]
+[ext_resource type="Script" uid="uid://xaf0iqjx8vmr" path="res://data/scenes_and_scripts/multiplayertesting/profile_screen.gd" id="1_p714y"]
+[ext_resource type="PackedScene" uid="uid://dptsatxug1hhb" path="res://data/scenes_and_scripts/multiplayertesting/profile_picture.tscn" id="3_7umc5"]
+[ext_resource type="FontFile" uid="uid://c5amput47m7lk" path="res://data/fonts/microbrew-one/Microbrew Three Regular.otf" id="3_hm0d2"]
+
+[node name="ProfileScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p714y")
+
+[node name="ProfileScreen" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="ProfileScreen"]
+custom_minimum_size = Vector2(1320, 2868)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.866667, 1, 1, 1)
+
+[node name="CurrentRank" type="Label" parent="ProfileScreen"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 24.0
+offset_top = 1003.0
+offset_right = 958.0
+offset_bottom = 1174.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hm0d2")
+theme_override_font_sizes/font_size = 125
+text = "Rank: "
+
+[node name="Username" type="Label" parent="ProfileScreen"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 428.0
+offset_top = 80.0
+offset_right = 917.0
+offset_bottom = 232.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hm0d2")
+theme_override_font_sizes/font_size = 125
+text = "USERNAME"
+horizontal_alignment = 1
+
+[node name="ChangeProfileButton" type="Button" parent="ProfileScreen"]
+layout_mode = 0
+offset_left = 389.0
+offset_top = 787.0
+offset_right = 972.0
+offset_bottom = 874.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hm0d2")
+theme_override_font_sizes/font_size = 65
+text = "Change Profile Picture"
+
+[node name="BackButton" type="Button" parent="ProfileScreen"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 11.0
+offset_right = 175.0
+offset_bottom = 109.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 65
+text = "Back
+"
+
+[node name="CurrentLevel" type="Label" parent="ProfileScreen"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 29.0
+offset_top = 1225.0
+offset_right = 963.0
+offset_bottom = 1396.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hm0d2")
+theme_override_font_sizes/font_size = 125
+text = "Level: "
+
+[node name="Label4" type="Label" parent="ProfileScreen"]
+layout_mode = 0
+offset_left = 326.0
+offset_top = 1621.0
+offset_right = 987.0
+offset_bottom = 1773.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hm0d2")
+theme_override_font_sizes/font_size = 125
+text = "Achievements"
+
+[node name="ProfilePicture" parent="ProfileScreen" instance=ExtResource("3_7umc5")]
+unique_name_in_owner = true
+offset_left = 408.0
+offset_top = 238.0
+offset_right = 908.0
+offset_bottom = 738.0
+
+[node name="ProfilePicChooserScreen" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="ProfilePicChooserScreen"]
+custom_minimum_size = Vector2(1320, 2868)
+layout_mode = 0
+offset_right = 1320.0
+offset_bottom = 2868.0
+color = Color(0.666667, 0.780392, 0.909804, 1)
+
+[node name="Label" type="Label" parent="ProfilePicChooserScreen"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 200.0
+offset_right = 679.0
+offset_bottom = 297.0
+theme_override_font_sizes/font_size = 71
+text = "Current Profile Pic:"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ProfilePicChooserScreen"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 112.0
+offset_top = 757.0
+offset_right = 1182.0
+offset_bottom = 2544.0
+horizontal_scroll_mode = 0
+script = ExtResource("1_a1iiy")
+image_paths = Array[String](["res://data/images/profilepics/Alan.png", "res://data/images/profilepics/Bookman.png", "res://data/images/profilepics/Gary.png"])
+image_size = Vector2(400, 400)
+
+[node name="PictureBox" type="GridContainer" parent="ProfilePicChooserScreen/ScrollContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(8.955, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 40
+theme_override_constants/v_separation = 20
+
+[node name="Control" type="Control" parent="ProfilePicChooserScreen/ScrollContainer/PictureBox"]
+layout_mode = 2
+
+[node name="PictureSelection1" type="TextureRect" parent="ProfilePicChooserScreen/ScrollContainer/PictureBox/Control"]
+layout_mode = 2
+offset_left = -16.0
+offset_right = -16.0
+expand_mode = 1
+
+[node name="Control2" type="Control" parent="ProfilePicChooserScreen/ScrollContainer/PictureBox"]
+layout_mode = 2
+
+[node name="PictureSelection2" type="TextureRect" parent="ProfilePicChooserScreen/ScrollContainer/PictureBox/Control2"]
+layout_mode = 2
+offset_left = -8.0
+offset_right = -8.0
+expand_mode = 1
+
+[node name="Control3" type="Control" parent="ProfilePicChooserScreen/ScrollContainer/PictureBox"]
+layout_mode = 2
+
+[node name="PictureSelection3" type="TextureRect" parent="ProfilePicChooserScreen/ScrollContainer/PictureBox/Control3"]
+layout_mode = 2
+offset_left = -12.0
+offset_right = -12.0
+expand_mode = 1
+
+[node name="Control4" type="Control" parent="ProfilePicChooserScreen/ScrollContainer/PictureBox"]
+layout_mode = 2
+
+[node name="PictureSelection4" type="TextureRect" parent="ProfilePicChooserScreen/ScrollContainer/PictureBox/Control4"]
+layout_mode = 2
+offset_left = -16.0
+offset_right = -16.0
+expand_mode = 1
+
+[node name="Control5" type="Control" parent="ProfilePicChooserScreen/ScrollContainer/PictureBox"]
+layout_mode = 2
+
+[node name="PictureSelection5" type="TextureRect" parent="ProfilePicChooserScreen/ScrollContainer/PictureBox/Control5"]
+layout_mode = 2
+offset_left = -16.0
+offset_right = -16.0
+expand_mode = 1
+
+[node name="Control6" type="Control" parent="ProfilePicChooserScreen/ScrollContainer/PictureBox"]
+layout_mode = 2
+
+[node name="PictureSelection6" type="TextureRect" parent="ProfilePicChooserScreen/ScrollContainer/PictureBox/Control6"]
+layout_mode = 2
+offset_left = -16.0
+offset_right = -16.0
+expand_mode = 1
+
+[node name="Control7" type="Control" parent="ProfilePicChooserScreen/ScrollContainer/PictureBox"]
+layout_mode = 2
+
+[node name="PictureSelection7" type="TextureRect" parent="ProfilePicChooserScreen/ScrollContainer/PictureBox/Control7"]
+layout_mode = 2
+offset_left = -16.0
+offset_right = -16.0
+expand_mode = 1
+
+[node name="Control8" type="Control" parent="ProfilePicChooserScreen/ScrollContainer/PictureBox"]
+layout_mode = 2
+
+[node name="PictureSelection8" type="TextureRect" parent="ProfilePicChooserScreen/ScrollContainer/PictureBox/Control8"]
+layout_mode = 2
+offset_left = -16.0
+offset_right = -16.0
+expand_mode = 1
+
+[node name="Control9" type="Control" parent="ProfilePicChooserScreen/ScrollContainer/PictureBox"]
+layout_mode = 2
+
+[node name="PictureSelection9" type="TextureRect" parent="ProfilePicChooserScreen/ScrollContainer/PictureBox/Control9"]
+layout_mode = 2
+offset_left = -16.0
+offset_right = -16.0
+expand_mode = 1
+
+[node name="Control10" type="Control" parent="ProfilePicChooserScreen/ScrollContainer/PictureBox"]
+layout_mode = 2
+
+[node name="PictureSelection10" type="TextureRect" parent="ProfilePicChooserScreen/ScrollContainer/PictureBox/Control10"]
+layout_mode = 2
+offset_left = -16.0
+offset_right = -16.0
+expand_mode = 1
+
+[node name="Control11" type="Control" parent="ProfilePicChooserScreen/ScrollContainer/PictureBox"]
+layout_mode = 2
+
+[node name="PictureSelection11" type="TextureRect" parent="ProfilePicChooserScreen/ScrollContainer/PictureBox/Control11"]
+layout_mode = 2
+offset_left = -16.0
+offset_right = -16.0
+expand_mode = 1
+
+[node name="BackButton" type="Button" parent="ProfilePicChooserScreen"]
+layout_mode = 0
+offset_right = 231.0
+offset_bottom = 126.0
+theme_override_font_sizes/font_size = 86
+text = "BACK"
+
+[node name="ProfilePicture2" parent="ProfilePicChooserScreen" instance=ExtResource("3_7umc5")]
+unique_name_in_owner = true
+offset_left = 757.0
+offset_top = 203.0
+offset_right = 1257.0
+offset_bottom = 703.0
+
+[connection signal="pressed" from="ProfileScreen/ChangeProfileButton" to="." method="_on_change_profile_button_pressed"]
+[connection signal="pressed" from="ProfileScreen/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="ProfilePicChooserScreen/BackButton" to="." method="_on_button_pressed"]

@@ -1,0 +1,35 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://yj33y36p2paa"
+path="res://.godot/imported/Microbrew Three Combined.otf-7a00bb64bf1a6510c9c68f9741d632d8.fontdata"
+
+[deps]
+
+source_file="res://data/fonts/microbrew-one/Microbrew Three Combined.otf"
+dest_files=["res://.godot/imported/Microbrew Three Combined.otf-7a00bb64bf1a6510c9c68f9741d632d8.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+disable_embedded_bitmaps=true
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=4
+keep_rounding_remainders=true
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}

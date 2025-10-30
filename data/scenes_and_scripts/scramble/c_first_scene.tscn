@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3dtxq0f2m7uq"]
+
+[ext_resource type="Script" uid="uid://3q385miw15st" path="res://data/scenes_and_scripts/scramble/c_first_scene.gd" id="1_kwa7n"]
+[ext_resource type="PackedScene" uid="uid://4prqn8yfhlyl" path="res://data/scenes_and_scripts/scramble/RulesTransition.tscn" id="2_y3kpd"]
+
+[node name="Baseboard" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1_kwa7n")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+layer = 10
+
+[node name="TransitionBox" type="ColorRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+z_index = 1
+z_as_relative = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.873512, 0.863215, 0.980003, 1)
+
+[node name="RulesTransition" parent="." instance=ExtResource("2_y3kpd")]
+unique_name_in_owner = true
+visible = false
+
+[node name="CurrentGame" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+layer = 7
+
+[node name="CurrentGameCanvasModulate" type="CanvasModulate" parent="CurrentGame"]
+unique_name_in_owner = true
+
+[node name="FadeManager" type="CanvasLayer" parent="."]
+unique_name_in_owner = true

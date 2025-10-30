@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://cqsh7sgao7ccl"]
+
+[ext_resource type="Texture2D" uid="uid://crknm7gdg7jon" path="res://data/images/fog.png" id="1_3cpss"]
+[ext_resource type="Script" uid="uid://cvdo1v8k00jqo" path="res://data/scenes_and_scripts/scramble/gpu_particles_2d.gd" id="2_rr8v0"]
+
+[sub_resource type="Gradient" id="Gradient_emw3b"]
+offsets = PackedFloat32Array(0, 0.237942, 0.514469, 1)
+colors = PackedColorArray(1, 0.835294, 0.839216, 0, 0.999999, 0.836602, 0.837397, 0.513726, 0.67451, 1, 0.945098, 0.168627, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rr8v0"]
+gradient = SubResource("Gradient_emw3b")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8w1ot"]
+lifetime_randomness = 0.5
+emission_shape = 3
+emission_box_extents = Vector3(600, 2000, 1)
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 150.0
+gravity = Vector3(25000, -9.8, 0)
+scale_min = 4.0
+scale_max = 6.0
+color_ramp = SubResource("GradientTexture1D_rr8v0")
+turbulence_enabled = true
+turbulence_noise_strength = 0.5
+turbulence_noise_scale = 2.0
+turbulence_influence_max = 1.0
+
+[node name="Particles" type="CanvasLayer"]
+layer = 3
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+z_index = 100
+amount = 55
+texture = ExtResource("1_3cpss")
+lifetime = 8.0
+speed_scale = 0.4
+randomness = 0.21
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_8w1ot")
+script = ExtResource("2_rr8v0")

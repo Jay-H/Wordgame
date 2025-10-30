@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3m207vm8082k"]
+
+[ext_resource type="Script" uid="uid://bju6kose448r6" path="res://data/scenes_and_scripts/multiplayertesting/globals.gd" id="1_ckbtv"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ckbtv"]
+properties/0/path = NodePath(".:top_players")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:top_players_dictionary")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="Globals" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ckbtv")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_interval = 0.107
+delta_interval = 0.107
+replication_config = SubResource("SceneReplicationConfig_ckbtv")

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1sjhqkeyx2mh"]
+
+[ext_resource type="Script" uid="uid://wo5myh1oa24q" path="res://data/scenes_and_scripts/multiplayertesting/rules_timer.gd" id="1_8mcfw"]
+
+[node name="RulesTimer" type="Timer"]
+wait_time = 10.0
+one_shot = true
+script = ExtResource("1_8mcfw")
+
+[connection signal="timeout" from="." to="." method="_on_timeout"]

@@ -1,0 +1,1 @@
+{"Auron":{"Experience":1.0,"Level":1.0,"Rank":1.0},"Tidus":{"Experience":1.0,"Level":1.0,"Rank":1.0},"Wakka":{"Experience":1.0,"Level":1.0,"Rank":1.0},"Yuna":{"Experience":1.0,"Level":1.0,"Rank":1.0}}

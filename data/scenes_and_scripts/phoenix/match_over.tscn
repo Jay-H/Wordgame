@@ -1,0 +1,339 @@
+[gd_scene load_steps=18 format=3 uid="uid://coukwor8sdb7r"]
+
+[ext_resource type="Script" uid="uid://c3x4cigvuglgx" path="res://data/scenes_and_scripts/phoenix/match_over.gd" id="1_pp16g"]
+[ext_resource type="Shader" uid="uid://dd0rvhyrgod8s" path="res://data/scenes_and_scripts/phoenix/ocean_waves.gdshader" id="1_x4ffn"]
+[ext_resource type="PackedScene" uid="uid://dptsatxug1hhb" path="res://data/scenes_and_scripts/multiplayertesting/profile_picture.tscn" id="2_ttd4f"]
+[ext_resource type="FontFile" uid="uid://dskmx2extevrw" path="res://data/fonts/times.ttf" id="3_h4thg"]
+[ext_resource type="FontFile" uid="uid://btkq12upc3w1a" path="res://data/fonts/fc-barcelona/barselona.ttf" id="4_1dqdh"]
+[ext_resource type="Texture2D" uid="uid://brurqblsdm0e4" path="res://data/images/Icons/RankPointOff.png" id="5_5tf3y"]
+[ext_resource type="Shader" uid="uid://clg4ck4oaauay" path="res://data/scenes_and_scripts/multiplayertesting/colours_collection_title.gdshader" id="5_spqgb"]
+[ext_resource type="PackedScene" uid="uid://d3jf6he50p6tp" path="res://experience_bar.tscn" id="6_cdx71"]
+[ext_resource type="Texture2D" uid="uid://c5vtlh6hmcped" path="res://data/images/Icons/LittleGreenParticle.png" id="7_mjy26"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ttd4f"]
+shader = ExtResource("1_x4ffn")
+shader_parameter/DEEP_WATER_COLOR = Color(0.914036, 0.946057, 0.99517, 1)
+shader_parameter/SHALLOW_WATER_COLOR = Color(1, 0.862435, 0.901871, 1)
+shader_parameter/WAVE_FREQUENCY = Vector2(3.515, 2.315)
+shader_parameter/WAVE_SPEED = 2.0
+shader_parameter/WAVE_HEIGHT = 0.18
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1dqdh"]
+shader = ExtResource("5_spqgb")
+shader_parameter/speed = 0.488
+shader_parameter/frequency = 0.436
+shader_parameter/saturation = 1.0
+shader_parameter/brightness = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_spqgb"]
+shader = ExtResource("5_spqgb")
+shader_parameter/speed = 0.2
+shader_parameter/frequency = 1.0
+shader_parameter/saturation = 1.0
+shader_parameter/brightness = 0.0
+
+[sub_resource type="Gradient" id="Gradient_spqgb"]
+offsets = PackedFloat32Array(0, 0.303571, 0.495536, 1)
+colors = PackedColorArray(1, 1, 1, 0.27451, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1dqdh"]
+gradient = SubResource("Gradient_spqgb")
+
+[sub_resource type="Curve" id="Curve_al4uh"]
+_data = [Vector2(0.908, 0.128183), 0.0, 0.0520551, 0, 0, Vector2(1, 0.128183), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mv7wk"]
+curve = SubResource("Curve_al4uh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cdx71"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(400, 100, 1)
+spread = 180.0
+flatness = 1.0
+initial_velocity_min = 40.97
+initial_velocity_max = 209.98
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_mv7wk")
+color_ramp = SubResource("GradientTexture1D_1dqdh")
+hue_variation_min = 1.0
+hue_variation_max = 1.0
+turbulence_noise_strength = 0.18
+
+[node name="match_over" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pp16g")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer"]
+unique_name_in_owner = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_ttd4f")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProfilePicture" parent="CanvasLayer" instance=ExtResource("2_ttd4f")]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -275.0
+offset_top = 490.0
+offset_right = 225.0
+offset_bottom = 990.0
+grow_horizontal = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 262.0
+offset_top = 274.0
+offset_right = 1021.0
+offset_bottom = 482.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_1dqdh")
+theme_override_font_sizes/normal_font_size = 136
+text = "Match Over!"
+horizontal_alignment = 1
+
+[node name="Username" type="RichTextLabel" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 265.0
+offset_top = 1016.0
+offset_right = 1024.0
+offset_bottom = 1224.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_1dqdh")
+theme_override_font_sizes/normal_font_size = 136
+text = "Match Over!"
+horizontal_alignment = 1
+
+[node name="LevelStatusLabel" type="RichTextLabel" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 207.0
+offset_top = 1233.0
+offset_right = 1092.0
+offset_bottom = 1402.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_h4thg")
+theme_override_font_sizes/normal_font_size = 71
+text = "Level"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OldLevelLabel" type="RichTextLabel" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 211.0
+offset_top = 1526.0
+offset_right = 1096.0
+offset_bottom = 1695.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_h4thg")
+theme_override_font_sizes/normal_font_size = 71
+text = "Level"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NewLevelLabel" type="RichTextLabel" parent="CanvasLayer"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_1dqdh")
+offset_left = 211.0
+offset_top = 1526.0
+offset_right = 1096.0
+offset_bottom = 1695.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/normal_font = ExtResource("3_h4thg")
+theme_override_font_sizes/normal_font_size = 71
+text = "Level"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RankStatusLabel" type="RichTextLabel" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 324.0
+offset_top = 1860.0
+offset_right = 968.0
+offset_bottom = 2053.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_h4thg")
+theme_override_font_sizes/normal_font_size = 71
+text = "Rank"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="OldRankLabel" type="RichTextLabel" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 229.0
+offset_top = 2225.0
+offset_right = 1082.0
+offset_bottom = 2335.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_h4thg")
+theme_override_font_sizes/normal_font_size = 71
+text = "Rank: "
+horizontal_alignment = 1
+
+[node name="NewRankLabel" type="RichTextLabel" parent="CanvasLayer"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_spqgb")
+offset_left = 229.0
+offset_top = 2225.0
+offset_right = 1082.0
+offset_bottom = 2335.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/normal_font = ExtResource("3_h4thg")
+theme_override_font_sizes/normal_font_size = 71
+text = "Rank: "
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+offset_left = 6.0
+offset_top = 2668.0
+offset_right = 496.0
+offset_bottom = 2869.0
+theme_override_font_sizes/font_size = 141
+text = "DEBUG"
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 6.0
+offset_top = 2668.0
+offset_right = 46.0
+offset_bottom = 2708.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 126.0
+offset_top = -633.0
+offset_right = 1162.0
+offset_bottom = -533.0
+
+[node name="TextureRect1" type="TextureRect" parent="CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("5_5tf3y")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("5_5tf3y")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("5_5tf3y")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("5_5tf3y")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureRect5" type="TextureRect" parent="CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("5_5tf3y")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureRect6" type="TextureRect" parent="CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("5_5tf3y")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureRect7" type="TextureRect" parent="CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("5_5tf3y")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureRect8" type="TextureRect" parent="CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("5_5tf3y")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureRect9" type="TextureRect" parent="CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("5_5tf3y")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureRect10" type="TextureRect" parent="CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("5_5tf3y")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="RankParticles" type="GPUParticles2D" parent="CanvasLayer/Control"]
+unique_name_in_owner = true
+position = Vector2(645, -585)
+emitting = false
+amount = 350
+texture = ExtResource("7_mjy26")
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_cdx71")
+
+[node name="experiencebar" parent="CanvasLayer" instance=ExtResource("6_cdx71")]
+unique_name_in_owner = true
+offset_left = 285.0
+offset_top = 1451.0
+offset_right = -500.0
+offset_bottom = -1381.0
+scale = Vector2(1.4, 1.4)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="CanvasLayer/experiencebar"]
+unique_name_in_owner = true
+position = Vector2(277.857, 17.1429)
+emitting = false
+amount = 350
+texture = ExtResource("7_mjy26")
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_cdx71")
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 5.0
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]

@@ -1,0 +1,281 @@
+[gd_scene load_steps=12 format=3 uid="uid://bihv5nal8gtcb"]
+
+[ext_resource type="Script" uid="uid://nhq037qac5vh" path="res://data/scenes_and_scripts/multiplayertesting/round_end_screen.gd" id="1_ivqvc"]
+[ext_resource type="Shader" uid="uid://ddb33olielmcv" path="res://data/scenes_and_scripts/scramble/FadeManager.gdshader" id="1_pw15r"]
+[ext_resource type="Script" uid="uid://cqxxr0e3ceok4" path="res://data/scenes_and_scripts/scramble/fade_overlay.gd" id="2_ivqvc"]
+[ext_resource type="PackedScene" uid="uid://dvwvkufti1fb3" path="res://data/scenes_and_scripts/multiplayertesting/playerpic.tscn" id="3_bq4l6"]
+[ext_resource type="PackedScene" uid="uid://sdrrhsylopiu" path="res://data/scenes_and_scripts/multiplayertesting/opponentpic.tscn" id="4_qp0x8"]
+[ext_resource type="PackedScene" uid="uid://jhobmoghfpt" path="res://data/scenes_and_scripts/scramble/AnimatedX.tscn" id="6_qp0x8"]
+[ext_resource type="FontFile" uid="uid://djfdv5od1bobp" path="res://data/fonts/OtherFonts/Breaktor-SansSerif.ttf" id="6_r406n"]
+[ext_resource type="PackedScene" uid="uid://dwupcvudridi7" path="res://data/scenes_and_scripts/scramble/animated_circle.tscn" id="7_r406n"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_r406n"]
+noise_type = 2
+frequency = 0.5
+fractal_ping_pong_strength = 2.495
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8spss"]
+width = 128
+height = 128
+seamless = true
+seamless_blend_skirt = 0.273
+noise = SubResource("FastNoiseLite_r406n")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ytgk8"]
+shader = ExtResource("1_pw15r")
+shader_parameter/color_one = Color(0.593503, 0.726996, 1, 1)
+shader_parameter/color_two = Color(1, 1, 1, 1)
+shader_parameter/speed = 0.5
+shader_parameter/frequency = 3.0
+shader_parameter/angle = 155.0
+shader_parameter/distortion_map = SubResource("NoiseTexture2D_8spss")
+shader_parameter/distortion_strength = 0.18
+shader_parameter/distortion_speed = 0.1
+
+[node name="RoundEndScreen" type="CanvasLayer"]
+script = ExtResource("1_ivqvc")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+unique_name_in_owner = true
+
+[node name="FadeOverlay" type="ColorRect" parent="CanvasModulate"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_ytgk8")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1320.0
+offset_bottom = 2868.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(4.23551e-06, 0.581428, 0.484856, 1)
+script = ExtResource("2_ivqvc")
+
+[node name="playerpic" parent="CanvasModulate" instance=ExtResource("3_bq4l6")]
+unique_name_in_owner = true
+offset_left = 106.0
+offset_top = 852.0
+offset_right = 606.0
+offset_bottom = 1352.0
+
+[node name="opponentpic" parent="CanvasModulate" instance=ExtResource("4_qp0x8")]
+unique_name_in_owner = true
+offset_left = 712.0
+offset_top = 852.0
+offset_right = 1212.0
+offset_bottom = 1352.0
+
+[node name="PlayerScore" type="Label" parent="CanvasModulate"]
+unique_name_in_owner = true
+offset_left = 216.0
+offset_top = 1715.0
+offset_right = 482.0
+offset_bottom = 1852.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_r406n")
+theme_override_font_sizes/font_size = 100
+text = "100"
+horizontal_alignment = 1
+
+[node name="PlayerName" type="Label" parent="CanvasModulate"]
+unique_name_in_owner = true
+offset_left = 113.0
+offset_top = 1414.0
+offset_right = 601.0
+offset_bottom = 1542.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_r406n")
+theme_override_font_sizes/font_size = 50
+text = "Player Name"
+horizontal_alignment = 1
+
+[node name="OpponentName" type="Label" parent="CanvasModulate"]
+unique_name_in_owner = true
+offset_left = 716.0
+offset_top = 1419.0
+offset_right = 1215.0
+offset_bottom = 1529.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_r406n")
+theme_override_font_sizes/font_size = 50
+text = "Opponent Name"
+horizontal_alignment = 1
+
+[node name="RoundScore" type="Label" parent="CanvasModulate"]
+unique_name_in_owner = true
+offset_left = 113.0
+offset_top = 1624.0
+offset_right = 601.0
+offset_bottom = 1752.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_r406n")
+theme_override_font_sizes/font_size = 50
+text = "Round Score"
+horizontal_alignment = 1
+
+[node name="BestWordLabelPlayer" type="Label" parent="CanvasModulate"]
+unique_name_in_owner = true
+offset_left = 99.0
+offset_top = 2035.0
+offset_right = 587.0
+offset_bottom = 2104.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_r406n")
+theme_override_font_sizes/font_size = 50
+text = "Best Word"
+horizontal_alignment = 1
+
+[node name="BestWordLabelOpponent" type="Label" parent="CanvasModulate"]
+unique_name_in_owner = true
+offset_left = 722.0
+offset_top = 2041.0
+offset_right = 1210.0
+offset_bottom = 2110.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_r406n")
+theme_override_font_sizes/font_size = 50
+text = "Best Word"
+horizontal_alignment = 1
+
+[node name="PlayerOneBestWord" type="Label" parent="CanvasModulate"]
+unique_name_in_owner = true
+offset_left = 97.0
+offset_top = 2136.0
+offset_right = 585.0
+offset_bottom = 2205.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_r406n")
+theme_override_font_sizes/font_size = 50
+text = "Best Word"
+horizontal_alignment = 1
+
+[node name="PlayerTwoBestWord" type="Label" parent="CanvasModulate"]
+unique_name_in_owner = true
+offset_left = 720.0
+offset_top = 2142.0
+offset_right = 1208.0
+offset_bottom = 2211.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_r406n")
+theme_override_font_sizes/font_size = 50
+text = "Best Word"
+horizontal_alignment = 1
+
+[node name="RoundScore2" type="Label" parent="CanvasModulate"]
+unique_name_in_owner = true
+offset_left = 716.0
+offset_top = 1629.0
+offset_right = 1215.0
+offset_bottom = 1739.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_r406n")
+theme_override_font_sizes/font_size = 50
+text = "Round Score"
+horizontal_alignment = 1
+
+[node name="OpponentScore" type="Label" parent="CanvasModulate"]
+unique_name_in_owner = true
+offset_left = 846.0
+offset_top = 1715.0
+offset_right = 1112.0
+offset_bottom = 1852.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_r406n")
+theme_override_font_sizes/font_size = 100
+text = "25"
+horizontal_alignment = 1
+
+[node name="RoundOver" type="Label" parent="CanvasModulate"]
+unique_name_in_owner = true
+offset_left = 369.0
+offset_top = 363.0
+offset_right = 942.0
+offset_bottom = 500.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_r406n")
+theme_override_font_sizes/font_size = 100
+text = "Round Over"
+horizontal_alignment = 1
+
+[node name="Round1" type="Label" parent="CanvasModulate"]
+offset_left = 69.0
+offset_top = 2591.0
+offset_right = 347.0
+offset_bottom = 2687.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_r406n")
+theme_override_font_sizes/font_size = 70
+text = "Round 1"
+
+[node name="Round2" type="Label" parent="CanvasModulate"]
+offset_left = 509.0
+offset_top = 2592.0
+offset_right = 787.0
+offset_bottom = 2688.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_r406n")
+theme_override_font_sizes/font_size = 70
+text = "Round 2"
+
+[node name="Round3" type="Label" parent="CanvasModulate"]
+offset_left = 958.0
+offset_top = 2593.0
+offset_right = 1236.0
+offset_bottom = 2689.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_r406n")
+theme_override_font_sizes/font_size = 70
+text = "Round 3"
+
+[node name="LoseRound1" parent="CanvasModulate" instance=ExtResource("6_qp0x8")]
+unique_name_in_owner = true
+offset_left = 51.0
+offset_top = 2267.0
+offset_right = 351.0
+offset_bottom = 2567.0
+
+[node name="WinRound1" parent="CanvasModulate" instance=ExtResource("7_r406n")]
+unique_name_in_owner = true
+offset_left = 51.0
+offset_top = 2267.0
+offset_right = 351.0
+offset_bottom = 2567.0
+
+[node name="LoseRound2" parent="CanvasModulate" instance=ExtResource("6_qp0x8")]
+unique_name_in_owner = true
+offset_left = 494.395
+offset_top = 2267.0
+offset_right = 794.395
+offset_bottom = 2567.0
+
+[node name="WinRound2" parent="CanvasModulate" instance=ExtResource("7_r406n")]
+unique_name_in_owner = true
+offset_left = 494.395
+offset_top = 2267.0
+offset_right = 794.395
+offset_bottom = 2567.0
+
+[node name="LoseRound3" parent="CanvasModulate" instance=ExtResource("6_qp0x8")]
+unique_name_in_owner = true
+offset_left = 946.0
+offset_top = 2267.0
+offset_right = 1246.0
+offset_bottom = 2567.0
+
+[node name="WinRound3" parent="CanvasModulate" instance=ExtResource("7_r406n")]
+unique_name_in_owner = true
+offset_left = 946.0
+offset_top = 2267.0
+offset_right = 1246.0
+offset_bottom = 2567.0
+
+[node name="Button" type="Button" parent="."]
+offset_left = 489.0
+offset_top = 142.0
+offset_right = 791.0
+offset_bottom = 268.0
+theme_override_font_sizes/font_size = 86
+text = "DEBUG"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

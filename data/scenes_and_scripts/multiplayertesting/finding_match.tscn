@@ -1,0 +1,127 @@
+[gd_scene load_steps=4 format=3 uid="uid://657mgbmdmk2n"]
+
+[ext_resource type="Script" uid="uid://d1n1qagdwy5cs" path="res://data/scenes_and_scripts/multiplayertesting/finding_match.gd" id="1_yfnck"]
+[ext_resource type="PackedScene" uid="uid://dvwvkufti1fb3" path="res://data/scenes_and_scripts/multiplayertesting/playerpic.tscn" id="2_ibdfq"]
+[ext_resource type="PackedScene" uid="uid://sdrrhsylopiu" path="res://data/scenes_and_scripts/multiplayertesting/opponentpic.tscn" id="3_q1smb"]
+
+[node name="FindingMatch" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yfnck")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+unique_name_in_owner = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasModulate"]
+custom_minimum_size = Vector2(1320, 2868)
+offset_right = 1320.0
+offset_bottom = 2868.0
+color = Color(1, 0.909804, 1, 1)
+
+[node name="playername" type="Label" parent="CanvasModulate"]
+unique_name_in_owner = true
+offset_left = 784.0
+offset_top = 713.0
+offset_right = 1144.0
+offset_bottom = 850.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "player1"
+horizontal_alignment = 1
+
+[node name="playerlevel" type="Label" parent="CanvasModulate"]
+unique_name_in_owner = true
+offset_left = 788.0
+offset_top = 874.0
+offset_right = 1148.0
+offset_bottom = 1011.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "Level: X"
+horizontal_alignment = 1
+
+[node name="playerrank" type="Label" parent="CanvasModulate"]
+unique_name_in_owner = true
+offset_left = 642.0
+offset_top = 1020.0
+offset_right = 1286.0
+offset_bottom = 1157.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "Rank: Fungus"
+horizontal_alignment = 1
+
+[node name="opponentname" type="Label" parent="CanvasModulate"]
+unique_name_in_owner = true
+offset_left = 109.0
+offset_top = 1474.0
+offset_right = 597.0
+offset_bottom = 1611.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "Opponent"
+horizontal_alignment = 1
+
+[node name="opponentlevel" type="Label" parent="CanvasModulate"]
+unique_name_in_owner = true
+offset_left = 176.0
+offset_top = 1650.0
+offset_right = 536.0
+offset_bottom = 1787.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "~~~~~~"
+
+[node name="opponentrank" type="Label" parent="CanvasModulate"]
+unique_name_in_owner = true
+offset_left = 29.0
+offset_top = 1802.0
+offset_right = 703.0
+offset_bottom = 1939.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "~~~~~~~~~~~~"
+
+[node name="playerpic" parent="CanvasModulate" instance=ExtResource("2_ibdfq")]
+unique_name_in_owner = true
+
+[node name="opponentpic" parent="CanvasModulate" instance=ExtResource("3_q1smb")]
+unique_name_in_owner = true
+offset_left = 743.0
+offset_top = 1437.0
+offset_right = 1243.0
+offset_bottom = 1937.0
+
+[node name="Label3" type="Label" parent="CanvasModulate"]
+offset_left = 563.0
+offset_top = 1251.0
+offset_right = 680.0
+offset_bottom = 1388.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "VS"
+
+[node name="Button" type="Button" parent="CanvasModulate"]
+offset_left = 190.0
+offset_top = 2316.0
+offset_right = 1149.0
+offset_bottom = 2490.0
+theme_override_font_sizes/font_size = 121
+text = "CANCEL SEARCH"
+
+[node name="FindingMatch" type="Label" parent="CanvasModulate"]
+unique_name_in_owner = true
+offset_left = 308.0
+offset_top = 253.0
+offset_right = 991.0
+offset_bottom = 390.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "Finding Match"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="CanvasModulate/Button" to="." method="_on_button_pressed"]

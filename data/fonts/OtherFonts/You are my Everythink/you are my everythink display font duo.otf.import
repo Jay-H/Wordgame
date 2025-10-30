@@ -1,0 +1,35 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://b7e2t7igia5ba"
+path="res://.godot/imported/you are my everythink display font duo.otf-17336be1efa9071018c8ccf234d7b748.fontdata"
+
+[deps]
+
+source_file="res://data/fonts/OtherFonts/You are my Everythink/you are my everythink display font duo.otf"
+dest_files=["res://.godot/imported/you are my everythink display font duo.otf-17336be1efa9071018c8ccf234d7b748.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+disable_embedded_bitmaps=true
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=4
+keep_rounding_remainders=true
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}

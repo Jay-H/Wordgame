@@ -1,0 +1,257 @@
+[gd_scene load_steps=21 format=3 uid="uid://dolar4q06a3n3"]
+
+[ext_resource type="Script" uid="uid://biryif0iatsfb" path="res://data/scenes_and_scripts/multiplayertesting/solar_system.gd" id="1_i806x"]
+[ext_resource type="Shader" uid="uid://dhyo3lyq5arv6" path="res://data/scenes_and_scripts/scramble/flickering_stars.gdshader" id="2_f8s8o"]
+[ext_resource type="Shader" uid="uid://denrnnkfgncp7" path="res://data/scenes_and_scripts/scramble/cloudscape.gdshader" id="3_f8s8o"]
+[ext_resource type="Shader" uid="uid://cwp4j5hdm0uga" path="res://data/scenes_and_scripts/multiplayertesting/background_settings.gdshader" id="3_ymx6u"]
+[ext_resource type="Texture2D" uid="uid://dihflquo480cm" path="res://data/images/mercury.png" id="4_py11k"]
+[ext_resource type="Texture2D" uid="uid://c6dvrp0iuh0h" path="res://data/images/venus.png" id="5_r83n8"]
+[ext_resource type="Texture2D" uid="uid://13da74db4gi8" path="res://data/images/earth.png" id="6_lgyom"]
+[ext_resource type="Texture2D" uid="uid://orbwl6vc6vwg" path="res://data/images/mars.png" id="7_1ualk"]
+[ext_resource type="Texture2D" uid="uid://c5ug28hal4nm5" path="res://data/images/jupiter.png" id="8_vvdx6"]
+[ext_resource type="Texture2D" uid="uid://bcs3meixcjlfe" path="res://data/images/uranus.png" id="9_ph2qw"]
+[ext_resource type="Texture2D" uid="uid://cwm60hoqpssak" path="res://data/images/neptune.png" id="10_xlqjh"]
+[ext_resource type="Texture2D" uid="uid://dgbnj3nm70et8" path="res://data/images/pluto.png" id="11_eiaix"]
+[ext_resource type="Texture2D" uid="uid://c1i7wipnu0mlv" path="res://data/images/saturn.png" id="12_4n05m"]
+[ext_resource type="Shader" uid="uid://c4ip5uiejcmqj" path="res://data/scenes_and_scripts/scramble/flickersun.gdshader" id="13_t5l57"]
+[ext_resource type="FontFile" uid="uid://kj5uv8mjmg1b" path="res://data/fonts/space-ranger/spacerangergradital.ttf" id="14_al7sj"]
+[ext_resource type="AudioStream" uid="uid://c3xdry6a563u5" path="res://data/music/SolarSystem.wav" id="15_gdlld"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lyvdi"]
+shader = ExtResource("2_f8s8o")
+shader_parameter/star_density = 129.545
+shader_parameter/star_spawn_chance = 0.049
+shader_parameter/flicker_speed = 5.41
+shader_parameter/flicker_intensity = 0.491
+shader_parameter/parallax_offset = Vector2(0, 0)
+shader_parameter/star_color_a = Color(1, 1, 0.9, 1)
+shader_parameter/star_color_b = Color(0.7, 0.8, 1, 1)
+shader_parameter/color_variation_chance = 0.3
+shader_parameter/min_star_size = 0.037
+shader_parameter/max_star_size = 0.1
+shader_parameter/size_distribution = 3.691
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a8tus"]
+shader = ExtResource("3_ymx6u")
+shader_parameter/aberration_amount = 0.022
+shader_parameter/aberration_speed = 1.0
+shader_parameter/aberration_randomness = 0.45
+shader_parameter/jitter_frequency = 0.9
+shader_parameter/jitter_magnitude = 0.011
+shader_parameter/jitter_rarity = 0.947
+shader_parameter/flicker_intensity = 0.0
+shader_parameter/flicker_density = 9.5
+shader_parameter/flicker_threshold = 0.94
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ymx6u"]
+shader = ExtResource("3_f8s8o")
+shader_parameter/tile_period = Vector2(10, 10)
+shader_parameter/scale = 2.05
+shader_parameter/octaves = 6
+shader_parameter/persistence = 0.5
+shader_parameter/lacunarity = 2.0
+shader_parameter/coverage = 0.5
+shader_parameter/softness = 0.15
+shader_parameter/sky_color = Color(0.211765, 0.392157, 0.658824, 0)
+shader_parameter/cloud_color = Color(0.435294, 0.227451, 0.301961, 0.27451)
+shader_parameter/speed_primary = 0.147
+shader_parameter/speed_secondary = 0.574
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_747qh"]
+shader = ExtResource("13_t5l57")
+shader_parameter/sun_color = Color(1, 0.901961, 0.501961, 1)
+shader_parameter/fluctuation_speed = 1.881
+shader_parameter/edge_softness = 0.681
+shader_parameter/noise_intensity = 0.006
+shader_parameter/aberration_amount = 0.1
+shader_parameter/aberration_speed = 20.0
+shader_parameter/aberration_randomness = 0.5
+shader_parameter/jitter_frequency = 15.0
+shader_parameter/jitter_magnitude = 0.0
+shader_parameter/jitter_rarity = 0.95
+shader_parameter/flicker_intensity = 0.01
+shader_parameter/flicker_density = 6.8
+shader_parameter/flicker_threshold = 0.25
+
+[node name="SolarSystem" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("1_i806x")
+
+[node name="Starfield" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_lyvdi")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -566.0
+offset_top = -142.0
+offset_right = 615.0
+offset_bottom = 86.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Planets" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -1119.0
+offset_top = -1681.0
+offset_right = -1079.0
+offset_bottom = -1641.0
+
+[node name="Mercury" type="TextureRect" parent="Planets"]
+material = SubResource("ShaderMaterial_a8tus")
+layout_mode = 0
+offset_left = 1212.0
+offset_top = 1734.0
+offset_right = 1369.0
+offset_bottom = 1887.0
+mouse_filter = 0
+texture = ExtResource("4_py11k")
+expand_mode = 1
+
+[node name="Venus" type="TextureRect" parent="Planets"]
+material = SubResource("ShaderMaterial_a8tus")
+layout_mode = 0
+offset_left = 1366.0
+offset_top = 1953.0
+offset_right = 1604.0
+offset_bottom = 2181.0
+mouse_filter = 0
+texture = ExtResource("5_r83n8")
+expand_mode = 1
+
+[node name="Earth" type="TextureRect" parent="Planets"]
+material = SubResource("ShaderMaterial_a8tus")
+layout_mode = 0
+offset_left = 1950.0
+offset_top = 2353.0
+offset_right = 2143.0
+offset_bottom = 2553.0
+mouse_filter = 0
+texture = ExtResource("6_lgyom")
+expand_mode = 1
+
+[node name="Mars" type="TextureRect" parent="Planets"]
+material = SubResource("ShaderMaterial_a8tus")
+layout_mode = 0
+offset_left = 1647.0
+offset_top = 2163.0
+offset_right = 1859.0
+offset_bottom = 2361.0
+mouse_filter = 0
+texture = ExtResource("7_1ualk")
+expand_mode = 1
+
+[node name="Jupiter" type="TextureRect" parent="Planets"]
+material = SubResource("ShaderMaterial_a8tus")
+layout_mode = 0
+offset_left = 1812.0
+offset_top = 2580.0
+offset_right = 2384.0
+offset_bottom = 3162.0
+mouse_filter = 0
+texture = ExtResource("8_vvdx6")
+expand_mode = 1
+
+[node name="Uranus" type="TextureRect" parent="Planets"]
+material = SubResource("ShaderMaterial_a8tus")
+layout_mode = 0
+offset_left = 1259.0
+offset_top = 3364.0
+offset_right = 1617.0
+offset_bottom = 3712.0
+mouse_filter = 0
+texture = ExtResource("9_ph2qw")
+expand_mode = 1
+
+[node name="Neptune" type="TextureRect" parent="Planets"]
+material = SubResource("ShaderMaterial_a8tus")
+layout_mode = 0
+offset_left = 1534.0
+offset_top = 3716.0
+offset_right = 1892.0
+offset_bottom = 4064.0
+mouse_filter = 0
+texture = ExtResource("10_xlqjh")
+expand_mode = 1
+
+[node name="Pluto" type="TextureRect" parent="Planets"]
+material = SubResource("ShaderMaterial_a8tus")
+layout_mode = 0
+offset_left = 1921.0
+offset_top = 3990.0
+offset_right = 2076.0
+offset_bottom = 4082.0
+mouse_filter = 0
+texture = ExtResource("11_eiaix")
+expand_mode = 1
+
+[node name="Saturn" type="TextureRect" parent="Planets"]
+material = SubResource("ShaderMaterial_a8tus")
+layout_mode = 0
+offset_left = 1134.0
+offset_top = 2904.0
+offset_right = 2044.0
+offset_bottom = 3404.0
+mouse_filter = 0
+texture = ExtResource("12_4n05m")
+expand_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 936.0
+offset_right = 787.0
+offset_bottom = 1261.0
+theme_override_colors/default_color = Color(0.701547, 0.399771, 0.105278, 1)
+theme_override_fonts/normal_font = ExtResource("14_al7sj")
+theme_override_font_sizes/normal_font_size = 111
+text = "Solar
+System
+Collection"
+autowrap_mode = 0
+
+[node name="SolarSystemSong" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("15_gdlld")
+volume_db = 10.874
+
+[node name="Clouds" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ymx6u")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 2705.0
+offset_right = 272.0
+offset_bottom = 2865.0
+theme_override_font_sizes/font_size = 111
+text = "Back"
+
+[node name="Sun" type="ColorRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_747qh")
+layout_mode = 0
+offset_left = -1119.0
+offset_top = -1681.0
+offset_right = 2243.0
+offset_bottom = 1537.0
+mouse_filter = 2
+
+[node name="SoundEffect" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+volume_db = -13.85
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

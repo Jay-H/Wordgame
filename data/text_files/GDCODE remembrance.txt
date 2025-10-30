@@ -1,0 +1,20 @@
+GDCODE remembrance(1,annnkfdkkkn1, UR MUM GEY)
+
+To load scene
+
+var a = load('res://....)
+
+then in the function
+
+var b = a.instantiate()
+add_child(b)
+
+
+property constants 
+add_theme_constant_override("separation", 10")
+
+
+can use await get_tree().process_frame
+this will wait a little so that layout and stuff are updated if having issues
+
+use bind in connect to send values

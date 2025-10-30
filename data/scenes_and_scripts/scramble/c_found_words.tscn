@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://bmf84m0ti532o"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GridContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 100.0
+offset_right = 90.0
+offset_bottom = 140.0
+
+[node name="GridContainer2" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 350.0
+offset_top = 100.0
+offset_right = 390.0
+offset_bottom = 140.0
+
+[node name="GridContainer3" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 650.0
+offset_top = 100.0
+offset_right = 690.0
+offset_bottom = 140.0
+
+[node name="GridContainer4" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 950.0
+offset_top = 100.0
+offset_right = 990.0
+offset_bottom = 140.0
+
+[node name="GridContainer5" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 1250.0
+offset_top = 100.0
+offset_right = 1290.0
+offset_bottom = 140.0

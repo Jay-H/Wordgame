@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwupcvudridi7"]
+
+[ext_resource type="Script" uid="uid://c3lvkeyacijp" path="res://animated_circle.gd" id="1_3q6jj"]
+
+[node name="AnimatedCircle" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -125.0
+offset_top = -125.0
+offset_right = -125.0
+offset_bottom = -125.0
+script = ExtResource("1_3q6jj")
+circle_radius = 135.0
+circle_width = 25.0
+draw_duration = 1.0

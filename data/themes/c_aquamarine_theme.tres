@@ -1,0 +1,19 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://w3nlc1bj6q0x"]
+
+[ext_resource type="FontFile" uid="uid://reev7811vmq8" path="res://data/fonts/montreal/Montreal-Regular.ttf" id="1_wip8b"]
+
+[resource]
+default_font = ExtResource("1_wip8b")
+Button/colors/font_color = Color(4.33177e-07, 0.519486, 0.46535, 1)
+Button/colors/font_disabled_color = Color(0, 0.517647, 0.466667, 1)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/font_outline_color = Color(0.87451, 0.87451, 0.87451, 0)
+Button/colors/font_pressed_color = Color(0, 0.517647, 0.466667, 1)
+Button/colors/icon_disabled_color = Color(0.87451, 0.87451, 0.87451, 0)
+Button/colors/icon_focus_color = Color(0.87451, 0.87451, 0.87451, 0)
+Button/colors/icon_hover_color = Color(0.87451, 0.87451, 0.87451, 0)
+Button/colors/icon_hover_pressed_color = Color(0.87451, 0.87451, 0.87451, 0)
+Button/colors/icon_normal_color = Color(0.87451, 0.87451, 0.87451, 0)
+Button/colors/icon_pressed_color = Color(0.87451, 0.87451, 0.87451, 0)

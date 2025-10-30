@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://v1mkql3023a2"]
+
+[ext_resource type="Script" uid="uid://74ha4iryjhqh" path="res://data/scenes_and_scripts/phoenix/serverhost_2.gd" id="1_4fxaf"]
+[ext_resource type="Script" uid="uid://bdgqhgwy0qply" path="res://data/scenes_and_scripts/phoenix/server_running_games.gd" id="2_j7w2k"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4fxaf")
+
+[node name="RunningGames" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_j7w2k")

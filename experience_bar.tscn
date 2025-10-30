@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3jf6he50p6tp"]
+
+[ext_resource type="Script" uid="uid://0sovunog8wx4" path="res://experience_bar.gd" id="1_8xnfi"]
+
+[sub_resource type="Gradient" id="Gradient_n2dn2"]
+colors = PackedColorArray(0.896246, 0.787298, 1, 1, 0.425941, 0.933159, 1, 1)
+
+[node name="experiencebar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -785.0
+offset_bottom = -2832.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8xnfi")
+
+[node name="Line2D2" type="Line2D" parent="."]
+position = Vector2(17.525, 17.525)
+points = PackedVector2Array(0, 0, 500, 0)
+width = 35.0
+default_color = Color(0.83025, 1, 0.999666, 1)
+joint_mode = 1
+begin_cap_mode = 2
+end_cap_mode = 2
+round_precision = 32
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(17.525, 17.525)
+points = PackedVector2Array(0, 0, 300, 0)
+closed = true
+width = 30.0
+default_color = Color(0, 0.785387, 0.785388, 1)
+gradient = SubResource("Gradient_n2dn2")
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+round_precision = 32
+antialiased = true

@@ -1,0 +1,80 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddv5jx6fsag0x"]
+
+[ext_resource type="Script" uid="uid://2ghsfk4ss20r" path="res://data/scenes_and_scripts/multiplayertesting/level_up_screen.gd" id="1_0fstc"]
+[ext_resource type="PackedScene" uid="uid://dvwvkufti1fb3" path="res://data/scenes_and_scripts/multiplayertesting/playerpic.tscn" id="2_u8dka"]
+[ext_resource type="PackedScene" uid="uid://d3jf6he50p6tp" path="res://experience_bar.tscn" id="3_1ggor"]
+
+[node name="LevelUpScreen" type="CanvasLayer"]
+script = ExtResource("1_0fstc")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(1320, 2868)
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="playerpic" parent="." instance=ExtResource("2_u8dka")]
+unique_name_in_owner = true
+offset_left = 445.0
+offset_top = 646.0
+offset_right = 945.0
+offset_bottom = 1146.0
+
+[node name="experiencebar" parent="." instance=ExtResource("3_1ggor")]
+unique_name_in_owner = true
+offset_left = 430.0
+offset_top = 1240.0
+offset_right = 430.0
+offset_bottom = 1240.0
+
+[node name="LevelUpLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 64.0
+offset_top = 1339.0
+offset_right = 1274.0
+offset_bottom = 1490.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 110
+text = "..."
+horizontal_alignment = 1
+
+[node name="Rank" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 379.0
+offset_top = 1550.0
+offset_right = 968.0
+offset_bottom = 1701.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 110
+text = "Rank = Dirt"
+horizontal_alignment = 1
+
+[node name="RankProgress" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 151.0
+offset_top = 1820.0
+offset_right = 1221.0
+offset_bottom = 2279.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 110
+text = "Wins until next rank
+3"
+horizontal_alignment = 1
+
+[node name="MainMenuButton" type="Button" parent="."]
+offset_left = 46.0
+offset_top = 2526.0
+offset_right = 988.0
+offset_bottom = 2671.0
+theme_override_font_sizes/font_size = 100
+text = "Back to main menu"
+
+[node name="DebugButton" type="Button" parent="."]
+offset_left = 23.0
+offset_top = 2704.0
+offset_right = 699.0
+offset_bottom = 2849.0
+theme_override_font_sizes/font_size = 100
+text = "DEBUG MODE"
+
+[connection signal="pressed" from="MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="DebugButton" to="." method="_on_button_pressed"]

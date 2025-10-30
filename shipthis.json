@@ -1,0 +1,31 @@
+{
+  "ignoredFilesGlobs": [
+    ".git",
+    ".gitignore",
+    "shipthis.json",
+    "shipthis-*.zip",
+    ".godot/**",
+    ".nomedia",
+    ".import/**",
+    "export.cfg",
+    "export_credentials.cfg",
+    "*.translation",
+    ".mono/**",
+    "data_*/**",
+    "mono_crash.*.json"
+  ],
+  "project": {
+    "id": "008f0e71-015d-4c75-bd05-c2847138b596",
+    "name": "wordsearch",
+    "details": {
+      "gameEngine": "godot",
+      "iosBundleId": "com.stephsgame.game",
+      "gameEngineVersion": "4.4"
+    },
+    "createdAt": "2025-10-15T17:32:54.527-07:00",
+    "updatedAt": "2025-10-15T17:34:32.996-07:00"
+  },
+  "shippedFilesGlobs": [
+    "**/*"
+  ]
+}

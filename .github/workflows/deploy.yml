@@ -1,0 +1,30 @@
+name: Deploy to test laptop
+
+# only run with master changes
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    # probably will change on cloud server but for now, self-hosted on this laptop
+    runs-on: self-hosted
+
+    steps:
+      # 1. check out
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      # 2. get latest changes
+      - name: Pull latest changes
+        run: |
+          cd /home/testbed/Documents/Wordsearch
+          git pull origin master
+
+      # 3. rerun godot!
+      - name: Rerun Headless Godot
+        run: |
+          cd /home/testbed/Documents/Wordsearch
+          ./run_headless.sh

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnjehj40nlrp8"]
+
+[ext_resource type="Script" uid="uid://6xnqkebf7hgl" path="res://data/scenes_and_scripts/multiplayertesting/pregame_timer.gd" id="1_kc2o2"]
+
+[node name="PregameTimer" type="Timer"]
+wait_time = 1.5
+one_shot = true
+script = ExtResource("1_kc2o2")
+
+[connection signal="timeout" from="." to="." method="_on_timeout"]

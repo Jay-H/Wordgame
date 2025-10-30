@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbj5wfvs0ktfq"]
+
+[ext_resource type="Script" uid="uid://cmhpal1rex77x" path="res://menu.gd" id="1_veo22"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_veo22")
+
+[node name="IPAddressEdit" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 319.0
+offset_top = 208.0
+offset_right = 1185.0
+offset_bottom = 353.0
+theme_override_font_sizes/font_size = 100
+
+[node name="ConnectButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 500.0
+offset_right = 158.0
+offset_bottom = 508.0
+theme_override_font_sizes/font_size = 100
+text = "CONNECT"
+
+[node name="StatusLabel" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 100

@@ -1,0 +1,172 @@
+[gd_scene load_steps=6 format=3 uid="uid://b8h5piucri0ws"]
+
+[ext_resource type="Shader" uid="uid://c14ncknun6c8h" path="res://data/scenes_and_scripts/scramble/cloudscape2.gdshader" id="1_2i182"]
+[ext_resource type="Script" uid="uid://dwd7er6w2s50n" path="res://data/scenes_and_scripts/phoenix/score_screen.gd" id="1_paxoi"]
+[ext_resource type="PackedScene" uid="uid://dptsatxug1hhb" path="res://data/scenes_and_scripts/multiplayertesting/profile_picture.tscn" id="2_hoclt"]
+[ext_resource type="FontFile" uid="uid://dskmx2extevrw" path="res://data/fonts/times.ttf" id="3_hoclt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_paxoi"]
+shader = ExtResource("1_2i182")
+shader_parameter/cloud_scale = 0.5
+shader_parameter/cloud_coverage = 0.1
+shader_parameter/cloud_softness = 0.158
+shader_parameter/octaves = 1
+shader_parameter/persistence = 0.438
+shader_parameter/lacunarity = 2.062
+shader_parameter/sky_color = Color(0.756274, 0.844187, 0.956462, 1)
+shader_parameter/cloud_base_color = Color(1, 0.86082, 0.998807, 1)
+shader_parameter/cloud_highlight_color = Color(1, 1, 1, 1)
+shader_parameter/lighting_contrast = 0.214
+shader_parameter/speed = 0.795
+shader_parameter/perspective = 0.338
+shader_parameter/horizon_line = 0.599
+
+[node name="ScoreScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_paxoi")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer"]
+unique_name_in_owner = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_paxoi")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="playerpic" parent="CanvasLayer" instance=ExtResource("2_hoclt")]
+unique_name_in_owner = true
+offset_left = 81.0
+offset_top = 353.0
+offset_right = 581.0
+offset_bottom = 853.0
+
+[node name="opponentpic" parent="CanvasLayer" instance=ExtResource("2_hoclt")]
+unique_name_in_owner = true
+offset_left = 84.0
+offset_top = 1184.0
+offset_right = 584.0
+offset_bottom = 1684.0
+
+[node name="playerscore" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 768.0
+offset_top = 445.0
+offset_right = 1196.0
+offset_bottom = 689.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hoclt")
+theme_override_font_sizes/font_size = 101
+text = "Score
+12345"
+horizontal_alignment = 1
+
+[node name="playerbestword" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 778.0
+offset_top = 725.0
+offset_right = 1203.0
+offset_bottom = 952.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hoclt")
+theme_override_font_sizes/font_size = 101
+text = "Best Word
+word"
+horizontal_alignment = 1
+
+[node name="playername" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 41.0
+offset_top = 879.0
+offset_right = 639.0
+offset_bottom = 1106.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hoclt")
+theme_override_font_sizes/font_size = 101
+text = "Player"
+horizontal_alignment = 1
+
+[node name="opponentname" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 47.0
+offset_top = 1712.0
+offset_right = 642.0
+offset_bottom = 1939.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hoclt")
+theme_override_font_sizes/font_size = 101
+text = "Enemy"
+horizontal_alignment = 1
+
+[node name="opponentscore" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 769.0
+offset_top = 1240.0
+offset_right = 1197.0
+offset_bottom = 1484.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hoclt")
+theme_override_font_sizes/font_size = 101
+text = "Score
+12345"
+horizontal_alignment = 1
+
+[node name="opponentbestword" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 762.0
+offset_top = 1529.0
+offset_right = 1187.0
+offset_bottom = 1756.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hoclt")
+theme_override_font_sizes/font_size = 101
+text = "Best Word
+word"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_left = 44.0
+offset_top = 2352.0
+offset_right = 1301.0
+offset_bottom = 2696.0
+
+[node name="winners" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hoclt")
+theme_override_font_sizes/font_size = 101
+text = "Winners"
+horizontal_alignment = 1
+
+[node name="round1winner" type="Label" parent="CanvasLayer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hoclt")
+theme_override_font_sizes/font_size = 101
+text = "Round 1: "
+
+[node name="round2winner" type="Label" parent="CanvasLayer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hoclt")
+theme_override_font_sizes/font_size = 101
+text = "Round 2:"
+
+[node name="round3winner" type="Label" parent="CanvasLayer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hoclt")
+theme_override_font_sizes/font_size = 101
+text = "Round 3: "

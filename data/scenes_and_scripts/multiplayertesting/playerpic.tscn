@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvwvkufti1fb3"]
+
+[ext_resource type="Texture2D" uid="uid://bibo4s7bqvqk5" path="res://data/images/profilepics/profilepic.jpg" id="1_keei0"]
+
+[node name="playerpic" type="TextureRect"]
+offset_left = 82.0
+offset_top = 693.0
+offset_right = 582.0
+offset_bottom = 1193.0
+texture = ExtResource("1_keei0")
+expand_mode = 1

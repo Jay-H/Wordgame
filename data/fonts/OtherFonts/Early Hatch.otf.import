@@ -1,0 +1,35 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://1r4vdm2jcclv"
+path="res://.godot/imported/Early Hatch.otf-9de771637143e6108f386a6f607ba8bd.fontdata"
+
+[deps]
+
+source_file="res://data/fonts/OtherFonts/Early Hatch.otf"
+dest_files=["res://.godot/imported/Early Hatch.otf-9de771637143e6108f386a6f607ba8bd.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+disable_embedded_bitmaps=true
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=4
+keep_rounding_remainders=true
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}

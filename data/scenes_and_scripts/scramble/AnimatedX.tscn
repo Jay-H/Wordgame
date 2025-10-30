@@ -1,0 +1,90 @@
+[gd_scene load_steps=5 format=3 uid="uid://jhobmoghfpt"]
+
+[ext_resource type="Script" uid="uid://iepgwppugsg" path="res://data/scenes_and_scripts/scramble/animated_x.gd" id="1_wpssi"]
+
+[sub_resource type="Animation" id="Animation_0c08y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Line1:points")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [PackedVector2Array(-50, -50, -50, -50)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Line2:points")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [PackedVector2Array(50, -50, 50, -50)]
+}
+
+[sub_resource type="Animation" id="Animation_xfs0l"]
+resource_name = "draw_x"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Line1:points")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(2, 0.5),
+"update": 0,
+"values": [PackedVector2Array(0, 0, 0, 0), PackedVector2Array(0, 0, 250, 250)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Line2:points")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(2, 2),
+"update": 0,
+"values": [PackedVector2Array(0, 250, 0, 250), PackedVector2Array(250, 0, 0, 250)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bve30"]
+_data = {
+&"RESET": SubResource("Animation_0c08y"),
+&"draw_x": SubResource("Animation_xfs0l")
+}
+
+[node name="AnimatedX" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_wpssi")
+
+[node name="Line1" type="Line2D" parent="."]
+unique_name_in_owner = true
+points = PackedVector2Array(-50, -50, -50, -50)
+width = 25.0
+default_color = Color(0.856494, 3.65794e-06, 8.66354e-07, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Line2" type="Line2D" parent="."]
+points = PackedVector2Array(50, -50, 50, -50)
+width = 25.0
+default_color = Color(0.856494, 3.65794e-06, 8.66354e-07, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_bve30")
+}

@@ -1,0 +1,442 @@
+[gd_scene load_steps=34 format=3 uid="uid://drjmw4ao3lblu"]
+
+[ext_resource type="Script" uid="uid://rfwekr2rfwd8" path="res://data/scenes_and_scripts/multiplayertesting/main_menu.gd" id="1_f881c"]
+[ext_resource type="Script" uid="uid://cr7hrbpy68k81" path="res://data/scenes_and_scripts/multiplayertesting/findmatch.gd" id="2_70flx"]
+[ext_resource type="Shader" uid="uid://ddoeuq4rvc1ri" path="res://data/scenes_and_scripts/scramble/coloredblocker.gdshader" id="2_o3yel"]
+[ext_resource type="Shader" uid="uid://bjgpp3162vnan" path="res://data/shaders/fiery_clouds.gdshader" id="3_pbkpi"]
+[ext_resource type="Texture2D" uid="uid://crknm7gdg7jon" path="res://data/images/fog.png" id="4_8pixs"]
+[ext_resource type="Shader" uid="uid://c14ncknun6c8h" path="res://data/scenes_and_scripts/scramble/cloudscape2.gdshader" id="4_kx6bv"]
+[ext_resource type="Script" uid="uid://bxofj6a1iwr2f" path="res://data/scenes_and_scripts/multiplayertesting/profilepic.gd" id="4_qmjnu"]
+[ext_resource type="Script" uid="uid://563mxn6s8u5u" path="res://data/scenes_and_scripts/multiplayertesting/fade_box.gd" id="5_8pixs"]
+[ext_resource type="PackedScene" uid="uid://dptsatxug1hhb" path="res://data/scenes_and_scripts/multiplayertesting/profile_picture.tscn" id="5_mf3rh"]
+[ext_resource type="Script" uid="uid://bpudt7icq13vp" path="res://data/scenes_and_scripts/multiplayertesting/leaderboard.gd" id="5_pbkpi"]
+[ext_resource type="PackedScene" uid="uid://c1sjhqkeyx2mh" path="res://data/scenes_and_scripts/multiplayertesting/rules_timer.tscn" id="6_adgmf"]
+[ext_resource type="FontFile" uid="uid://e30t6lqawacl" path="res://data/fonts/timeless-memories/TimelessMemoriesRegular-2vvwo.otf" id="6_mf3rh"]
+[ext_resource type="Script" uid="uid://dy3gyfisoekug" path="res://data/scenes_and_scripts/multiplayertesting/settings.gd" id="7_17qu4"]
+[ext_resource type="FontFile" uid="uid://dskmx2extevrw" path="res://data/fonts/times.ttf" id="7_mf3rh"]
+[ext_resource type="PackedScene" uid="uid://c65vui5pgdw1w" path="res://data/scenes_and_scripts/multiplayertesting/matchmaking_timer.tscn" id="7_qmjnu"]
+[ext_resource type="PackedScene" uid="uid://cnjehj40nlrp8" path="res://data/scenes_and_scripts/multiplayertesting/pregame_timer.tscn" id="8_o3yel"]
+[ext_resource type="Texture2D" uid="uid://dmls7nrkb31n5" path="res://data/images/profilepics/Alan.png" id="11_kx6bv"]
+[ext_resource type="PackedScene" uid="uid://bqvj1l8tdmplc" path="res://data/scenes_and_scripts/multiplayertesting/login.tscn" id="14_5iki3"]
+[ext_resource type="PackedScene" uid="uid://d3jf6he50p6tp" path="res://experience_bar.tscn" id="14_maf38"]
+[ext_resource type="PackedScene" uid="uid://c58ol0a15ty70" path="res://data/scenes_and_scripts/multiplayertesting/leaderboard.tscn" id="15_hp8i3"]
+[ext_resource type="PackedScene" uid="uid://easanlfl7ixe" path="res://data/scenes_and_scripts/multiplayertesting/profile_screen.tscn" id="16_cm2i2"]
+[ext_resource type="Script" uid="uid://d1ev7swwexb4y" path="res://data/scenes_and_scripts/multiplayertesting/music_toggle.gd" id="19_mbplf"]
+[ext_resource type="AudioStream" uid="uid://pclwk720i0ch" path="res://data/music/Piano1.wav" id="20_17qu4"]
+[ext_resource type="PackedScene" uid="uid://d0qf15b4xih56" path="res://data/scenes_and_scripts/multiplayertesting/settings_scene.tscn" id="22_nqn65"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5iki3"]
+shader = ExtResource("2_o3yel")
+shader_parameter/pink_color = Color(1, 0.783893, 0.852482, 1)
+shader_parameter/blue_color = Color(0.661317, 0.734261, 0.920544, 1)
+shader_parameter/noise_scale = 4.0
+shader_parameter/motion_speed = 0.05
+shader_parameter/fbm_octaves = 5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ricx3"]
+shader = ExtResource("3_pbkpi")
+shader_parameter/fire_color_a = Color(1, 0.341176, 0, 1)
+shader_parameter/fire_color_b = Color(0.611697, 0.67735, 0.769555, 1)
+shader_parameter/smoke_color = Color(0.725483, 0.492822, 0, 1)
+shader_parameter/noise_scale = -6.0
+shader_parameter/octaves = 9.585
+shader_parameter/density = 0.6
+shader_parameter/morphing_speed = 0.235
+shader_parameter/cloud_position = 0.0
+shader_parameter/cloud_fade_softness = 1.0
+shader_parameter/border_fade_size = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mf3rh"]
+shader = ExtResource("4_kx6bv")
+shader_parameter/cloud_scale = 0.5
+shader_parameter/cloud_coverage = 0.272
+shader_parameter/cloud_softness = 0.236
+shader_parameter/octaves = 6
+shader_parameter/persistence = 0.688
+shader_parameter/lacunarity = 1.619
+shader_parameter/sky_color = Color(0.664565, 0.775863, 1, 1)
+shader_parameter/cloud_base_color = Color(0.812333, 0.768181, 1, 1)
+shader_parameter/cloud_highlight_color = Color(1, 1, 1, 1)
+shader_parameter/lighting_contrast = 0.181
+shader_parameter/speed = 0.409
+shader_parameter/perspective = 0.76
+shader_parameter/horizon_line = 0.335
+
+[sub_resource type="Gradient" id="Gradient_mf3rh"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_12xy2"]
+gradient = SubResource("Gradient_mf3rh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jteiq"]
+
+[sub_resource type="Gradient" id="Gradient_susjl"]
+offsets = PackedFloat32Array(0, 0.237942, 0.514469, 1)
+colors = PackedColorArray(1, 0.835294, 0.839216, 0, 0.999999, 0.836602, 0.837397, 0.513726, 0.67451, 1, 0.945098, 0.168627, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rr8v0"]
+gradient = SubResource("Gradient_susjl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_adgmf"]
+lifetime_randomness = 0.5
+emission_shape = 3
+emission_box_extents = Vector3(600, 2000, 1)
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 150.0
+gravity = Vector3(25000, -9.8, 0)
+scale_min = 4.0
+scale_max = 6.0
+color_ramp = SubResource("GradientTexture1D_rr8v0")
+turbulence_enabled = true
+turbulence_noise_strength = 0.5
+turbulence_noise_scale = 2.0
+turbulence_influence_max = 1.0
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f881c")
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_5iki3")
+layout_mode = 0
+offset_left = 1320.0
+offset_top = 2868.0
+offset_right = 2640.0
+offset_bottom = 5736.0
+rotation = 3.14159
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_ricx3")
+layout_mode = 0
+offset_left = 1530.0
+offset_top = 3079.0
+offset_right = 3328.0
+offset_bottom = 4588.0
+rotation = 3.14159
+
+[node name="CloudsBackground" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_mf3rh")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerInfoContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.045
+anchor_top = 0.018
+anchor_right = 0.073
+anchor_bottom = 0.036
+offset_left = 786.6
+offset_top = 502.376
+offset_right = 1158.6
+offset_bottom = 814.376
+theme_override_constants/separation = 20
+
+[node name="username" type="Label" parent="PlayerInfoContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_mf3rh")
+theme_override_font_sizes/font_size = 50
+text = "Welcome: Chris"
+horizontal_alignment = 1
+
+[node name="level" type="Label" parent="PlayerInfoContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_mf3rh")
+theme_override_font_sizes/font_size = 50
+text = "Level: X"
+horizontal_alignment = 1
+
+[node name="experiencebar" parent="PlayerInfoContainer" instance=ExtResource("14_maf38")]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="rank" type="Label" parent="PlayerInfoContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_mf3rh")
+theme_override_font_sizes/font_size = 50
+text = "Rank: "
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.027
+anchor_top = 0.277
+anchor_right = 0.064
+anchor_bottom = 0.5
+offset_left = 4.36
+offset_top = -57.436
+offset_right = 1134.36
+offset_bottom = 613.0
+grow_vertical = 2
+
+[node name="wordgame" type="Label" parent="Control"]
+layout_mode = 1
+offset_right = 859.0
+offset_bottom = 241.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_mf3rh")
+theme_override_font_sizes/font_size = 180
+text = "wordwar."
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -955.0
+offset_right = 909.0
+grow_vertical = 0
+theme_override_constants/separation = -10
+
+[node name="findmatch" type="Label" parent="Control/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_mf3rh")
+theme_override_font_sizes/font_size = 150
+text = "find match."
+script = ExtResource("2_70flx")
+
+[node name="singleplayer" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_mf3rh")
+theme_override_font_sizes/font_size = 150
+text = "single player."
+
+[node name="settings" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_mf3rh")
+theme_override_font_sizes/font_size = 150
+text = "settings."
+script = ExtResource("7_17qu4")
+
+[node name="store" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_mf3rh")
+theme_override_font_sizes/font_size = 150
+text = "store."
+
+[node name="leaderboard" type="Label" parent="Control/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_mf3rh")
+theme_override_font_sizes/font_size = 150
+text = "leaderboard."
+script = ExtResource("5_pbkpi")
+
+[node name="cjenterprises" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.99
+anchor_top = 0.95
+anchor_right = 0.99
+anchor_bottom = 0.99
+offset_left = -371.8
+offset_top = -0.599854
+offset_right = 0.199951
+offset_bottom = -0.320068
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_mf3rh")
+theme_override_font_sizes/font_size = 50
+text = "CJ Enterprises
+All rights reserved"
+horizontal_alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+custom_minimum_size = Vector2(512, 512)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.972
+anchor_top = 0.01
+anchor_right = 0.981
+anchor_bottom = 0.01
+offset_left = -244.04
+offset_top = 0.32
+offset_right = 0.0799561
+offset_bottom = 256.32
+grow_horizontal = 0
+texture = SubResource("GradientTexture1D_12xy2")
+
+[node name="profilepic" type="TextureRect" parent="TextureRect"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_jteiq")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -137.0
+offset_top = -241.0
+offset_right = 146.0
+offset_bottom = 233.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_kx6bv")
+expand_mode = 1
+script = ExtResource("4_qmjnu")
+
+[node name="StatusLabel" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.945
+anchor_right = 1.0
+anchor_bottom = 0.955
+offset_left = -372.0
+offset_top = -232.26
+offset_bottom = -92.9399
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.552941, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_mf3rh")
+theme_override_font_sizes/font_size = 70
+text = "Players 
+Online: 0"
+horizontal_alignment = 2
+
+[node name="RunningGames" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Particles" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 1402.26)
+emitting = false
+amount = 450
+texture = ExtResource("4_8pixs")
+lifetime = 8.0
+speed_scale = 0.4
+randomness = 0.21
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_adgmf")
+
+[node name="FadeBox" type="ColorRect" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 1320.0
+offset_bottom = 2860.0
+mouse_filter = 2
+color = Color(1, 0.859757, 0.872584, 1)
+script = ExtResource("5_8pixs")
+
+[node name="ProfilePicture" parent="." instance=ExtResource("5_mf3rh")]
+unique_name_in_owner = true
+visible = false
+offset_left = 793.0
+offset_top = 36.0
+offset_right = 1293.0
+offset_bottom = 536.0
+
+[node name="RulesTimer" parent="." instance=ExtResource("6_adgmf")]
+unique_name_in_owner = true
+
+[node name="MatchmakingTimer" parent="." instance=ExtResource("7_qmjnu")]
+unique_name_in_owner = true
+
+[node name="PregameTimer" parent="." instance=ExtResource("8_o3yel")]
+unique_name_in_owner = true
+
+[node name="MusicToggle" type="Button" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -242.0
+offset_right = 197.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 171
+toggle_mode = true
+text = "♬"
+script = ExtResource("19_mbplf")
+
+[node name="Music" type="AudioStreamPlayer2D" parent="MusicToggle"]
+stream = ExtResource("20_17qu4")
+volume_db = -80.0
+autoplay = true
+
+[node name="Login" parent="." instance=ExtResource("14_5iki3")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="QuickLoginA" type="Button" parent="Login"]
+layout_mode = 0
+offset_left = 543.0
+offset_top = 2502.0
+offset_right = 1228.0
+offset_bottom = 2635.0
+theme_override_font_sizes/font_size = 91
+text = "QUICK LOGIN A"
+
+[node name="QuickLoginB" type="Button" parent="Login"]
+layout_mode = 0
+offset_left = 539.0
+offset_top = 2669.0
+offset_right = 1224.0
+offset_bottom = 2802.0
+theme_override_font_sizes/font_size = 91
+text = "QUICK LOGIN B"
+
+[node name="LeaderboardScreen" parent="." instance=ExtResource("15_hp8i3")]
+unique_name_in_owner = true
+visible = false
+
+[node name="ProfileScreen" parent="." instance=ExtResource("16_cm2i2")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="SettingsScene" parent="." instance=ExtResource("22_nqn65")]
+unique_name_in_owner = true
+visible = false
+
+[connection signal="pressed" from="Control/VBoxContainer/findmatch" to="." method="_on_findmatch_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/leaderboard" to="." method="on_leaderboard_pressed"]
+[connection signal="toggled" from="MusicToggle" to="MusicToggle" method="_on_toggled"]
+[connection signal="pressed" from="Login/QuickLoginA" to="." method="_on_quick_login_a_pressed"]
+[connection signal="pressed" from="Login/QuickLoginB" to="." method="_on_quick_login_b_pressed"]

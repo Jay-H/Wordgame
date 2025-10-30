@@ -1,0 +1,35 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://d2nnu56e22hfw"
+path="res://.godot/imported/Vintage Bilbesto.woff-2ce8f60084c3db8969d8cce7ccac6745.fontdata"
+
+[deps]
+
+source_file="res://data/fonts/OtherFonts/Vintage Bilbesto.woff"
+dest_files=["res://.godot/imported/Vintage Bilbesto.woff-2ce8f60084c3db8969d8cce7ccac6745.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+disable_embedded_bitmaps=true
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=4
+keep_rounding_remainders=true
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}

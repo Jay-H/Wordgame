@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://bk6yqt04dl0v2"]
+
+[ext_resource type="Script" uid="uid://nxhp87aa6tth" path="res://data/scenes_and_scripts/wordsearch/letter_cell.gd" id="1_365sp"]
+[ext_resource type="Script" uid="uid://blgox8q5ggqiq" path="res://data/scenes_and_scripts/wordsearch/letter_cell_label.gd" id="2_x84bm"]
+
+[node name="LetterCell" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_365sp")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_default_cursor_shape = 3
+color = Color(0.478431, 0.478431, 0.478431, 0)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -55.0
+offset_right = 0.5
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 80
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_x84bm")
+metadata/_edit_use_anchors_ = true

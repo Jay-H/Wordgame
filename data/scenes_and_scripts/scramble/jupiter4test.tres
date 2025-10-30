@@ -1,0 +1,28 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://xtnsfpcccyin"]
+
+[ext_resource type="Shader" uid="uid://bul2xum21pspb" path="res://data/scenes_and_scripts/scramble/jupiter4tweaked.gdshader" id="1_xrp24"]
+
+[resource]
+shader = ExtResource("1_xrp24")
+shader_parameter/band_A_color_1 = Color(0.83, 0.75, 0.64, 1)
+shader_parameter/band_A_color_2 = Color(0.65, 0.53, 0.41, 1)
+shader_parameter/band_B_color_1 = Color(0.91, 0.85, 0.76, 1)
+shader_parameter/band_B_color_2 = Color(0.53, 0.44, 0.35, 1)
+shader_parameter/band_C_color_1 = Color(0.75, 0.6, 0.5, 1)
+shader_parameter/band_C_color_2 = Color(0.45, 0.35, 0.3, 1)
+shader_parameter/band_D_color_1 = Color(0.685, 0.632962, 0.625507, 1)
+shader_parameter/band_D_color_2 = Color(0.8, 0.7, 0.6, 1)
+shader_parameter/band_frequency = 3.8
+shader_parameter/band_sharpness = 14.0
+shader_parameter/band_height_variation = 0.7
+shader_parameter/band_definition_variation = 4.7
+shader_parameter/band_blend_softness = 0.5
+shader_parameter/band_type_transition_softness = 0.25
+shader_parameter/noise_scale = 7.1
+shader_parameter/vortex_curl_strength = 4.0
+shader_parameter/vortex_evolution_speed = 0.5
+shader_parameter/turbulence_intensity = 0.0
+shader_parameter/band_flow_speeds = Vector4(4, 10, 3, 2)
+shader_parameter/band_vortex_strengths = Vector4(0.05, 0.09, 0.06, 0.03)
+shader_parameter/band_vortex_feedbacks = Vector4(0.3, 0.5, 0.2, 0.4)
+shader_parameter/band_turbulence_details = Vector4(2.5, 3.5, 2, 4)

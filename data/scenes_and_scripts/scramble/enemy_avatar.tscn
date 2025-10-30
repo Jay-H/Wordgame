@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwq5oqsnjscuo"]
+
+[ext_resource type="Texture2D" uid="uid://bicogf2qi6cdn" path="res://data/images/tidusavatar.png" id="1_db5gx"]
+[ext_resource type="Texture2D" uid="uid://kupi3b2ijpco" path="res://data/images/paintingframetransparency.png" id="2_ntxus"]
+
+[node name="EnemyAvatar" type="PanelContainer"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(400, 400)
+offset_left = 460.0
+offset_top = 1234.0
+offset_right = 860.0
+offset_bottom = 1634.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="avatarimage" type="TextureRect" parent="."]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_db5gx")
+expand_mode = 1
+
+[node name="borderimage" type="TextureRect" parent="."]
+visible = false
+texture_filter = 3
+custom_minimum_size = Vector2(40, 400)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_ntxus")
+expand_mode = 1

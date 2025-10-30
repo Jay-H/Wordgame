@@ -1,0 +1,513 @@
+[gd_scene load_steps=23 format=3 uid="uid://bg3sj7c6hiakf"]
+
+[ext_resource type="Script" uid="uid://d0ojyugu0687m" path="res://data/scenes_and_scripts/scramble/rules_transition_wordsearch.gd" id="1_51s3c"]
+[ext_resource type="PackedScene" uid="uid://cqsh7sgao7ccl" path="res://data/scenes_and_scripts/scramble/c_particles.tscn" id="2_51s3c"]
+[ext_resource type="Shader" uid="uid://dqh1fq5sbkokn" path="res://data/scenes_and_scripts/scramble/ScrambleWord.gdshader" id="3_h8yy4"]
+[ext_resource type="FontFile" uid="uid://bhvt5rw7k2iwk" path="res://data/fonts/OtherFonts/HARLOWSI_1.TTF" id="4_0qxpm"]
+[ext_resource type="Script" uid="uid://baw5hkg5cgwdi" path="res://data/scenes_and_scripts/scramble/scramble_rules.gd" id="5_htymm"]
+[ext_resource type="FontFile" uid="uid://ls1tsnsgjmae" path="res://data/fonts/microbrew-one/Microbrew One 3D.otf" id="6_vxkjt"]
+[ext_resource type="Script" uid="uid://dqh28q705qlav" path="res://data/scenes_and_scripts/scramble/bonus_letter_rules.gd" id="7_vyy0k"]
+[ext_resource type="FontFile" uid="uid://lakpyxevgy8" path="res://data/fonts/OtherFonts/Majesty Goldera.woff" id="8_kkmml"]
+[ext_resource type="Script" uid="uid://b2q0bvvqa8qt2" path="res://data/scenes_and_scripts/scramble/obscurityrules.gd" id="9_k8iu0"]
+[ext_resource type="FontFile" uid="uid://j715etk2k7y5" path="res://data/fonts/burkhan/Burkhan.otf" id="10_h8yy4"]
+[ext_resource type="Script" uid="uid://blmjk7t48yyoc" path="res://data/scenes_and_scripts/scramble/wonder.gd" id="11_tatks"]
+[ext_resource type="Script" uid="uid://bqjvm8q7tr073" path="res://data/scenes_and_scripts/scramble/red_line.gd" id="12_7mla3"]
+[ext_resource type="PackedScene" uid="uid://sdrrhsylopiu" path="res://data/scenes_and_scripts/multiplayertesting/opponentpic.tscn" id="13_nhti1"]
+[ext_resource type="Shader" uid="uid://dydkl60vbhiwx" path="res://data/scenes_and_scripts/multiplayertesting/profile_shader.gdshader" id="14_pya0c"]
+[ext_resource type="PackedScene" uid="uid://dvwvkufti1fb3" path="res://data/scenes_and_scripts/multiplayertesting/playerpic.tscn" id="15_2i50p"]
+[ext_resource type="Texture2D" uid="uid://t71ul0257vc7" path="res://data/images/noun-finger-7180936.svg" id="16_oy08c"]
+[ext_resource type="Script" uid="uid://bbf53upsu10k" path="res://data/scenes_and_scripts/scramble/texture_rect_2.gd" id="17_581ew"]
+[ext_resource type="Texture2D" uid="uid://bqvnhvhw8pmxa" path="res://data/images/Icons/Untitled-1.png" id="18_mwhnb"]
+[ext_resource type="Script" uid="uid://clp3ynw3cf8k2" path="res://data/scenes_and_scripts/scramble/close_button.gd" id="19_ws18v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fkp3x"]
+bg_color = Color(0.92549, 1, 1, 1)
+border_width_left = 50
+border_width_top = 50
+border_width_right = 50
+border_width_bottom = 50
+border_color = Color(1, 1, 1, 0)
+border_blend = true
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wp2ep"]
+resource_local_to_scene = true
+shader = ExtResource("3_h8yy4")
+shader_parameter/color1 = Color(0.907457, 0.71582, 1, 1)
+shader_parameter/color2 = Color(0.417167, 0.727298, 1, 1)
+shader_parameter/color3 = Color(0.378377, 0.313947, 0.399109, 1)
+shader_parameter/speed = 1.06
+shader_parameter/width = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ftxv5"]
+shader = ExtResource("14_pya0c")
+shader_parameter/softness = 0.2
+
+[node name="ScrambleBonusObscurityRules" type="CanvasLayer"]
+layer = 12
+script = ExtResource("1_51s3c")
+
+[node name="ColoredBlocker" type="ColorRect" parent="."]
+unique_name_in_owner = true
+offset_right = 1320.0
+offset_bottom = 2868.0
+mouse_filter = 2
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+unique_name_in_owner = true
+
+[node name="Particles" parent="CanvasModulate" instance=ExtResource("2_51s3c")]
+unique_name_in_owner = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasModulate"]
+offset_right = 1320.0
+offset_bottom = 2868.0
+color = Color(0.921569, 0.878431, 0.823529, 1)
+
+[node name="ScramblePanel" type="Panel" parent="CanvasModulate"]
+unique_name_in_owner = true
+offset_left = 292.0
+offset_top = 945.0
+offset_right = 1262.0
+offset_bottom = 1193.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_fkp3x")
+
+[node name="BonusPanel" type="Panel" parent="CanvasModulate"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.164706)
+offset_left = 296.0
+offset_top = 1485.0
+offset_right = 1266.0
+offset_bottom = 1733.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_fkp3x")
+
+[node name="ObscurityPanel" type="Panel" parent="CanvasModulate"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.164706)
+offset_left = 303.0
+offset_top = 1757.0
+offset_right = 1273.0
+offset_bottom = 2005.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_fkp3x")
+
+[node name="WonderPanel" type="Panel" parent="CanvasModulate"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.164706)
+offset_left = 303.0
+offset_top = 2029.0
+offset_right = 1273.0
+offset_bottom = 2277.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_fkp3x")
+
+[node name="Scramble" type="RichTextLabel" parent="CanvasModulate"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_wp2ep")
+offset_left = 552.0
+offset_top = 1004.0
+offset_right = 1222.0
+offset_bottom = 1156.0
+theme_override_fonts/normal_font = ExtResource("4_0qxpm")
+theme_override_font_sizes/normal_font_size = 116
+text = "WordSearch"
+script = ExtResource("5_htymm")
+
+[node name="Bonus" type="RichTextLabel" parent="CanvasModulate"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.164706)
+material = SubResource("ShaderMaterial_wp2ep")
+offset_left = 527.0
+offset_top = 1530.0
+offset_right = 1209.0
+offset_bottom = 1691.0
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("6_vxkjt")
+theme_override_font_sizes/normal_font_size = 126
+text = "Vanilla"
+autowrap_mode = 1
+horizontal_alignment = 1
+script = ExtResource("7_vyy0k")
+
+[node name="Obscurity" type="RichTextLabel" parent="CanvasModulate"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.164706)
+material = SubResource("ShaderMaterial_wp2ep")
+offset_left = 611.0
+offset_top = 1787.0
+offset_right = 1252.0
+offset_bottom = 2005.0
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("8_kkmml")
+theme_override_font_sizes/normal_font_size = 126
+text = "Adventure"
+script = ExtResource("9_k8iu0")
+
+[node name="Wonder" type="RichTextLabel" parent="CanvasModulate"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.164706)
+material = SubResource("ShaderMaterial_wp2ep")
+offset_left = 679.0
+offset_top = 2098.0
+offset_right = 1124.0
+offset_bottom = 2233.0
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("10_h8yy4")
+theme_override_font_sizes/normal_font_size = 111
+text = "OneBoard"
+script = ExtResource("11_tatks")
+
+[node name="BonusRedLine" type="Node2D" parent="CanvasModulate"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.384314)
+position = Vector2(505, 1609)
+script = ExtResource("12_7mla3")
+
+[node name="ObscurityRedLine" type="Node2D" parent="CanvasModulate"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.384314)
+position = Vector2(505, 1883)
+script = ExtResource("12_7mla3")
+
+[node name="WonderRedLine" type="Node2D" parent="CanvasModulate"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.384314)
+position = Vector2(506, 2160)
+script = ExtResource("12_7mla3")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasModulate"]
+offset_left = 473.0
+offset_top = 814.0
+offset_right = 573.0
+offset_bottom = 939.0
+
+[node name="Label" type="Label" parent="CanvasModulate"]
+offset_left = 42.0
+offset_top = 737.0
+offset_right = 995.0
+offset_bottom = 941.0
+theme_override_colors/font_color = Color(0.535602, 0.686181, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("4_0qxpm")
+theme_override_font_sizes/font_size = 126
+text = "Upcoming Game:"
+
+[node name="Label2" type="Label" parent="CanvasModulate"]
+offset_left = 41.0
+offset_top = 1307.0
+offset_right = 994.0
+offset_bottom = 1511.0
+theme_override_colors/font_color = Color(0.535602, 0.686181, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("4_0qxpm")
+theme_override_font_sizes/font_size = 126
+text = "Variants:"
+
+[node name="opponentpic" parent="CanvasModulate" instance=ExtResource("13_nhti1")]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_ftxv5")
+offset_left = 760.0
+offset_top = 71.0
+offset_right = 1260.0
+offset_bottom = 571.0
+
+[node name="playerpic" parent="CanvasModulate" instance=ExtResource("15_2i50p")]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_ftxv5")
+offset_left = 48.0
+offset_top = 65.0
+offset_right = 548.0
+offset_bottom = 565.0
+
+[node name="ScrambleButton" type="TextureRect" parent="CanvasModulate"]
+unique_name_in_owner = true
+offset_left = 369.0
+offset_top = 985.0
+offset_right = 519.0
+offset_bottom = 1160.0
+scale = Vector2(0.815, 0.815)
+pivot_offset = Vector2(75, 87.5)
+texture = ExtResource("16_oy08c")
+script = ExtResource("17_581ew")
+
+[node name="BonusButton" type="TextureRect" parent="CanvasModulate"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.164706)
+offset_left = 384.0
+offset_top = 1520.0
+offset_right = 534.0
+offset_bottom = 1695.0
+scale = Vector2(0.815, 0.815)
+pivot_offset = Vector2(75, 87.5)
+texture = ExtResource("16_oy08c")
+script = ExtResource("17_581ew")
+
+[node name="ObscurityButton" type="TextureRect" parent="CanvasModulate"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.164706)
+offset_left = 384.0
+offset_top = 1795.0
+offset_right = 534.0
+offset_bottom = 1970.0
+scale = Vector2(0.815, 0.815)
+pivot_offset = Vector2(75, 87.5)
+texture = ExtResource("16_oy08c")
+script = ExtResource("17_581ew")
+
+[node name="WonderButton" type="TextureRect" parent="CanvasModulate"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.164706)
+offset_left = 384.0
+offset_top = 2071.0
+offset_right = 534.0
+offset_bottom = 2246.0
+scale = Vector2(0.815, 0.815)
+pivot_offset = Vector2(75, 87.5)
+texture = ExtResource("16_oy08c")
+script = ExtResource("17_581ew")
+
+[node name="P1Label" type="Label" parent="CanvasModulate"]
+unique_name_in_owner = true
+offset_left = 161.0
+offset_top = 558.0
+offset_right = 463.0
+offset_bottom = 695.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "Player"
+horizontal_alignment = 1
+
+[node name="P2Label" type="Label" parent="CanvasModulate"]
+unique_name_in_owner = true
+offset_left = 872.0
+offset_top = 560.0
+offset_right = 1174.0
+offset_bottom = 697.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "Player"
+horizontal_alignment = 1
+
+[node name="SkipButton" type="Button" parent="CanvasModulate"]
+unique_name_in_owner = true
+offset_left = 427.0
+offset_top = 2479.0
+offset_right = 925.0
+offset_bottom = 2624.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "Skip Rules"
+
+[node name="SkipWaiting" type="Label" parent="CanvasModulate"]
+unique_name_in_owner = true
+offset_left = 458.0
+offset_top = 2651.0
+offset_right = 894.0
+offset_bottom = 2788.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+horizontal_alignment = 1
+
+[node name="NonFadeables" type="CanvasGroup" parent="CanvasModulate"]
+
+[node name="ScrambleRulesPanel" type="Panel" parent="CanvasModulate/NonFadeables"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+offset_left = 19.0
+offset_top = 667.0
+offset_right = 1301.0
+offset_bottom = 2043.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fkp3x")
+
+[node name="ScrambleRules" type="Label" parent="CanvasModulate/NonFadeables/ScrambleRulesPanel"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 69.0
+offset_right = 308.0
+offset_bottom = 257.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 55
+text = "It's time for a competitive wordsearch!
+
+Drag to find words in the wordsearch.
+
+The selected variant will determine
+the specific rules of the game!"
+
+[node name="CloseButton" type="TextureRect" parent="CanvasModulate/NonFadeables/ScrambleRulesPanel"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 1067.0
+offset_top = -123.0
+offset_right = 1258.0
+offset_bottom = 70.0
+mouse_filter = 2
+texture = ExtResource("18_mwhnb")
+expand_mode = 1
+script = ExtResource("19_ws18v")
+
+[node name="WonderRulesPanel" type="Panel" parent="CanvasModulate/NonFadeables"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+offset_left = 19.0
+offset_top = 667.0
+offset_right = 1301.0
+offset_bottom = 2043.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fkp3x")
+
+[node name="Wonder2" type="RichTextLabel" parent="CanvasModulate/NonFadeables/WonderRulesPanel"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_wp2ep")
+layout_mode = 0
+offset_left = 349.0
+offset_top = 218.0
+offset_right = 962.0
+offset_bottom = 425.0
+theme_override_fonts/normal_font = ExtResource("10_h8yy4")
+theme_override_font_sizes/normal_font_size = 146
+text = "One Board"
+horizontal_alignment = 1
+
+[node name="CloseButton" type="TextureRect" parent="CanvasModulate/NonFadeables/WonderRulesPanel"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 1067.0
+offset_top = -123.0
+offset_right = 1258.0
+offset_bottom = 70.0
+mouse_filter = 2
+texture = ExtResource("18_mwhnb")
+expand_mode = 1
+script = ExtResource("19_ws18v")
+
+[node name="WonderRules" type="Label" parent="CanvasModulate/NonFadeables/WonderRulesPanel"]
+layout_mode = 0
+offset_left = 163.0
+offset_top = 513.0
+offset_right = 1132.0
+offset_bottom = 826.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 55
+text = "You are your opponent are playing on
+the same board.
+
+If they find a word, it will show up 
+on your board and you will no 
+longer be able to score it.
+
+First to three words wins!"
+
+[node name="BonusLetterRulesPanel" type="Panel" parent="CanvasModulate/NonFadeables"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+offset_left = 19.0
+offset_top = 670.0
+offset_right = 1272.0
+offset_bottom = 2046.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fkp3x")
+
+[node name="Bonus2" type="RichTextLabel" parent="CanvasModulate/NonFadeables/BonusLetterRulesPanel"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_wp2ep")
+layout_mode = 0
+offset_left = 267.0
+offset_top = 69.0
+offset_right = 970.0
+offset_bottom = 326.0
+theme_override_fonts/normal_font = ExtResource("6_vxkjt")
+theme_override_font_sizes/normal_font_size = 126
+text = "Vanilla"
+autowrap_mode = 1
+horizontal_alignment = 1
+
+[node name="CloseButton" type="TextureRect" parent="CanvasModulate/NonFadeables/BonusLetterRulesPanel"]
+layout_mode = 0
+offset_left = 1067.0
+offset_top = -123.0
+offset_right = 1258.0
+offset_bottom = 70.0
+mouse_filter = 2
+texture = ExtResource("18_mwhnb")
+expand_mode = 1
+script = ExtResource("19_ws18v")
+
+[node name="BonusLetterRules" type="Label" parent="CanvasModulate/NonFadeables/BonusLetterRulesPanel"]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 250.0
+offset_right = 1161.0
+offset_bottom = 1116.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 55
+text = "Both players compete to find as many
+words as they can.
+If time runs out, the player with the
+most found words wins.
+
+...If there is a tie when the time runs out,
+the first to find the next word wins!"
+
+[node name="ObscurityRulesPanel" type="Panel" parent="CanvasModulate/NonFadeables"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+offset_left = 19.0
+offset_top = 670.0
+offset_right = 1272.0
+offset_bottom = 2046.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fkp3x")
+
+[node name="Obscurity2" type="RichTextLabel" parent="CanvasModulate/NonFadeables/ObscurityRulesPanel"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_wp2ep")
+layout_mode = 0
+offset_left = 322.0
+offset_top = 74.0
+offset_right = 963.0
+offset_bottom = 292.0
+theme_override_fonts/normal_font = ExtResource("8_kkmml")
+theme_override_font_sizes/normal_font_size = 126
+text = "Adventure"
+horizontal_alignment = 1
+
+[node name="CloseButton" type="TextureRect" parent="CanvasModulate/NonFadeables/ObscurityRulesPanel"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 1067.0
+offset_top = -123.0
+offset_right = 1258.0
+offset_bottom = 70.0
+mouse_filter = 2
+texture = ExtResource("18_mwhnb")
+expand_mode = 1
+script = ExtResource("19_ws18v")
+
+[node name="ObscurityRules" type="Label" parent="CanvasModulate/NonFadeables/ObscurityRulesPanel"]
+layout_mode = 0
+offset_left = 116.0
+offset_top = 273.0
+offset_right = 1122.0
+offset_bottom = 1060.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 55
+text = "Find as many words as you can,
+before the timer runs out.
+The catch is, there's no list of words!
+
+Good luck!"
+
+[connection signal="pressed" from="CanvasModulate/Scramble" to="." method="_on_scramble_pressed"]
+[connection signal="pressed" from="CanvasModulate/Bonus" to="." method="_on_bonus_letter_pressed"]
+[connection signal="pressed" from="CanvasModulate/Obscurity" to="." method="_on_obscurity_pressed"]
+[connection signal="pressed" from="CanvasModulate/Wonder" to="." method="_on_wonder_pressed"]
+[connection signal="pressed" from="CanvasModulate/SkipButton" to="." method="_on_skip_button_pressed"]
+[connection signal="pressed" from="CanvasModulate/NonFadeables/ScrambleRulesPanel/CloseButton" to="." method="close_button_pressed"]
+[connection signal="pressed" from="CanvasModulate/NonFadeables/WonderRulesPanel/CloseButton" to="." method="close_button_pressed"]
+[connection signal="pressed" from="CanvasModulate/NonFadeables/BonusLetterRulesPanel/CloseButton" to="." method="close_button_pressed"]
+[connection signal="pressed" from="CanvasModulate/NonFadeables/ObscurityRulesPanel/CloseButton" to="." method="close_button_pressed"]

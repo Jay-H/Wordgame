@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://dd3wwu35lmvam"]
+
+[ext_resource type="Shader" uid="uid://ddoeuq4rvc1ri" path="res://data/scenes_and_scripts/scramble/coloredblocker.gdshader" id="1_ohocl"]
+[ext_resource type="FontFile" uid="uid://dskmx2extevrw" path="res://data/fonts/times.ttf" id="2_vnrq0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vnrq0"]
+shader = ExtResource("1_ohocl")
+shader_parameter/pink_color = Color(1, 0.893969, 0.925706, 1)
+shader_parameter/blue_color = Color(0.3, 0.4, 0.7, 1)
+shader_parameter/noise_scale = 18.257
+shader_parameter/motion_speed = 0.5
+shader_parameter/fbm_octaves = 1
+
+[node name="Rules" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_vnrq0")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 55.0
+offset_top = 388.0
+offset_right = 628.0
+offset_bottom = 484.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_vnrq0")
+theme_override_font_sizes/font_size = 86
+text = "upcoming game."

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://sdrrhsylopiu"]
+
+[ext_resource type="Texture2D" uid="uid://bibo4s7bqvqk5" path="res://data/images/profilepics/profilepic.jpg" id="1_0w2ft"]
+
+[node name="opponentpic" type="TextureRect"]
+offset_left = 667.0
+offset_top = 1451.0
+offset_right = 1167.0
+offset_bottom = 1951.0
+texture = ExtResource("1_0w2ft")
+expand_mode = 1

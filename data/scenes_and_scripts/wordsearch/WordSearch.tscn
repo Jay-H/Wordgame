@@ -1,0 +1,254 @@
+[gd_scene load_steps=13 format=3 uid="uid://ddc7u2h6cfyni"]
+
+[ext_resource type="Script" uid="uid://d3rrj4hxhrd2j" path="res://data/scenes_and_scripts/wordsearch/word_search.gd" id="1_3kvo5"]
+[ext_resource type="PackedScene" uid="uid://bk6yqt04dl0v2" path="res://data/scenes_and_scripts/wordsearch/LetterCell.tscn" id="2_2stpv"]
+[ext_resource type="Resource" uid="uid://c20xqxq0lwmyo" path="res://data/animations/default_wave_animation.tres" id="3_0dbxo"]
+[ext_resource type="PackedScene" uid="uid://b1ox8dcj0yscl" path="res://data/scenes_and_scripts/wordsearch/GameTimer.tscn" id="3_mgi5u"]
+[ext_resource type="PackedScene" uid="uid://cyqux5urfqgpp" path="res://data/scenes_and_scripts/wordsearch/Background.tscn" id="4_mgi5u"]
+[ext_resource type="AudioStream" uid="uid://cx0176ru31d0h" path="res://data/music/WS_temp.mp3" id="6_c6bbx"]
+[ext_resource type="Shader" uid="uid://ddoeuq4rvc1ri" path="res://data/scenes_and_scripts/scramble/coloredblocker.gdshader" id="7_tgtiw"]
+[ext_resource type="Shader" uid="uid://baj561mjeqcoh" path="res://data/scenes_and_scripts/scramble/pregamelabels.gdshader" id="8_6hwgw"]
+[ext_resource type="FontFile" uid="uid://ca75bijbhrqu7" path="res://data/fonts/akando/Akando.otf" id="9_vi34y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0dbxo"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.584314)
+shadow_size = 20
+shadow_offset = Vector2(4, 4)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5w3md"]
+shader = ExtResource("7_tgtiw")
+shader_parameter/pink_color = Color(1, 0.952941, 0.803922, 1)
+shader_parameter/blue_color = Color(0.673158, 0.746813, 1, 1)
+shader_parameter/noise_scale = 20.0
+shader_parameter/motion_speed = 0.5
+shader_parameter/fbm_octaves = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tsdk0"]
+shader = ExtResource("8_6hwgw")
+shader_parameter/base_color = Color(0.430503, 0.549134, 0.988768, 1)
+shader_parameter/glow_intensity = 4.068
+shader_parameter/pulse_speed = 10.0
+shader_parameter/pulse_depth = 0.423
+shader_parameter/color_aberration = 0.002
+shader_parameter/distortion_amount = 0.0
+shader_parameter/distortion_speed = 0.1
+
+[node name="WSFirst" type="Control"]
+z_index = 4096
+z_as_relative = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3kvo5")
+letter_cell_scene = ExtResource("2_2stpv")
+found_word_animation = ExtResource("3_0dbxo")
+
+[node name="chungus" type="CanvasLayer" parent="."]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="chungus"]
+unique_name_in_owner = true
+
+[node name="Background" parent="chungus" instance=ExtResource("4_mgi5u")]
+
+[node name="WrongLabel" type="Label" parent="chungus"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -28.0
+offset_right = 28.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Wrong!"
+
+[node name="CorrectLabel" type="Label" parent="chungus"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -31.0
+offset_right = 31.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Correct!"
+
+[node name="GameTimer" parent="chungus" instance=ExtResource("3_mgi5u")]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+
+[node name="WinLabel" type="Label" parent="chungus"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -34.0
+offset_right = 34.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "You Win!"
+
+[node name="LoseLabel" type="Label" parent="chungus"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -37.0
+offset_right = 37.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "You Lose!"
+
+[node name="GridPanel" type="PanelContainer" parent="chungus"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0dbxo")
+
+[node name="GridContainer" type="GridContainer" parent="chungus/GridPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 9
+
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="chungus"]
+unique_name_in_owner = true
+stream = ExtResource("6_c6bbx")
+
+[node name="SoundPlayer" type="AudioStreamPlayer2D" parent="chungus"]
+unique_name_in_owner = true
+volume_db = 16.865
+
+[node name="Words" type="HBoxContainer" parent="chungus"]
+unique_name_in_owner = true
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Words_P1" type="VBoxContainer" parent="chungus/Words"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+alignment = 1
+
+[node name="Words_P2" type="VBoxContainer" parent="chungus/Words"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+alignment = 1
+
+[node name="SharedWords" type="VBoxContainer" parent="chungus"]
+unique_name_in_owner = true
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="asdfasdfasdf" type="GridContainer" parent="chungus"]
+unique_name_in_owner = true
+columns = 2
+
+[node name="ColoredBlocker" type="ColorRect" parent="chungus"]
+unique_name_in_owner = true
+visible = false
+material = SubResource("ShaderMaterial_5w3md")
+offset_right = 1320.0
+offset_bottom = 2868.0
+mouse_filter = 2
+color = Color(1, 0.860672, 0.999645, 1)
+
+[node name="PreTimerLabel" type="Label" parent="chungus/ColoredBlocker"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 642.0
+offset_top = 1471.0
+offset_right = 898.0
+offset_bottom = 1608.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "00:00"
+
+[node name="GameStartingInLabel" type="Label" parent="chungus/ColoredBlocker"]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 1184.0
+offset_right = 908.0
+offset_bottom = 1321.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "Game Starting In:"
+
+[node name="Background" type="RichTextLabel" parent="chungus/ColoredBlocker"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_tsdk0")
+layout_mode = 0
+offset_left = 43.0
+offset_top = 2339.0
+offset_right = 1289.0
+offset_bottom = 2462.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("9_vi34y")
+theme_override_font_sizes/normal_font_size = 100
+text = "Background: Jupiter"
+
+[node name="Music" type="RichTextLabel" parent="chungus/ColoredBlocker"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_tsdk0")
+layout_mode = 0
+offset_left = 46.0
+offset_top = 2547.0
+offset_right = 1269.0
+offset_bottom = 2716.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("9_vi34y")
+theme_override_font_sizes/normal_font_size = 100
+text = "Music: Interstellar"

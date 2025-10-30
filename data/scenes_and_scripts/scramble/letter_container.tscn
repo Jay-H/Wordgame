@@ -1,0 +1,89 @@
+[gd_scene load_steps=2 format=3 uid="uid://bg7q2o60jgsi7"]
+
+[ext_resource type="Script" uid="uid://ck5ryki5q1vxt" path="res://data/scenes_and_scripts/scramble/letter.gd" id="1_srvye"]
+
+[node name="LetterContainer" type="HBoxContainer"]
+offset_left = 14.0
+offset_top = 1307.0
+offset_right = 1308.0
+offset_bottom = 1580.0
+theme_override_constants/separation = 50
+
+[node name="Letter1" type="Label" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(142, 0)
+layout_mode = 2
+mouse_filter = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 150
+text = "W"
+horizontal_alignment = 1
+script = ExtResource("1_srvye")
+
+[node name="Letter2" type="Label" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(142, 0)
+layout_mode = 2
+mouse_filter = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 150
+text = "W"
+horizontal_alignment = 1
+script = ExtResource("1_srvye")
+
+[node name="Letter3" type="Label" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(142, 0)
+layout_mode = 2
+mouse_filter = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 150
+text = "W"
+horizontal_alignment = 1
+script = ExtResource("1_srvye")
+
+[node name="Letter4" type="Label" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(142, 0)
+layout_mode = 2
+mouse_filter = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 150
+text = "W"
+horizontal_alignment = 1
+script = ExtResource("1_srvye")
+
+[node name="Letter5" type="Label" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(142, 0)
+layout_mode = 2
+mouse_filter = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 200
+theme_override_constants/shadow_outline_size = -135
+theme_override_font_sizes/font_size = 150
+text = "W"
+horizontal_alignment = 1
+script = ExtResource("1_srvye")
+
+[node name="Letter6" type="Label" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(142, 0)
+layout_mode = 2
+mouse_filter = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 150
+text = "W"
+horizontal_alignment = 1
+script = ExtResource("1_srvye")
+
+[node name="Letter7" type="Label" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(142, 0)
+layout_mode = 2
+mouse_filter = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 150
+text = "W"
+horizontal_alignment = 1
+script = ExtResource("1_srvye")

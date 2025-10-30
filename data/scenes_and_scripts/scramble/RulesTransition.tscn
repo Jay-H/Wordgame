@@ -1,0 +1,313 @@
+[gd_scene load_steps=12 format=3 uid="uid://4prqn8yfhlyl"]
+
+[ext_resource type="PackedScene" uid="uid://dng5jq27x7scm" path="res://data/scenes_and_scripts/scramble/player_avatar.tscn" id="1_i1fay"]
+[ext_resource type="Texture2D" uid="uid://crknm7gdg7jon" path="res://data/images/fog.png" id="1_vxfcq"]
+[ext_resource type="FontFile" uid="uid://o3l26ca08tpl" path="res://data/fonts/source-code-pro/source-code-pro-2.010R-ro-1.030R-it/TTF/SourceCodePro-Bold.ttf" id="1_xu50k"]
+[ext_resource type="Script" uid="uid://cvdo1v8k00jqo" path="res://data/scenes_and_scripts/scramble/gpu_particles_2d.gd" id="2_8viyi"]
+[ext_resource type="PackedScene" uid="uid://bwq5oqsnjscuo" path="res://data/scenes_and_scripts/scramble/enemy_avatar.tscn" id="2_ox0l4"]
+[ext_resource type="PackedScene" uid="uid://dexyaixglvei" path="res://data/scenes_and_scripts/scramble/player_name_label.tscn" id="3_5ei2a"]
+[ext_resource type="PackedScene" uid="uid://daa0teotn1m1g" path="res://data/scenes_and_scripts/scramble/enemy_name_label.tscn" id="4_xu50k"]
+[ext_resource type="Script" uid="uid://drmyxtp2nitqj" path="res://data/scenes_and_scripts/scramble/button2.gd" id="8_8viyi"]
+
+[sub_resource type="Gradient" id="Gradient_swdww"]
+offsets = PackedFloat32Array(0, 0.237942, 0.514469, 1)
+colors = PackedColorArray(1, 0.835294, 0.839216, 0, 0.999999, 0.836602, 0.837397, 0.513726, 0.67451, 1, 0.945098, 0.168627, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vtw22"]
+gradient = SubResource("Gradient_swdww")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p7hlg"]
+lifetime_randomness = 0.5
+emission_shape = 3
+emission_box_extents = Vector3(600, 2000, 1)
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 150.0
+gravity = Vector3(25000, -9.8, 0)
+scale_min = 4.0
+scale_max = 6.0
+color_ramp = SubResource("GradientTexture1D_vtw22")
+turbulence_enabled = true
+turbulence_noise_strength = 0.5
+turbulence_noise_scale = 2.0
+turbulence_influence_max = 1.0
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 12
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+z_index = 100
+
+[node name="Control" type="Control" parent="CanvasModulate"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_right = 1323.0
+offset_bottom = 2868.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="RulesParticles" type="GPUParticles2D" parent="CanvasModulate/Control"]
+unique_name_in_owner = true
+modulate = Color(0.991199, 0.829309, 0.912971, 1)
+position = Vector2(-3, 0)
+amount = 55
+texture = ExtResource("1_vxfcq")
+lifetime = 8.0
+speed_scale = 0.4
+randomness = 0.21
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_p7hlg")
+script = ExtResource("2_8viyi")
+
+[node name="UpcomingGameHeading" type="Label" parent="CanvasModulate/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -495.097
+offset_right = 400.0
+offset_bottom = -358.097
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_xu50k")
+theme_override_font_sizes/font_size = 100
+text = "Upcoming Game"
+horizontal_alignment = 1
+
+[node name="VS" type="Label" parent="CanvasModulate/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -399.0
+offset_top = -984.0
+offset_right = 401.0
+offset_bottom = -847.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "VS"
+horizontal_alignment = 1
+
+[node name="UpcomingGameName" type="Label" parent="CanvasModulate/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -399.0
+offset_top = -338.0
+offset_right = 401.0
+offset_bottom = -201.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_xu50k")
+theme_override_font_sizes/font_size = 100
+text = "Scramble"
+horizontal_alignment = 1
+
+[node name="VariantName" type="Label" parent="CanvasModulate/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -689.0
+offset_top = -190.0
+offset_right = 691.0
+offset_bottom = 197.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.877414, 0.335372, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_xu50k")
+theme_override_font_sizes/font_size = 100
+text = "Bonus Letter
+Obscurity Multiplier
+"
+horizontal_alignment = 1
+
+[node name="RulesHeading" type="Label" parent="CanvasModulate/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -451.0
+offset_top = 117.0
+offset_right = 453.0
+offset_bottom = 254.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_xu50k")
+theme_override_font_sizes/font_size = 100
+text = "Rules"
+horizontal_alignment = 1
+
+[node name="ScrambleBaseRule" type="Label" parent="CanvasModulate/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -660.0
+offset_top = 332.0
+offset_right = 673.0
+offset_bottom = 473.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("1_xu50k")
+theme_override_font_sizes/font_size = 55
+text = "Make as many words as you can 
+using the seven letters"
+horizontal_alignment = 1
+
+[node name="PenaltyRule" type="Label" parent="CanvasModulate/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -660.0
+offset_top = 532.0
+offset_right = 673.0
+offset_bottom = 673.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("1_xu50k")
+theme_override_font_sizes/font_size = 55
+text = "Incorrect words apply an increasing 
+score penalty"
+horizontal_alignment = 1
+
+[node name="BonusRule" type="Label" parent="CanvasModulate/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -660.0
+offset_top = 719.0
+offset_right = 673.0
+offset_bottom = 879.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.878431, 0.337255, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("1_xu50k")
+theme_override_font_sizes/font_size = 55
+text = "The bonus letter is shared between
+players. Its value increases over time"
+horizontal_alignment = 1
+
+[node name="ObscurityRule" type="Label" parent="CanvasModulate/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -660.0
+offset_top = 908.0
+offset_right = 673.0
+offset_bottom = 1063.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.878431, 0.337255, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("1_xu50k")
+theme_override_font_sizes/font_size = 55
+text = "A multiplier is applied based on the
+obscurity of the scored word"
+horizontal_alignment = 1
+
+[node name="PlayerAvatar" parent="CanvasModulate/Control" instance=ExtResource("1_i1fay")]
+modulate = Color(1, 1, 1, 1)
+layout_mode = 0
+offset_left = 100.0
+offset_top = 250.0
+offset_right = 500.0
+offset_bottom = 650.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="EnemyAvatar" parent="CanvasModulate/Control" instance=ExtResource("2_ox0l4")]
+modulate = Color(1, 1, 1, 1)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -500.0
+offset_top = 250.0
+offset_right = -100.0
+offset_bottom = 650.0
+grow_horizontal = 0
+grow_vertical = 1
+
+[node name="PlayerNameLabel" parent="CanvasModulate/Control" instance=ExtResource("3_5ei2a")]
+modulate = Color(1, 1, 1, 1)
+layout_mode = 0
+offset_left = 281.0
+offset_top = 52.0
+offset_right = 321.0
+offset_bottom = 182.0
+horizontal_alignment = 1
+
+[node name="EnemyNameLabel" parent="CanvasModulate/Control" instance=ExtResource("4_xu50k")]
+modulate = Color(1, 1, 1, 1)
+layout_mode = 0
+offset_left = 1041.0
+offset_top = 65.0
+offset_right = 1081.0
+offset_bottom = 195.0
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasModulate/Control"]
+layout_mode = 0
+offset_left = 511.0
+offset_top = 2585.0
+offset_right = 783.0
+offset_bottom = 2764.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 125
+text = "SKIP"
+script = ExtResource("8_8viyi")

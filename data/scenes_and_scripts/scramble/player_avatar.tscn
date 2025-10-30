@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://dng5jq27x7scm"]
+
+[ext_resource type="Texture2D" uid="uid://cqd0pkr2l68vy" path="res://data/images/Auron-Final-Fantasy-X-Game-Art-Tribute.jpg" id="1_30tcx"]
+[ext_resource type="Texture2D" uid="uid://kupi3b2ijpco" path="res://data/images/paintingframetransparency.png" id="2_lehvj"]
+
+[node name="PlayerAvatar" type="PanelContainer"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(400, 400)
+offset_left = 460.0
+offset_top = 1234.0
+offset_right = 860.0
+offset_bottom = 1634.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="avatarimage" type="TextureRect" parent="."]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_30tcx")
+expand_mode = 1
+
+[node name="borderimage" type="TextureRect" parent="."]
+visible = false
+texture_filter = 3
+custom_minimum_size = Vector2(40, 400)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_lehvj")
+expand_mode = 1
