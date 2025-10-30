@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Navigate to the project directory
-cd /home/testbed/Documents/Wordsearch
+cd /home/testbed/Documents/Wordgame
 
 # Pull the latest changes
 git pull origin master
