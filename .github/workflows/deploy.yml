@@ -20,11 +20,11 @@ jobs:
       # 2. get latest changes
       - name: Pull latest changes
         run: |
-          cd /home/testbed/Documents/Wordsearch
+          cd /home/testbed/Documents/Wordgame
           git pull origin master
 
       # 3. rerun godot!
       - name: Rerun Headless Godot
         run: |
-          cd /home/testbed/Documents/Wordsearch
+          cd /home/testbed/Documents/Wordgame
           ./run_headless.sh
