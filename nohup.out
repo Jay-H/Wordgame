@@ -1,0 +1,23 @@
+libfontconfig.so.1: cannot open shared object file: No such file or directory
+Godot Engine v4.4.stable.official.4c311cbee - https://godotengine.org
+
+ERROR: Unable to load fontconfig, system font support is disabled.
+   at: get_system_font_path (platform/linuxbsd/os_linuxbsd.cpp:803)
+ERROR: Unable to load fontconfig, system font support is disabled.
+   at: get_system_font_path (platform/linuxbsd/os_linuxbsd.cpp:803)
+ERROR: Unable to load fontconfig, system font support is disabled.
+   at: get_system_font_path (platform/linuxbsd/os_linuxbsd.cpp:803)
+ERROR: Unable to load fontconfig, system font support is disabled.
+   at: get_system_font_path (platform/linuxbsd/os_linuxbsd.cpp:803)
+ERROR: Unable to load fontconfig, system font support is disabled.
+   at: get_system_font_path (platform/linuxbsd/os_linuxbsd.cpp:803)
+ERROR: Unable to load fontconfig, system font support is disabled.
+   at: get_system_font_path (platform/linuxbsd/os_linuxbsd.cpp:803)
+ERROR: Unable to load fontconfig, system font support is disabled.
+   at: get_system_font_path (platform/linuxbsd/os_linuxbsd.cpp:803)
+ERROR: Unable to load fontconfig, system font support is disabled.
+   at: get_system_font_path (platform/linuxbsd/os_linuxbsd.cpp:803)
+ERROR: Unable to load fontconfig, system font support is disabled.
+   at: get_system_font_path (platform/linuxbsd/os_linuxbsd.cpp:803)
+ERROR: Unable to load fontconfig, system font support is disabled.
+   at: get_system_font_path (platform/linuxbsd/os_linuxbsd.cpp:803)

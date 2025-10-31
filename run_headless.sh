@@ -13,6 +13,6 @@ echo "Exporting new Godot project..."
 # Restart the systemd service to pick up the new executable
 echo "Restarting Godot server service..."
 pkill Godot_v4
-../Godot_v4.4-stable_linux.x86_64 --verbose  --headless --main-pack ../game.pck 
+../Godot_v4.4-stable_linux.x86_64  --headless --main-pack build/server/wordsearch.x86_64 
 
 echo "Deployment complete."
