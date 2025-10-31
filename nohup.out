@@ -21,3 +21,31 @@ ERROR: Unable to load fontconfig, system font support is disabled.
    at: get_system_font_path (platform/linuxbsd/os_linuxbsd.cpp:803)
 ERROR: Unable to load fontconfig, system font support is disabled.
    at: get_system_font_path (platform/linuxbsd/os_linuxbsd.cpp:803)
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+load dictionary function run
+7-letter words found: 24029
+Game dictionary loaded successfully.
+globals initialization function run
+ERROR: Attempt to open script 'res://data/scenes_and_scripts/multiplayertesting/FirebaseManager.gd' resulted in error 'File not found'.
+   at: load_source_code (modules/gdscript/gdscript.cpp:1115)
+ERROR: Failed loading resource: res://data/scenes_and_scripts/multiplayertesting/FirebaseManager.gd. Make sure resources have been imported by opening the project in the editor at least once.
+   at: _load (core/io/resource_loader.cpp:343)
+ERROR: Failed to instantiate an autoload, can't load from path: res://data/scenes_and_scripts/multiplayertesting/FirebaseManager.gd.
+   at: start (main/main.cpp:4069)
+load dictionary function run
+7-letter words found: 48058
+Game dictionary loaded successfully.
+[Firebase] >> The value for `clientSecret` is not configured. If you are not planning to use it, ignore this message.
+[Firebase] >> The value for `domainUriPrefix` is not configured. If you are not planning to use it, ignore this message.
+[Firebase] >> The value for `functionsGeoZone` is not configured. If you are not planning to use it, ignore this message.
+[Firebase] >> The value for `cacheLocation` is not configured. If you are not planning to use it, ignore this message.
+[Firebase] >> The value for `emulators` is not configured. If you are not planning to use it, ignore this message.
+[Firebase] >> The value for `workarounds` is not configured. If you are not planning to use it, ignore this message.
+✅ Starting server...
+ERROR: Parent node is busy adding/removing children, `remove_child()` can't be called at this time. Consider using `remove_child.call_deferred(child)` instead.
+   at: remove_child (scene/main/node.cpp:1686)
+Server started. Waiting for players...
+Server is running on port 7777
+server has logged in
+{ "kind": "identitytoolkit#VerifyPasswordResponse", "localId": "yhYOWugpYKflhBZV0XK1TTGzKjC3", "email": "server@server.com", "displayName": "", "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjdlYTA5ZDA1NzI2MmU2M2U2MmZmNzNmMDNlMDRhZDI5ZDg5Zjg5MmEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vd29yZHdhci05MzY1NCIsImF1ZCI6IndvcmR3YXItOTM2NTQiLCJhdXRoX3RpbWUiOjE3NjE4NzY4NDgsInVzZXJfaWQiOiJ5aFlPV3VncFlLZmxoQlpWMFhLMVRUR3pLakMzIiwic3ViIjoieWhZT1d1Z3BZS2ZsaEJaVjBYSzFUVEd6S2pDMyIsImlhdCI6MTc2MTg3Njg0OCwiZXhwIjoxNzYxODgwNDQ4LCJlbWFpbCI6InNlcnZlckBzZXJ2ZXIuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbInNlcnZlckBzZXJ2ZXIuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.n6-BVA8_5c4RlNtmq7FGyS-MERSmDJ_nSwcuhkdfbD0pvELfoIPXfI-d6oQ-i1gbixnMoJOQ3c0Zg7phzN1PdTYHuhCBatCeB1D-xz9JwohSs_ZMl4VEHd11dUQVEyQ9s9g3f69ar_y6fyv6bZqWTJD8FUi8xZyqlOMfOLL8f83KqLIJgmX3Si35YdZt5-NBlK0AFlL-M2bdvWYtX4eiQBELrpaPcajorxt5r-grpuCHoO-dNXSTAFTQWdfh-RCZqdAcXj7PoVzgnLyJmYCw6APbwz6rGfuQYIOxGFZX3p-XhaOJgeZ-FVg8bezad-K2RpfWcstaHUxKq-_IJtDiqg", "registered": true, "refreshToken": "AMf-vBxbAPut97LwRdX9hX0Npwwi6S3dJMAo6OdDns5NtcRbMq9ZBMn10g6-KxpjpIuqODGxDc3rK78gfvd-Y6--ZMcxC64O1ql5HjUXO_qygAor1XhW9RsPp3q1ms3flgOTNfbTGd5fjeuA_0S4Lv4qcdeNnaUydt3-55RsrLGghCEDN0CKZSSLBRHFSBNOMHEuloCn9512PrP8cohJ0K1BijBaPvxdDA", "expiresIn": "3600" }
