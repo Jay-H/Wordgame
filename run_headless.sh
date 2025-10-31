@@ -12,7 +12,8 @@ echo "Exporting new Godot project..."
 
 # Restart the systemd service to pick up the new executable
 echo "Restarting Godot server service..."
-pkill wordsearch
-nohup build/server/wordsearch.x86_64 --headless & 
+#pkill wordsearch
+#nohup build/server/wordsearch.x86_64 --headless &
+sudo systemctl restart godot_server.service
 
 echo "Deployment complete."
