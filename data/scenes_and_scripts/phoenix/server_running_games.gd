@@ -6,7 +6,7 @@ signal match_ended(dict)
 var players_looking_for_match = []
 var matched_players = []
 var timers_scene = "res://data/scenes_and_scripts/phoenix/timers.tscn"
-var round_time = 5
+var round_time = 45
 var match_found_time = 3
 var rules_time = 7
 var score_time = 3

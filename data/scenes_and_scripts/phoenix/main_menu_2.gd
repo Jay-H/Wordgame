@@ -42,7 +42,7 @@ var path
 #var IP_ADDRESS =  "185.98.1.219"
 #var IP_ADDRESS = "localhost"
 #var IP_ADDRESS = "185.98.171.129"
-var IP_ADDRESS = "34.61.170.203"
+var IP_ADDRESS = "136.112.186.218"
 var PORT = 7777
 var rules_instance
 var score_screen_instance
