@@ -12,6 +12,8 @@ echo "Exporting new Godot project..."
 
 # Restart the systemd service to pick up the new executable
 echo "Restarting Godot server service..."
-sudo systemctl restart godot_server.service
+pkill Godot_v4
+./Godot_v4.4-stable_linux.x86_64 --headless --main-pack ../game.pck 
+
 
 echo "Deployment complete."
