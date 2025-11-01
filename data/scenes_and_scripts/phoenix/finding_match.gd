@@ -24,12 +24,12 @@ func _setup(my_info, opponent_info):
 	opponent_dictionary = opponent_info
 	%ProfilePicture.setup(GlobalData.profile_pics[my_info["profilepic"]])
 	%playername.text = my_dictionary["username"]
-	%playerlevel.text = "Level: " + str(int(my_dictionary["level"]))
+	%playerlevel.text = "Level " + str(int(my_dictionary["level"])) + ": " + str(Globals.level_name_array[int(my_dictionary["level"])])
 	%playerrank.text = "Rank: " + str(Globals.rank_name_array[my_dictionary["rank"]])
 	if opponent_info != null:
 		%OpponentProfilePicture.setup(GlobalData.profile_pics[opponent_dictionary["profilepic"]])
 		%opponentname.text = opponent_dictionary["username"]
-		%opponentlevel.text = "Level: " + str(int(opponent_dictionary["level"]))
+		%opponentlevel.text = "Level " + str(int(opponent_dictionary["level"])) + ": " + str(Globals.level_name_array[int(opponent_dictionary["level"])])
 		%opponentrank.text = "Rank: " + str(Globals.rank_name_array[opponent_dictionary["rank"]])
 		%Status.text = "Match Found!"
 		%BackToMenu.visible = false

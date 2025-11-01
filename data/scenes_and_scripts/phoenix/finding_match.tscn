@@ -1,17 +1,37 @@
-[gd_scene load_steps=8 format=3 uid="uid://ca1a4c5jmd3nr"]
+[gd_scene load_steps=10 format=3 uid="uid://ca1a4c5jmd3nr"]
 
 [ext_resource type="Script" uid="uid://cki3vil7bjwia" path="res://data/scenes_and_scripts/phoenix/finding_match.gd" id="1_u67om"]
-[ext_resource type="Shader" uid="uid://dd0rvhyrgod8s" path="res://data/scenes_and_scripts/phoenix/ocean_waves.gdshader" id="2_2hk30"]
+[ext_resource type="Shader" uid="uid://c0ptn8g2ds8f6" path="res://data/scenes_and_scripts/scramble/cloudscape.gdshader" id="2_2hk30"]
 [ext_resource type="PackedScene" uid="uid://dptsatxug1hhb" path="res://data/scenes_and_scripts/multiplayertesting/profile_picture.tscn" id="3_w5enl"]
 [ext_resource type="FontFile" uid="uid://dskmx2extevrw" path="res://data/fonts/times.ttf" id="4_eg0yy"]
+[ext_resource type="FontFile" uid="uid://e30t6lqawacl" path="res://data/fonts/timeless-memories/TimelessMemoriesRegular-2vvwo.otf" id="5_2hk30"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ss7o6"]
 shader = ExtResource("2_2hk30")
-shader_parameter/DEEP_WATER_COLOR = Color(1, 1, 1, 1)
-shader_parameter/SHALLOW_WATER_COLOR = Color(0.571433, 0.759327, 0.966839, 1)
-shader_parameter/WAVE_FREQUENCY = Vector2(2.065, 6.645)
-shader_parameter/WAVE_SPEED = 0.905
-shader_parameter/WAVE_HEIGHT = 0.205
+shader_parameter/tile_period = Vector2(10, 10)
+shader_parameter/scale = 4.0
+shader_parameter/octaves = 2
+shader_parameter/persistence = 0.509
+shader_parameter/lacunarity = 3.574
+shader_parameter/coverage = 0.529
+shader_parameter/softness = 0.125
+shader_parameter/sky_color = Color(0.779181, 0.854147, 0.96628, 1)
+shader_parameter/cloud_color = Color(0.999311, 0.868115, 1, 1)
+shader_parameter/speed_primary = 0.559
+shader_parameter/speed_secondary = 1.167
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w5enl"]
+bg_color = Color(0.873298, 0.873298, 0.873298, 0.45098)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.999687, 0.722502, 0.94231, 0.168627)
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u67om"]
 
@@ -48,26 +68,135 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.871112, 0.999836, 1, 1)
 
-[node name="ProfilePicture" parent="CanvasLayer" instance=ExtResource("3_w5enl")]
-unique_name_in_owner = true
-offset_left = 102.0
-offset_top = 686.0
-offset_right = 602.0
-offset_bottom = 1186.0
+[node name="OpponentPanel" type="Panel" parent="CanvasLayer"]
+custom_minimum_size = Vector2(1000, 1100)
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.715
+anchor_right = 0.5
+anchor_bottom = 0.715
+offset_left = -500.0
+offset_top = -550.0
+offset_right = 500.0
+offset_bottom = 550.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_w5enl")
 
-[node name="OpponentProfilePicture" parent="CanvasLayer" instance=ExtResource("3_w5enl")]
+[node name="OpponentProfilePicture" parent="CanvasLayer/OpponentPanel" instance=ExtResource("3_w5enl")]
 unique_name_in_owner = true
-offset_left = 100.0
-offset_top = 1626.0
-offset_right = 600.0
-offset_bottom = 2126.0
+offset_left = 257.0
+offset_top = 241.0
+offset_right = 757.0
+offset_bottom = 741.0
+
+[node name="opponentname" type="Label" parent="CanvasLayer/OpponentPanel"]
+unique_name_in_owner = true
+offset_left = -121.0
+offset_top = 69.0
+offset_right = 1127.0
+offset_bottom = 159.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_2hk30")
+theme_override_font_sizes/font_size = 89
+text = "Username"
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/OpponentPanel"]
+offset_left = -103.0
+offset_top = 834.0
+offset_right = 1145.0
+offset_bottom = 1006.0
+
+[node name="opponentlevel" type="Label" parent="CanvasLayer/OpponentPanel/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_eg0yy")
+theme_override_font_sizes/font_size = 75
+text = "Level:"
+horizontal_alignment = 1
+
+[node name="opponentrank" type="Label" parent="CanvasLayer/OpponentPanel/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_eg0yy")
+theme_override_font_sizes/font_size = 75
+text = "Rank:"
+horizontal_alignment = 1
+
+[node name="PlayerPanel" type="Panel" parent="CanvasLayer"]
+custom_minimum_size = Vector2(1000, 1100)
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.265
+anchor_right = 0.5
+anchor_bottom = 0.265
+offset_left = -500.0
+offset_top = -550.0
+offset_right = 500.0
+offset_bottom = 550.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_w5enl")
+
+[node name="ProfilePicture" parent="CanvasLayer/PlayerPanel" instance=ExtResource("3_w5enl")]
+unique_name_in_owner = true
+offset_left = 245.0
+offset_top = 245.0
+offset_right = 745.0
+offset_bottom = 745.0
+
+[node name="playername" type="Label" parent="CanvasLayer/PlayerPanel"]
+unique_name_in_owner = true
+offset_left = -138.0
+offset_top = 85.0
+offset_right = 1139.0
+offset_bottom = 175.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_2hk30")
+theme_override_font_sizes/font_size = 89
+text = "Username"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PlayerPanel"]
+offset_left = -133.0
+offset_top = 860.0
+offset_right = 1144.0
+offset_bottom = 1032.0
+
+[node name="playerlevel" type="Label" parent="CanvasLayer/PlayerPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_eg0yy")
+theme_override_font_sizes/font_size = 75
+text = "Level:"
+horizontal_alignment = 1
+
+[node name="playerrank" type="Label" parent="CanvasLayer/PlayerPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_eg0yy")
+theme_override_font_sizes/font_size = 75
+text = "Rank:"
+horizontal_alignment = 1
 
 [node name="Status" type="Label" parent="CanvasLayer"]
 unique_name_in_owner = true
-offset_left = 77.0
-offset_top = 1353.0
-offset_right = 1243.0
-offset_bottom = 1460.0
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.49
+anchor_right = 0.5
+anchor_bottom = 0.49
+offset_left = -583.0
+offset_top = -53.5
+offset_right = 583.0
+offset_bottom = 53.5
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_eg0yy")
 theme_override_font_sizes/font_size = 96
@@ -77,10 +206,16 @@ autowrap_mode = 2
 
 [node name="BackToMenu" type="Button" parent="CanvasLayer"]
 unique_name_in_owner = true
-offset_left = 368.0
-offset_top = 2654.0
-offset_right = 949.0
-offset_bottom = 2774.0
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.975
+anchor_right = 0.5
+anchor_bottom = 0.975
+offset_left = -290.5
+offset_top = -120.0
+offset_right = 290.5
+grow_horizontal = 2
+grow_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_eg0yy")
 theme_override_font_sizes/font_size = 101
@@ -96,65 +231,5 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_u67om")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_u67om")
 theme_override_styles/normal = SubResource("StyleBoxFlat_2hk30")
 text = "Back to Menu"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
-offset_left = 646.0
-offset_top = 794.0
-offset_right = 950.0
-offset_bottom = 1054.0
-
-[node name="playername" type="Label" parent="CanvasLayer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_eg0yy")
-theme_override_font_sizes/font_size = 75
-text = "Username"
-
-[node name="playerrank" type="Label" parent="CanvasLayer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_eg0yy")
-theme_override_font_sizes/font_size = 75
-text = "Rank:"
-
-[node name="playerlevel" type="Label" parent="CanvasLayer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_eg0yy")
-theme_override_font_sizes/font_size = 75
-text = "Level: "
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer"]
-offset_left = 656.0
-offset_top = 1743.0
-offset_right = 960.0
-offset_bottom = 2003.0
-
-[node name="opponentname" type="Label" parent="CanvasLayer/VBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_eg0yy")
-theme_override_font_sizes/font_size = 75
-text = "Username"
-
-[node name="opponentlevel" type="Label" parent="CanvasLayer/VBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_eg0yy")
-theme_override_font_sizes/font_size = 75
-text = "Level: "
-
-[node name="opponentrank" type="Label" parent="CanvasLayer/VBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_eg0yy")
-theme_override_font_sizes/font_size = 75
-text = "Rank:"
 
 [connection signal="pressed" from="CanvasLayer/BackToMenu" to="." method="_on_back_to_menu_pressed"]
