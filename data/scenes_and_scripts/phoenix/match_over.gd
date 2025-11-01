@@ -131,12 +131,7 @@ func _fade_in():
 				texture_boxes[current_marginal_point].texture = load(rank_point_off_texture)
 				await get_tree().create_timer(0.5).timeout
 				current_marginal_point -= 1
-	
-	
-	
-		
-		
-	%Timer.start(2)
+	%Timer.start(3)
 	
 
 func _fade_out():

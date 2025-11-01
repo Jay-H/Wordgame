@@ -88,30 +88,31 @@ unique_name_in_owner = true
 anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -275.0
+offset_left = -252.0
 offset_top = 490.0
-offset_right = 225.0
+offset_right = 248.0
 offset_bottom = 990.0
 grow_horizontal = 2
 
 [node name="TopBigLabel" type="RichTextLabel" parent="CanvasLayer"]
 unique_name_in_owner = true
-offset_left = 262.0
-offset_top = 274.0
-offset_right = 1021.0
-offset_bottom = 482.0
+offset_left = 19.0
+offset_top = 272.0
+offset_right = 1305.0
+offset_bottom = 480.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_1dqdh")
 theme_override_font_sizes/normal_font_size = 136
-text = "Match Over!"
+text = "TECHNICAL VICTORY"
+fit_content = true
 horizontal_alignment = 1
 
 [node name="Username" type="RichTextLabel" parent="CanvasLayer"]
 unique_name_in_owner = true
-offset_left = 265.0
-offset_top = 1016.0
-offset_right = 1024.0
-offset_bottom = 1224.0
+offset_left = 286.0
+offset_top = 1014.0
+offset_right = 1045.0
+offset_bottom = 1222.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_1dqdh")
 theme_override_font_sizes/normal_font_size = 136
@@ -120,13 +121,13 @@ horizontal_alignment = 1
 
 [node name="LevelStatusLabel" type="RichTextLabel" parent="CanvasLayer"]
 unique_name_in_owner = true
-offset_left = 207.0
+offset_left = 29.0
 offset_top = 1233.0
-offset_right = 1092.0
+offset_right = 1294.0
 offset_bottom = 1402.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("3_h4thg")
-theme_override_font_sizes/normal_font_size = 71
+theme_override_font_sizes/normal_font_size = 115
 text = "Level"
 fit_content = true
 scroll_active = false
@@ -141,7 +142,7 @@ offset_right = 1096.0
 offset_bottom = 1695.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("3_h4thg")
-theme_override_font_sizes/normal_font_size = 71
+theme_override_font_sizes/normal_font_size = 115
 text = "Level"
 fit_content = true
 scroll_active = false
@@ -159,7 +160,7 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
 theme_override_fonts/normal_font = ExtResource("3_h4thg")
-theme_override_font_sizes/normal_font_size = 71
+theme_override_font_sizes/normal_font_size = 115
 text = "Level"
 fit_content = true
 scroll_active = false
@@ -168,13 +169,13 @@ vertical_alignment = 1
 
 [node name="RankStatusLabel" type="RichTextLabel" parent="CanvasLayer"]
 unique_name_in_owner = true
-offset_left = 324.0
-offset_top = 1860.0
-offset_right = 968.0
-offset_bottom = 2053.0
+offset_left = 34.0
+offset_top = 1832.0
+offset_right = 1282.0
+offset_bottom = 2025.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("3_h4thg")
-theme_override_font_sizes/normal_font_size = 71
+theme_override_font_sizes/normal_font_size = 115
 text = "Rank"
 fit_content = true
 scroll_active = false
@@ -182,29 +183,31 @@ horizontal_alignment = 1
 
 [node name="OldRankLabel" type="RichTextLabel" parent="CanvasLayer"]
 unique_name_in_owner = true
-offset_left = 229.0
-offset_top = 2225.0
-offset_right = 1082.0
-offset_bottom = 2335.0
+offset_left = 241.0
+offset_top = 2231.0
+offset_right = 1094.0
+offset_bottom = 2359.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("3_h4thg")
-theme_override_font_sizes/normal_font_size = 71
+theme_override_font_sizes/normal_font_size = 115
 text = "Rank: "
+fit_content = true
 horizontal_alignment = 1
 
 [node name="NewRankLabel" type="RichTextLabel" parent="CanvasLayer"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_spqgb")
-offset_left = 229.0
-offset_top = 2225.0
-offset_right = 1082.0
-offset_bottom = 2335.0
+offset_left = 241.0
+offset_top = 2231.0
+offset_right = 1094.0
+offset_bottom = 2359.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
 theme_override_fonts/normal_font = ExtResource("3_h4thg")
-theme_override_font_sizes/normal_font_size = 71
+theme_override_font_sizes/normal_font_size = 115
 text = "Rank: "
+fit_content = true
 horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="CanvasLayer"]
