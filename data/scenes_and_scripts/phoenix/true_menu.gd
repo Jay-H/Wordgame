@@ -35,6 +35,7 @@ func _ready():
 	tween.parallel().tween_property(%MainMenuBox, "modulate", Color.WHITE, 2)
 	
 func fade_in():
+	%Hider.color = Color.WHITE
 	visible = true
 	var tween = create_tween()
 	tween.tween_property(%Hider, "color", Color.TRANSPARENT, 1)
@@ -44,7 +45,9 @@ func _fade_out():
 	visible = true
 	var tween = create_tween()
 	tween.tween_property(%CanvasModulate, "color", Color.TRANSPARENT, 1)
+	
 	await tween.finished
+	
 	return
 	
 func _on_profile_pressed() -> void:

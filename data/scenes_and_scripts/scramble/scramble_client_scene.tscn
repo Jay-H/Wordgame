@@ -258,7 +258,6 @@ offset_right = 660.0
 offset_bottom = 1320.0
 grow_horizontal = 2
 scale = Vector2(1.1, 1.1)
-pivot_offset = Vector2(750, 750)
 
 [node name="BackgroundFader" type="ColorRect" parent="CanvasLayer"]
 unique_name_in_owner = true
@@ -762,6 +761,7 @@ theme_override_font_sizes/normal_font_size = 100
 text = "Music: Interstellar"
 
 [node name="Button" type="Button" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
 offset_left = 13.0
 offset_top = 2707.0
 offset_right = 389.0

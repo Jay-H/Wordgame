@@ -56,6 +56,7 @@ func setup(rules, dict):
 		%SkipButton.text = "Auto Skip!"
 		%SkipButton.icon = null
 		%SkipButton.add_theme_color_override("font_disabled_color", Color.GOLDENROD)
+		
 		var tween = create_tween()
 		tween.set_trans(Tween.TRANS_SPRING)
 		%SkipButton.position.x = 0 - %SkipButton.size.x - 50
@@ -65,21 +66,27 @@ func setup(rules, dict):
 		tween.tween_property(%SkipButton, "position", mid_position, 0.5)
 		await tween.finished
 		await get_tree().create_timer(0.5).timeout
+		%SkipButton.add_theme_color_override("font_disabled_color", Color.GOLDENROD)
 		var tween2 = create_tween()
 		tween2.tween_property(%SkipButton, "position", target_position, 1)
+	if dict["rules_skipped"] == false:
+		%SkipButton.disabled = false
 func fadeables_collector():
 	fadeables.clear()
-	for i in %CanvasModulate.get_children():
-		if not i is CanvasGroup:
+	for i in %Control.get_children():
+		if not i == %NonFadeables:
+			
 			fadeables.append(i)
 	pass
 
 func _on_scramble_pressed() -> void:
+	
+	
 	var fadingtween = create_tween()
 	for i in fadeables:
-		fadingtween.parallel().tween_property(i, "modulate", Color.TRANSPARENT, 0.5)
-		
-	var close_button = %ScrambleRulesPanel.get_child(1)
+		fadingtween.parallel().tween_property(i, "modulate", Color.TRANSPARENT, 0.5)	
+	var close_button = %ScrambleRulesPanel.get_node("BackButton")
+	close_button.pressed.connect(close_button_pressed.bind(close_button))
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_IN)
 	tween.tween_property(%ScrambleRulesPanel, "modulate", Color. WHITE, 0.75)
@@ -95,7 +102,8 @@ func _on_bonus_letter_pressed() -> void:
 	var fadingtween = create_tween()
 	for i in fadeables:
 		fadingtween.parallel().tween_property(i, "modulate", Color.TRANSPARENT, 0.5)
-	var close_button = %BonusLetterRulesPanel.get_child(1)
+	var close_button = %BonusLetterRulesPanel.get_node("BackButton")
+	close_button.pressed.connect(close_button_pressed.bind(close_button))
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_IN)
 	tween.tween_property(%BonusLetterRulesPanel, "modulate", Color. WHITE, 0.75)
@@ -108,7 +116,8 @@ func _on_obscurity_pressed() -> void:
 	var fadingtween = create_tween()
 	for i in fadeables:
 		fadingtween.parallel().tween_property(i, "modulate", Color.TRANSPARENT, 0.5)
-	var close_button = %ObscurityRulesPanel.get_child(1)
+	var close_button = %ObscurityRulesPanel.get_node("BackButton")
+	close_button.pressed.connect(close_button_pressed.bind(close_button))
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_IN)
 	tween.tween_property(%ObscurityRulesPanel, "modulate", Color. WHITE, 0.75)
@@ -119,6 +128,7 @@ func _on_obscurity_pressed() -> void:
 func close_button_pressed(close_button_node):
 	print("close_button_pressed")
 	
+	print(close_button_node)
 	var rules_panel = close_button_node.get_parent()
 	print(rules_panel)
 	rules_panel.modulate = Color.TRANSPARENT
@@ -142,6 +152,8 @@ func _on_skip_button_pressed() -> void:
 	%SkipButton.disabled = true
 	skip_pressed = true
 	skip_button_pressed.emit()
+	var tween = create_tween()
+	tween.tween_property(%SkipButton, "modulate", Color.TRANSPARENT, 0.5)
 	
 	
 	pass # Replace with function body.
@@ -154,7 +166,7 @@ func fade_in():
 	
 	tween.tween_property(canvasmodulate, "color", Color.WHITE, 1)
 	await tween.finished
-	%SkipButton.disabled = false
+	
 
 func fade_out():
 	%SkipWaiting.visible = false
@@ -233,7 +245,8 @@ func _on_wonder_pressed() -> void:
 	var fadingtween = create_tween()
 	for i in fadeables:
 		fadingtween.parallel().tween_property(i, "modulate", Color.TRANSPARENT, 0.5)
-	var close_button = %WonderRulesPanel.get_child(1)
+	var close_button = %WonderRulesPanel.get_node("BackButton")
+	close_button.pressed.connect(close_button_pressed.bind(close_button))
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_IN)
 	tween.tween_property(%WonderRulesPanel, "modulate", Color. WHITE, 0.75)

@@ -37,9 +37,21 @@ func _on_peer_connected(id):
 	pass
 	
 func _on_peer_disconnected(id):
-	logged_in_firebase_ids.erase(peerid_to_firebaseid_dictionary[id])
-	peerid_to_firebaseid_dictionary.erase(id)
-	print(peerid_to_firebaseid_dictionary)
+	
+	# the logic for ending a game if a player disconnects
+	if peerid_to_firebaseid_dictionary.has(id):
+		for i in running_matches:
+			if i["player_one_peer_id"] == id or i["player_two_peer_id"] == id:
+				%RunningGames._disconnect_handler(i, id)
+				
+	if peerid_to_firebaseid_dictionary.has(id):
+		logged_in_firebase_ids.erase(peerid_to_firebaseid_dictionary[id])
+	if peerid_to_firebaseid_dictionary.has(id):
+		peerid_to_firebaseid_dictionary.erase(id)
+			
+	
+
+		
 	pass
 
 

@@ -2,7 +2,7 @@ extends Node
 
 var PlayerDictionary = {}
 
-var profile_pics = ["res://data/images/profilepics/Alan.png", "res://data/images/profilepics/Bookman.png", "res://data/images/profilepics/Gary.png","res://data/images/profilepics/Alan.png", "res://data/images/profilepics/Bookman.png", "res://data/images/profilepics/Gary.png", "res://data/images/profilepics/Arnold.png", "res://data/images/profilepics/Eugene.png", "res://data/images/profilepics/Jennifer.png" ]
+var profile_pics = ["res://data/images/profilepics/Alan.png", "res://data/images/profilepics/Bookman.png", "res://data/images/profilepics/Gary.png","res://data/images/profilepics/Alan.png", "res://data/images/profilepics/Bookman.png", "res://data/images/profilepics/Gary.png", "res://data/images/profilepics/Arnold.png", "res://data/images/profilepics/Eugene.png", "res://data/images/profilepics/Jennifer.png", "res://data/images/profilepics/Kasper.png", "res://data/images/profilepics/Oak.png" ]
 var current_bonus_letter = ""
 var bonus_letter_global_position : Vector2 = Vector2(0,0)
 var mini_score_display_global_position : Vector2 = Vector2(0,0)

@@ -94,7 +94,8 @@ offset_right = 225.0
 offset_bottom = 990.0
 grow_horizontal = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+[node name="TopBigLabel" type="RichTextLabel" parent="CanvasLayer"]
+unique_name_in_owner = true
 offset_left = 262.0
 offset_top = 274.0
 offset_right = 1021.0
@@ -331,6 +332,16 @@ one_shot = true
 explosiveness = 1.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_cdx71")
+
+[node name="BigWhiteRect" type="ColorRect" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Timer" type="Timer" parent="."]
 unique_name_in_owner = true

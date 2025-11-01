@@ -2,7 +2,7 @@ extends Node
 
 signal database_update
 
-
+var opponent_disconnected = false
 var yoyoyoyoyo
 var country
 var experience
@@ -40,10 +40,11 @@ var username
 var db_ref
 var path
 #var IP_ADDRESS =  "185.98.1.219"
-#var IP_ADDRESS = "localhost"
+var IP_ADDRESS = "localhost"
 #var IP_ADDRESS = "185.98.171.129"
-var IP_ADDRESS = "136.112.186.218"
+#var IP_ADDRESS = "136.112.186.218"
 var PORT = 7777
+var match_found_instance
 var rules_instance
 var score_screen_instance
 var match_over_screen_instance
@@ -53,6 +54,17 @@ var number_of_matches_currently_being_played
 var process_test = false
 
 func _process(delta):
+	if opponent_disconnected:
+		if rules_instance != null:
+			await rules_instance.fade_out()
+			rules_instance.queue_free()
+		if score_screen_instance != null:
+			await score_screen_instance._fade_out()
+			score_screen_instance.queue_free()
+		if match_found_instance != null:
+			await match_found_instance._fade_out()
+			match_found_instance.queue_free()
+		
 	if process_test == false:
 		process_test = true
 		await get_tree().create_timer(1).timeout
@@ -182,6 +194,7 @@ func _find_game(): #this is the function for when you are looking for a game. It
 	var finding_match_scene_instance = (load(finding_match_scene)).instantiate()
 	finding_match_scene_instance._setup(my_info, null) # null here for when you don't know your opponent's information
 	add_child(finding_match_scene_instance)
+	match_found_instance = finding_match_scene_instance
 	await finding_match_scene_instance._fade_in()
 	finding_match_scene_instance.back_to_menu_pressed.connect(_cancel_find_game)
 	rpc_id(1, "_find_game")
@@ -204,43 +217,48 @@ func _match_found_screen(my_info, opponent_info):
 	pass
 
 func _fade_out_match_found_screen():
-	await $FindingMatch._fade_out()
-	$FindingMatch.queue_free()
+	if opponent_disconnected == false:
+		await $FindingMatch._fade_out()
+		$FindingMatch.queue_free()
 
 func _show_rules_screen(rules, dict): #this function will choose the rules screen based on the game, and display it.
-	var scramble_rules = "res://data/scenes_and_scripts/phoenix/RulesTransition2.tscn"
-	var wordsearch_rules = "res://data/scenes_and_scripts/phoenix/RulesTransitionWordsearch.tscn"
-	var current_rules_node
-	if rules.contains("Scramble"):
-		current_rules_node = ((load(scramble_rules)).instantiate())
-	if rules.contains("Wordsearch"):
-		current_rules_node = ((load(scramble_rules)).instantiate())
-	add_child(current_rules_node)
-	current_rules_node.setup(rules,dict)
-	rules_instance = current_rules_node
-	current_rules_node.skip_button_pressed.connect(_skip_pressed.bind(dict))
-	await current_rules_node.fade_in()
-		
-	pass
+	if opponent_disconnected == false:
+		var scramble_rules = "res://data/scenes_and_scripts/phoenix/RulesTransition2.tscn"
+		var wordsearch_rules = "res://data/scenes_and_scripts/phoenix/RulesTransitionWordsearch.tscn"
+		var current_rules_node
+		if rules.contains("Scramble"):
+			current_rules_node = ((load(scramble_rules)).instantiate())
+		if rules.contains("Wordsearch"):
+			current_rules_node = ((load(scramble_rules)).instantiate())
+		add_child(current_rules_node)
+		current_rules_node.setup(rules,dict)
+		rules_instance = current_rules_node
+		current_rules_node.skip_button_pressed.connect(_skip_pressed.bind(dict))
+		await current_rules_node.fade_in()
+			
+		pass
 
 func _fade_out_rules_screen():
-	if rules_instance != null:
-		await rules_instance.fade_out()
-		rules_instance.queue_free()
-	else:
-		return
+	if opponent_disconnected == false:
+		if rules_instance != null:
+			await rules_instance.fade_out()
+			rules_instance.queue_free()
+		else:
+			return
 	
 func _score_screen(dict, big_dictionary):
-	score_screen_instance = (load(score_screen).instantiate())
-	score_screen_instance._setup(dict,big_dictionary,firebase_local_id)
-	add_child(score_screen_instance)
-	await score_screen_instance._fade_in()
+	if opponent_disconnected == false:
+		score_screen_instance = (load(score_screen).instantiate())
+		score_screen_instance._setup(dict,big_dictionary,firebase_local_id)
+		add_child(score_screen_instance)
+		await score_screen_instance._fade_in()
 	pass
 	
 func _fade_out_score_screen(dict):
-	await score_screen_instance._fade_out()
-	score_screen_instance.queue_free()
-	pass
+	if opponent_disconnected == false:
+		await score_screen_instance._fade_out()
+		score_screen_instance.queue_free()
+		pass
 
 
 func _match_over_screen(dict):
@@ -249,6 +267,7 @@ func _match_over_screen(dict):
 	if dict["player_one_dictionary"]["email"] == firebase_email:
 		player_number = "one"
 		match_over_screen_instance._setup(dict["player_one_dictionary"], pre_match_info)
+		
 	else:
 		player_number = "two"
 		match_over_screen_instance._setup(dict["player_two_dictionary"], pre_match_info)
@@ -262,6 +281,7 @@ func _fade_out_match_over_screen():
 	await match_over_screen_instance._fade_out()
 	match_over_screen_instance.queue_free()
 	_true_menu_fade_in()
+	opponent_disconnected = false
 	pass
 
 

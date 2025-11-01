@@ -465,36 +465,86 @@ func fade_out():
 
 @rpc("authority", "call_local")
 func wonder_game_ender(winner_user_id):
-	big_word_event()
-	var nodes_to_move = [%Submit, %Clear, %Shuffle, %BonusLetter, %BonusScore, %BonusReminder, %GameTimerLabel, %GameScore, %MiniScore]
+	#big_word_event()
+	var nodes_to_move = [%Submit, %Clear, %Shuffle, %BonusLetter, %BonusScore, %BonusReminder, %GameTimerLabel, %GameScore, %MiniScore, %HBoxContainer]
 	var nodes_to_disable = [%LetterContainer, %Submit, %Clear, %Shuffle, %BonusLetter]
 	for x in %LetterContainer.get_children():
 		nodes_to_disable.append(x)
 	for i in nodes_to_disable:
 		i.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	if winner_user_id == user_id:
-		pass
+		var sun_tween = create_tween()
+		%Sun.pivot_offset = %Sun.size/2
+		sun_tween.set_ease(Tween.EASE_IN)
+		sun_tween.parallel().tween_property(%Sun, "material:shader_parameter/sun_color", Color.DARK_GREEN, 2)
+		sun_tween.parallel().tween_property(%Sun, "scale", Vector2(7,7), 5)
+		sun_tween.parallel().tween_property(%LetterContainer, "modulate", Color.TRANSPARENT, 1)
+		sun_tween.chain().tween_property(%Sun, "material:shader_parameter/sun_color", Color.WHITE, 2)		
+		
+		for i in nodes_to_move:
+			var tween2 = create_tween()
+			tween2.set_ease(Tween.EASE_IN_OUT)
+			tween2.set_trans(Tween.TRANS_SINE)
+			var target_position = Vector2(i.position.x, i.position.y - 3000)
+			
+			tween2.tween_property(i, "position", target_position, 3)
+		var big_label = Label.new()
+		big_label.add_theme_font_size_override("font_size", 300)
+		big_label.add_theme_font_override("font", load("res://data/fonts/elmora-classica/Elmora Classica.otf"))
+		big_label.set_anchors_preset(Control.PRESET_CENTER)
+		big_label.text = "Wonderful!"
+		big_label.add_theme_color_override("font_color", Color.DARK_GOLDENROD)
+		big_label.modulate = Color.TRANSPARENT
+		big_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		
+		$CanvasLayer.add_child(big_label)
+		big_label.pivot_offset = big_label.size/2
+		big_label.position -= big_label.size/2
+		big_label.set_anchors_preset(Control.PRESET_CENTER)
+		var tween = create_tween()
+		tween.tween_property(big_label, "modulate", Color.WHITE, 3)
+		tween.parallel().tween_property(big_label, "scale", Vector2(1.2,1.2), 3)
 	if winner_user_id != user_id:
 		
 		var sun_tween = create_tween()
+		%Sun.pivot_offset = %Sun.size/2
 		sun_tween.set_ease(Tween.EASE_IN)
-		sun_tween.parallel().tween_property(%Sun, "material:shader_parameter/sun_color", Color.RED, 3)
-		sun_tween.parallel().tween_property(%Sun, "scale", Vector2(4,4), 3)
-		sun_tween.parallel().tween_property(%Sun, "position", Vector2(get_viewport_rect().size/2), 1)
+		sun_tween.parallel().tween_property(%Sun, "material:shader_parameter/sun_color", Color.DARK_RED, 3)
+		sun_tween.parallel().tween_property(%Sun, "scale", Vector2(7,7), 5)
 		sun_tween.parallel().tween_property(%LetterContainer, "modulate", Color.TRANSPARENT, 3)
-		sun_tween.parallel().tween_property(%HBoxContainer, "modulate", Color.TRANSPARENT, 3)
+		
 		for i in nodes_to_move:
-			i.pivot_offset = size/2
+			i.pivot_offset = i.size/2
 			var tween = create_tween()
 			tween.set_ease(Tween.EASE_IN_OUT)
+			tween.set_trans(Tween.TRANS_SINE)
 			var x_position = i.position.x
 			var y_position = i.position.y
 			var randomizer_x = randi_range(-300, 300)
 			var target_position = Vector2(x_position + randomizer_x , y_position + 3000)
 			var random_rotation = randf_range(-50, 50)
-			tween.tween_property(i, "position", target_position, 2 )
+			tween.tween_property(i, "position", target_position, 3 )
+			tween.parallel().tween_property(i, "modulate", Color.TRANSPARENT, 3)
 			tween.parallel().tween_property(i, "rotation", random_rotation, 4)
-			
+		for i in %LetterContainer.get_children():
+			var tween = create_tween()	
+			tween.tween_property(i, "scale", Vector2(0,0), 4)
+		var big_label = Label.new()
+		big_label.add_theme_font_size_override("font_size", 300)
+		big_label.add_theme_font_override("font", load("res://data/fonts/elmora-classica/Elmora Classica.otf"))
+		big_label.set_anchors_preset(Control.PRESET_CENTER)
+		big_label.text = "Terrible!"
+		big_label.add_theme_color_override("font_color", Color.DARK_GOLDENROD)
+		big_label.modulate = Color.TRANSPARENT
+		big_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		
+		$CanvasLayer.add_child(big_label)
+		big_label.pivot_offset = big_label.size/2
+		big_label.position -= big_label.size/2
+		big_label.set_anchors_preset(Control.PRESET_CENTER)
+		var tween = create_tween()
+		tween.tween_property(big_label, "modulate", Color.WHITE, 3)
+		tween.parallel().tween_property(big_label, "scale", Vector2(1.2,1.2), 3)
 		#for i in %CanvasLayer.get_children():
 			#print(i)
 			#
@@ -516,7 +566,7 @@ func small_green_letters(letternode):
 	letternode.add_child(label_node)
 	label_node.text = str(letter_score)
 	label_node.position += letternode.size/2
-	print(label_node, label_node.position)
+	
 	var tween = create_tween()
 	tween.parallel().tween_property(label_node, "position", Vector2((label_node.size.x/2) - 25,letternode.position.y - 150), 1)
 	tween.parallel().tween_property(label_node, "modulate", Color.TRANSPARENT, 0.8)
@@ -570,13 +620,15 @@ func shaker(number, i, duration = 0.2, repeats = 10):
 	
 @rpc("authority", "call_local")			
 func big_word_event():
-
+	if wonder_variant: # disallow in wonder variant, we have a different animation there
+		return
 
 	
 	#var shadows = [%SubmitShadow, %ClearShadow, %ShuffleShadow]
 	
 	for i in shakeables:
-		print(i)
+		
+		
 		shaker(20, i)	
 	
 
@@ -660,6 +712,7 @@ func _on_button_pressed() -> void:
 	big_dictionary["Player Two Found Words"] = ["john", "chris", "mike", "john", "chris", "mike", "allan", "simon", "gary"]
 	big_dictionary["All Found Words"] = ["john", "chris", "mike", "allan", "simon", "gary", "john", "chris", "mike", "allan", "simon", "gary","john", "chris", "mike", "allan", "simon", "gary"]
 	found_words_populator()
+	wonder_game_ender(user_id)
 	pass # Replace with function body.
 
 func _initialize(dict):
