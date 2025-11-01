@@ -14,12 +14,16 @@ var rank_name_array = ["Wood", "Bronze", "Iron", "Steel", "Platinum", "Diamond",
 	#"WordsearchVanilla", "WordsearchShared", "WordsearchVanilla", "WordsearchShared", "WordsearchVanilla", "WordsearchShared"
 	#]
 
-#var game_types = ["ScrambleVanilla", "ScrambleBonus","ScrambleBonusObscurity", "ScrambleObscurity", "ScrambleWonder", "ScrambleBonusWonder",
-	#"ScrambleObscurityWonder", "ScrambleBonusObscurityWonder"]
+#var game_types = [
+	#"ScrambleVanilla", "ScrambleBonus","ScrambleBonusObscurity", "ScrambleObscurity", "ScrambleWonder", "ScrambleBonusWonder",
+	#"ScrambleObscurityWonder", "ScrambleBonusObscurityWonder"
+	#]
 	
-var game_types = ["ScrambleWonder", "ScrambleWonder", "ScrambleWonder", "ScrambleWonder", "ScrambleWonder", "ScrambleWonder", ]
+#var game_types = ["ScrambleWonder", "ScrambleWonder", "ScrambleWonder", "ScrambleWonder", "ScrambleWonder", "ScrambleWonder", ]
 
-
+var game_types = [
+	"ScrambleObscurity", "ScrambleObscurity", "ScrambleObscurity"
+	]
 
 var backgrounds_dictionary = {"Jupiter": "res://data/scenes_and_scripts/scramble/jupiter4test.tres", "Mars": "res://data/scenes_and_scripts/multiplayertesting/mars.gdshader"}
 

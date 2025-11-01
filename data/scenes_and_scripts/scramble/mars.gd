@@ -9,7 +9,7 @@ func _ready():
 func animator():
 	var tween = create_tween()
 	var random_number = randomizer()
-	print(random_number)
+	
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_CIRC)
 	tween.tween_property(self.material, "shader_parameter/bloom_intensity", random_number,  5)

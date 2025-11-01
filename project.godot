@@ -22,8 +22,6 @@ CSignals="*res://data/scenes_and_scripts/scramble/c_signals.gd"
 GlobalData="*res://data/scenes_and_scripts/scramble/c_global_word_lists.gd"
 RpcAwait="*res://addons/rpc-await/rpc_await.gd"
 Globals="*res://data/scenes_and_scripts/multiplayertesting/Globals.tscn"
-ClientSide="*res://data/scenes_and_scripts/multiplayertesting/client_side.gd"
-FirebaseManager="res://data/scenes_and_scripts/multiplayertesting/FirebaseManager.gd"
 Firebase="*res://addons/godot-firebase/firebase/firebase.tscn"
 
 [display]

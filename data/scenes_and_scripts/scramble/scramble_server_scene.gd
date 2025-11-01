@@ -64,7 +64,7 @@ var phoenix_dictionary
 var process_pause = false
 
 var important_information = []
-
+var tie_game_cycles: int = 0
 
 func _ready():
 	print(Globals.player_save_data)
@@ -73,27 +73,33 @@ func _ready():
 	
 	multiplayer.peer_connected.connect(_on_player_connected)
 	multiplayer.peer_disconnected.connect(_on_player_disconnected)
-	find_good_letters()
+	if wonder_variant: # if wonder variant, we guarantee a 7 letter word
+		find_good_letters()
+	if not wonder_variant: # if not wonder variant, we have a 50% chance of guaranteeing a 7 letter word
+		var random_number = randi_range(0,1)
+		if random_number == 1:
+			find_good_letters()
+		if random_number == 0:
+			find_good_letters_not_seven()
+	
 	if bonus_variant == true:
 		current_bonus_letter = bonus_letter_chooser()
 		
-	#var players_array = multiplayer.get_peers()
-	#player_one_id = players_array[0]
-	#player_two_id = players_array[1]
+
 	player_one_id = get_meta("userid1")
 	player_two_id = get_meta("userid2")
 	var parent = get_parent()
 	serverhost = parent.get_parent()
 	print("server host is " + str(serverhost))
-	#%MainTimer.start()
-	#if bonus_variant == true:
-		#%BonusTimer.start()
 
 func _process(delta):
 	if round_timer.time_left < 0.5:
 		if player_one_score == player_two_score:
-			round_timer.start(10)
-			print("TIE GAME, SUDDEN DEATH")
+			round_timer.start(1)
+			tie_game_cycles += 1
+			rpc_id(player_one_id, "tie_game_informer", tie_game_cycles)
+			rpc_id(player_two_id, "tie_game_informer", tie_game_cycles)
+			
 
 	if process_pause == false: # this process pause thing makes it so that the update to the big dictionary happens 2x/second minimum, also updating timer variables for sending
 		process_pause = true
@@ -111,11 +117,11 @@ func game_starter():
 		%BonusTimer.start()
 	pass
 
-func find_good_letters():
+func find_good_letters(): # this one is for getting directly from a seven letter word.
 	print("find_good_letters function running")
 	# Define your specific criteria for a "good" hand
 	var min_other_words_required = 25 # At least 25 OTHER words (3-6 letters)
-									  # This implies the t+otal words will be >= 26 (20 + the 7-letter word)
+									  # This implies the t+otal words will be >= 26 (25 + the 7-letter word)
 
 	var chosen_letters_string = ""
 	var attempts = 0
@@ -143,6 +149,7 @@ func find_good_letters():
 		var chosen_seven_word = global_data.seven_letter_words_list[random_seven_word_index]
 		
 		# The hand for the player is now directly the letters of this chosen 7-letter word
+
 		chosen_letters_string = chosen_seven_word
 		var shuffled_letters_array = []
 			# Convert the string into an array of its characters
@@ -187,7 +194,7 @@ func find_good_letters():
 		else:
 			print("Hand '", chosen_letters_string, "' did not meet criteria.")
 			print("Only found ", actual_other_words_count, " other words (needed ", min_other_words_required, ").")
-
+			
 	var end_total_time = Time.get_ticks_msec()
 	print("Total time to find suitable letters (including multiple attempts): ", (end_total_time - start_total_time) / 1000.0, " seconds")
 
@@ -201,6 +208,98 @@ func find_good_letters():
 	
 	print(final_letters_array)
 
+func find_good_letters_not_seven(): # this one doesn't guarantee a seven letter word
+	print("find_good_letters function running")
+	# Define your specific criteria for a "good" hand
+	var min_other_words_required= 50 # At least 25 OTHER words (minimum length based on GlobalData variable allowed word length)
+									  # This implies the total words will be >= 26 (25 + the 7-letter word)
+
+	var chosen_letters_string = ""
+	var attempts = 0
+	var max_attempts = 2000 
+
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+
+	var start_total_time = Time.get_ticks_msec()
+
+	while true:
+		attempts += 1
+		if attempts > max_attempts:
+			print("Failed to find suitable letters after ", max_attempts, " attempts.")
+			print("Consider relaxing 'min_other_words_required' (current: ", min_other_words_required, ") or checking your dictionary.")
+			return # Exit function if max attempts reached
+		
+		##DONT DELETE FOR LOOPS BELOW
+		#This for loop is if we want random letters from the alphabet
+		#for i in range(7): 
+			#var random_letter = GlobalData.alphabet[randi_range(0,25)]
+			#print(random_letter)
+			#chosen_letters_string += random_letter
+			
+		##This for loop is if we want random letters from the scabble tile bag
+		for i in range(7):
+			var random_letter = GlobalData.SCRABBLE_TILE_BAG[randi_range(0,GlobalData.SCRABBLE_TILE_BAG.length() - 1)]
+			chosen_letters_string += random_letter
+			
+		
+		var shuffled_letters_array = []
+			# Convert the string into an array of its characters
+		for char in chosen_letters_string:
+			shuffled_letters_array.append(char)
+			
+			# Shuffle the array
+			shuffled_letters_array.shuffle()
+			
+			# Join the array back into a string (if you need it as a string for display/storage)
+			var final_shuffled_display_string = "".join(shuffled_letters_array)
+			print("Shuffled letters for display: ", final_shuffled_display_string)
+		print("\n--- Attempt ", attempts, ": Testing hand from chosen 7-letter word: '", chosen_letters_string, "' ---")
+
+		var start_check_time = Time.get_ticks_msec()
+
+		# 2. Find ALL possible words from this hand (including the 7-letter word itself, and 3-6 letter words)
+		var all_possible_words_from_hand = global_data.find_valid_words_from_letters(chosen_letters_string)
+
+		var end_check_time = Time.get_ticks_msec()
+		print("Time taken for word generation and lookup: ", (end_check_time - start_check_time) / 1000.0, " seconds")
+
+		# 3. Check the criteria:
+		#    a. We know a 7-letter word exists (it's `chosen_seven_word`).
+		#    b. We need to check for at least `min_other_words_required` *additional* words (3-6 letters).
+
+		var total_words_found = all_possible_words_from_hand.size()
+		
+		# The number of "other" words is the total found minus the 7-letter word we picked
+		# (assuming `find_valid_words_from_letters` only returns 3+ letter words, including the 7-letter one).
+		var actual_other_words_count = total_words_found - 1
+
+		var criteria_met = (actual_other_words_count >= min_other_words_required)
+
+		if criteria_met:
+			print("SUCCESS! Found a good hand: '", chosen_letters_string, "'")
+			print("Total words found (3+ letters): ", total_words_found)
+			#print(all_possible_words_from_hand)
+			possible_words_array = all_possible_words_from_hand
+			print(all_possible_words_from_hand)
+			#print("Other words (3-6 letters): ", actual_other_words_count, " (>= ", min_other_words_required, " required)")
+			break # Exit the loop, we found a suitable set of letters!
+		else:
+			print("Hand '", chosen_letters_string, "' did not meet criteria.")
+			print("Only found ", actual_other_words_count, " other words (needed ", min_other_words_required, ").")
+			chosen_letters_string = ""
+	var end_total_time = Time.get_ticks_msec()
+	print("Total time to find suitable letters (including multiple attempts): ", (end_total_time - start_total_time) / 1000.0, " seconds")
+
+	# `chosen_letters_string` now holds the letters for the player's hand
+	print("\n--- Game will start with letters: ", chosen_letters_string, " ---")
+	for character in chosen_letters_string:
+		final_letters_array.append(character)
+		final_letters_array.shuffle()
+		if final_letters_array.size() == 7:
+			return final_letters_array
+	
+	print(final_letters_array)
 func bonus_letter_chooser():
 	current_bonus_time_value = 0
 	%BonusTimer.start()
@@ -473,4 +572,9 @@ func _initialize(dict):
 		obscurity_variant = true	
 	if variant.contains("Wonder"):
 		wonder_variant = true		
+	pass
+
+@rpc("any_peer", "call_local", "reliable")			
+func tie_game_informer(tie_game_cycles):
+
 	pass
