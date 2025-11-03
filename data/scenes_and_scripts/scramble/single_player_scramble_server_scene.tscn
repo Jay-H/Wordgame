@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://vmhg548ogfne"]
+
+[ext_resource type="Script" uid="uid://cpiabm6mfw7jj" path="res://data/scenes_and_scripts/scramble/scramble_server_scene.gd" id="1_rr6g4"]
+[ext_resource type="Script" uid="uid://c4q76dr747x8i" path="res://data/scenes_and_scripts/scramble/main_timer.gd" id="2_xhm6h"]
+
+[node name="ScrambleScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rr6g4")
+
+[node name="MainTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 35.835
+one_shot = true
+script = ExtResource("2_xhm6h")
+
+[node name="BonusTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 10.0
+one_shot = true
+
+[connection signal="timeout" from="MainTimer" to="." method="_on_main_timer_timeout"]

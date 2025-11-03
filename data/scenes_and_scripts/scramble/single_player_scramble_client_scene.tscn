@@ -1,0 +1,1297 @@
+[gd_scene load_steps=28 format=3 uid="uid://bua76mxf28m2e"]
+
+[ext_resource type="Script" uid="uid://cutv0mtnmypn0" path="res://data/scenes_and_scripts/scramble/single_player_scramble_client_scene.gd" id="1_bgm7i"]
+[ext_resource type="AudioStream" uid="uid://pclwk720i0ch" path="res://data/music/Piano1.wav" id="2_8c2gt"]
+[ext_resource type="Shader" uid="uid://xh4c2hxx3xs1" path="res://data/scenes_and_scripts/scramble/jupiter.gdshader" id="3_ng6hk"]
+[ext_resource type="Shader" uid="uid://bllkhvpx2wvkv" path="res://data/scenes_and_scripts/multiplayertesting/mars.gdshader" id="4_t2vtt"]
+[ext_resource type="Texture2D" uid="uid://toy4qh1c35cl" path="res://data/images/mars_high_res.jpg" id="5_xakxi"]
+[ext_resource type="Script" uid="uid://cqjgchwh21nc1" path="res://data/scenes_and_scripts/scramble/mars.gd" id="6_o84lt"]
+[ext_resource type="Material" uid="uid://xtnsfpcccyin" path="res://data/scenes_and_scripts/scramble/jupiter4test.tres" id="7_nljo5"]
+[ext_resource type="Shader" uid="uid://c0ptn8g2ds8f6" path="res://data/scenes_and_scripts/scramble/cloudscape.gdshader" id="8_y3vu0"]
+[ext_resource type="Material" uid="uid://cutp7wv0qewh5" path="res://data/scenes_and_scripts/scramble/cloudscape2test.tres" id="9_gr4mr"]
+[ext_resource type="Shader" uid="uid://dwfv7tbunsf61" path="res://data/scenes_and_scripts/scramble/scramble_client_scene.gdshader" id="12_myj8m"]
+[ext_resource type="FontFile" uid="uid://dskmx2extevrw" path="res://data/fonts/times.ttf" id="13_bkvhe"]
+[ext_resource type="Script" uid="uid://htbcgdaaygan" path="res://data/scenes_and_scripts/scramble/letter.gd" id="14_iog2l"]
+[ext_resource type="FontFile" uid="uid://cpavm8lp2mx3e" path="res://data/fonts/lcd/LCD2B___.TTF" id="14_mwyel"]
+[ext_resource type="Script" uid="uid://cy1a7adjburkj" path="res://data/scenes_and_scripts/scramble/mini_score.gd" id="15_b67rk"]
+[ext_resource type="Shader" uid="uid://ddoeuq4rvc1ri" path="res://data/scenes_and_scripts/scramble/coloredblocker.gdshader" id="17_gu7gj"]
+[ext_resource type="Shader" uid="uid://baj561mjeqcoh" path="res://data/scenes_and_scripts/scramble/pregamelabels.gdshader" id="18_qr1m8"]
+[ext_resource type="FontFile" uid="uid://ca75bijbhrqu7" path="res://data/fonts/akando/Akando.otf" id="19_x5ipd"]
+[ext_resource type="PackedScene" uid="uid://bmm23rwsctf0d" path="res://data/scenes_and_scripts/multiplayertesting/piano_controller.tscn" id="20_8thv5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eyk14"]
+shader = ExtResource("3_ng6hk")
+shader_parameter/color_dark = Color(0.35, 0.2, 0.15, 1)
+shader_parameter/color_mid = Color(0.65, 0.5, 0.35, 1)
+shader_parameter/color_light = Color(0.9, 0.85, 0.75, 1)
+shader_parameter/noise_scale = 1.653
+shader_parameter/swirl_speed = 0.588
+shader_parameter/distortion = 0.5
+shader_parameter/band_stretch = 0.1
+shader_parameter/band_softness = 0.179
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1gm2h"]
+shader = ExtResource("4_t2vtt")
+shader_parameter/aberration_amount = 0.0
+shader_parameter/bloom_threshold = 0.136
+shader_parameter/bloom_intensity = 0.464
+shader_parameter/fade = 0.0
+shader_parameter/wave_speed = 0.589
+shader_parameter/wave_frequency = 20.0
+shader_parameter/wave_amplitude = 0.001
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kg312"]
+shader = ExtResource("8_y3vu0")
+shader_parameter/tile_period = Vector2(10, 10)
+shader_parameter/scale = 2.147
+shader_parameter/octaves = 3
+shader_parameter/persistence = 0.287
+shader_parameter/lacunarity = 1.845
+shader_parameter/coverage = 0.364
+shader_parameter/softness = 0.213
+shader_parameter/sky_color = Color(0.615226, 0.921129, 1, 1)
+shader_parameter/cloud_color = Color(1, 0.87451, 0.933333, 1)
+shader_parameter/speed_primary = 0.69
+shader_parameter/speed_secondary = 0.818
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vsvxw"]
+shader = ExtResource("12_myj8m")
+shader_parameter/sun_color = Color(1, 0.901961, 0.501961, 1)
+shader_parameter/fluctuation_speed = 1.969
+shader_parameter/edge_softness = 0.321
+shader_parameter/noise_intensity = 0.074
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_48hoo"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_utcc8"]
+shader = ExtResource("17_gu7gj")
+shader_parameter/pink_color = Color(1, 0.952941, 0.803922, 1)
+shader_parameter/blue_color = Color(0.673158, 0.746813, 1, 1)
+shader_parameter/noise_scale = 20.0
+shader_parameter/motion_speed = 0.5
+shader_parameter/fbm_octaves = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dnafr"]
+shader = ExtResource("18_qr1m8")
+shader_parameter/base_color = Color(0.430503, 0.549134, 0.988768, 1)
+shader_parameter/glow_intensity = 4.068
+shader_parameter/pulse_speed = 10.0
+shader_parameter/pulse_depth = 0.423
+shader_parameter/color_aberration = 0.002
+shader_parameter/distortion_amount = 0.0
+shader_parameter/distortion_speed = 0.1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nqxtb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mwyel"]
+bg_color = Color(1, 1, 1, 0.282353)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+expand_margin_left = 15.0
+expand_margin_top = 15.0
+expand_margin_right = 15.0
+expand_margin_bottom = 15.0
+
+[node name="ScrambleScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bgm7i")
+
+[node name="GodLightMusic" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_8c2gt")
+volume_db = -21.697
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer"]
+unique_name_in_owner = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+offset_right = 1320.0
+offset_bottom = 2868.0
+color = Color(0, 0, 0, 1)
+
+[node name="Jupiter" type="ColorRect" parent="CanvasLayer"]
+visible = false
+modulate = Color(1, 1, 1, 0.235294)
+material = SubResource("ShaderMaterial_eyk14")
+offset_right = 1320.0
+offset_bottom = 2868.0
+
+[node name="MarsBase" type="ColorRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mars" type="TextureRect" parent="CanvasLayer/MarsBase"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_1gm2h")
+layout_mode = 2
+offset_left = -824.0
+offset_top = 1044.0
+offset_right = 2146.0
+offset_bottom = 4014.0
+texture = ExtResource("5_xakxi")
+script = ExtResource("6_o84lt")
+
+[node name="Jupiter3" type="ColorRect" parent="CanvasLayer"]
+visible = false
+material = ExtResource("7_nljo5")
+offset_left = -1561.0
+offset_top = -13.0
+offset_right = -241.0
+offset_bottom = 2863.0
+
+[node name="Jupiter4" type="ColorRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(1, 1, 1, 0.682353)
+material = ExtResource("7_nljo5")
+offset_left = -247.0
+offset_top = -179.0
+offset_right = 1647.0
+offset_bottom = 3282.0
+
+[node name="Cloudscape1" type="ColorRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_kg312")
+custom_minimum_size = Vector2(1320, 2868)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Cloudscape2" type="ColorRect" parent="CanvasLayer"]
+visible = false
+material = ExtResource("9_gr4mr")
+custom_minimum_size = Vector2(1320, 2868)
+offset_right = 1320.0
+offset_bottom = 2868.0
+
+[node name="Sun" type="ColorRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_vsvxw")
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.134
+anchor_right = 0.5
+anchor_bottom = 0.134
+offset_left = -660.0
+offset_right = 660.0
+offset_bottom = 1320.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackgroundFader" type="ColorRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.321569)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LetterContainer" type="HBoxContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -660.0
+offset_top = -1434.0
+offset_right = 660.0
+offset_bottom = 1434.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="Letter1" type="Label" parent="CanvasLayer/LetterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(142, 0)
+layout_mode = 2
+mouse_filter = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("13_bkvhe")
+theme_override_font_sizes/font_size = 150
+text = "7"
+horizontal_alignment = 1
+script = ExtResource("14_iog2l")
+
+[node name="Letter2" type="Label" parent="CanvasLayer/LetterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(142, 0)
+layout_mode = 2
+mouse_filter = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("13_bkvhe")
+theme_override_font_sizes/font_size = 150
+text = "7"
+horizontal_alignment = 1
+script = ExtResource("14_iog2l")
+
+[node name="Letter3" type="Label" parent="CanvasLayer/LetterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(142, 0)
+layout_mode = 2
+mouse_filter = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("13_bkvhe")
+theme_override_font_sizes/font_size = 150
+text = "7"
+horizontal_alignment = 1
+script = ExtResource("14_iog2l")
+
+[node name="Letter4" type="Label" parent="CanvasLayer/LetterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(142, 0)
+layout_mode = 2
+mouse_filter = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("13_bkvhe")
+theme_override_font_sizes/font_size = 150
+text = "7"
+horizontal_alignment = 1
+script = ExtResource("14_iog2l")
+
+[node name="Letter5" type="Label" parent="CanvasLayer/LetterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(142, 0)
+layout_mode = 2
+mouse_filter = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 200
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = -135
+theme_override_fonts/font = ExtResource("13_bkvhe")
+theme_override_font_sizes/font_size = 150
+text = "7"
+horizontal_alignment = 1
+script = ExtResource("14_iog2l")
+
+[node name="Letter6" type="Label" parent="CanvasLayer/LetterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(142, 0)
+layout_mode = 2
+mouse_filter = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("13_bkvhe")
+theme_override_font_sizes/font_size = 150
+text = "7"
+horizontal_alignment = 1
+script = ExtResource("14_iog2l")
+
+[node name="Letter7" type="Label" parent="CanvasLayer/LetterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(142, 0)
+layout_mode = 2
+mouse_filter = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("13_bkvhe")
+theme_override_font_sizes/font_size = 150
+text = "7"
+horizontal_alignment = 1
+script = ExtResource("14_iog2l")
+
+[node name="SubmitShadow" type="Button" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(1, 1, 1, 0)
+offset_left = 10.0
+offset_top = 1621.0
+offset_right = 368.602
+offset_bottom = 1766.0
+mouse_filter = 2
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("13_bkvhe")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/hover = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/normal = SubResource("StyleBoxFlat_48hoo")
+text = "Submit"
+
+[node name="ClearShadow" type="Button" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(1, 1, 1, 0)
+offset_left = 941.0
+offset_top = 1613.0
+offset_right = 1299.6
+offset_bottom = 1758.0
+mouse_filter = 2
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("13_bkvhe")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/hover = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/normal = SubResource("StyleBoxFlat_48hoo")
+text = "Clear"
+
+[node name="ShuffleShadow" type="Button" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(1, 1, 1, 0)
+offset_top = 1927.0
+offset_right = 1320.0
+offset_bottom = 2072.0
+mouse_filter = 2
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("13_bkvhe")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/hover = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/normal = SubResource("StyleBoxFlat_48hoo")
+text = "Shuffle
+"
+
+[node name="Submit" type="Button" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.58
+anchor_right = 0.2
+anchor_bottom = 0.58
+offset_left = -179.0
+offset_top = -72.4399
+offset_right = 180.0
+offset_bottom = 10.8801
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("13_bkvhe")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/hover = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/normal = SubResource("StyleBoxFlat_48hoo")
+text = "Submit"
+
+[node name="Clear" type="Button" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_left = 0.735
+anchor_top = 0.569
+anchor_right = 0.735
+anchor_bottom = 0.569
+offset_top = -56.0
+offset_right = 179.5
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("13_bkvhe")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/hover = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/normal = SubResource("StyleBoxFlat_48hoo")
+text = "Clear"
+
+[node name="Shuffle" type="Button" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.693
+anchor_right = 0.5
+anchor_bottom = 0.693
+offset_left = -660.0
+offset_top = -72.5
+offset_right = 660.0
+offset_bottom = 72.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("13_bkvhe")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/hover = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_48hoo")
+theme_override_styles/normal = SubResource("StyleBoxFlat_48hoo")
+text = "Shuffle
+"
+
+[node name="GameTimerLabel" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.624
+anchor_right = 0.5
+anchor_bottom = 0.624
+offset_left = -660.0
+offset_top = -102.5
+offset_right = 660.0
+offset_bottom = 102.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 150
+text = "00:45"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MiniScore" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.769
+anchor_right = 0.5
+anchor_bottom = 0.769
+offset_left = -660.0
+offset_top = -102.5
+offset_right = 660.0
+offset_bottom = 102.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 150
+text = "0"
+horizontal_alignment = 1
+script = ExtResource("15_b67rk")
+
+[node name="WordsLeft" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.769
+anchor_right = 0.5
+anchor_bottom = 0.769
+offset_left = -657.0
+offset_top = 218.508
+offset_right = 663.0
+offset_bottom = 297.508
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("14_mwyel")
+theme_override_font_sizes/font_size = 75
+text = "Words Found: 25/90
+"
+horizontal_alignment = 1
+script = ExtResource("15_b67rk")
+
+[node name="GameScore" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.334
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -652.0
+offset_top = -83.912
+offset_right = 648.0
+offset_bottom = -393.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("13_bkvhe")
+theme_override_font_sizes/font_size = 150
+text = "Score = 0 "
+horizontal_alignment = 1
+
+[node name="CurrentWord" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.417
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -660.0
+offset_top = -95.804
+offset_right = 660.0
+offset_bottom = -218.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("13_bkvhe")
+theme_override_font_sizes/font_size = 140
+text = "XXXXXXX"
+horizontal_alignment = 1
+
+[node name="ColoredBlocker" type="ColorRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+material = SubResource("ShaderMaterial_utcc8")
+offset_right = 1320.0
+offset_bottom = 2868.0
+mouse_filter = 2
+color = Color(1, 0.860672, 0.999645, 1)
+
+[node name="PreTimerLabel" type="Label" parent="CanvasLayer/ColoredBlocker"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 642.0
+offset_top = 1471.0
+offset_right = 898.0
+offset_bottom = 1608.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "00:00"
+
+[node name="GameStartingInLabel" type="Label" parent="CanvasLayer/ColoredBlocker"]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 1184.0
+offset_right = 908.0
+offset_bottom = 1321.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "Game Starting In:"
+
+[node name="Background" type="RichTextLabel" parent="CanvasLayer/ColoredBlocker"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_dnafr")
+layout_mode = 0
+offset_left = 43.0
+offset_top = 2339.0
+offset_right = 1289.0
+offset_bottom = 2462.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("19_x5ipd")
+theme_override_font_sizes/normal_font_size = 100
+text = "Background: Jupiter"
+
+[node name="Music" type="RichTextLabel" parent="CanvasLayer/ColoredBlocker"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_dnafr")
+layout_mode = 0
+offset_left = 46.0
+offset_top = 2547.0
+offset_right = 1269.0
+offset_bottom = 2716.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("19_x5ipd")
+theme_override_font_sizes/normal_font_size = 100
+text = "Music: Interstellar"
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 13.0
+offset_top = 2707.0
+offset_right = 389.0
+offset_bottom = 2852.0
+theme_override_font_sizes/font_size = 100
+text = "DEBUG "
+
+[node name="Button2" type="Button" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 879.0
+offset_top = 2697.0
+offset_right = 1255.0
+offset_bottom = 2842.0
+theme_override_font_sizes/font_size = 100
+text = "DEBUG "
+
+[node name="GodLight" type="DirectionalLight2D" parent="CanvasLayer"]
+unique_name_in_owner = true
+position = Vector2(696, -604)
+energy = 0.0
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="PianoController" parent="CanvasLayer" instance=ExtResource("20_8thv5")]
+unique_name_in_owner = true
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 100.0
+offset_top = 100.0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 50
+
+[node name="FoundWordsVbox1" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 2
+
+[node name="FoundWord1" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord2" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord3" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord4" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord5" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord6" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord7" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord8" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord9" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord10" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWordsVbox2" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 2
+
+[node name="FoundWord12" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord13" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord14" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord15" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord16" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord17" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord18" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord19" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord20" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord21" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWordsVbox3" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 2
+
+[node name="FoundWord23" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord24" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord25" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord26" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord27" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord28" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord29" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord30" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord31" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord32" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWordsVbox4" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 2
+
+[node name="FoundWord34" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord35" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord36" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord37" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord38" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord39" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord40" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord41" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord42" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord43" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWordsVbox5" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 2
+
+[node name="FoundWord45" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord46" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord47" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord48" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord49" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord50" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord51" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord52" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord53" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord54" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWordsVbox6" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 2
+
+[node name="FoundWord45" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox6"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord46" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox6"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord47" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox6"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord48" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox6"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord49" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox6"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord50" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox6"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord51" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox6"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord52" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox6"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord53" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox6"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord54" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox6"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWordsVbox7" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 2
+
+[node name="FoundWord45" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox7"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord46" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox7"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord47" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox7"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord48" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox7"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord49" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox7"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord50" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox7"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord51" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox7"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord52" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox7"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord53" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox7"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord54" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox7"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWordsVbox8" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 2
+
+[node name="FoundWord45" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox8"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord46" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox8"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord47" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox8"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord48" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox8"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord49" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox8"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord50" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox8"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord51" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox8"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord52" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox8"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord53" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox8"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord54" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox8"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWordsVbox9" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 2
+
+[node name="FoundWord45" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox9"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord46" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox9"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord47" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox9"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord48" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox9"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord49" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox9"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord50" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox9"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord51" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox9"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord52" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox9"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord53" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox9"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="FoundWord54" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox9"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="Blocker" type="ColorRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackToMenu" type="Button" parent="CanvasLayer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.592157)
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.975
+anchor_right = 0.5
+anchor_bottom = 0.975
+offset_left = -573.0
+offset_top = -147.3
+offset_right = 8.0
+offset_bottom = -27.3
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("13_bkvhe")
+theme_override_font_sizes/font_size = 101
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nqxtb")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_nqxtb")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_nqxtb")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_nqxtb")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_nqxtb")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_nqxtb")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_nqxtb")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_nqxtb")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_nqxtb")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_nqxtb")
+theme_override_styles/normal = SubResource("StyleBoxFlat_mwyel")
+text = "End Game."
+
+[connection signal="pressed" from="CanvasLayer/SubmitShadow" to="." method="_on_submit_pressed"]
+[connection signal="pressed" from="CanvasLayer/ClearShadow" to="." method="_on_clear_pressed"]
+[connection signal="pressed" from="CanvasLayer/ShuffleShadow" to="." method="_on_shuffle_pressed"]
+[connection signal="pressed" from="CanvasLayer/Submit" to="." method="_on_submit_pressed"]
+[connection signal="pressed" from="CanvasLayer/Clear" to="." method="_on_clear_pressed"]
+[connection signal="pressed" from="CanvasLayer/Shuffle" to="." method="_on_shuffle_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="CanvasLayer/BackToMenu" to="." method="_on_back_to_menu_pressed"]

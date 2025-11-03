@@ -35,6 +35,7 @@ var tie_cycles
 var tie_animations_running = false
 var sun_color = Color(1.0, 0.902, 0.502)
 
+
 func _ready():
 	#username = arguments[1]
 	

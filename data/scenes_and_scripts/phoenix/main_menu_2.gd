@@ -17,6 +17,7 @@ var true_settings = "res://data/scenes_and_scripts/phoenix/true_settings.tscn"
 var finding_match_scene = "res://data/scenes_and_scripts/phoenix/finding_match.tscn"
 var score_screen = "res://data/scenes_and_scripts/phoenix/score_screen.tscn"
 var match_over_scene = "res://data/scenes_and_scripts/phoenix/match_over.tscn"
+var single_player_scramble_scene = "res://data/scenes_and_scripts/scramble/single_player_scramble_client_scene.tscn"
 
 @onready var Database = get_node("/root/Firebase/Database")
 var my_client_id
@@ -366,3 +367,22 @@ func _ask_server_for_info(info_dictionary):
 	number_of_players_online = info_dictionary["players"]
 	number_of_matches_currently_being_played = info_dictionary["matches"]
 	pass
+
+
+func _start_single_player_game(parameters):
+	await $TrueMenu._fade_out()
+	$TrueMenu.queue_free()
+	if parameters[0] == "scramble":
+		var single_player_node_instance = load(single_player_scramble_scene).instantiate()
+		single_player_node_instance.game_over.connect(_end_single_player_game)
+		single_player_node_instance._setup(parameters)
+		add_child(single_player_node_instance)
+		print(single_player_node_instance)
+		
+	pass
+
+func _end_single_player_game(node):
+	print(node)
+	_true_menu_fade_in()
+	node.queue_free()
+	
