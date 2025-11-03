@@ -493,9 +493,9 @@ anchor_top = 0.693
 anchor_right = 0.5
 anchor_bottom = 0.693
 offset_left = -660.0
-offset_top = -72.5
+offset_top = -77.524
 offset_right = 660.0
-offset_bottom = 72.5
+offset_bottom = 72.476
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
@@ -706,76 +706,92 @@ mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
 unique_name_in_owner = true
-offset_left = 100.0
-offset_top = 100.0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.035
+anchor_right = 0.5
+anchor_bottom = 0.04
+offset_left = -592.0
+offset_top = -0.379997
+offset_right = 593.0
+offset_bottom = 711.28
+grow_horizontal = 2
 theme_override_constants/separation = 50
 
 [node name="FoundWordsVbox1" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-alignment = 2
+alignment = 1
 
 [node name="FoundWord1" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord2" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord3" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord4" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord5" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord6" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord7" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord8" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord9" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord10" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWordsVbox2" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
 unique_name_in_owner = true
@@ -787,60 +803,70 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord13" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord14" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord15" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord16" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord17" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord18" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord19" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord20" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord21" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWordsVbox3" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
 unique_name_in_owner = true
@@ -852,60 +878,70 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord24" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord25" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord26" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord27" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord28" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord29" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord30" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord31" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord32" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWordsVbox4" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
 unique_name_in_owner = true
@@ -917,60 +953,70 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord35" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord36" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord37" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord38" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord39" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord40" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord41" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord42" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord43" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWordsVbox5" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
 unique_name_in_owner = true
@@ -981,271 +1027,61 @@ alignment = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord46" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord47" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord48" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord49" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord50" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord51" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord52" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord53" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="FoundWord54" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
-
-[node name="FoundWordsVbox6" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-alignment = 2
-
-[node name="FoundWord45" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox6"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord46" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox6"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord47" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox6"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord48" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox6"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord49" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox6"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord50" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox6"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord51" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox6"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord52" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox6"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord53" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox6"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord54" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox6"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWordsVbox7" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-alignment = 2
-
-[node name="FoundWord45" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox7"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord46" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox7"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord47" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox7"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord48" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox7"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord49" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox7"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord50" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox7"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord51" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox7"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord52" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox7"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord53" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox7"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord54" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox7"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWordsVbox8" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-alignment = 2
-
-[node name="FoundWord45" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox8"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord46" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox8"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord47" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox8"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord48" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox8"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord49" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox8"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord50" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox8"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord51" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox8"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord52" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox8"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord53" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox8"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord54" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox8"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWordsVbox9" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-alignment = 2
-
-[node name="FoundWord45" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox9"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord46" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox9"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord47" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox9"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord48" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox9"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord49" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox9"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord50" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox9"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord51" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox9"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord52" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox9"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord53" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox9"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-
-[node name="FoundWord54" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox9"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
+text = "wagawa"
 
 [node name="Blocker" type="ColorRect" parent="CanvasLayer"]
 unique_name_in_owner = true

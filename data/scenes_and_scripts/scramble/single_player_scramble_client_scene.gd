@@ -1,6 +1,7 @@
 extends Control
 
 signal game_over
+var little_green_particles = "res://data/scenes_and_scripts/particles/small_green_particles.tscn"
 var ranks = ["bad", "okay", "good", "great", "amazing", "unbelievable", "godlike", "universal master"]
 var current_rank = ""
 var rank_thresholds
@@ -18,7 +19,7 @@ var mini_score : int
 #variants
 var show_words_to_find = false
 var seven_letter_word_guaranteed = false
-var score_matters = false
+var score_matters = true
 var time_limit = false
 var time_limit_duration = 3
 #end variants
@@ -28,6 +29,7 @@ func _setup(parameters):
 	time_limit = parameters[2]
 	show_words_to_find = parameters[3]
 	score_matters = parameters[4]
+	time_limit_duration = parameters[5]
 	if not score_matters:
 		%MiniScore.visible = false
 	if not time_limit:
@@ -39,6 +41,7 @@ func _setup(parameters):
 
 
 func _ready():
+	_clear_word_boxes() # take away the placeholder text
 	_find_good_letters()
 	_populate_word_list()
 	_populate_letters()
@@ -147,6 +150,9 @@ func _connect_letter_signals():
 		pass
 		
 func _letter_collector(letter_text, letter_node, changed):
+	%PianoController.play_random_note()
+	if score_matters:
+		_little_green_letters(letter_text, letter_node)
 	selected_letters_array.append(letter_text)
 	selected_letters_string += letter_text
 	letter_node.mouse_filter = MOUSE_FILTER_IGNORE
@@ -248,4 +254,28 @@ func _current_rank_determiner():
 				thresholds_reached += 1
 		current_rank = ranks[thresholds_reached]
 	
+func _clear_word_boxes():
+	for i in %HBoxContainer.get_children():
+		for x in i.get_children():
+			x.text = ""
+func _little_green_letters(letter_text, letter_node):
+	var points = GlobalData.SCRABBLE_POINTS[letter_text]
+	var little_green_letter_node = Label.new()
+	little_green_letter_node.add_theme_font_size_override("font_size", 100)
+	little_green_letter_node.add_theme_color_override("font_color", Color.GREEN)
+	little_green_letter_node.text = str(points)
+	letter_node.add_child(little_green_letter_node)
+	var particles = load(little_green_particles).instantiate()
+	particles.position += little_green_letter_node.size/2
+	little_green_letter_node.add_child(particles)
+	little_green_letter_node.position += letter_node.size/2
+	little_green_letter_node.position -= little_green_letter_node.size/2
+	var target_position = Vector2(little_green_letter_node.position.x, -1000)
+	var tween = create_tween()
+	var random_additional_vector2 = Vector2(randi_range(-300, 300), 0)
 	
+	tween.tween_property(little_green_letter_node, "position", target_position + random_additional_vector2, 2)
+	tween.parallel().tween_property(little_green_letter_node, "modulate", Color.TRANSPARENT, 1)
+	await tween.finished
+	little_green_letter_node.queue_free()
+	pass

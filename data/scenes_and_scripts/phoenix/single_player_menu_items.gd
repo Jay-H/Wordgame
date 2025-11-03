@@ -11,10 +11,12 @@ var ensure_seven_letter_word = false
 var time_limit = false
 var show_words_to_find = false
 var score = false
+var time_limit_amount = 45
 #end scramble variants region
 
 
 func _process(_delta):
+	%TimeLimitLabel.text = str(time_limit_amount)
 	if selected_game == "wordsearch":
 		%TitleLabel.text = "word search."
 	if selected_game == "scramble":
@@ -48,6 +50,7 @@ func _on_back_button_pressed() -> void:
 
 
 func _on_game_button_pressed() -> void:
+	%PianoController.play_random_chord()
 	if game_panels_visible == false:
 		$WordsearchPanel.visible = true
 		$ScramblePanel.visible = true
@@ -76,17 +79,17 @@ func _on_scramble_button_pressed() -> void:
 
 
 func _on_start_button_pressed() -> void:
+	%PianoController.play_random_chord()
 	var parameters = []
 	if selected_game == "scramble":
-		parameters = [selected_game, ensure_seven_letter_word, time_limit, show_words_to_find, score]
+		parameters = [selected_game, ensure_seven_letter_word, time_limit, show_words_to_find, score, time_limit_amount]
 		true_menu._single_player_start(parameters)
 	pass
 	pass # Replace with function body.
 
 
 func _on_variants_button_pressed() -> void:
-	
-		
+	%PianoController.play_random_chord()
 	if selected_game == "scramble":
 		if variant_panel_visible == false:
 			$ScrambleVariantsMenu.visible = true
@@ -100,6 +103,8 @@ func _on_variants_button_pressed() -> void:
 	pass # Replace with function body.
 
 func _on_record_score_toggled(toggled_on: bool) -> void:
+	%PianoController.play_random_note()
+	Input.vibrate_handheld(200, -1)
 	if toggled_on:
 		score = true
 	if not toggled_on:
@@ -108,6 +113,8 @@ func _on_record_score_toggled(toggled_on: bool) -> void:
 
 
 func _on_word_list_toggled(toggled_on: bool) -> void:
+	%PianoController.play_random_note()
+	Input.vibrate_handheld(200, -1)
 	if toggled_on:
 		show_words_to_find = true
 	if not toggled_on:
@@ -116,6 +123,8 @@ func _on_word_list_toggled(toggled_on: bool) -> void:
 
 
 func _on_seven_ensure_toggled(toggled_on: bool) -> void:
+	%PianoController.play_random_note()
+	Input.vibrate_handheld(200, -1)
 	if toggled_on:
 		ensure_seven_letter_word = true
 	if not toggled_on:
@@ -124,8 +133,61 @@ func _on_seven_ensure_toggled(toggled_on: bool) -> void:
 
 
 func _on_time_limit_toggled(toggled_on: bool) -> void:
+	%PianoController.play_random_note()
+	Input.vibrate_handheld(200, -1)
 	if toggled_on:
 		time_limit = true
+		%TimeLimitLabel.visible = true
+		%TimeLimit.visible = false
+		%SevenEnsure.visible = false
+		%WordList.visible = false
+		%RecordScore.visible = false
 	if not toggled_on:
 		time_limit = false
+	pass # Replace with function body.
+
+
+func _on_up_button_pressed() -> void:
+	Input.vibrate_handheld(200, 1)
+	if time_limit_amount <= 950:
+		time_limit_amount += 15
+	else:
+		await _time_limit_label_error()
+	pass # Replace with function body.
+
+
+func _on_down_button_pressed() -> void:
+	Input.vibrate_handheld(200, 1)
+	if time_limit_amount >= 45:
+		time_limit_amount -= 15
+	else:
+		await _time_limit_label_error()
+	pass # Replace with function body.
+
+func _time_limit_label_error():
+	var previous_amount = time_limit_amount
+	time_limit_amount = "err"
+	%DownButton.disabled = true
+	%UpButton.disabled = true
+	%ConfirmButton.disabled = true
+	await get_tree().create_timer(0.35).timeout
+	time_limit_amount = previous_amount
+	%DownButton.disabled = false
+	%UpButton.disabled = false
+	%ConfirmButton.disabled = false
+	pass
+
+
+func _on_confirm_button_pressed() -> void:
+	Input.vibrate_handheld(200, 1)
+	await get_tree().create_timer(0.2).timeout
+	Input.vibrate_handheld(200, 0.7)
+	await get_tree().create_timer(0.2).timeout
+	Input.vibrate_handheld(200, 0.3)
+	%TimeLimitLabel.visible = false
+	%TimeLimit.visible = true
+	%SevenEnsure.visible = true
+	%WordList.visible = true
+	%RecordScore.visible = true
+	
 	pass # Replace with function body.
