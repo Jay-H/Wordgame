@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://bmm23rwsctf0d"]
 
-[ext_resource type="Script" uid="uid://bybtum2gen2sn" path="res://piano_controller.gd" id="1_dhja5"]
+[ext_resource type="Script" uid="uid://obgctns6kav8" path="res://piano_controller.gd" id="1_dhja5"]
 [ext_resource type="AudioStream" uid="uid://x2gmv6k7865v" path="res://data/sound_effects/PianoA.wav" id="2_no1mx"]
 [ext_resource type="AudioStream" uid="uid://dld4yrmiciygi" path="res://data/sound_effects/PianoA#.wav" id="3_16xhs"]
 [ext_resource type="AudioStream" uid="uid://drag3lq35lub4" path="res://data/sound_effects/PianoB.wav" id="4_mtk6g"]

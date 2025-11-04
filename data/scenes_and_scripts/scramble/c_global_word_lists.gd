@@ -2,7 +2,7 @@ extends Node
 
 var PlayerDictionary = {}
 
-var profile_pics = ["res://data/images/profilepics/Alan.png", "res://data/images/profilepics/Bookman.png", "res://data/images/profilepics/Gary.png","res://data/images/profilepics/Alan.png", "res://data/images/profilepics/Bookman.png", "res://data/images/profilepics/Gary.png", "res://data/images/profilepics/Arnold.png", "res://data/images/profilepics/Eugene.png", "res://data/images/profilepics/Jennifer.png" ]
+var profile_pics = ["res://data/images/profilepics/Alan.png", "res://data/images/profilepics/Bookman.png", "res://data/images/profilepics/Gary.png","res://data/images/profilepics/Alan.png", "res://data/images/profilepics/Bookman.png", "res://data/images/profilepics/Gary.png", "res://data/images/profilepics/Arnold.png", "res://data/images/profilepics/Eugene.png", "res://data/images/profilepics/Jennifer.png", "res://data/images/profilepics/Kasper.png", "res://data/images/profilepics/Oak.png" ]
 var current_bonus_letter = ""
 var bonus_letter_global_position : Vector2 = Vector2(0,0)
 var mini_score_display_global_position : Vector2 = Vector2(0,0)
@@ -11,8 +11,11 @@ var scrabble_dictionary = {}
 var obscurity_dictionary = {}
 const SCRABBLE_TILE_BAG = "AAAAAAAAABBCDDDEEEEEEEEEEEFFGGGHHIIIIIIIIIJKLLLLMMNNNNNNOOOOOOOOPPQRRRRRRSSSSSTTTTTTUUUUVVWWXYYZ"
 var alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+var vowels = ["A", "E", "I", "O", "U"]
+var consonants = ["B", "C", "D","F", "G", "H","J", "K", "L", "M", "N", "P", "Q", "R", "S", "T","V", "W", "X", "Y", "Z"]
 var seven_letter_words_list = [] # This list will hold all 7-letter words from your dictionary
-var allowed_word_length = 3
+var allowed_word_length = 3 # this doesn't affect words that are valid when submitted in scramble, it affects making sure that there are
+					# a certain number of words of this length that are real from the functions on this script that are called from the scramble server 
 const SCRABBLE_POINTS = {
 	'A': 1, 'E': 1, 'I': 1, 'O': 1, 'U': 1, 'L': 1, 'N': 1, 'S': 1, 'T': 1, 'R': 1,
 	'D': 2, 'G': 2,

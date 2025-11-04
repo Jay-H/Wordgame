@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://k512d61sdhfx"]
+
+[sub_resource type="Gradient" id="Gradient_qi6iv"]
+offsets = PackedFloat32Array(0, 0.00260417, 0.679688, 1)
+colors = PackedColorArray(1, 1, 1, 0, 0.0214461, 0.979575, 0.00434028, 1, 0.295956, 0.718138, 0.0598959, 1, 0.329412, 0.686275, 0.0666667, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3p8k8"]
+gradient = SubResource("Gradient_qi6iv")
+width = 10
+height = 10
+fill = 2
+fill_from = Vector2(0.5, 0.521368)
+fill_to = Vector2(1, 0.0042735)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_358wy"]
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+spread = 28.182
+initial_velocity_max = 81.69
+gravity = Vector3(0, 0, 0)
+
+[node name="SmallWhiteParticles" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 50
+texture = SubResource("GradientTexture2D_3p8k8")
+lifetime = 3.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_358wy")

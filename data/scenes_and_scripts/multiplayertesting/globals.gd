@@ -8,18 +8,22 @@ extends Control
 var level_name_array = ["Dirt", "Bacterium", "Amoeba", "Fungus", "Fungi", "Fun Guy", "Naked Mole Rat", "Common Slug", "Uncommon Slug", "Mouse", "Guinea Pig", "Hamster", "Cat", "Dog", "Rare Slug", "Eagle", "Zebra", "Lion", "Elephant", "Chimpanzee", "Human Being", "Mythic Slug", "Lesser Angel", "Cherubim", "Seraphim", "Archangel", "Exotic Slug", "Demiurge", "Omnipotent God", "Multiverse God", "Holy Spirit", "Nirvanist", "Hologram Breaker", "Universal Eldritch Being", "Wielder of the Phoenix Armament", "Welder of the Phoenix Armament", "CJ Enterprises Co-CEO", "CJ Enterprises Co-CEO's Mom", "Legendary Slug", "Singularity", "One With Nothing"]
 var rank_name_array = ["Wood", "Bronze", "Iron", "Steel", "Platinum", "Diamond", "Antimatter"]
 
+var game_types = [
+	"ScrambleVanilla", "ScrambleBonus","ScrambleBonusObscurity", "ScrambleObscurity", "ScrambleWonder", "ScrambleBonusWonder",
+	"ScrambleObscurityWonder", "ScrambleBonusObscurityWonder", "WordsearchVanilla", "WordsearchShared", 
+	"WordsearchVanilla", "WordsearchShared", "WordsearchVanilla", "WordsearchShared", "WordsearchVanilla", "WordsearchShared"
+	]
+
 #var game_types = [
 	#"ScrambleVanilla", "ScrambleBonus","ScrambleBonusObscurity", "ScrambleObscurity", "ScrambleWonder", "ScrambleBonusWonder",
-	#"ScrambleObscurityWonder", "ScrambleBonusObscurityWonder", "WordsearchVanilla", "WordsearchShared", 
-	#"WordsearchVanilla", "WordsearchShared", "WordsearchVanilla", "WordsearchShared", "WordsearchVanilla", "WordsearchShared"
+	#"ScrambleObscurityWonder", "ScrambleBonusObscurityWonder"
 	#]
-
-#var game_types = ["ScrambleVanilla", "ScrambleBonus","ScrambleBonusObscurity", "ScrambleObscurity", "ScrambleWonder", "ScrambleBonusWonder",
-	#"ScrambleObscurityWonder", "ScrambleBonusObscurityWonder"]
 	
-var game_types = ["ScrambleWonder", "ScrambleWonder", "ScrambleWonder", "ScrambleWonder", "ScrambleWonder", "ScrambleWonder", ]
+#var game_types = ["ScrambleWonder", "ScrambleWonder", "ScrambleWonder", "ScrambleWonder", "ScrambleWonder", "ScrambleWonder", ]
 
-
+#var game_types = [
+	#"ScrambleObscurity", "ScrambleObscurity", "ScrambleObscurity"
+	#]
 
 var backgrounds_dictionary = {"Jupiter": "res://data/scenes_and_scripts/scramble/jupiter4test.tres", "Mars": "res://data/scenes_and_scripts/multiplayertesting/mars.gdshader"}
 

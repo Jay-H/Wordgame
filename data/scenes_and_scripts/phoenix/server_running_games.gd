@@ -6,9 +6,9 @@ signal match_ended(dict)
 var players_looking_for_match = []
 var matched_players = []
 var timers_scene = "res://data/scenes_and_scripts/phoenix/timers.tscn"
-var round_time = 45
-var match_found_time = 3
-var rules_time = 7
+var round_time = 40
+var match_found_time = 7
+var rules_time = 5
 var score_time = 3
 var skip_dict = {}
 
@@ -44,9 +44,10 @@ func _new_match(matched_players):
 	"player_one_peer_id": player_one_peer_id, "player_two_peer_id": player_two_peer_id, "player_one_firebase_id": player_one_firebase_id,
 	"player_two_firebase_id": player_two_firebase_id, "player_one_dictionary": player_one_dictionary, "player_two_dictionary": player_two_dictionary,
 	"match_node_name": match_node.name, "timers_node_name": timers_node.name, "selected_games": games_array, "match_stage": "initial", "current_round": 0,
-	"match_winner": "", "rules_skipped": false
+	"match_winner": "", "rules_skipped": false, "end_by_disconnection": false
 	}
-	serverhost.running_matches.append(str(match_info_dictionary["match_node_name"]))
+	#serverhost.running_matches.append(str(match_info_dictionary["match_node_name"]))
+	serverhost.running_matches.append(match_info_dictionary)
 	rpc_id(player_one_peer_id, "_client_match_informer", match_info_dictionary)
 	rpc_id(player_two_peer_id, "_client_match_informer", match_info_dictionary)
 	
@@ -60,71 +61,72 @@ func _client_match_informer(match_info_dictionary):
 #it is called from the client identified as player one exclusively to keep the stages of the game progressing
 @rpc("any_peer", "call_remote", "reliable")	
 func _match_runner(dict):
-	if dict["match_stage"] == "initial": # we use the match_stage dictionary entry to keep track of what stage of the game they are in
-		var match_found_timer = get_node(str(dict["timers_node_name"]) + "/MatchFoundTimer")
-		match_found_timer.start(match_found_time)
-		await match_found_timer.timeout
-		if dict["player_one_dictionary"]["auto_skip_rules"] == true and dict["player_two_dictionary"]["auto_skip_rules"] == true:
-			dict["rules_skipped"] = true
-			dict["match_stage"] = "rules"
-			rpc_id(dict["player_one_peer_id"], "_show_rules", dict)
-			rpc_id(dict["player_two_peer_id"], "_show_rules", dict)
-		else:
-			dict["match_stage"] = "rules"
-			rpc_id(dict["player_one_peer_id"], "_show_rules", dict)
-			rpc_id(dict["player_two_peer_id"], "_show_rules", dict)
-		return
-	if dict["match_stage"] == "rules":
-		print("match runner")
-		var rules_timer = get_node(str(dict["timers_node_name"]) + "/RulesTimer")
-		if dict["rules_skipped"]:
-			rules_timer.start(0.5)
-		else:
-			rules_timer.start(rules_time)
-		await rules_timer.timeout
-		
-		dict["match_stage"] = "game"
-		if dict["player_one_dictionary"]["auto_skip_rules"] == true and dict["player_two_dictionary"]["auto_skip_rules"] == true:
-			dict["rules_skipped"] = true # this is to reset it for the next rules screen
-		else:
-			dict["rules_skipped"] = false
+	if dict["end_by_disconnection"] == false:
+		if dict["match_stage"] == "initial": # we use the match_stage dictionary entry to keep track of what stage of the game they are in
+			var match_found_timer = get_node(str(dict["timers_node_name"]) + "/MatchFoundTimer")
+			match_found_timer.start(match_found_time)
+			await match_found_timer.timeout
+			if dict["player_one_dictionary"]["auto_skip_rules"] == true and dict["player_two_dictionary"]["auto_skip_rules"] == true:
+				dict["rules_skipped"] = true
+				dict["match_stage"] = "rules"
+				rpc_id(dict["player_one_peer_id"], "_show_rules", dict)
+				rpc_id(dict["player_two_peer_id"], "_show_rules", dict)
+			else:
+				dict["match_stage"] = "rules"
+				rpc_id(dict["player_one_peer_id"], "_show_rules", dict)
+				rpc_id(dict["player_two_peer_id"], "_show_rules", dict)
+			return
+		if dict["match_stage"] == "rules":
+			print("match runner")
+			var rules_timer = get_node(str(dict["timers_node_name"]) + "/RulesTimer")
+			if dict["rules_skipped"]:
+				rules_timer.start(0.5)
+			else:
+				rules_timer.start(rules_time)
+			await rules_timer.timeout
+			
+			dict["match_stage"] = "game"
+			if dict["player_one_dictionary"]["auto_skip_rules"] == true and dict["player_two_dictionary"]["auto_skip_rules"] == true:
+				dict["rules_skipped"] = true # this is to reset it for the next rules screen
+			else:
+				dict["rules_skipped"] = false
 
-		_start_game(dict)
-		var round_timer = get_node(str(dict["timers_node_name"]) + "/RoundTimer")
-		round_timer.start(100)
-		rpc_id(dict["player_one_peer_id"], "_start_game", dict)
-		rpc_id(dict["player_two_peer_id"], "_start_game", dict)		
-		return
-	if dict["match_stage"] == "game":
-		var round_timer = get_node(str(dict["timers_node_name"]) + "/RoundTimer")
-		round_timer.start(round_time)
-		dict["match_stage"] = "score"
-		await round_timer.timeout
-		var winner = _end_game(dict)
-		var string = "round" + str(dict["current_round"] + 1) + "winner" # this is to register into the dictionary who won each round.
-		dict[string] = winner
-		print(dict)
-		rpc_id(dict["player_one_peer_id"], "_end_game", dict)
-		rpc_id(dict["player_two_peer_id"], "_end_game", dict)
-		return
-	if dict["match_stage"] == "score":
-		var score_timer = get_node(str(dict["timers_node_name"]) + "/ScoreTimer") 
-		score_timer.start(score_time)
-		dict["current_round"] += 1
-		dict["match_stage"] = "rules"
-		await score_timer.timeout
-		if dict["current_round"] == 2 and dict["round1winner"] == dict["round2winner"]: # if someone wins the first two games
-			dict["match_stage"] == "ending"
-			_end_match_prefunction(dict)
+			_start_game(dict)
+			var round_timer = get_node(str(dict["timers_node_name"]) + "/RoundTimer")
+			round_timer.start(100)
+			rpc_id(dict["player_one_peer_id"], "_start_game", dict)
+			rpc_id(dict["player_two_peer_id"], "_start_game", dict)		
 			return
-		if dict["current_round"] == 3:
-			dict["match_stage"] == "ending"
-			_end_match_prefunction(dict)
+		if dict["match_stage"] == "game":
+			var round_timer = get_node(str(dict["timers_node_name"]) + "/RoundTimer")
+			round_timer.start(round_time)
+			dict["match_stage"] = "score"
+			await round_timer.timeout
+			var winner = _end_game(dict)
+			var string = "round" + str(dict["current_round"] + 1) + "winner" # this is to register into the dictionary who won each round.
+			dict[string] = winner
+			print(dict)
+			rpc_id(dict["player_one_peer_id"], "_end_game", dict)
+			rpc_id(dict["player_two_peer_id"], "_end_game", dict)
 			return
-		rpc_id(dict["player_one_peer_id"], "_show_rules", dict)
-		rpc_id(dict["player_two_peer_id"], "_show_rules", dict)		
+		if dict["match_stage"] == "score":
+			var score_timer = get_node(str(dict["timers_node_name"]) + "/ScoreTimer") 
+			score_timer.start(score_time)
+			dict["current_round"] += 1
+			dict["match_stage"] = "rules"
+			await score_timer.timeout
+			if dict["current_round"] == 2 and dict["round1winner"] == dict["round2winner"]: # if someone wins the first two games
+				dict["match_stage"] == "ending"
+				_end_match_prefunction(dict)
+				return
+			if dict["current_round"] == 3:
+				dict["match_stage"] == "ending"
+				_end_match_prefunction(dict)
+				return
+			rpc_id(dict["player_one_peer_id"], "_show_rules", dict)
+			rpc_id(dict["player_two_peer_id"], "_show_rules", dict)		
+			return
 		return
-	return
 
 
 @rpc("any_peer", "call_remote", "reliable")	
@@ -202,9 +204,7 @@ func _end_match_prefunction(dict):
 	var timers_node = get_node(str(dict["timers_node_name"]))
 	match_container.queue_free()
 	timers_node.queue_free()
-	_determine_match_winner(dict)
-	#rpc_id(dict["player_one_peer_id"], "_end_match", dict)
-	#rpc_id(dict["player_two_peer_id"], "_end_match", dict)				
+	_determine_match_winner(dict)	
 	print("match over")
 	match_ended.emit(dict)
 	pass
@@ -247,4 +247,31 @@ func _skip_rules_pressed(dict):
 			dict["rules_skipped"] = true
 	_match_runner(dict)	
 	
+	pass
+
+func _disconnect_handler(dict, disconnected_player_peer_id):
+	var connected_player_peer_id
+	var connected_player_player_number
+	if disconnected_player_peer_id == dict["player_one_peer_id"]:
+		connected_player_peer_id = dict["player_two_peer_id"]
+		connected_player_player_number = "two"
+	else:
+		connected_player_peer_id = dict["player_one_peer_id"]
+		connected_player_player_number = "one"
+	# following here will be making it so the still connected player automatically wins the match and gets all the round end rewards. 
+		dict["match_winner"] = connected_player_player_number
+	dict["end_by_disconnection"] = true
+	dict["current_round"] = 3
+	dict["round1winner"] = str(connected_player_player_number)
+	dict["round2winner"] = str(connected_player_player_number)
+	dict["round3winner"] = str(connected_player_player_number)
+	_end_match_prefunction(dict)
+	for i in serverhost.running_matches:
+		if i["match_node_name"] == dict["match_node_name"]:
+			serverhost.running_matches.erase(i)
+	rpc_id(connected_player_peer_id, "_on_opponent_disconnected", dict)
+	pass
+
+@rpc("any_peer", "call_remote", "reliable")
+func _on_opponent_disconnected(dict):
 	pass

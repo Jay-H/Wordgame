@@ -59,25 +59,27 @@ func _show_rules(dict):
 
 @rpc("authority", "call_remote", "reliable")	
 func _start_game(dict):
-	await main_menu._fade_out_rules_screen()
-	var game
-	var match_container = get_node(str(dict["match_node_name"]))
-	if match_container.get_children().size() == 1:
-		return
-	if dict["selected_games"][dict["current_round"]].contains("Scramble"):
-		game = load("res://data/scenes_and_scripts/scramble/scramble_client_scene.tscn")
-	if dict["selected_games"][dict["current_round"]].contains("Wordsearch"):
-		game = load("res://data/scenes_and_scripts/wordsearch/WordSearch.tscn")
-	var game_instance = game.instantiate()
-	game_instance._initialize(dict)
-	#game_instance.name = str(dict["player_one_dictionary"]["email"]) + str(dict["player_two_dictionary"]["email"]) 
-	current_match_node = game_instance
-	if my_player_number == "one":
-		rpc_id(1, "_match_runner", dict)	
-	
-	
-	match_container.add_child(game_instance)
-	pass
+	if main_menu.opponent_disconnected == false:
+		await main_menu._fade_out_rules_screen()
+		var game
+		var match_container = get_node(str(dict["match_node_name"]))
+		if match_container != null:
+			if match_container.get_children().size() == 1:
+				return
+		if dict["selected_games"][dict["current_round"]].contains("Scramble"):
+			game = load("res://data/scenes_and_scripts/scramble/scramble_client_scene.tscn")
+		if dict["selected_games"][dict["current_round"]].contains("Wordsearch"):
+			game = load("res://data/scenes_and_scripts/wordsearch/WordSearch.tscn")
+		var game_instance = game.instantiate()
+		game_instance._initialize(dict)
+		#game_instance.name = str(dict["player_one_dictionary"]["email"]) + str(dict["player_two_dictionary"]["email"]) 
+		current_match_node = game_instance
+		if my_player_number == "one":
+			rpc_id(1, "_match_runner", dict)	
+		
+		if match_container != null:
+			match_container.add_child(game_instance)
+		pass
 
 @rpc("authority", "call_remote", "reliable")	
 func _end_game(dict):
@@ -92,8 +94,18 @@ func _end_game(dict):
 
 @rpc("authority", "call_remote", "reliable")	
 func _end_match(dict):
+	if dict["end_by_disconnection"]:
+		for i in get_children():
+			i.queue_free()
+		await main_menu._match_over_screen(dict)
+		
+		return
 	for i in get_children():
 		i.queue_free()
+
+		
+		
+	
 	await main_menu._fade_out_score_screen(dict)
 	main_menu._match_over_screen(dict)
 	pass
@@ -102,4 +114,9 @@ func _end_match(dict):
 @rpc("authority", "call_remote", "reliable")	
 func _skip_rules_pressed(dict): # this is from the score screen -- > main menu by signal --> to here by direct call
 	rpc_id(1, "_skip_rules_pressed", dict)
+	pass
+
+@rpc("authority", "call_remote", "reliable")
+func _on_opponent_disconnected(dict):
+	main_menu.opponent_disconnected = true
 	pass

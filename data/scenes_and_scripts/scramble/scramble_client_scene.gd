@@ -30,6 +30,11 @@ var GMajorChords = []
 var current_background = ""
 var blocker_faded = false
 var shadows_enabled = false
+var tie_game = false
+var tie_cycles 
+var tie_animations_running = false
+var sun_color = Color(1.0, 0.902, 0.502)
+
 
 func _ready():
 	#username = arguments[1]
@@ -52,7 +57,17 @@ func _process(delta):
 
 	%CurrentWord.text = current_chosen_letters_string
 	if big_dictionary.has("Server Time Left"):
-		%GameTimerLabel.text = str(big_dictionary["Server Time Left"])
+		if tie_game == false:
+			%GameTimerLabel.text = str(big_dictionary["Server Time Left"])
+		else:
+			%GameTimerLabel.add_theme_font_size_override("font_size", 100)
+			%GameTimerLabel.text = "TIE GAME, OVERTIME!"
+			
+			if tie_animations_running == false:
+				tie_game_pulse()
+				tie_game_cloudscape()
+				tie_animations_running = true
+			
 	if bonus_variant == true:
 		if big_dictionary.has("Bonus Time Value") and big_dictionary.has("Bonus Letter Value"):
 			%BonusScore.text = str(big_dictionary["Bonus Time Value"]) + " + " + str(big_dictionary["Bonus Letter Value"])
@@ -93,7 +108,7 @@ func letter_collector(letter, letternode, bonus): #updates the current chosen le
 	
 	if bonus:
 		bonus_pressed = true
-		print("bonus pressed")
+		
 	mini_score_display()
 	
 
@@ -293,7 +308,8 @@ func _on_shuffle_pressed():
 @rpc("any_peer", "call_local")
 func remote_tester():
 	if big_dictionary.has(["Parent"]):
-		print(big_dictionary["Parent"])
+		#print(big_dictionary["Parent"])
+		pass
 	pass
 	
 func _on_submit_pressed():
@@ -326,12 +342,15 @@ func _on_bonus_letter_pressed() -> void:
 func show_obscurity_popup():
 	# 1. Create and style the Label
 	if obscurity_variant:
+		print("obsc variant")
 		var obscurity
 		if big_dictionary.has("Player One Last Obscurity Value") and big_dictionary.has("Player Two Last Obscurity Value"):
 			if is_player_one == true:
 				obscurity = big_dictionary["Player One Last Obscurity Value"]
+				print(obscurity)
 			if is_player_two == true:
 				obscurity = big_dictionary["Player Two Last Obscurity Value"]
+				print(obscurity)
 		var label = Label.new()
 		if obscurity != null:
 			label.text = "Obscurity = %s/10" % obscurity
@@ -344,25 +363,24 @@ func show_obscurity_popup():
 			#label.label_settings = outline
 			
 			# 2. Add to scene and wait one frame for its size to be calculated
-			add_child(label)
+			%GameScore.add_child(label)
 			await get_tree().process_frame
+
+		
 			
-			
-			# 3. Calculate start and end positions
-			var screen_size = get_viewport_rect().size
-			var label_size = label.size
-			
-			var start_pos = screen_size/2 - label.size/2 
-			var end_pos = Vector2((screen_size.x - label_size.x) / 2, screen_size.y * 0.2)
+			label.position = label.size/2
+			var start_pos = label.position 
+			var end_pos = label.position
+			end_pos.y -= 300
 			
 			# 4. Set initial state (invisible and at the start position)
-			label.global_position = start_pos
+			
 			label.modulate.a = 0.0
 			
 			# 5. Create and run animations
 			# This tween handles the movement over 1 second
 			var move_tween = create_tween()
-			move_tween.tween_property(label, "global_position", end_pos, 1.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+			move_tween.tween_property(label, "position", end_pos, 1.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 			
 			# This tween handles the fade-in and fade-out sequence
 			var fade_tween = create_tween()
@@ -371,6 +389,8 @@ func show_obscurity_popup():
 			
 			# 6. Clean up the label after the animation is done
 			await fade_tween.finished
+
+			
 			label.queue_free()
 	else:
 		return
@@ -382,7 +402,7 @@ func wrong_word_display():
 	sun_tween.parallel().tween_property(%Sun, "material:shader_parameter/edge_softness", 0.25, 0.5)
 	sun_tween.parallel().tween_property(%Sun, "material:shader_parameter/sun_color", Color.PALE_VIOLET_RED, 0.5)	
 	sun_tween.chain().tween_property(%Sun, "material:shader_parameter/edge_softness", 0.419, 0.5)
-	sun_tween.parallel().tween_property(%Sun, "material:shader_parameter/sun_color", Color(1.0, 0.902, 0.502), 0.5)		
+	sun_tween.parallel().tween_property(%Sun, "material:shader_parameter/sun_color", sun_color, 0.5)		
 	
 	var jupiter_tween = create_tween()
 	jupiter_tween.tween_property(%Jupiter4, "material:shader_parameter/band_A_color_2", Color.PALE_VIOLET_RED, 0.5)
@@ -465,36 +485,86 @@ func fade_out():
 
 @rpc("authority", "call_local")
 func wonder_game_ender(winner_user_id):
-	big_word_event()
-	var nodes_to_move = [%Submit, %Clear, %Shuffle, %BonusLetter, %BonusScore, %BonusReminder, %GameTimerLabel, %GameScore, %MiniScore]
+	#big_word_event()
+	var nodes_to_move = [%Submit, %Clear, %Shuffle, %BonusLetter, %BonusScore, %BonusReminder, %GameTimerLabel, %GameScore, %MiniScore, %HBoxContainer]
 	var nodes_to_disable = [%LetterContainer, %Submit, %Clear, %Shuffle, %BonusLetter]
 	for x in %LetterContainer.get_children():
 		nodes_to_disable.append(x)
 	for i in nodes_to_disable:
 		i.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	if winner_user_id == user_id:
-		pass
+		var sun_tween = create_tween()
+		%Sun.pivot_offset = %Sun.size/2
+		sun_tween.set_ease(Tween.EASE_IN)
+		sun_tween.parallel().tween_property(%Sun, "material:shader_parameter/sun_color", Color.DARK_GREEN, 2)
+		sun_tween.parallel().tween_property(%Sun, "scale", Vector2(7,7), 5)
+		sun_tween.parallel().tween_property(%LetterContainer, "modulate", Color.TRANSPARENT, 1)
+		sun_tween.chain().tween_property(%Sun, "material:shader_parameter/sun_color", Color.WHITE, 2)		
+		
+		for i in nodes_to_move:
+			var tween2 = create_tween()
+			tween2.set_ease(Tween.EASE_IN_OUT)
+			tween2.set_trans(Tween.TRANS_SINE)
+			var target_position = Vector2(i.position.x, i.position.y - 3000)
+			
+			tween2.tween_property(i, "position", target_position, 3)
+		var big_label = Label.new()
+		big_label.add_theme_font_size_override("font_size", 300)
+		big_label.add_theme_font_override("font", load("res://data/fonts/elmora-classica/Elmora Classica.otf"))
+		big_label.set_anchors_preset(Control.PRESET_CENTER)
+		big_label.text = "Wonderful!"
+		big_label.add_theme_color_override("font_color", Color.DARK_GOLDENROD)
+		big_label.modulate = Color.TRANSPARENT
+		big_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		
+		$CanvasLayer.add_child(big_label)
+		big_label.pivot_offset = big_label.size/2
+		big_label.position -= big_label.size/2
+		big_label.set_anchors_preset(Control.PRESET_CENTER)
+		var tween = create_tween()
+		tween.tween_property(big_label, "modulate", Color.WHITE, 3)
+		tween.parallel().tween_property(big_label, "scale", Vector2(1.2,1.2), 3)
 	if winner_user_id != user_id:
 		
 		var sun_tween = create_tween()
+		%Sun.pivot_offset = %Sun.size/2
 		sun_tween.set_ease(Tween.EASE_IN)
-		sun_tween.parallel().tween_property(%Sun, "material:shader_parameter/sun_color", Color.RED, 3)
-		sun_tween.parallel().tween_property(%Sun, "scale", Vector2(4,4), 3)
-		sun_tween.parallel().tween_property(%Sun, "position", Vector2(get_viewport_rect().size/2), 1)
+		sun_tween.parallel().tween_property(%Sun, "material:shader_parameter/sun_color", Color.DARK_RED, 3)
+		sun_tween.parallel().tween_property(%Sun, "scale", Vector2(7,7), 5)
 		sun_tween.parallel().tween_property(%LetterContainer, "modulate", Color.TRANSPARENT, 3)
-		sun_tween.parallel().tween_property(%HBoxContainer, "modulate", Color.TRANSPARENT, 3)
+		
 		for i in nodes_to_move:
-			i.pivot_offset = size/2
+			i.pivot_offset = i.size/2
 			var tween = create_tween()
 			tween.set_ease(Tween.EASE_IN_OUT)
+			tween.set_trans(Tween.TRANS_SINE)
 			var x_position = i.position.x
 			var y_position = i.position.y
 			var randomizer_x = randi_range(-300, 300)
 			var target_position = Vector2(x_position + randomizer_x , y_position + 3000)
 			var random_rotation = randf_range(-50, 50)
-			tween.tween_property(i, "position", target_position, 2 )
+			tween.tween_property(i, "position", target_position, 3 )
+			tween.parallel().tween_property(i, "modulate", Color.TRANSPARENT, 3)
 			tween.parallel().tween_property(i, "rotation", random_rotation, 4)
-			
+		for i in %LetterContainer.get_children():
+			var tween = create_tween()	
+			tween.tween_property(i, "scale", Vector2(0,0), 4)
+		var big_label = Label.new()
+		big_label.add_theme_font_size_override("font_size", 300)
+		big_label.add_theme_font_override("font", load("res://data/fonts/elmora-classica/Elmora Classica.otf"))
+		big_label.set_anchors_preset(Control.PRESET_CENTER)
+		big_label.text = "Terrible!"
+		big_label.add_theme_color_override("font_color", Color.DARK_GOLDENROD)
+		big_label.modulate = Color.TRANSPARENT
+		big_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		
+		$CanvasLayer.add_child(big_label)
+		big_label.pivot_offset = big_label.size/2
+		big_label.position -= big_label.size/2
+		big_label.set_anchors_preset(Control.PRESET_CENTER)
+		var tween = create_tween()
+		tween.tween_property(big_label, "modulate", Color.WHITE, 3)
+		tween.parallel().tween_property(big_label, "scale", Vector2(1.2,1.2), 3)
 		#for i in %CanvasLayer.get_children():
 			#print(i)
 			#
@@ -511,14 +581,26 @@ func wonder_game_ender(winner_user_id):
 func small_green_letters(letternode):
 	var letter_score = GlobalData.SCRABBLE_POINTS[letternode.text]
 	var label_node = Label.new()
+	var particles = (load("res://data/scenes_and_scripts/particles/small_green_particles.tscn").instantiate())
 	label_node.add_theme_font_size_override("font_size", 88)
 	label_node.add_theme_color_override("font_color", Color.GREEN)
 	letternode.add_child(label_node)
+	
+	
+	
+	
 	label_node.text = str(letter_score)
 	label_node.position += letternode.size/2
-	print(label_node, label_node.position)
+	var target_position = letternode.position
+	target_position.y -= 2000
+	target_position.x = 0
+
+	label_node.add_child(particles)
+	particles.position = label_node.size/2
+	
 	var tween = create_tween()
-	tween.parallel().tween_property(label_node, "position", Vector2((label_node.size.x/2) - 25,letternode.position.y - 150), 1)
+	tween.tween_property(label_node, "position", target_position, 1)
+	#tween.parallel().tween_property(label_node, "position", Vector2((label_node.size.x/2) - 25,letternode.position.y - 150), 1)
 	tween.parallel().tween_property(label_node, "modulate", Color.TRANSPARENT, 0.8)
 	await get_tree().create_timer(1).timeout
 	label_node.queue_free()
@@ -570,13 +652,15 @@ func shaker(number, i, duration = 0.2, repeats = 10):
 	
 @rpc("authority", "call_local")			
 func big_word_event():
-
+	if wonder_variant: # disallow in wonder variant, we have a different animation there
+		return
 
 	
 	#var shadows = [%SubmitShadow, %ClearShadow, %ShuffleShadow]
 	
 	for i in shakeables:
-		print(i)
+		
+		
 		shaker(20, i)	
 	
 
@@ -644,7 +728,7 @@ func valid_word_event():
 	sun_tween.parallel().tween_property(%Sun, "material:shader_parameter/edge_softness", 0.25, 0.5)
 	sun_tween.parallel().tween_property(%Sun, "material:shader_parameter/sun_color", Color.PALE_GREEN, 0.5)	
 	sun_tween.chain().tween_property(%Sun, "material:shader_parameter/edge_softness", 0.419, 0.5)
-	sun_tween.parallel().tween_property(%Sun, "material:shader_parameter/sun_color", Color(1.0, 0.902, 0.502), 0.5)		
+	sun_tween.parallel().tween_property(%Sun, "material:shader_parameter/sun_color", sun_color, 0.5)		
 	
 	var jupiter_tween = create_tween()
 	jupiter_tween.tween_property(%Jupiter4, "material:shader_parameter/band_A_color_2", Color(0.491, 0.585, 0.494), 0.5)
@@ -656,10 +740,20 @@ func valid_word_event():
 func _on_button_pressed() -> void:
 	#wrong_word_display()
 	#big_word_event()
-	big_dictionary["Player One Found Words"] = ["allan", "simon", "gary", "john", "chris", "mike", "allan", "simon", "gary"]
-	big_dictionary["Player Two Found Words"] = ["john", "chris", "mike", "john", "chris", "mike", "allan", "simon", "gary"]
-	big_dictionary["All Found Words"] = ["john", "chris", "mike", "allan", "simon", "gary", "john", "chris", "mike", "allan", "simon", "gary","john", "chris", "mike", "allan", "simon", "gary"]
-	found_words_populator()
+	
+	
+	#big_dictionary["Player One Found Words"] = ["allan", "simon", "gary", "john", "chris", "mike", "allan", "simon", "gary"]
+	#big_dictionary["Player Two Found Words"] = ["john", "chris", "mike", "john", "chris", "mike", "allan", "simon", "gary"]
+	#big_dictionary["All Found Words"] = ["john", "chris", "mike", "allan", "simon", "gary", "john", "chris", "mike", "allan", "simon", "gary","john", "chris", "mike", "allan", "simon", "gary"]
+	#found_words_populator()
+	#wonder_game_ender(user_id)
+	
+	tie_game = true
+	tie_game_pulse()
+	tie_game_cloudscape()
+	%GameTimerLabel.add_theme_font_size_override("font_size", 100)
+	%GameTimerLabel.text = "TIE GAME! OVERTIME!"
+	
 	pass # Replace with function body.
 
 func _initialize(dict):
@@ -678,3 +772,43 @@ func fade_blocker():
 	var tween = create_tween()
 	tween.tween_property(%Blocker, "modulate", Color.TRANSPARENT, 1)
 	
+@rpc("authority", "call_local", "reliable")			
+func tie_game_informer(tie_game_cycles):
+	tie_game = true
+	tie_cycles = tie_game_cycles
+	pass
+
+func tie_game_pulse():
+	
+	var tween = create_tween()
+	tween.set_loops()
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.set_trans(Tween.TRANS_SINE)
+	%GameTimerLabel.pivot_offset = %GameTimerLabel.size/2
+	%GameTimerLabel.add_theme_color_override("font_color", Color.FIREBRICK)
+	tween.tween_property(%GameTimerLabel, "scale", Vector2(0.75, 0.75), 0.5)
+	tween.chain().tween_property(%GameTimerLabel, "scale", Vector2(1, 1), 0.5)
+	pass
+
+func tie_game_cloudscape():
+	%Sun.pivot_offset = %Sun.size/2
+	var sun_tween = create_tween()
+	sun_tween.tween_property(%Sun, "material:shader_parameter/sun_color", Color.BLACK, 2)
+	sun_color = Color.BLACK
+	sun_tween.parallel().tween_property(%Sun, "scale", Vector2 (1.3, 1.3), 1)
+	if %Cloudscape1.visible == true:
+		
+		var cloud_tween = create_tween()
+		cloud_tween.set_ease(Tween.EASE_IN_OUT)
+		cloud_tween.set_trans(Tween.TRANS_SINE)
+		cloud_tween.tween_property(%Cloudscape1, "material:shader_parameter/sky_color", Color(1.0, 0.0, 0.0, 0.949), 2)
+		cloud_tween.parallel().tween_property(%Cloudscape1, "material:shader_parameter/cloud_color", Color(0.773, 0.573, 0.0), 2)
+		
+
+	pass
+
+
+func _on_button_2_pressed() -> void:
+	for i in %LetterContainer.get_children():
+		i.text = "A"
+	pass # Replace with function body.

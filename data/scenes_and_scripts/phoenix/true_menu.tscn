@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ny8idplgyu1s"]
+[gd_scene load_steps=26 format=3 uid="uid://ny8idplgyu1s"]
 
 [ext_resource type="Script" uid="uid://cpgbo42e7vse8" path="res://data/scenes_and_scripts/phoenix/true_menu.gd" id="1_mgwhk"]
 [ext_resource type="Shader" uid="uid://c14ncknun6c8h" path="res://data/scenes_and_scripts/scramble/cloudscape2.gdshader" id="2_7kx3w"]
@@ -10,6 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://bux67bkd2teot" path="res://data/images/Icons/SwitchOnBold128x128.png" id="8_cppe5"]
 [ext_resource type="Texture2D" uid="uid://lalidk0dce2g" path="res://data/images/Icons/SwitchOffBold128x128.png" id="9_mljia"]
 [ext_resource type="Texture2D" uid="uid://t71ul0257vc7" path="res://data/images/noun-finger-7180936.svg" id="10_mljia"]
+[ext_resource type="Script" uid="uid://cvo3flp0bxocd" path="res://data/scenes_and_scripts/phoenix/single_player_menu_items.gd" id="11_5ttty"]
+[ext_resource type="FontFile" uid="uid://cpavm8lp2mx3e" path="res://data/fonts/lcd/LCD2B___.TTF" id="12_aolt3"]
+[ext_resource type="PackedScene" uid="uid://bmm23rwsctf0d" path="res://data/scenes_and_scripts/multiplayertesting/piano_controller.tscn" id="13_w2506"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3eet2"]
 shader = ExtResource("2_7kx3w")
@@ -34,6 +37,8 @@ shader_parameter/fluctuation_speed = 1.644
 shader_parameter/edge_softness = 0.46
 shader_parameter/noise_intensity = 0.063
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mljia"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n284u"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
@@ -55,6 +60,35 @@ expand_margin_bottom = 20.0
 bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_83fcs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mljia"]
+bg_color = Color(0.878431, 0.87451, 0.992157, 0.356863)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 0)
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5ttty"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w2506"]
+bg_color = Color(0.899309, 0.800136, 1, 0.462745)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aolt3"]
+bg_color = Color(0.247059, 0, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
 
 [node name="TrueMenu" type="Control"]
 layout_mode = 3
@@ -162,6 +196,16 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_7kx3w")
 theme_override_font_sizes/font_size = 141
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_mljia")
 theme_override_styles/normal = SubResource("StyleBoxFlat_n284u")
 text = "find game."
 alignment = 0
@@ -171,6 +215,16 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_7kx3w")
 theme_override_font_sizes/font_size = 141
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_mljia")
 theme_override_styles/normal = SubResource("StyleBoxFlat_n284u")
 text = "settings."
 alignment = 0
@@ -180,6 +234,16 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_7kx3w")
 theme_override_font_sizes/font_size = 141
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_mljia")
 theme_override_styles/normal = SubResource("StyleBoxFlat_n284u")
 text = "single player."
 alignment = 0
@@ -189,27 +253,19 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_7kx3w")
 theme_override_font_sizes/font_size = 141
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_mljia")
 theme_override_styles/normal = SubResource("StyleBoxFlat_n284u")
 text = "profile."
 alignment = 0
-
-[node name="cjenterprises" type="Label" parent="CanvasLayer"]
-unique_name_in_owner = true
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -400.0
-offset_top = -74.0
-offset_right = -85.0
-offset_bottom = -85.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_7kx3w")
-theme_override_font_sizes/font_size = 66
-text = "CJ Enterprises."
 
 [node name="ProfileMenuItems" type="Control" parent="CanvasLayer"]
 unique_name_in_owner = true
@@ -604,8 +660,532 @@ theme_override_font_sizes/font_size = 146
 text = "Settings"
 horizontal_alignment = 1
 
+[node name="SinglePlayerMenuItems" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+grow_vertical = 2
+script = ExtResource("11_5ttty")
+
+[node name="BackButton2" type="Button" parent="CanvasLayer/SinglePlayerMenuItems"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 86.0
+offset_top = 1271.0
+offset_right = 668.0
+offset_bottom = 1362.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 66
+theme_override_styles/normal = SubResource("StyleBoxFlat_2jwjy")
+text = "back to menu."
+
+[node name="TitlePanel" type="Panel" parent="CanvasLayer/SinglePlayerMenuItems"]
+layout_mode = 0
+offset_left = 73.0
+offset_top = -1276.0
+offset_right = 1238.0
+offset_bottom = -1043.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_mljia")
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/SinglePlayerMenuItems/TitlePanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -383.5
+offset_top = -92.5
+offset_right = 416.5
+offset_bottom = 74.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.463365, 0.549187, 0.722637, 1)
+theme_override_fonts/font = ExtResource("3_7kx3w")
+theme_override_font_sizes/font_size = 150
+text = "single player."
+horizontal_alignment = 1
+
+[node name="GamePanel" type="Panel" parent="CanvasLayer/SinglePlayerMenuItems"]
+layout_mode = 0
+offset_left = 53.0
+offset_top = -882.0
+offset_right = 772.0
+offset_bottom = -543.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_mljia")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/SinglePlayerMenuItems/GamePanel"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 91.0
+offset_right = 151.0
+offset_bottom = 255.0
+texture = ExtResource("10_mljia")
+expand_mode = 1
+
+[node name="GameButton" type="Button" parent="CanvasLayer/SinglePlayerMenuItems/GamePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5ttty")
+
+[node name="Label" type="Label" parent="CanvasLayer/SinglePlayerMenuItems/GamePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -94.5
+offset_top = -103.5
+offset_right = 230.5
+offset_bottom = 63.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.463365, 0.549187, 0.722637, 1)
+theme_override_fonts/font = ExtResource("3_7kx3w")
+theme_override_font_sizes/font_size = 150
+text = "game"
+horizontal_alignment = 1
+
+[node name="WordsearchPanel" type="Panel" parent="CanvasLayer/SinglePlayerMenuItems"]
+visible = false
+layout_mode = 0
+offset_left = 242.0
+offset_top = -469.0
+offset_right = 1162.0
+offset_bottom = -279.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_mljia")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/SinglePlayerMenuItems/WordsearchPanel"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 14.0
+offset_right = 151.0
+offset_bottom = 178.0
+texture = ExtResource("10_mljia")
+expand_mode = 1
+
+[node name="WordsearchButton" type="Button" parent="CanvasLayer/SinglePlayerMenuItems/WordsearchPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5ttty")
+
+[node name="Label" type="Label" parent="CanvasLayer/SinglePlayerMenuItems/WordsearchPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -279.0
+offset_top = -93.0
+offset_right = 412.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.463365, 0.549187, 0.722637, 1)
+theme_override_fonts/font = ExtResource("3_7kx3w")
+theme_override_font_sizes/font_size = 150
+text = "wordsearch"
+horizontal_alignment = 1
+
+[node name="ScramblePanel" type="Panel" parent="CanvasLayer/SinglePlayerMenuItems"]
+visible = false
+layout_mode = 0
+offset_left = 245.0
+offset_top = -207.0
+offset_right = 1165.0
+offset_bottom = -17.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_mljia")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/SinglePlayerMenuItems/ScramblePanel"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 15.0
+offset_right = 160.0
+offset_bottom = 179.0
+texture = ExtResource("10_mljia")
+expand_mode = 1
+
+[node name="ScrambleButton" type="Button" parent="CanvasLayer/SinglePlayerMenuItems/ScramblePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5ttty")
+
+[node name="Label" type="Label" parent="CanvasLayer/SinglePlayerMenuItems/ScramblePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -202.0
+offset_top = -92.0
+offset_right = 339.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.463365, 0.549187, 0.722637, 1)
+theme_override_fonts/font = ExtResource("3_7kx3w")
+theme_override_font_sizes/font_size = 150
+text = "scramble"
+horizontal_alignment = 1
+
+[node name="VariantsPanel" type="Panel" parent="CanvasLayer/SinglePlayerMenuItems"]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 45.0
+offset_right = 772.0
+offset_bottom = 384.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_mljia")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/SinglePlayerMenuItems/VariantsPanel"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 100.0
+offset_right = 151.0
+offset_bottom = 264.0
+texture = ExtResource("10_mljia")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/SinglePlayerMenuItems/VariantsPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -163.5
+offset_top = -89.5
+offset_right = 311.5
+offset_bottom = 77.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.463365, 0.549187, 0.722637, 1)
+theme_override_fonts/font = ExtResource("3_7kx3w")
+theme_override_font_sizes/font_size = 150
+text = "variants"
+horizontal_alignment = 1
+
+[node name="VariantsButton" type="Button" parent="CanvasLayer/SinglePlayerMenuItems/VariantsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5ttty")
+
+[node name="StartPanel" type="Panel" parent="CanvasLayer/SinglePlayerMenuItems"]
+visible = false
+layout_mode = 0
+offset_left = 306.0
+offset_top = 708.0
+offset_right = 1031.0
+offset_bottom = 1047.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_mljia")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/SinglePlayerMenuItems/StartPanel"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 100.0
+offset_right = 151.0
+offset_bottom = 264.0
+texture = ExtResource("10_mljia")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/SinglePlayerMenuItems/StartPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.5
+offset_top = -101.5
+offset_right = 157.5
+offset_bottom = 65.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.463365, 0.549187, 0.722637, 1)
+theme_override_fonts/font = ExtResource("3_7kx3w")
+theme_override_font_sizes/font_size = 150
+text = "start"
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="CanvasLayer/SinglePlayerMenuItems/StartPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_5ttty")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5ttty")
+
+[node name="ScrambleVariantsMenu" type="Panel" parent="CanvasLayer/SinglePlayerMenuItems"]
+visible = false
+layout_mode = 0
+offset_left = 142.0
+offset_top = 428.0
+offset_right = 1187.0
+offset_bottom = 1216.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_mljia")
+
+[node name="RecordScore" type="CheckButton" parent="CanvasLayer/SinglePlayerMenuItems/ScrambleVariantsMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 706.0
+offset_top = 71.0
+offset_right = 934.0
+offset_bottom = 193.0
+theme_override_icons/checked = ExtResource("8_cppe5")
+theme_override_icons/unchecked = ExtResource("9_mljia")
+
+[node name="WordList" type="CheckButton" parent="CanvasLayer/SinglePlayerMenuItems/ScrambleVariantsMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 710.0
+offset_top = 226.0
+offset_right = 938.0
+offset_bottom = 348.0
+theme_override_icons/checked = ExtResource("8_cppe5")
+theme_override_icons/unchecked = ExtResource("9_mljia")
+
+[node name="SevenEnsure" type="CheckButton" parent="CanvasLayer/SinglePlayerMenuItems/ScrambleVariantsMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 709.0
+offset_top = 437.0
+offset_right = 937.0
+offset_bottom = 559.0
+theme_override_icons/checked = ExtResource("8_cppe5")
+theme_override_icons/unchecked = ExtResource("9_mljia")
+
+[node name="TimeLimit" type="CheckButton" parent="CanvasLayer/SinglePlayerMenuItems/ScrambleVariantsMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 715.0
+offset_top = 630.0
+offset_right = 943.0
+offset_bottom = 752.0
+theme_override_icons/checked = ExtResource("8_cppe5")
+theme_override_icons/unchecked = ExtResource("9_mljia")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/SinglePlayerMenuItems/ScrambleVariantsMenu"]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 68.0
+offset_right = 763.0
+offset_bottom = 751.0
+theme_override_constants/separation = 40
+
+[node name="Label" type="Label" parent="CanvasLayer/SinglePlayerMenuItems/ScrambleVariantsMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.489834, 0.654025, 1, 1)
+theme_override_fonts/font = ExtResource("3_7kx3w")
+theme_override_font_sizes/font_size = 100
+text = "record score"
+
+[node name="Label2" type="Label" parent="CanvasLayer/SinglePlayerMenuItems/ScrambleVariantsMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.489834, 0.654025, 1, 1)
+theme_override_fonts/font = ExtResource("3_7kx3w")
+theme_override_font_sizes/font_size = 100
+text = "word list"
+
+[node name="Label3" type="Label" parent="CanvasLayer/SinglePlayerMenuItems/ScrambleVariantsMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.489834, 0.654025, 1, 1)
+theme_override_fonts/font = ExtResource("3_7kx3w")
+theme_override_font_sizes/font_size = 100
+text = "ensure seven
+letter word"
+
+[node name="Label4" type="Label" parent="CanvasLayer/SinglePlayerMenuItems/ScrambleVariantsMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.489834, 0.654025, 1, 1)
+theme_override_fonts/font = ExtResource("3_7kx3w")
+theme_override_font_sizes/font_size = 100
+text = "time limit"
+
+[node name="TimeLimitLabel" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+offset_left = 725.0
+offset_top = 2152.0
+offset_right = 1039.0
+offset_bottom = 2337.0
+theme_override_fonts/font = ExtResource("12_aolt3")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = SubResource("StyleBoxFlat_w2506")
+text = "999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpButton" type="Button" parent="CanvasLayer/TimeLimitLabel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 41.0
+offset_top = -124.0
+offset_right = 268.0
+offset_bottom = -19.0
+theme_override_fonts/font = ExtResource("12_aolt3")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_aolt3")
+text = "more."
+
+[node name="DownButton" type="Button" parent="CanvasLayer/TimeLimitLabel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 47.0
+offset_top = 205.0
+offset_right = 274.0
+offset_bottom = 310.0
+theme_override_fonts/font = ExtResource("12_aolt3")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_aolt3")
+text = "less."
+
+[node name="ConfirmButton" type="Button" parent="CanvasLayer/TimeLimitLabel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 334.0
+offset_top = 32.0
+offset_right = 547.0
+offset_bottom = 148.0
+theme_override_fonts/font = ExtResource("12_aolt3")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_aolt3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_aolt3")
+text = "confirm."
+clip_text = true
+
+[node name="cjenterprises" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -485.0
+offset_top = -159.0
+offset_right = -85.0
+offset_bottom = -85.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_7kx3w")
+theme_override_font_sizes/font_size = 66
+text = "CJ Enterprises."
+
+[node name="PianoController" parent="." instance=ExtResource("13_w2506")]
+unique_name_in_owner = true
+layout_mode = 1
+
 [connection signal="pressed" from="CanvasLayer/MainMenuItems/MainMenuBox/FindGame" to="." method="_on_find_game_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenuItems/MainMenuBox/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenuItems/MainMenuBox/SinglePlayer" to="." method="_on_single_player_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenuItems/MainMenuBox/Profile" to="." method="_on_profile_pressed"]
 [connection signal="pressed" from="CanvasLayer/ProfileMenuItems/BackButton" to="CanvasLayer/ProfileMenuItems" method="_on_back_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/ProfileMenuItems/VBoxContainer2/VBoxContainer2/ChangeUsername" to="." method="_on_change_username_pressed"]
@@ -615,3 +1195,16 @@ horizontal_alignment = 1
 [connection signal="toggled" from="CanvasLayer/SettingsMenuItems/SettingsBox/AutoSkipRulesSwitch" to="." method="_on_auto_skip_rules_switch_toggled"]
 [connection signal="toggled" from="CanvasLayer/SettingsMenuItems/SettingsBox/LowGraphicsSwitch" to="." method="_on_low_graphics_switch_toggled"]
 [connection signal="pressed" from="CanvasLayer/SettingsMenuItems/BackButton" to="CanvasLayer/SettingsMenuItems" method="_on_back_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/SinglePlayerMenuItems/BackButton2" to="CanvasLayer/SinglePlayerMenuItems" method="_on_back_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/SinglePlayerMenuItems/GamePanel/GameButton" to="CanvasLayer/SinglePlayerMenuItems" method="_on_game_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/SinglePlayerMenuItems/WordsearchPanel/WordsearchButton" to="CanvasLayer/SinglePlayerMenuItems" method="_on_wordsearch_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/SinglePlayerMenuItems/ScramblePanel/ScrambleButton" to="CanvasLayer/SinglePlayerMenuItems" method="_on_scramble_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/SinglePlayerMenuItems/VariantsPanel/VariantsButton" to="CanvasLayer/SinglePlayerMenuItems" method="_on_variants_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/SinglePlayerMenuItems/StartPanel/StartButton" to="CanvasLayer/SinglePlayerMenuItems" method="_on_start_button_pressed"]
+[connection signal="toggled" from="CanvasLayer/SinglePlayerMenuItems/ScrambleVariantsMenu/RecordScore" to="CanvasLayer/SinglePlayerMenuItems" method="_on_record_score_toggled"]
+[connection signal="toggled" from="CanvasLayer/SinglePlayerMenuItems/ScrambleVariantsMenu/WordList" to="CanvasLayer/SinglePlayerMenuItems" method="_on_word_list_toggled"]
+[connection signal="toggled" from="CanvasLayer/SinglePlayerMenuItems/ScrambleVariantsMenu/SevenEnsure" to="CanvasLayer/SinglePlayerMenuItems" method="_on_seven_ensure_toggled"]
+[connection signal="toggled" from="CanvasLayer/SinglePlayerMenuItems/ScrambleVariantsMenu/TimeLimit" to="CanvasLayer/SinglePlayerMenuItems" method="_on_time_limit_toggled"]
+[connection signal="pressed" from="CanvasLayer/TimeLimitLabel/UpButton" to="CanvasLayer/SinglePlayerMenuItems" method="_on_up_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/TimeLimitLabel/DownButton" to="CanvasLayer/SinglePlayerMenuItems" method="_on_down_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/TimeLimitLabel/ConfirmButton" to="CanvasLayer/SinglePlayerMenuItems" method="_on_confirm_button_pressed"]

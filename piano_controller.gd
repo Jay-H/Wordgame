@@ -71,5 +71,6 @@ func play_random_note():
 		#counter = 0
 
 func play_random_chord():
-	play_random_note()
+	g_major_chords[randi_range(0, (g_major_chords.size()-1))].play()
+	#play_random_note()
 	#g_major_chords[randi_range(0, (g_major_chords.size()-1))].play()

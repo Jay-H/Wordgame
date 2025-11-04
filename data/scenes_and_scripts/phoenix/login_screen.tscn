@@ -200,16 +200,31 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 script = ExtResource("4_wk1ki")
+
+[node name="Label3" type="Label" parent="CanvasLayer/SplashScreen"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 206.0
+offset_top = 2036.0
+offset_right = 1097.0
+offset_bottom = 2264.0
+theme_override_colors/font_color = Color(0.438889, 0.299364, 2.40654e-07, 1)
+theme_override_fonts/font = ExtResource("4_w6vpo")
+theme_override_font_sizes/font_size = 106
+text = "headphones
+ recommended"
+horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="CanvasLayer/SplashScreen"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 239.0
-offset_top = 669.0
-offset_right = 1130.0
-offset_bottom = 960.0
+offset_left = 233.0
+offset_top = 383.0
+offset_right = 1124.0
+offset_bottom = 674.0
 theme_override_colors/font_color = Color(0.438889, 0.299364, 2.40654e-07, 1)
 theme_override_fonts/font = ExtResource("4_w6vpo")
 theme_override_font_sizes/font_size = 106
@@ -221,10 +236,10 @@ horizontal_alignment = 1
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/SplashScreen"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 355.0
-offset_top = 1773.0
-offset_right = 997.0
-offset_bottom = 2360.0
+offset_left = 336.0
+offset_top = 1214.0
+offset_right = 978.0
+offset_bottom = 1801.0
 mouse_filter = 0
 texture = ExtResource("5_wk1ki")
 expand_mode = 1
@@ -244,15 +259,15 @@ horizontal_alignment = 1
 
 [node name="Label" type="Label" parent="CanvasLayer/SplashScreen/TextureRect"]
 layout_mode = 0
-offset_left = -41.0
-offset_top = 127.0
-offset_right = 663.0
-offset_bottom = 418.0
+offset_left = -44.0
+offset_top = 99.0
+offset_right = 660.0
+offset_bottom = 390.0
 mouse_filter = 0
 theme_override_colors/font_color = Color(0.438889, 0.299364, 2.40654e-07, 1)
 theme_override_fonts/font = ExtResource("4_w6vpo")
 theme_override_font_sizes/font_size = 106
-text = "encephalon
+text = "Cortex
 Stochastic
 Anti-cheat"
 horizontal_alignment = 1

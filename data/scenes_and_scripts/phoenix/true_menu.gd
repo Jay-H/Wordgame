@@ -26,6 +26,8 @@ func _ready():
 	%Hider.color = Color.WHITE
 	visible = false
 	%MainMenuBox.modulate = Color.TRANSPARENT
+	%PlayersOnline.modulate = Color.TRANSPARENT
+	%MatchesRunning.modulate = Color.TRANSPARENT
 	var initial_position = %MainMenuBox.global_position
 	%MainMenuBox.position.x = initial_position.x - 1000
 	var tween = create_tween()
@@ -33,8 +35,10 @@ func _ready():
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.tween_property(%MainMenuBox, "position", initial_position, 2)
 	tween.parallel().tween_property(%MainMenuBox, "modulate", Color.WHITE, 2)
-	
+	tween.parallel().tween_property(%PlayersOnline, "modulate", Color.WHITE, 2)
+	tween.parallel().tween_property(%MatchesRunning, "modulate", Color.WHITE, 2)
 func fade_in():
+	%Hider.color = Color.WHITE
 	visible = true
 	var tween = create_tween()
 	tween.tween_property(%Hider, "color", Color.TRANSPARENT, 1)
@@ -44,7 +48,9 @@ func _fade_out():
 	visible = true
 	var tween = create_tween()
 	tween.tween_property(%CanvasModulate, "color", Color.TRANSPARENT, 1)
+	
 	await tween.finished
+	
 	return
 	
 func _on_profile_pressed() -> void:
@@ -132,3 +138,14 @@ func _on_low_graphics_switch_toggled(toggled_on: bool) -> void:
 	if not toggled_on:
 		low_graphics_disabled.emit()
 	pass # Replace with function body.
+
+
+func _on_single_player_pressed() -> void:
+	await %MainMenuItems._fade_out()
+	%SinglePlayerMenuItems._fade_in()
+	pass # Replace with function body.
+
+
+func _single_player_start(parameters):
+	main_menu._start_single_player_game(parameters)
+	pass

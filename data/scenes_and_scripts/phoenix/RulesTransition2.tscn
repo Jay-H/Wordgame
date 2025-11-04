@@ -1,9 +1,11 @@
-[gd_scene load_steps=39 format=3 uid="uid://b1vxbjebmqv4"]
+[gd_scene load_steps=38 format=3 uid="uid://b1vxbjebmqv4"]
 
 [ext_resource type="Script" uid="uid://6s57fl1722kj" path="res://data/scenes_and_scripts/phoenix/rules_transition_2.gd" id="1_ylin2"]
 [ext_resource type="Texture2D" uid="uid://dkuq8lxub8gf1" path="res://data/images/BlurredCircleParticle.png" id="3_3xjcr"]
+[ext_resource type="StyleBox" uid="uid://cko0rnujhddvu" path="res://data/scenes_and_scripts/phoenix/rulestransitionpanels.tres" id="3_cxpsr"]
 [ext_resource type="Shader" uid="uid://cqqkik0yqdnto" path="res://data/scenes_and_scripts/scramble/ScrambleWord.gdshader" id="3_hhy1a"]
 [ext_resource type="PackedScene" uid="uid://dptsatxug1hhb" path="res://data/scenes_and_scripts/multiplayertesting/profile_picture.tscn" id="3_vlgv7"]
+[ext_resource type="StyleBox" uid="uid://oebjvbrtcsc5" path="res://data/scenes_and_scripts/phoenix/RulesTransition2.tres" id="3_ylin2"]
 [ext_resource type="FontFile" uid="uid://bhvt5rw7k2iwk" path="res://data/fonts/OtherFonts/HARLOWSI_1.TTF" id="4_ype3i"]
 [ext_resource type="Script" uid="uid://dofoc2faacmyb" path="res://data/scenes_and_scripts/scramble/scramble_rules.gd" id="5_e4uby"]
 [ext_resource type="FontFile" uid="uid://ls1tsnsgjmae" path="res://data/fonts/microbrew-one/Microbrew One 3D.otf" id="6_j0qn1"]
@@ -16,8 +18,48 @@
 [ext_resource type="FontFile" uid="uid://dskmx2extevrw" path="res://data/fonts/times.ttf" id="16_3xjcr"]
 [ext_resource type="Texture2D" uid="uid://t71ul0257vc7" path="res://data/images/noun-finger-7180936.svg" id="16_85b3d"]
 [ext_resource type="Script" uid="uid://il2ri3xxjue5" path="res://data/scenes_and_scripts/scramble/texture_rect_2.gd" id="17_3ylq5"]
-[ext_resource type="Texture2D" uid="uid://bqvnhvhw8pmxa" path="res://data/images/Icons/Untitled-1.png" id="18_medsp"]
-[ext_resource type="Script" uid="uid://dnrccy0okwqn7" path="res://data/scenes_and_scripts/scramble/close_button.gd" id="19_nfw8r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wp2ep"]
+resource_local_to_scene = true
+shader = ExtResource("3_hhy1a")
+shader_parameter/color1 = Color(0.907457, 0.71582, 1, 1)
+shader_parameter/color2 = Color(0.417167, 0.727298, 1, 1)
+shader_parameter/color3 = Color(0.378377, 0.313947, 0.399109, 1)
+shader_parameter/speed = 1.06
+shader_parameter/width = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4nuvn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gnjvv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hw73j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_erf32"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0cwjb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0t4pt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7ojfp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ochjx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_85b3d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3ylq5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_medsp"]
+bg_color = Color(0.729412, 0.815686, 0.815686, 0)
+draw_center = false
+border_color = Color(0, 0, 0, 0)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+expand_margin_left = 25.0
+expand_margin_top = 25.0
+expand_margin_right = 25.0
+expand_margin_bottom = 25.0
 
 [sub_resource type="Curve" id="Curve_ylin2"]
 _data = [Vector2(0.244, 0), 0.0, 0.0, 0, 0, Vector2(0.86, 0.977929), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -57,59 +99,6 @@ turbulence_initial_displacement_min = 53.3
 turbulence_initial_displacement_max = 53.3
 turbulence_influence_over_life = SubResource("CurveTexture_j0qn1")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fkp3x"]
-bg_color = Color(0.92549, 1, 1, 1)
-border_width_left = 50
-border_width_top = 50
-border_width_right = 50
-border_width_bottom = 50
-border_color = Color(1, 1, 1, 0)
-border_blend = true
-corner_radius_top_left = 100
-corner_radius_top_right = 100
-corner_radius_bottom_right = 100
-corner_radius_bottom_left = 100
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wp2ep"]
-resource_local_to_scene = true
-shader = ExtResource("3_hhy1a")
-shader_parameter/color1 = Color(0.907457, 0.71582, 1, 1)
-shader_parameter/color2 = Color(0.417167, 0.727298, 1, 1)
-shader_parameter/color3 = Color(0.378377, 0.313947, 0.399109, 1)
-shader_parameter/speed = 1.06
-shader_parameter/width = 1.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4nuvn"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gnjvv"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hw73j"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_erf32"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0cwjb"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0t4pt"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7ojfp"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ochjx"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_85b3d"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3ylq5"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_medsp"]
-bg_color = Color(0.729412, 0.815686, 0.815686, 0.341176)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-expand_margin_left = 25.0
-expand_margin_top = 25.0
-expand_margin_right = 25.0
-expand_margin_bottom = 25.0
-
 [node name="ScrambleBonusObscurityRules" type="CanvasLayer"]
 layer = 12
 script = ExtResource("1_ylin2")
@@ -125,16 +114,11 @@ grow_vertical = 2
 
 [node name="ColoredBlocker" type="ColorRect" parent="Control"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 0
 offset_right = 1320.0
 offset_bottom = 2868.0
 mouse_filter = 2
-
-[node name="ColorRect" type="ColorRect" parent="Control"]
-layout_mode = 0
-offset_right = 1320.0
-offset_bottom = 2868.0
-color = Color(0.850774, 0.928434, 1, 1)
 
 [node name="playerpic" parent="Control" instance=ExtResource("3_vlgv7")]
 unique_name_in_owner = true
@@ -152,56 +136,52 @@ offset_top = 75.0
 offset_right = 1261.0
 offset_bottom = 575.0
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Control"]
-position = Vector2(658, 2831)
-amount = 30
-texture = ExtResource("3_3xjcr")
-lifetime = 15.0
-randomness = 0.34
-fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_vkpby")
-
 [node name="ScramblePanel" type="Panel" parent="Control"]
 unique_name_in_owner = true
+z_index = 1
 layout_mode = 0
 offset_left = 292.0
 offset_top = 945.0
 offset_right = 1262.0
 offset_bottom = 1193.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_fkp3x")
+theme_override_styles/panel = ExtResource("3_cxpsr")
 
 [node name="BonusPanel" type="Panel" parent="Control"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.164706)
+z_index = 1
 layout_mode = 0
 offset_left = 296.0
 offset_top = 1485.0
 offset_right = 1266.0
 offset_bottom = 1733.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_fkp3x")
+theme_override_styles/panel = ExtResource("3_cxpsr")
 
 [node name="ObscurityPanel" type="Panel" parent="Control"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.164706)
+z_index = 1
 layout_mode = 0
 offset_left = 303.0
 offset_top = 1757.0
 offset_right = 1273.0
 offset_bottom = 2005.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_fkp3x")
+theme_override_styles/panel = ExtResource("3_cxpsr")
 
 [node name="WonderPanel" type="Panel" parent="Control"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.164706)
+z_index = 1
 layout_mode = 0
 offset_left = 303.0
 offset_top = 2029.0
 offset_right = 1273.0
 offset_bottom = 2277.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_fkp3x")
+theme_override_styles/panel = ExtResource("3_cxpsr")
 
 [node name="Scramble" type="RichTextLabel" parent="Control"]
 unique_name_in_owner = true
+z_index = 1
 material = SubResource("ShaderMaterial_wp2ep")
 layout_mode = 0
 offset_left = 562.0
@@ -216,6 +196,7 @@ script = ExtResource("5_e4uby")
 [node name="Bonus" type="RichTextLabel" parent="Control"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.164706)
+z_index = 1
 material = SubResource("ShaderMaterial_wp2ep")
 layout_mode = 0
 offset_left = 527.0
@@ -232,6 +213,7 @@ script = ExtResource("7_vkpby")
 [node name="Obscurity" type="RichTextLabel" parent="Control"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.164706)
+z_index = 1
 material = SubResource("ShaderMaterial_wp2ep")
 layout_mode = 0
 offset_left = 611.0
@@ -247,6 +229,7 @@ script = ExtResource("9_gnjvv")
 [node name="Wonder" type="RichTextLabel" parent="Control"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.164706)
+z_index = 1
 material = SubResource("ShaderMaterial_wp2ep")
 layout_mode = 0
 offset_left = 709.0
@@ -262,18 +245,21 @@ script = ExtResource("11_erf32")
 [node name="BonusRedLine" type="Node2D" parent="Control"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.384314)
+z_index = 1
 position = Vector2(505, 1609)
 script = ExtResource("12_0cwjb")
 
 [node name="ObscurityRedLine" type="Node2D" parent="Control"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.384314)
+z_index = 1
 position = Vector2(505, 1883)
 script = ExtResource("12_0cwjb")
 
 [node name="WonderRedLine" type="Node2D" parent="Control"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.384314)
+z_index = 1
 position = Vector2(506, 2160)
 script = ExtResource("12_0cwjb")
 
@@ -285,6 +271,7 @@ offset_right = 573.0
 offset_bottom = 939.0
 
 [node name="Label" type="Label" parent="Control"]
+z_index = 1
 layout_mode = 0
 offset_left = 42.0
 offset_top = 737.0
@@ -298,6 +285,7 @@ theme_override_font_sizes/font_size = 126
 text = "Upcoming Game:"
 
 [node name="Label3" type="Label" parent="Control"]
+z_index = 1
 layout_mode = 0
 offset_left = 163.0
 offset_top = 344.0
@@ -312,6 +300,7 @@ text = "Rules"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="Control"]
+z_index = 1
 layout_mode = 0
 offset_left = 41.0
 offset_top = 1307.0
@@ -326,6 +315,7 @@ text = "Variants:"
 
 [node name="ScrambleButton" type="TextureRect" parent="Control"]
 unique_name_in_owner = true
+z_index = 1
 layout_mode = 0
 offset_left = 369.0
 offset_top = 985.0
@@ -339,6 +329,7 @@ script = ExtResource("17_3ylq5")
 [node name="BonusButton" type="TextureRect" parent="Control"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.164706)
+z_index = 1
 layout_mode = 0
 offset_left = 384.0
 offset_top = 1520.0
@@ -352,6 +343,7 @@ script = ExtResource("17_3ylq5")
 [node name="ObscurityButton" type="TextureRect" parent="Control"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.164706)
+z_index = 1
 layout_mode = 0
 offset_left = 384.0
 offset_top = 1795.0
@@ -365,6 +357,7 @@ script = ExtResource("17_3ylq5")
 [node name="WonderButton" type="TextureRect" parent="Control"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.164706)
+z_index = 1
 layout_mode = 0
 offset_left = 384.0
 offset_top = 2071.0
@@ -405,6 +398,7 @@ horizontal_alignment = 1
 
 [node name="SkipButton" type="Button" parent="Control"]
 unique_name_in_owner = true
+z_index = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -445,27 +439,55 @@ theme_override_font_sizes/font_size = 100
 horizontal_alignment = 1
 
 [node name="NonFadeables" type="CanvasGroup" parent="Control"]
+unique_name_in_owner = true
+
+[node name="ColorRect" type="ColorRect" parent="Control/NonFadeables"]
+z_index = -1
+offset_right = 1320.0
+offset_bottom = 2868.0
+mouse_filter = 2
+color = Color(0.850774, 0.928434, 1, 1)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Control/NonFadeables"]
+z_index = 1
+position = Vector2(658, 2831)
+amount = 30
+texture = ExtResource("3_3xjcr")
+lifetime = 15.0
+randomness = 0.34
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_vkpby")
 
 [node name="ScrambleRulesPanel" type="Panel" parent="Control/NonFadeables"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0)
+z_index = 3
 offset_left = 19.0
 offset_top = 667.0
 offset_right = 1301.0
 offset_bottom = 2043.0
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_fkp3x")
+theme_override_styles/panel = ExtResource("3_ylin2")
 
 [node name="ScrambleRules" type="Label" parent="Control/NonFadeables/ScrambleRulesPanel"]
-layout_mode = 0
-offset_left = 75.0
-offset_top = 69.0
-offset_right = 308.0
-offset_bottom = 257.0
+z_index = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -461.5
+offset_top = -453.5
+offset_right = 461.5
+offset_bottom = 453.5
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("16_3xjcr")
 theme_override_font_sizes/font_size = 55
-text = "Make as many words as you can out of
-seven available letters.
+text = "Make as many words as you can out 
+of seven available letters.
 
 Every time you submit an invalid word, 
 the penalty increases.
@@ -478,31 +500,53 @@ it is no longer available to submit.
 
 Bonus points for seven letter words!
 At least one is guaranteed per round!"
+horizontal_alignment = 1
 
-[node name="CloseButton" type="TextureRect" parent="Control/NonFadeables/ScrambleRulesPanel"]
+[node name="BackButton" type="Button" parent="Control/NonFadeables/ScrambleRulesPanel"]
 modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_left = 1067.0
-offset_top = -123.0
-offset_right = 1258.0
-offset_bottom = 70.0
+z_index = 3
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -172.5
+offset_top = -137.0
+offset_right = 172.5
+grow_horizontal = 2
+grow_vertical = 0
 mouse_filter = 2
-texture = ExtResource("18_medsp")
-expand_mode = 1
-script = ExtResource("19_nfw8r")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4nuvn")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_gnjvv")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_hw73j")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_erf32")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_0cwjb")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_0t4pt")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7ojfp")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_ochjx")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_85b3d")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_3ylq5")
+theme_override_styles/normal = SubResource("StyleBoxFlat_medsp")
+text = "Back"
+icon = ExtResource("16_85b3d")
 
 [node name="WonderRulesPanel" type="Panel" parent="Control/NonFadeables"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0)
+z_index = 3
 offset_left = 19.0
 offset_top = 667.0
 offset_right = 1301.0
 offset_bottom = 2043.0
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_fkp3x")
+theme_override_styles/panel = ExtResource("3_ylin2")
 
 [node name="Wonder2" type="RichTextLabel" parent="Control/NonFadeables/WonderRulesPanel"]
 unique_name_in_owner = true
+z_index = 3
 material = SubResource("ShaderMaterial_wp2ep")
 layout_mode = 0
 offset_left = 433.0
@@ -513,25 +557,22 @@ theme_override_fonts/normal_font = ExtResource("10_hw73j")
 theme_override_font_sizes/normal_font_size = 86
 text = "Wonder"
 
-[node name="CloseButton" type="TextureRect" parent="Control/NonFadeables/WonderRulesPanel"]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_left = 1067.0
-offset_top = -123.0
-offset_right = 1258.0
-offset_bottom = 70.0
-mouse_filter = 2
-texture = ExtResource("18_medsp")
-expand_mode = 1
-script = ExtResource("19_nfw8r")
-
 [node name="WonderRules" type="Label" parent="Control/NonFadeables/WonderRulesPanel"]
-layout_mode = 0
-offset_left = 163.0
-offset_top = 513.0
-offset_right = 1132.0
-offset_bottom = 826.0
+z_index = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -484.5
+offset_top = -161.0
+offset_right = 484.5
+offset_bottom = 161.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("16_3xjcr")
 theme_override_font_sizes/font_size = 55
 text = "If someone gets the 7-letter word,
 they win.
@@ -539,18 +580,51 @@ That's it.
 If no one finds it,
           all other rules apply."
 
+[node name="BackButton" type="Button" parent="Control/NonFadeables/WonderRulesPanel"]
+modulate = Color(1, 1, 1, 0)
+z_index = 3
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -172.5
+offset_top = -137.0
+offset_right = 172.5
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4nuvn")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_gnjvv")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_hw73j")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_erf32")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_0cwjb")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_0t4pt")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7ojfp")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_ochjx")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_85b3d")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_3ylq5")
+theme_override_styles/normal = SubResource("StyleBoxFlat_medsp")
+text = "Back"
+icon = ExtResource("16_85b3d")
+
 [node name="BonusLetterRulesPanel" type="Panel" parent="Control/NonFadeables"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0)
+z_index = 3
 offset_left = 19.0
 offset_top = 670.0
 offset_right = 1272.0
 offset_bottom = 2046.0
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_fkp3x")
+theme_override_styles/panel = ExtResource("3_ylin2")
 
 [node name="Bonus2" type="RichTextLabel" parent="Control/NonFadeables/BonusLetterRulesPanel"]
 unique_name_in_owner = true
+z_index = 3
 material = SubResource("ShaderMaterial_wp2ep")
 layout_mode = 0
 offset_left = 267.0
@@ -562,24 +636,22 @@ theme_override_font_sizes/normal_font_size = 126
 text = " Bonus Letter"
 autowrap_mode = 1
 
-[node name="CloseButton" type="TextureRect" parent="Control/NonFadeables/BonusLetterRulesPanel"]
-layout_mode = 0
-offset_left = 1067.0
-offset_top = -123.0
-offset_right = 1258.0
-offset_bottom = 70.0
-mouse_filter = 2
-texture = ExtResource("18_medsp")
-expand_mode = 1
-script = ExtResource("19_nfw8r")
-
 [node name="BonusLetterRules" type="Label" parent="Control/NonFadeables/BonusLetterRulesPanel"]
-layout_mode = 0
-offset_left = 70.0
-offset_top = 250.0
-offset_right = 1161.0
-offset_bottom = 1116.0
+z_index = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -545.5
+offset_top = -433.0
+offset_right = 545.5
+offset_bottom = 433.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("16_3xjcr")
 theme_override_font_sizes/font_size = 55
 text = "A bonus letter is available for use to 
 make words.
@@ -593,18 +665,51 @@ Its value goes up over time.
 
 Extra bonus points for eight letter words!"
 
+[node name="BackButton" type="Button" parent="Control/NonFadeables/BonusLetterRulesPanel"]
+modulate = Color(1, 1, 1, 0)
+z_index = 3
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -172.5
+offset_top = -137.0
+offset_right = 172.5
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4nuvn")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_gnjvv")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_hw73j")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_erf32")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_0cwjb")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_0t4pt")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7ojfp")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_ochjx")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_85b3d")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_3ylq5")
+theme_override_styles/normal = SubResource("StyleBoxFlat_medsp")
+text = "Back"
+icon = ExtResource("16_85b3d")
+
 [node name="ObscurityRulesPanel" type="Panel" parent="Control/NonFadeables"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0)
+z_index = 3
 offset_left = 19.0
 offset_top = 670.0
 offset_right = 1272.0
 offset_bottom = 2046.0
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_fkp3x")
+theme_override_styles/panel = ExtResource("3_ylin2")
 
 [node name="Obscurity2" type="RichTextLabel" parent="Control/NonFadeables/ObscurityRulesPanel"]
 unique_name_in_owner = true
+z_index = 3
 material = SubResource("ShaderMaterial_wp2ep")
 layout_mode = 0
 offset_left = 322.0
@@ -615,25 +720,22 @@ theme_override_fonts/normal_font = ExtResource("8_4nuvn")
 theme_override_font_sizes/normal_font_size = 126
 text = "Obscurity"
 
-[node name="CloseButton" type="TextureRect" parent="Control/NonFadeables/ObscurityRulesPanel"]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_left = 1067.0
-offset_top = -123.0
-offset_right = 1258.0
-offset_bottom = 70.0
-mouse_filter = 2
-texture = ExtResource("18_medsp")
-expand_mode = 1
-script = ExtResource("19_nfw8r")
-
 [node name="ObscurityRules" type="Label" parent="Control/NonFadeables/ObscurityRulesPanel"]
-layout_mode = 0
-offset_left = 116.0
-offset_top = 273.0
-offset_right = 1122.0
-offset_bottom = 1060.0
+z_index = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -503.0
+offset_top = -393.5
+offset_right = 503.0
+offset_bottom = 393.5
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("16_3xjcr")
 theme_override_font_sizes/font_size = 55
 text = "In this variant, words are worth more 
 based on their rarity.
@@ -644,6 +746,37 @@ word is submitted.
 Points awarded will increase 
 logarithmically.."
 
+[node name="BackButton" type="Button" parent="Control/NonFadeables/ObscurityRulesPanel"]
+modulate = Color(1, 1, 1, 0)
+z_index = 3
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -172.5
+offset_top = -137.0
+offset_right = 172.5
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4nuvn")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_gnjvv")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_hw73j")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_erf32")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_0cwjb")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_0t4pt")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7ojfp")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_ochjx")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_85b3d")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_3ylq5")
+theme_override_styles/normal = SubResource("StyleBoxFlat_medsp")
+text = "Back"
+icon = ExtResource("16_85b3d")
+
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 unique_name_in_owner = true
 
@@ -652,7 +785,3 @@ unique_name_in_owner = true
 [connection signal="pressed" from="Control/Obscurity" to="." method="_on_obscurity_pressed"]
 [connection signal="pressed" from="Control/Wonder" to="." method="_on_wonder_pressed"]
 [connection signal="pressed" from="Control/SkipButton" to="." method="_on_skip_button_pressed"]
-[connection signal="pressed" from="Control/NonFadeables/ScrambleRulesPanel/CloseButton" to="." method="close_button_pressed"]
-[connection signal="pressed" from="Control/NonFadeables/WonderRulesPanel/CloseButton" to="." method="close_button_pressed"]
-[connection signal="pressed" from="Control/NonFadeables/BonusLetterRulesPanel/CloseButton" to="." method="close_button_pressed"]
-[connection signal="pressed" from="Control/NonFadeables/ObscurityRulesPanel/CloseButton" to="." method="close_button_pressed"]

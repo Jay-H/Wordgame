@@ -154,7 +154,7 @@ void fragment() {
 	float band_y_coord = base_uv.y + height_noise * band_height_variation * 0.1;
 	// We get 4 bands by multiplying frequency by 0.25
 	float band_selector = fract(band_y_coord * band_frequency * 0.25) * 4.0;
-	
+
 	int band_id_current = int(floor(band_selector));
 	int band_id_next = (band_id_current + 1) % 4; // Wrap around for the last band
 
@@ -172,22 +172,22 @@ void fragment() {
 	vec3 p1 = vec3(base_uv * noise_scale, TIME * vortex_evolution_speed);
 	p1.x += TIME * current_flow_speed * 0.5;
 	vec2 distortion1 = get_curl(p1, current_vortex_strength);
-	
+
 	vec3 p2 = vec3((base_uv + distortion1) * noise_scale, TIME * vortex_evolution_speed * 0.8);
 	p2.x += TIME * current_flow_speed * 0.7;
 	vec2 distortion2 = get_curl(p2, current_vortex_strength);
-	
+
 	vec2 final_distortion = distortion1 + distortion2 * current_vortex_feedback;
 	vec2 distorted_uv = base_uv + final_distortion;
-	
+
 	// --- 4. Create Atmospheric Bands with Blended Colors ---
 	float definition_noise = (snoise(base_uv * 1.5 + TIME * vortex_evolution_speed * 0.2) + 1.0) * 0.5;
 	float varied_sharpness = band_sharpness + definition_noise * band_definition_variation;
-	
+
 	float softness_noise = (snoise(base_uv * 3.0 + TIME * vortex_evolution_speed * 0.15) + 1.0) * 0.5 * band_blend_softness;
 	float blend_start = 0.5 - softness_noise;
 	float blend_end = 0.5 + softness_noise;
-	
+
 	// Get colors for current band
 	vec4 c1_curr, c2_curr;
 	if (band_id_current == 0) { c1_curr = band_A_color_1; c2_curr = band_A_color_2; }
@@ -201,7 +201,7 @@ void fragment() {
 	else if (band_id_next == 1) { c1_next = band_B_color_1; c2_next = band_B_color_2; }
 	else if (band_id_next == 2) { c1_next = band_C_color_1; c2_next = band_C_color_2; }
 	else { c1_next = band_D_color_1; c2_next = band_D_color_2; }
-	
+
 	// Mix the color palettes based on the major band transition
 	vec4 c1 = mix(c1_curr, c1_next, blend_factor);
 	vec4 c2 = mix(c2_curr, c2_next, blend_factor);
@@ -221,7 +221,7 @@ void fragment() {
 	vec2 flow_uv = distorted_uv * noise_scale * current_turbulence_detail;
 	flow_uv.x += TIME * current_flow_speed * 2.5;
 	float overlay_noise = (snoise(flow_uv) + 1.0) * 0.5;
-	
+
 	// --- 6. Combine Bands and Turbulence ---
 	vec3 final_color = base_color.rgb * (1.0 - (overlay_noise * turbulence_intensity));
 
