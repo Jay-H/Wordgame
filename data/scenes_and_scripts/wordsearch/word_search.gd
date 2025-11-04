@@ -101,8 +101,7 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Handles ending drag via mouse/touch release
-	if (event is InputEventMouseButton and not event.is_pressed()) or \
-	   (event is InputEventScreenTouch and not event.is_pressed()):
+	if (event is InputEventMouseButton and not event.is_pressed()):
 		if is_dragging: # Only process if a drag was active
 			is_dragging = false
 			process_selection()
