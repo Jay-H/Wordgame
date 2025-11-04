@@ -17,7 +17,7 @@ var game_timer_node
 var score : int
 var mini_score : int
 #variants
-var show_words_to_find = false
+var show_words_to_find = true
 var seven_letter_word_guaranteed = false
 var score_matters = true
 var time_limit = false
@@ -115,13 +115,16 @@ func _find_good_letters():
 
 func _populate_word_list():
 	if show_words_to_find:
+		var word_to_find_unpacked_array = Array(words_to_find)
+		word_to_find_unpacked_array.sort_custom(_sort_words)
+		print(word_to_find_unpacked_array)
 		var number_of_words_to_find = words_to_find.size()
 		for a in %HBoxContainer.get_children():
 			for b in a.get_children():
 				array_of_slots.append(b)
 		for i in number_of_words_to_find:
 			
-			var word = words_to_find[i]
+			var word = word_to_find_unpacked_array[i]
 			var slot = array_of_slots[i]
 			var length = word.length()
 			var unfound_word_string = ""
@@ -136,6 +139,13 @@ func _populate_word_list():
 			for b in a.get_children():
 				array_of_slots.append(b)
 	pass
+
+func _sort_words(a,b):
+	if a.length() < b.length():
+		return true
+	return false
+	pass
+
 
 func _populate_letters():
 	for i in range(7):

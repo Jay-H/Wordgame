@@ -1,0 +1,113 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgokhdo1talb0"]
+
+[ext_resource type="Script" uid="uid://dvhvks567eoe7" path="res://data/scenes_and_scripts/phoenix/vibration_tester.gd" id="1_56bfp"]
+
+[node name="VibrationTester" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_56bfp")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VibrationStrength" type="TextEdit" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 173.0
+offset_top = 646.0
+offset_right = 651.0
+offset_bottom = 753.0
+theme_override_font_sizes/font_size = 50
+placeholder_text = "Vibration Strength"
+
+[node name="VibrationDuration" type="TextEdit" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 156.0
+offset_top = 1155.0
+offset_right = 663.0
+offset_bottom = 1265.0
+theme_override_font_sizes/font_size = 50
+placeholder_text = "Vibration Duration"
+
+[node name="NumberOfPulses" type="TextEdit" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 177.0
+offset_top = 808.0
+offset_right = 633.0
+offset_bottom = 892.0
+theme_override_font_sizes/font_size = 50
+placeholder_text = "Number of Pulses"
+
+[node name="TimeBetweenPulses" type="TextEdit" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 144.0
+offset_top = 973.0
+offset_right = 751.0
+offset_bottom = 1076.0
+theme_override_font_sizes/font_size = 50
+placeholder_text = "Time between pulses"
+
+[node name="VibrationStrengthButton" type="Button" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 799.0
+offset_top = 643.0
+offset_right = 1028.0
+offset_bottom = 748.0
+text = "Confirm"
+
+[node name="NumberOfPulsesButton" type="Button" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 795.0
+offset_top = 785.0
+offset_right = 1024.0
+offset_bottom = 890.0
+text = "Confirm"
+
+[node name="TimeBetweenPulsesButton" type="Button" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 842.0
+offset_top = 969.0
+offset_right = 1071.0
+offset_bottom = 1074.0
+text = "Confirm"
+
+[node name="VibrationDurationButton" type="Button" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 852.0
+offset_top = 1162.0
+offset_right = 1081.0
+offset_bottom = 1267.0
+text = "Confirm"
+
+[node name="TesterButton" type="Button" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 285.0
+offset_top = 1488.0
+offset_right = 961.0
+offset_bottom = 1794.0
+theme_override_font_sizes/font_size = 141
+text = "TEST"
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 63.0
+offset_top = 2081.0
+offset_right = 1267.0
+offset_bottom = 2580.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[connection signal="pressed" from="CanvasLayer/VibrationStrengthButton" to="." method="_on_vibration_strength_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/NumberOfPulsesButton" to="." method="_on_number_of_pulses_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/TimeBetweenPulsesButton" to="." method="_on_time_between_pulses_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/VibrationDurationButton" to="." method="_on_vibration_duration_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/TesterButton" to="." method="_on_tester_button_pressed"]
