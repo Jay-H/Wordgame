@@ -131,6 +131,8 @@ func _populate_word_list():
 			for x in length:
 				unfound_word_string += "[]"
 			slot.text = unfound_word_string
+			for b in 8 - length:
+				slot.text += " "
 			slot_dictionary[word] = slot
 			slot.modulate.a = 0.5
 	else:
@@ -160,6 +162,7 @@ func _connect_letter_signals():
 		pass
 		
 func _letter_collector(letter_text, letter_node, changed):
+	Haptics.stacatto_singleton_longer()
 	%PianoController.play_random_note()
 	if score_matters:
 		_little_green_letters(letter_text, letter_node)
@@ -171,12 +174,14 @@ func _letter_collector(letter_text, letter_node, changed):
 
 
 func _on_shuffle_pressed() -> void:
+	Haptics.pitter_patter_light()
 	for i in %LetterContainer.get_children():
 		%LetterContainer.move_child(i,randi_range(0,6))
 	pass # Replace with function body.
 
 
 func _on_clear_pressed() -> void:
+	Haptics.stacatto_doublet()
 	for i in %LetterContainer.get_children():
 		i.mouse_filter = MOUSE_FILTER_STOP
 		i.add_theme_color_override("font_color", Color.BLACK)
@@ -187,11 +192,14 @@ func _on_clear_pressed() -> void:
 	
 
 func _on_submit_pressed() -> void:
+	Haptics.pitter_patter_light()
 	var word_score : int = 0
 	if selected_letters_array.size() <3:
+		Haptics.hard_half_second()
 		_too_short_word_shaker()
 	
 	if GlobalData.is_valid_word(selected_letters_string):
+		Haptics.pitter_patter_heavy()
 		for i in selected_letters_array:
 			word_score += GlobalData.SCRABBLE_POINTS[i]
 		found_words.append(selected_letters_string)

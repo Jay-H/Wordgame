@@ -1,0 +1,378 @@
+[gd_scene load_steps=9 format=3 uid="uid://dd55dlv38c3kf"]
+
+[ext_resource type="Script" uid="uid://pb15cwnnrk4f" path="res://data/scenes_and_scripts/phoenix/hangman_client_scene.gd" id="1_c8i80"]
+[ext_resource type="FontFile" uid="uid://dskmx2extevrw" path="res://data/fonts/times.ttf" id="1_gndkq"]
+[ext_resource type="Texture2D" uid="uid://dwjasqd1m1mcp" path="res://data/images/textures/kiwihug-MS9Tnh3if1o-unsplash.jpg" id="2_ooqq5"]
+[ext_resource type="PackedScene" uid="uid://dptsatxug1hhb" path="res://data/scenes_and_scripts/multiplayertesting/profile_picture.tscn" id="3_ooqq5"]
+[ext_resource type="FontFile" uid="uid://csa2vdskduyio" path="res://data/fonts/OtherFonts/Kiddie-Store.otf" id="6_7as1b"]
+[ext_resource type="FontFile" uid="uid://4emmmfvay1to" path="res://data/fonts/OtherFonts/Kiddie-Store.woff" id="6_f5oys"]
+[ext_resource type="Script" uid="uid://cd6yotd8jl2p7" path="res://data/scenes_and_scripts/phoenix/hangman_text_entry.gd" id="6_pdb44"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pdb44"]
+bg_color = Color(0.572273, 0.685787, 0.840438, 0.737255)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[node name="HangmanScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c8i80")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 0.917647, 1)
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+modulate = Color(1, 1, 0.937255, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -35.0
+offset_top = -20.0
+offset_right = 1746.0
+offset_bottom = 1574.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ooqq5")
+stretch_mode = 2
+
+[node name="NextLetterTimerTitle" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 688.0
+offset_bottom = 98.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.227451)
+theme_override_fonts/font = ExtResource("6_7as1b")
+theme_override_font_sizes/font_size = 161
+text = "Time to next letter!"
+horizontal_alignment = 1
+
+[node name="NextLetterTimeLeft" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 1019.0
+offset_bottom = 98.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.227451)
+theme_override_fonts/font = ExtResource("6_7as1b")
+theme_override_font_sizes/font_size = 161
+text = "5 sec"
+horizontal_alignment = 1
+
+[node name="LetterBox" type="HBoxContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 67.0
+offset_bottom = 183.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/LetterBox"]
+custom_minimum_size = Vector2(156, 240)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.235294)
+theme_override_constants/shadow_offset_x = 15
+theme_override_constants/shadow_offset_y = 15
+theme_override_fonts/font = ExtResource("1_gndkq")
+theme_override_font_sizes/font_size = 216
+text = "x"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/LetterBox"]
+custom_minimum_size = Vector2(156, 240)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.235294)
+theme_override_constants/shadow_offset_x = 15
+theme_override_constants/shadow_offset_y = 15
+theme_override_fonts/font = ExtResource("1_gndkq")
+theme_override_font_sizes/font_size = 216
+text = "x"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="CanvasLayer/LetterBox"]
+custom_minimum_size = Vector2(156, 240)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.235294)
+theme_override_constants/shadow_offset_x = 15
+theme_override_constants/shadow_offset_y = 15
+theme_override_fonts/font = ExtResource("1_gndkq")
+theme_override_font_sizes/font_size = 216
+text = "x"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="CanvasLayer/LetterBox"]
+custom_minimum_size = Vector2(156, 240)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.235294)
+theme_override_constants/shadow_offset_x = 15
+theme_override_constants/shadow_offset_y = 15
+theme_override_fonts/font = ExtResource("1_gndkq")
+theme_override_font_sizes/font_size = 216
+text = "x"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="CanvasLayer/LetterBox"]
+custom_minimum_size = Vector2(156, 240)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.235294)
+theme_override_constants/shadow_offset_x = 15
+theme_override_constants/shadow_offset_y = 15
+theme_override_fonts/font = ExtResource("1_gndkq")
+theme_override_font_sizes/font_size = 216
+text = "x"
+horizontal_alignment = 1
+
+[node name="Label6" type="Label" parent="CanvasLayer/LetterBox"]
+custom_minimum_size = Vector2(156, 240)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.235294)
+theme_override_constants/shadow_offset_x = 15
+theme_override_constants/shadow_offset_y = 15
+theme_override_fonts/font = ExtResource("1_gndkq")
+theme_override_font_sizes/font_size = 216
+text = "x"
+horizontal_alignment = 1
+
+[node name="Label7" type="Label" parent="CanvasLayer/LetterBox"]
+custom_minimum_size = Vector2(156, 240)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.235294)
+theme_override_constants/shadow_offset_x = 15
+theme_override_constants/shadow_offset_y = 15
+theme_override_fonts/font = ExtResource("1_gndkq")
+theme_override_font_sizes/font_size = 216
+text = "x"
+horizontal_alignment = 1
+
+[node name="Label8" type="Label" parent="CanvasLayer/LetterBox"]
+custom_minimum_size = Vector2(156, 240)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.235294)
+theme_override_constants/shadow_offset_x = 15
+theme_override_constants/shadow_offset_y = 15
+theme_override_fonts/font = ExtResource("1_gndkq")
+theme_override_font_sizes/font_size = 216
+text = "x"
+horizontal_alignment = 1
+
+[node name="ParticipantHBox" type="HBoxContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = -3.0
+offset_top = 75.0
+offset_right = -3.0
+offset_bottom = 1052.0
+grow_horizontal = 2
+theme_override_constants/separation = 141
+alignment = 1
+
+[node name="PlayerVBox" type="VBoxContainer" parent="CanvasLayer/ParticipantHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 33
+
+[node name="PlayerPic" parent="CanvasLayer/ParticipantHBox/PlayerVBox" instance=ExtResource("3_ooqq5")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="PlayerName" type="Label" parent="CanvasLayer/ParticipantHBox/PlayerVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_f5oys")
+theme_override_font_sizes/font_size = 86
+text = "Archangel"
+horizontal_alignment = 1
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/ParticipantHBox/PlayerVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="PlayerLastGuessTitle" type="Label" parent="CanvasLayer/ParticipantHBox/PlayerVBox/VBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_f5oys")
+theme_override_font_sizes/font_size = 86
+text = "Last Guess"
+horizontal_alignment = 1
+
+[node name="PlayerLastGuess" type="Label" parent="CanvasLayer/ParticipantHBox/PlayerVBox/VBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_f5oys")
+theme_override_font_sizes/font_size = 86
+text = "xxxxxxxx"
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/ParticipantHBox/PlayerVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="PlayerDelayTitle" type="Label" parent="CanvasLayer/ParticipantHBox/PlayerVBox/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_f5oys")
+theme_override_font_sizes/font_size = 86
+text = "Lockout Status"
+horizontal_alignment = 1
+
+[node name="PlayerDelay" type="Label" parent="CanvasLayer/ParticipantHBox/PlayerVBox/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_f5oys")
+theme_override_font_sizes/font_size = 86
+text = "Inactive"
+horizontal_alignment = 1
+
+[node name="OpponentVBox" type="VBoxContainer" parent="CanvasLayer/ParticipantHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 33
+
+[node name="OpponentPic" parent="CanvasLayer/ParticipantHBox/OpponentVBox" instance=ExtResource("3_ooqq5")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="OpponentName" type="Label" parent="CanvasLayer/ParticipantHBox/OpponentVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_f5oys")
+theme_override_font_sizes/font_size = 86
+text = "Arch Demon"
+horizontal_alignment = 1
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/ParticipantHBox/OpponentVBox"]
+layout_mode = 2
+
+[node name="OpponentLastGuessTitle" type="Label" parent="CanvasLayer/ParticipantHBox/OpponentVBox/VBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_f5oys")
+theme_override_font_sizes/font_size = 86
+text = "Last Guess"
+horizontal_alignment = 1
+
+[node name="OpponentLastGuess" type="Label" parent="CanvasLayer/ParticipantHBox/OpponentVBox/VBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_f5oys")
+theme_override_font_sizes/font_size = 86
+text = "xxxxxxxx"
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/ParticipantHBox/OpponentVBox"]
+layout_mode = 2
+
+[node name="OpponentDelayTitle" type="Label" parent="CanvasLayer/ParticipantHBox/OpponentVBox/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_f5oys")
+theme_override_font_sizes/font_size = 86
+text = "Lockout Status"
+horizontal_alignment = 1
+
+[node name="OpponentDelay" type="Label" parent="CanvasLayer/ParticipantHBox/OpponentVBox/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("6_f5oys")
+theme_override_font_sizes/font_size = 86
+text = "Inactive"
+horizontal_alignment = 1
+
+[node name="HangmanTextEntry" type="LineEdit" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 250.0
+offset_top = 1232.0
+offset_right = 1071.0
+offset_bottom = 1425.0
+theme_override_constants/caret_width = 10
+theme_override_fonts/font = ExtResource("6_7as1b")
+theme_override_font_sizes/font_size = 131
+theme_override_styles/focus = SubResource("StyleBoxFlat_pdb44")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_pdb44")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pdb44")
+placeholder_text = "START TYPING!"
+alignment = 1
+max_length = 8
+keep_editing_on_text_submit = true
+clear_button_enabled = true
+select_all_on_focus = true
+caret_blink = true
+caret_blink_interval = 0.13
+caret_force_displayed = true
+script = ExtResource("6_pdb44")
+
+[connection signal="pressed" from="CanvasLayer/HangmanTextEntry" to="." method="_on_hangman_text_entry_pressed"]

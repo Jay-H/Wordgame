@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bua76mxf28m2e"]
+[gd_scene load_steps=23 format=3 uid="uid://bua76mxf28m2e"]
 
 [ext_resource type="Script" uid="uid://cutv0mtnmypn0" path="res://data/scenes_and_scripts/scramble/single_player_scramble_client_scene.gd" id="1_bgm7i"]
 [ext_resource type="AudioStream" uid="uid://pclwk720i0ch" path="res://data/music/Piano1.wav" id="2_8c2gt"]
@@ -14,9 +14,6 @@
 [ext_resource type="Script" uid="uid://htbcgdaaygan" path="res://data/scenes_and_scripts/scramble/letter.gd" id="14_iog2l"]
 [ext_resource type="FontFile" uid="uid://cpavm8lp2mx3e" path="res://data/fonts/lcd/LCD2B___.TTF" id="14_mwyel"]
 [ext_resource type="Script" uid="uid://cy1a7adjburkj" path="res://data/scenes_and_scripts/scramble/mini_score.gd" id="15_b67rk"]
-[ext_resource type="Shader" uid="uid://ddoeuq4rvc1ri" path="res://data/scenes_and_scripts/scramble/coloredblocker.gdshader" id="17_gu7gj"]
-[ext_resource type="Shader" uid="uid://baj561mjeqcoh" path="res://data/scenes_and_scripts/scramble/pregamelabels.gdshader" id="18_qr1m8"]
-[ext_resource type="FontFile" uid="uid://ca75bijbhrqu7" path="res://data/fonts/akando/Akando.otf" id="19_x5ipd"]
 [ext_resource type="PackedScene" uid="uid://bmm23rwsctf0d" path="res://data/scenes_and_scripts/multiplayertesting/piano_controller.tscn" id="20_8thv5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eyk14"]
@@ -63,24 +60,6 @@ shader_parameter/noise_intensity = 0.074
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_48hoo"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_utcc8"]
-shader = ExtResource("17_gu7gj")
-shader_parameter/pink_color = Color(1, 0.952941, 0.803922, 1)
-shader_parameter/blue_color = Color(0.673158, 0.746813, 1, 1)
-shader_parameter/noise_scale = 20.0
-shader_parameter/motion_speed = 0.5
-shader_parameter/fbm_octaves = 4
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dnafr"]
-shader = ExtResource("18_qr1m8")
-shader_parameter/base_color = Color(0.430503, 0.549134, 0.988768, 1)
-shader_parameter/glow_intensity = 4.068
-shader_parameter/pulse_speed = 10.0
-shader_parameter/pulse_depth = 0.423
-shader_parameter/color_aberration = 0.002
-shader_parameter/distortion_amount = 0.0
-shader_parameter/distortion_speed = 0.1
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nqxtb"]
 
@@ -617,64 +596,6 @@ theme_override_fonts/font = ExtResource("13_bkvhe")
 theme_override_font_sizes/font_size = 140
 text = "XXXXXXX"
 horizontal_alignment = 1
-
-[node name="ColoredBlocker" type="ColorRect" parent="CanvasLayer"]
-unique_name_in_owner = true
-visible = false
-material = SubResource("ShaderMaterial_utcc8")
-offset_right = 1320.0
-offset_bottom = 2868.0
-mouse_filter = 2
-color = Color(1, 0.860672, 0.999645, 1)
-
-[node name="PreTimerLabel" type="Label" parent="CanvasLayer/ColoredBlocker"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 642.0
-offset_top = 1471.0
-offset_right = 898.0
-offset_bottom = 1608.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 100
-text = "00:00"
-
-[node name="GameStartingInLabel" type="Label" parent="CanvasLayer/ColoredBlocker"]
-layout_mode = 0
-offset_left = 69.0
-offset_top = 1184.0
-offset_right = 908.0
-offset_bottom = 1321.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 100
-text = "Game Starting In:"
-
-[node name="Background" type="RichTextLabel" parent="CanvasLayer/ColoredBlocker"]
-unique_name_in_owner = true
-material = SubResource("ShaderMaterial_dnafr")
-layout_mode = 0
-offset_left = 43.0
-offset_top = 2339.0
-offset_right = 1289.0
-offset_bottom = 2462.0
-mouse_filter = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("19_x5ipd")
-theme_override_font_sizes/normal_font_size = 100
-text = "Background: Jupiter"
-
-[node name="Music" type="RichTextLabel" parent="CanvasLayer/ColoredBlocker"]
-unique_name_in_owner = true
-material = SubResource("ShaderMaterial_dnafr")
-layout_mode = 0
-offset_left = 46.0
-offset_top = 2547.0
-offset_right = 1269.0
-offset_bottom = 2716.0
-mouse_filter = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("19_x5ipd")
-theme_override_font_sizes/normal_font_size = 100
-text = "Music: Interstellar"
 
 [node name="Button" type="Button" parent="CanvasLayer"]
 modulate = Color(1, 1, 1, 0)
