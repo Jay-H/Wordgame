@@ -36,6 +36,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_3kvo5")
 letter_cell_scene = ExtResource("2_2stpv")
 found_word_animation = ExtResource("3_0dbxo")
@@ -115,6 +116,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0dbxo")
 
 [node name="GridContainer" type="GridContainer" parent="chungus/GridPanel"]

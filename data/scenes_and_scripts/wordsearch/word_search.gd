@@ -100,21 +100,12 @@ func _ready() -> void:
 	queue_redraw() # Request a redraw when the grid is generated/ready
 
 func _unhandled_input(event: InputEvent) -> void:
-	# Handles ending drag via mouse/touch release
-	if (event is InputEventMouseButton and not event.is_pressed()):
+	if event is InputEventMouseButton and !event.is_pressed():
 		if is_dragging: # Only process if a drag was active
 			is_dragging = false
 			process_selection()
 			get_viewport().set_input_as_handled()
 			return # Event handled, stop processing
-
-	# Debugging: Mimic end of drag with a keyboard key (e.g., Spacebar)
-	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_SPACE:
-		if is_dragging: # Only simulate if a drag is active
-			is_dragging = false
-			process_selection()
-			print("simulated drag end via Spacebar")
-			get_viewport().set_input_as_handled()
 
 func generate_grid() -> void:
 	# Clear previous grid and data
@@ -200,7 +191,7 @@ func _on_cell_drag_started(cell: LetterCell) -> void:
 	# Start the new selection
 	selection_path.append(cell)
 	cell.highlight(Globals.CELL_HIGHLIGHT_COLOR)
-	Input.vibrate_handheld(30)
+	#Input.vibrate_handheld(30)
 
 func _on_cell_mouse_entered(cell: LetterCell) -> void:
 	if not is_dragging or cell in selection_path:
@@ -232,7 +223,7 @@ func _on_cell_mouse_entered(cell: LetterCell) -> void:
 	# If all checks pass, append the cell
 	selection_path.append(cell)
 	cell.highlight(Globals.CELL_HIGHLIGHT_COLOR)
-	Input.vibrate_handheld(10)
+	Input.vibrate_handheld(50)
 
 # --- Selection Logic ---
 func process_selection() -> void:
@@ -329,6 +320,10 @@ func _animate_wrong_label() -> void:
 	var tween = create_tween()
 	tween.set_parallel(false) # Make these animations sequential
 	
+	Input.vibrate_handheld(100)
+	Input.vibrate_handheld(100)
+	Input.vibrate_handheld(100)
+	
 	# Move right
 	tween.tween_property(wrong_label, "position:x", original_pos.x + wrong_label_move_distance, 0.1)\
 		.set_ease(Tween.EASE_OUT)\
@@ -365,6 +360,7 @@ func _animate_correct_label() -> void:
 	current_modulate.a = 1.0 # Set alpha to fully opaque
 	correct_label.modulate = current_modulate
 	
+	Input.vibrate_handheld(300)
 	var tween = create_tween()
 	tween.set_parallel(true) # Animate scale and alpha simultaneously
 	
@@ -388,6 +384,9 @@ func _animate_correct_label() -> void:
 @rpc("authority", "call_local")
 func set_red_label(word: String, opponent_id: int, selection_path_opponent: Array):
 	var label
+	Input.vibrate_handheld(100)
+	Input.vibrate_handheld(100)
+	Input.vibrate_handheld(100)
 	if variant == Globals.WordsearchVariants.DEFAULT:
 		label = find_label_by_text(words_labels, str(opponent_id), word)
 	elif variant == Globals.WordsearchVariants.SHARED_BOARD:
