@@ -149,3 +149,8 @@ func _on_single_player_pressed() -> void:
 func _single_player_start(parameters):
 	main_menu._start_single_player_game(parameters)
 	pass
+
+
+func _on_debug_pressed() -> void:
+	add_child(load("res://data/scenes_and_scripts/phoenix/vibration_tester.tscn").instantiate())
+	pass # Replace with function body.
