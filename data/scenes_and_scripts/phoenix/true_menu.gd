@@ -37,6 +37,7 @@ func _ready():
 	tween.parallel().tween_property(%MainMenuBox, "modulate", Color.WHITE, 2)
 	tween.parallel().tween_property(%PlayersOnline, "modulate", Color.WHITE, 2)
 	tween.parallel().tween_property(%MatchesRunning, "modulate", Color.WHITE, 2)
+
 func fade_in():
 	%Hider.color = Color.WHITE
 	visible = true
@@ -54,6 +55,7 @@ func _fade_out():
 	return
 	
 func _on_profile_pressed() -> void:
+	Haptics.stacatto_doublet()
 	await %MainMenuItems._fade_out()
 	%ProfileMenuItems._fade_in()
 	
@@ -98,16 +100,19 @@ func _database_update(): # this gets triggered by signal whenever data is update
 
 
 func _on_find_game_pressed() -> void:
+	Haptics.stacatto_doublet()
 	find_game_pressed.emit()
 	pass # Replace with function body.
 
 
 func _on_settings_pressed() -> void:
+	Haptics.stacatto_doublet()
 	await %MainMenuItems._fade_out()
 	%SettingsMenuItems._fade_in()
 	pass # Replace with function body.
 	
 func _on_music_switch_toggled(toggled_on: bool) -> void:
+	Haptics.triple_quick_medium()
 	if toggled_on:
 		music_enabled.emit()
 	if not toggled_on:
@@ -116,7 +121,7 @@ func _on_music_switch_toggled(toggled_on: bool) -> void:
 
 
 func _on_sound_switch_toggled(toggled_on: bool) -> void:
-	
+	Haptics.triple_quick_medium()
 	if toggled_on:
 		sound_enabled.emit()
 	if not toggled_on:
@@ -125,6 +130,7 @@ func _on_sound_switch_toggled(toggled_on: bool) -> void:
 
 
 func _on_auto_skip_rules_switch_toggled(toggled_on: bool) -> void:
+	Haptics.triple_quick_medium()
 	if toggled_on:
 		auto_skip_rules_enabled.emit()
 	if not toggled_on:
@@ -133,6 +139,7 @@ func _on_auto_skip_rules_switch_toggled(toggled_on: bool) -> void:
 
 
 func _on_low_graphics_switch_toggled(toggled_on: bool) -> void:
+	Haptics.triple_quick_medium()
 	if toggled_on:
 		low_graphics_enabled.emit()
 	if not toggled_on:
@@ -141,6 +148,7 @@ func _on_low_graphics_switch_toggled(toggled_on: bool) -> void:
 
 
 func _on_single_player_pressed() -> void:
+	Haptics.stacatto_doublet()
 	await %MainMenuItems._fade_out()
 	%SinglePlayerMenuItems._fade_in()
 	pass # Replace with function body.
