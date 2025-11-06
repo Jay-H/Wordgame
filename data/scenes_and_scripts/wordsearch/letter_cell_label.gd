@@ -8,16 +8,14 @@ const HOVER_COLOR = Color.DARK_GRAY # Really only used for testing on PC, not go
 
 func _gui_input(event: InputEvent) -> void:
 	# A drag starts when the mouse button or a finger is pressed down on this cell.
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+	if event is InputEventMouseButton and event.is_pressed():
 		emit_signal("drag_started", get_parent())
 		get_viewport().set_input_as_handled() # Prevent event from propagating
 	
-	if event is InputEventScreenTouch and event.is_pressed():
-		emit_signal("drag_started", get_parent())
-		get_viewport().set_input_as_handled()
 		
 func _ready() -> void:
 	# Connect mouse enter/exit signals for hover effect.
+	mouse_filter = MOUSE_FILTER_PASS
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
 

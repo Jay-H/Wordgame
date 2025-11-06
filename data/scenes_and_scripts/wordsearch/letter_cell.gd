@@ -38,7 +38,8 @@ func highlight(color: Color) -> void:
 	# Only apply temporary highlight if the cell is NOT already found
 	if not is_found or not is_found_by_opponent:
 		color_rect.color = color
-		
+	Haptics.stacatto_singleton_longer()
+
 func set_found(found: bool) -> void:
 	is_found = found
 	if is_found:
