@@ -17,7 +17,8 @@ extends Control
 
 var grid_cells: Array = [] # This will be our 2D array of LetterCell nodes.
 var is_dragging: bool = false
-var _drag_direction: Vector2i = Vector2i.ZERO
+var current_locked_direction: Vector2i = Vector2i.ZERO
+var start_cell: LetterCell = null
 
 var selection_path: Array[LetterCell] = [] # The current chain of selected cells.
 
@@ -103,6 +104,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and !event.is_pressed():
 		if is_dragging: # Only process if a drag was active
 			is_dragging = false
+			start_cell = null
 			process_selection()
 			get_viewport().set_input_as_handled()
 			return # Event handled, stop processing
@@ -178,52 +180,61 @@ func _on_game_timer_timeout() -> void:
 
 func _on_cell_drag_started(cell: LetterCell) -> void:
 	is_dragging = true
-	# Reset drag direction at the start of a new drag
-	_drag_direction = Vector2i.ZERO 
-	# When a new drag starts, clear the previous selection path.
-	# Cells that were part of a found word (green) will remain green
-	# due to LetterCell's `is_found` logic.
-	for existing_cell in selection_path:
-		existing_cell.unhighlight() # This will revert if not found, or stay green if found.
-			
+	
+	# Unhighlight any previous path (in case of a bug)
+	unhighlight_current_selection()
 	selection_path.clear()
+
+	# Set the new pivot
+	start_cell = cell 
+	current_locked_direction = Vector2i.ZERO # No direction yet
 	
 	# Start the new selection
 	selection_path.append(cell)
 	cell.highlight(Globals.CELL_HIGHLIGHT_COLOR)
-	#Input.vibrate_handheld(30)
 
 func _on_cell_mouse_entered(cell: LetterCell) -> void:
-	if not is_dragging or cell in selection_path:
+	if not is_dragging or not start_cell or cell == selection_path.back():
 		return
 
-	var last_cell: LetterCell = selection_path.back()
-	var current_segment_direction: Vector2i = cell.grid_position - last_cell.grid_position
+	var start_to_hover_vec: Vector2i = cell.grid_position - start_cell.grid_position
 	
-	# Ensure adjacency (already existing logic)
-	if abs(current_segment_direction.x) > 1 or abs(current_segment_direction.y) > 1:
-		return # Not adjacent, ignore
+	if start_to_hover_vec == Vector2i.ZERO:
+		# This handles moving off and back to the start cell
+		unhighlight_current_selection()
+		selection_path = [start_cell]
+		start_cell.highlight(Globals.CELL_HIGHLIGHT_COLOR)
+		current_locked_direction = Vector2i.ZERO
+		return
 
-	# Check for straight line or diagonal (abs(x)==abs(y) for diagonal, x==0 or y==0 for straight)
-	var is_straight_or_diagonal = (current_segment_direction.x == 0 or current_segment_direction.y == 0) or \
-								  (abs(current_segment_direction.x) == abs(current_segment_direction.y))
+	var new_direction = get_snapped_direction(start_to_hover_vec)
 	
-	if not is_straight_or_diagonal:
-		return # Not a straight or diagonal move, ignore
+	# had to google this because good LORD
+	var line_length = max(abs(start_to_hover_vec.x), abs(start_to_hover_vec.y))
+
+	#if nothing changed, just break out
+	if new_direction == current_locked_direction and line_length == selection_path.size() - 1:
+		return
+
+	current_locked_direction = new_direction
 	
-	# Determine or enforce the drag direction
-	if selection_path.size() == 1:
-		# This is the second cell, so establish the drag direction
-		_drag_direction = current_segment_direction
-	else:
-		# For subsequent cells, ensure they continue in the established direction
-		if current_segment_direction != _drag_direction:
-			return # Direction changed, ignore
+	#remove old path 
+	unhighlight_current_selection()
+	selection_path.clear()
+	
+	#build new one
+	for i in range(line_length + 1): 
+		var step_vector = current_locked_direction * i
+		var cell_pos = start_cell.grid_position + step_vector
 		
-	# If all checks pass, append the cell
-	selection_path.append(cell)
-	cell.highlight(Globals.CELL_HIGHLIGHT_COLOR)
-	Input.vibrate_handheld(50)
+		var cell_on_path = get_cell_from_grid_pos(cell_pos)
+		
+		if cell_on_path:
+			selection_path.append(cell_on_path)
+			cell_on_path.highlight(Globals.CELL_HIGHLIGHT_COLOR)
+		else:
+			#this means we are off the grid, just break and ignore
+			break
 
 # --- Selection Logic ---
 func process_selection() -> void:
@@ -320,9 +331,7 @@ func _animate_wrong_label() -> void:
 	var tween = create_tween()
 	tween.set_parallel(false) # Make these animations sequential
 	
-	Input.vibrate_handheld(100)
-	Input.vibrate_handheld(100)
-	Input.vibrate_handheld(100)
+	Haptics.stacatto_singleton_longer()
 	
 	# Move right
 	tween.tween_property(wrong_label, "position:x", original_pos.x + wrong_label_move_distance, 0.1)\
@@ -360,7 +369,7 @@ func _animate_correct_label() -> void:
 	current_modulate.a = 1.0 # Set alpha to fully opaque
 	correct_label.modulate = current_modulate
 	
-	Input.vibrate_handheld(300)
+	Haptics.hard_half_second()
 	var tween = create_tween()
 	tween.set_parallel(true) # Animate scale and alpha simultaneously
 	
@@ -384,9 +393,7 @@ func _animate_correct_label() -> void:
 @rpc("authority", "call_local")
 func set_red_label(word: String, opponent_id: int, selection_path_opponent: Array):
 	var label
-	Input.vibrate_handheld(100)
-	Input.vibrate_handheld(100)
-	Input.vibrate_handheld(100)
+	Haptics.double_normal_hard()
 	if variant == Globals.WordsearchVariants.DEFAULT:
 		label = find_label_by_text(words_labels, str(opponent_id), word)
 	elif variant == Globals.WordsearchVariants.SHARED_BOARD:
@@ -520,3 +527,35 @@ func fade_out():
 	tween.tween_property(%CanvasModulate, "color", Color.TRANSPARENT, 1)
 	await tween.finished
 	pass
+	
+#needed some massive google help here
+func get_snapped_direction(vec: Vector2i) -> Vector2i:
+	if vec == Vector2i.ZERO:
+		return Vector2i.ZERO
+
+	# first get angle
+	var angle = Vector2(vec).angle()
+	
+	var pi_over_4 = PI / 4.0
+	var snapped_angle = round(angle / pi_over_4) * pi_over_4
+	
+	var snapped_vec_f = Vector2.from_angle(snapped_angle)
+	
+	# Rround the nubmer to get it to be 0 or 1
+	return Vector2i(round(snapped_vec_f.x), round(snapped_vec_f.y))
+
+func get_cell_from_grid_pos(pos: Vector2i) -> LetterCell:
+	if pos.x < 0 or pos.x >= Globals.GRID_SIZE.x or pos.y < 0 or pos.y >= Globals.GRID_SIZE.y:
+		return null
+		
+	var index = pos.y * grid_container.columns + pos.x
+	
+	if index >= 0 and index < grid_container.get_child_count():
+		return grid_container.get_child(index) as LetterCell
+		
+	return null #shouldnt happen
+
+func unhighlight_current_selection():
+	for cell in selection_path:
+		if is_instance_valid(cell):
+			cell.unhighlight()
