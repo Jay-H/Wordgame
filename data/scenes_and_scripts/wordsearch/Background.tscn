@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cyqux5urfqgpp"]
 
-[ext_resource type="Material" uid="uid://xtnsfpcccyin" path="res://data/scenes_and_scripts/scramble/jupiter4test.tres" id="1_wnnbo"]
+[ext_resource type="Material" uid="uid://cutp7wv0qewh5" path="res://data/scenes_and_scripts/scramble/cloudscape2test.tres" id="1_wnnbo"]
 
 [node name="Background" type="Control"]
 layout_mode = 3
