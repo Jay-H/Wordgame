@@ -17,19 +17,8 @@ func _ready() -> void:
 	# Connect mouse enter/exit signals for hover effect.
 	mouse_filter = MOUSE_FILTER_PASS
 	mouse_entered.connect(_on_mouse_entered)
-	mouse_exited.connect(_on_mouse_exited)
 
 # --- Signal Handlers for Hover Effect ---
-
 func _on_mouse_entered() -> void:
 	# Let the main script know the mouse/finger is over this cell.
 	emit_signal("mouse_entered_cell", get_parent())
-	
-	# Also provide a simple visual hover effect if not highlighted.
-	if not get_parent().is_found and not get_parent().is_found_by_opponent and get_parent().color_rect.color == Globals.CELL_BACKGROUND_COLOR:
-		get_parent().color_rect.color = HOVER_COLOR
-
-func _on_mouse_exited() -> void:
-	# Revert hover effect if not part of a final selection.
-	if not get_parent().is_found and get_parent().color_rect.color == HOVER_COLOR:
-		get_parent().color_rect.color = Globals.CELL_BACKGROUND_COLOR

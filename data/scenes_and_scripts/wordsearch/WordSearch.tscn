@@ -51,26 +51,36 @@ unique_name_in_owner = true
 [node name="WrongLabel" type="Label" parent="chungus"]
 unique_name_in_owner = true
 visible = false
-anchors_preset = 5
+z_index = 1
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -28.0
+offset_top = -11.5
 offset_right = 28.0
-offset_bottom = 23.0
+offset_bottom = 11.5
 grow_horizontal = 2
+grow_vertical = 2
 text = "Wrong!"
 
 [node name="CorrectLabel" type="Label" parent="chungus"]
 unique_name_in_owner = true
 visible = false
-anchors_preset = 5
+z_index = 1
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -31.0
+offset_top = -11.5
 offset_right = 31.0
-offset_bottom = 23.0
+offset_bottom = 11.5
 grow_horizontal = 2
-text = "Correct!"
+grow_vertical = 2
+text = "Nice!"
 
 [node name="GameTimer" parent="chungus" instance=ExtResource("3_mgi5u")]
 unique_name_in_owner = true

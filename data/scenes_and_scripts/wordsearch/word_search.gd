@@ -55,14 +55,16 @@ var opponent_found_sound = preload("res://data/sounds/WS_temp_opponent_found.mp3
 
 # Wrong Label Animation Properties
 @export_group("Wrong Label Animation")
-@export var wrong_label_duration: float = 1.0 # How long the label stays visible
-@export var wrong_label_move_distance: float = 20.0 # How far it moves left/right
+@export var wrong_label_duration: float = 1.0 # Total time for grow and fade
+@export var wrong_label_initial_scale: Vector2 = Vector2(0.5, 0.5) # Start small
+@export var wrong_label_final_scale: Vector2 = Vector2(2.5, 2.5) # Grow larger
+@export var wrong_label_initial_alpha: float = 1.0 # Start invisible
 
 # Correct Label Animation Properties
 @export_group("Correct Label Animation")
-@export var correct_label_duration: float = 0.8 # Total time for grow and fade
+@export var correct_label_duration: float = 1.0 # Total time for grow and fade
 @export var correct_label_initial_scale: Vector2 = Vector2(0.5, 0.5) # Start small
-@export var correct_label_final_scale: Vector2 = Vector2(2.0, 2.0) # Grow larger
+@export var correct_label_final_scale: Vector2 = Vector2(2.5, 2.5) # Grow larger
 @export var correct_label_initial_alpha: float = 1.0 # Start invisible
 
 @export var found_word_animation: CellAnimationResource
@@ -326,37 +328,36 @@ func unhighlight_all_cells() -> void:
 				
 func _animate_wrong_label() -> void:
 	wrong_label.visible = true
-	var original_pos = wrong_label.position
 	
-	var tween = create_tween()
-	tween.set_parallel(false) # Make these animations sequential
+	#So that it grows from the center-top of the label, and not the default top-left
+	wrong_label.pivot_offset = wrong_label.size / 2.0
+	
+	wrong_label.scale = wrong_label_initial_scale
+	var current_modulate = wrong_label.modulate # Get the label's current modulate (color)
+	current_modulate.a = 1.0 # Set alpha to fully opaque
+	wrong_label.modulate = current_modulate
 	
 	Haptics.stacatto_singleton_longer()
+	var tween = create_tween()
+	tween.set_parallel(true) # Animate scale and alpha simultaneously
 	
-	# Move right
-	tween.tween_property(wrong_label, "position:x", original_pos.x + wrong_label_move_distance, 0.1)\
+	# Animate scale: grow from initial to final scale
+	tween.tween_property(wrong_label, "scale", wrong_label_final_scale, wrong_label_duration)\
 		.set_ease(Tween.EASE_OUT)\
-		.set_trans(Tween.TRANS_SINE)
-	# Move left
-	tween.tween_property(wrong_label, "position:x", original_pos.x - wrong_label_move_distance, 0.1)\
-		.set_ease(Tween.EASE_OUT)\
-		.set_trans(Tween.TRANS_SINE)
-	# Move right
-	tween.tween_property(wrong_label, "position:x", original_pos.x + wrong_label_move_distance, 0.1)\
-		.set_ease(Tween.EASE_OUT)\
-		.set_trans(Tween.TRANS_SINE)
-	# Move left
-	tween.tween_property(wrong_label, "position:x", original_pos.x - wrong_label_move_distance, 0.1)\
-		.set_ease(Tween.EASE_OUT)\
-		.set_trans(Tween.TRANS_SINE)
-	# Move back to center
-	tween.tween_property(wrong_label, "position:x", original_pos.x, 0.1)\
-		.set_ease(Tween.EASE_OUT)\
-		.set_trans(Tween.TRANS_SINE)
+		.set_trans(Tween.TRANS_QUAD)
 		
-	# Wait for a bit, then hide
-	tween.tween_interval(wrong_label_duration - (0.1*7)) # Subtract animation time
+	# Animate modulate alpha: fade out (from 1.0 to 0.0)
+	# The target alpha is 0.0. The starting alpha is already set to 1.0 above.
+	tween.tween_property(wrong_label, "modulate:a", 0.0, wrong_label_duration)\
+		.set_ease(Tween.EASE_OUT)\
+		.set_trans(Tween.TRANS_QUAD)
+		
+	tween.set_parallel(false) # Switch to sequential mode for the following steps
+	tween.tween_interval(0.0) # Wait for the parallel animations to complete
+	
 	tween.tween_callback(func(): wrong_label.visible = false)
+	
+
 
 func _animate_correct_label() -> void:
 	correct_label.visible = true

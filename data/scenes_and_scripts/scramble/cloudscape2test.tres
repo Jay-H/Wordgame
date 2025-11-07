@@ -1,13 +1,13 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cutp7wv0qewh5"]
 
-[ext_resource type="Shader" uid="uid://utbh3wv3i367" path="res://data/scenes_and_scripts/scramble/cloudscape2.gdshader" id="1_phe12"]
+[ext_resource type="Shader" uid="uid://btgpav5jcvl8h" path="res://data/scenes_and_scripts/scramble/cloudscape2.gdshader" id="1_phe12"]
 
 [resource]
 shader = ExtResource("1_phe12")
 shader_parameter/cloud_scale = 2.68
 shader_parameter/cloud_coverage = 0.141
 shader_parameter/cloud_softness = 0.273
-shader_parameter/octaves = 7
+shader_parameter/octaves = 1
 shader_parameter/persistence = 0.557
 shader_parameter/lacunarity = 1.509
 shader_parameter/sky_color = Color(0.68116, 0.822212, 1, 1)

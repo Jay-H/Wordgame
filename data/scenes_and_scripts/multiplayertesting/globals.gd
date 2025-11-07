@@ -42,16 +42,15 @@ const LABEL_FONT_SIZE = 80
 const LABEL_FONT_COLOR = Color.WHITE
 
 const CELL_BACKGROUND_COLOR = Color.TRANSPARENT # Background color of each cell
-const CELL_HOVER_COLOR = Color.DARK_GRAY # Hover color of each cell
 const CELL_HIGHLIGHT_COLOR = Color.LIGHT_SKY_BLUE # Highlight color of each cell
 const CELL_FOUND_COLOR = Color.GREEN_YELLOW # Found color of each cell
 const CELL_FOUND_BY_OPPONENT_COLOR = Color.ORANGE_RED # Found color of each opponent's cells
 
-const WRONG_LABEL_FONT_SIZE = 100
-const WRONG_LABEL_FONT_COLOR = Color.ORANGE
+const WRONG_LABEL_FONT_SIZE = 130
+const WRONG_LABEL_FONT_COLOR = Color.DARK_ORANGE
 
-const CORRECT_LABEL_FONT_SIZE = 100
-const CORRECT_LABEL_FONT_COLOR = Color.GREEN
+const CORRECT_LABEL_FONT_SIZE = 130
+const CORRECT_LABEL_FONT_COLOR = Color.DARK_GREEN
 
 const TIMER_LABEL_FONT_SIZE = 100
 const TIMER_LABEL_FONT_COLOR = Color.BLUE
