@@ -46,6 +46,8 @@ var p1id
 var p2id
 var player_one_number_of_revealed_letters = 0
 var player_two_number_of_revealed_letters = 0
+var player_one_wrong_guesses = 0
+var player_two_wrong_guesses = 0
 
 var chaos_variant = true
 var turn_based_variant = false
@@ -90,6 +92,7 @@ func _on_peer_connected(id):
 		rpc_id(p2id, "_initial_dictionary_server_to_client", game_dictionary)
 		_new_letter_timer_starter(p1id)
 		_new_letter_timer_starter(p2id)
+		%RoundTimer.start(100)
 		_cycler()
 		print(game_dictionary)
 func _cycler(): #repeating function which sends dictionary to clients every 0.5 seconds
@@ -166,12 +169,39 @@ func _send_word_to_server(word):
 		print("Winner is: " + str(peer_id))
 	if peer_id == p1id:
 		game_dictionary["player_one_last_guess"] = word
+		_lockout_calculator(p1id)
+		
 	if peer_id == p2id:
 		game_dictionary["player_two_last_guess"] = word
+		_lockout_calculator(p2id)
 	rpc_id(p1id, "_send_dictionary_server_to_client", game_dictionary)
 	rpc_id(p2id, "_send_dictionary_server_to_client", game_dictionary)
 	pass
 
+func _lockout():
+	pass
+
+func _lockout_calculator(id):
+	var guesses
+	if id == p1id: 
+		guesses = player_one_wrong_guesses
+	if id == p2id:
+		guesses = player_two_wrong_guesses
+	var time_left = %RoundTimer.time_left
+	var percent_of_time_left = (time_left/round_time) * 100
+	if percent_of_time_left < 50:
+		guesses +=1
+		var fraction = time_left/guesses
+		#if fraction > 
+	if percent_of_time_left < 75:
+		guesses += 1
+		var fraction = time_left/guesses
+		if fraction > 1.0:
+			print("lockout")
+	
+	
+
+	pass
 
 func _start_server():
 	# Create a new ENet multiplayer peer.

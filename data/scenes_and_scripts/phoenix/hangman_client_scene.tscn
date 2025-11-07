@@ -58,7 +58,7 @@ stretch_mode = 2
 
 [node name="NextLetterTimerTitle" type="Label" parent="CanvasLayer"]
 unique_name_in_owner = true
-anchors_preset = -1
+anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
@@ -75,7 +75,7 @@ horizontal_alignment = 1
 
 [node name="NextLetterTimeLeft" type="Label" parent="CanvasLayer"]
 unique_name_in_owner = true
-anchors_preset = -1
+anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
@@ -92,7 +92,7 @@ horizontal_alignment = 1
 
 [node name="LetterBox" type="HBoxContainer" parent="CanvasLayer"]
 unique_name_in_owner = true
-anchors_preset = -1
+anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
@@ -200,7 +200,7 @@ horizontal_alignment = 1
 
 [node name="ParticipantHBox" type="HBoxContainer" parent="CanvasLayer"]
 unique_name_in_owner = true
-anchors_preset = -1
+anchors_preset = 10
 anchor_right = 1.0
 offset_left = -3.0
 offset_top = 75.0
@@ -354,10 +354,10 @@ horizontal_alignment = 1
 
 [node name="HangmanTextEntry" type="LineEdit" parent="CanvasLayer"]
 unique_name_in_owner = true
-offset_left = 250.0
-offset_top = 1232.0
-offset_right = 1071.0
-offset_bottom = 1425.0
+offset_left = 151.0
+offset_top = 1149.0
+offset_right = 1174.0
+offset_bottom = 1423.0
 theme_override_constants/caret_width = 10
 theme_override_fonts/font = ExtResource("6_7as1b")
 theme_override_font_sizes/font_size = 131

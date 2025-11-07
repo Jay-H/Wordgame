@@ -10,4 +10,6 @@ func _gui_input(event):
 			text = ""
 			print("pressed")
 			pressed.emit(word)
-			
+		if event.is_action_pressed("backspace"):
+			text = ""
+		
