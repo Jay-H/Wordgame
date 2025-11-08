@@ -18,7 +18,7 @@ var available_game_type_lists = {}
 var game_types_ref
 var selected_game_list_name
 var selected_game_list
-
+var timer_values_ref
 func _ready():
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
@@ -35,7 +35,10 @@ func _on_FirebaseAuth_login_succeeded(auth):
 	game_types_ref.new_data_update.connect(_on_game_types_ref_update)
 	game_types_ref.patch_data_update.connect(_on_game_types_ref_update)
 	game_types_ref.delete_data_update.connect(_on_game_types_ref_update)
-	
+	timer_values_ref = Firebase.Database.get_database_reference("server_data/timer_values", {})
+	timer_values_ref.new_data_update.connect(_on_timer_ref_update)
+	timer_values_ref.patch_data_update.connect(_on_timer_ref_update)
+	timer_values_ref.delete_data_update.connect(_on_timer_ref_update)	
 	pass	
 	
 	
@@ -49,12 +52,14 @@ func _on_game_types_ref_update(resource):
 	if available_game_type_lists != null and selected_game_list_name != null:
 		if available_game_type_lists.has(selected_game_list_name):
 			selected_game_list = available_game_type_lists[str(selected_game_list_name)]	
-		
+			Globals.game_types = selected_game_list
 		
 	
 	print(resource)
 	#print(resource["selected_game_list"])
  
+func _on_timer_ref_update(resource):
+	pass
 func _on_peer_connected(id):
 	print(id)
 	rpc_id(id, "_confirm_connected_to_server")
