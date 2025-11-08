@@ -14,14 +14,14 @@ var rank_name_array = ["Wood", "Bronze", "Iron", "Steel", "Platinum", "Diamond",
 	#"WordsearchVanilla", "WordsearchShared", "WordsearchVanilla", "WordsearchShared", "WordsearchVanilla", "WordsearchShared"
 	#]
 
-var game_types = [
-	"ScrambleVanilla", "ScrambleBonus","ScrambleBonusObscurity", "ScrambleObscurity", "ScrambleWonder", "ScrambleBonusWonder",
-	"ScrambleObscurityWonder", "ScrambleBonusObscurityWonder", "WordsearchVanilla", "WordsearchShared", 
-	"WordsearchVanilla", "WordsearchShared", "WordsearchVanilla", "WordsearchShared", "WordsearchVanilla", "WordsearchShared",
-	"HangmanChaosVanilla", "HangmanChaosShared", "HangmanChaosEphemeral", "HangmanTurnbased", "HangmanDelay", "HangmanDelayEphemeral"
-	]
-	
-#var game_types = ["HangmanChaosVanilla", "HangmanChaosShared", "HangmanChaosEphemeral", "HangmanTurnbased", "HangmanDelay", "HangmanDelayEphemeral"]
+#var game_types = [
+	#"ScrambleVanilla", "ScrambleBonus","ScrambleBonusObscurity", "ScrambleObscurity", "ScrambleWonder", "ScrambleBonusWonder",
+	#"ScrambleObscurityWonder", "ScrambleBonusObscurityWonder", "WordsearchVanilla", "WordsearchShared", 
+	#"WordsearchVanilla", "WordsearchShared", "WordsearchVanilla", "WordsearchShared", "WordsearchVanilla", "WordsearchShared",
+	#"HangmanChaosVanilla", "HangmanChaosShared", "HangmanChaosEphemeral", "HangmanTurnbased", "HangmanDelay", "HangmanDelayEphemeral"
+	#]
+	#
+var game_types = ["HangmanChaosVanilla", "HangmanChaosShared", "HangmanChaosEphemeral", "HangmanTurnbased", "HangmanDelay", "HangmanDelayEphemeral"]
 #var game_types = [
 	#"ScrambleVanilla", "ScrambleBonus","ScrambleBonusObscurity", "ScrambleObscurity", "ScrambleWonder", "ScrambleBonusWonder",
 	#"ScrambleObscurityWonder", "ScrambleBonusObscurityWonder"

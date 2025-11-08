@@ -53,7 +53,7 @@ func _on_game_types_ref_update(resource):
 	if available_game_type_lists != null and selected_game_list_name != null:
 		if available_game_type_lists.has(selected_game_list_name):
 			selected_game_list = available_game_type_lists[str(selected_game_list_name)]	
-			Globals.game_types = selected_game_list
+			
 		
 	
 	print(resource)
