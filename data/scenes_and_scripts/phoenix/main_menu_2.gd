@@ -41,9 +41,9 @@ var username
 var db_ref
 var path
 #var IP_ADDRESS =  "185.98.1.219"
-var IP_ADDRESS = "localhost"
+#var IP_ADDRESS = "localhost"
 #var IP_ADDRESS = "185.98.171.129"
-#var IP_ADDRESS = "136.112.186.218" # VM
+var IP_ADDRESS = "136.112.186.218" # VM
 var PORT = 7777
 var match_found_instance
 var rules_instance
@@ -226,11 +226,14 @@ func _show_rules_screen(rules, dict): #this function will choose the rules scree
 	if opponent_disconnected == false:
 		var scramble_rules = "res://data/scenes_and_scripts/phoenix/RulesTransition2.tscn"
 		var wordsearch_rules = "res://data/scenes_and_scripts/phoenix/RulesTransitionWordsearch.tscn"
+		var hangman_rules = "res://data/scenes_and_scripts/phoenix/HangmanRules.tscn"
 		var current_rules_node
 		if rules.contains("Scramble"):
 			current_rules_node = ((load(scramble_rules)).instantiate())
 		if rules.contains("Wordsearch"):
 			current_rules_node = ((load(scramble_rules)).instantiate())
+		if rules.contains("Hangman"):
+			current_rules_node = ((load(hangman_rules)).instantiate())
 		add_child(current_rules_node)
 		current_rules_node.setup(rules,dict)
 		rules_instance = current_rules_node

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://jhobmoghfpt"]
 
-[ext_resource type="Script" uid="uid://iepgwppugsg" path="res://data/scenes_and_scripts/scramble/animated_x.gd" id="1_wpssi"]
+[ext_resource type="Script" uid="uid://cmoh6tkf2dqqe" path="res://data/scenes_and_scripts/scramble/animated_x.gd" id="1_wpssi"]
 
 [sub_resource type="Animation" id="Animation_0c08y"]
 length = 0.001

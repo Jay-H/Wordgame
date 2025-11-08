@@ -7,7 +7,7 @@ var players_looking_for_match = []
 var matched_players = []
 var timers_scene = "res://data/scenes_and_scripts/phoenix/timers.tscn"
 var round_time = 40
-var match_found_time = 7
+var match_found_time = 3
 var rules_time = 5
 var score_time = 3
 var skip_dict = {}
@@ -99,7 +99,14 @@ func _match_runner(dict):
 			return
 		if dict["match_stage"] == "game":
 			var round_timer = get_node(str(dict["timers_node_name"]) + "/RoundTimer")
-			round_timer.start(round_time)
+			if dict["selected_games"][dict["current_round"]].contains("Hangman"): # because hangman doesn't work the same way as other games
+				round_timer.start(999)
+				var match_container = get_node(str(dict["match_node_name"])) 
+				var game = match_container.get_child(0)
+				game.game_over.connect(func(): # this will make it so that the round ends when someone wins in hangman
+					round_timer.start(0.5))
+			else:
+				round_timer.start(round_time)
 			dict["match_stage"] = "score"
 			await round_timer.timeout
 			var winner = _end_game(dict)
@@ -144,6 +151,8 @@ func _start_game(dict):
 		game = load("res://data/scenes_and_scripts/scramble/scramble_server_scene.tscn")
 	if dict["selected_games"][dict["current_round"]].contains("Wordsearch"):
 		game = load("res://data/scenes_and_scripts/wordsearch/WsServer.tscn")
+	if dict["selected_games"][dict["current_round"]].contains("Hangman"):
+		game = load("res://data/scenes_and_scripts/phoenix/hangman_server_scene.tscn")	
 	var game_instance = game.instantiate()
 	game_instance._initialize(dict)
 	game_instance.set_meta("userid1", dict["player_one_peer_id"])

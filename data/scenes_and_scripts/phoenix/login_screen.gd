@@ -2,7 +2,7 @@ extends Control
 @onready var main_menu = get_parent()
 var duration = 2
 var connected_to_server = false
-
+var shader_array = []
 func _ready():
 	await %SplashScreen.fade_process()
 	%SplashScreen.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -10,10 +10,30 @@ func _ready():
 	fade_in(duration)
 
 func fade_in(duration):
+	shader_array = [%Login, %CreateAccount, %ChrisLabel]
+	for i in shader_array:
+		i.material.set_shader_parameter("light_radius_pixels", 0)
+		i.material.set_shader_parameter("softness_pixels", 0)
+	%EmailBox.modulate = Color.TRANSPARENT
+	%PasswordBox.modulate = Color.TRANSPARENT
+	
 	var tween = create_tween()
 	tween.tween_property(%CanvasModulate, "color", Color.WHITE, duration)
+	for i in shader_array:
+		var tween2 = create_tween()
+		tween2.parallel().tween_method(func(a):
+			i.material.set_shader_parameter("light_radius_pixels", a),
+			0, 340, 2)
+		tween2.parallel().tween_method(func(a):
+			i.material.set_shader_parameter("softness_pixels", a),
+			0, 340, 2)
+	for i in [%EmailBox, %PasswordBox]:
+		var tween3 = create_tween()
+		tween3.tween_property(i, "modulate", Color.WHITE, 4)
+	
+func _process(_delta):
 
-
+	pass
 
 func _on_login_pressed() -> void:
 	%login_btn.play()

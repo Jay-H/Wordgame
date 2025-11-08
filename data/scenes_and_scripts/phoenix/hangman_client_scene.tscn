@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dd55dlv38c3kf"]
+[gd_scene load_steps=13 format=3 uid="uid://dd55dlv38c3kf"]
 
 [ext_resource type="Script" uid="uid://pb15cwnnrk4f" path="res://data/scenes_and_scripts/phoenix/hangman_client_scene.gd" id="1_c8i80"]
 [ext_resource type="FontFile" uid="uid://dskmx2extevrw" path="res://data/fonts/times.ttf" id="1_gndkq"]
@@ -7,11 +7,25 @@
 [ext_resource type="FontFile" uid="uid://csa2vdskduyio" path="res://data/fonts/OtherFonts/Kiddie-Store.otf" id="6_7as1b"]
 [ext_resource type="FontFile" uid="uid://4emmmfvay1to" path="res://data/fonts/OtherFonts/Kiddie-Store.woff" id="6_f5oys"]
 [ext_resource type="Script" uid="uid://cd6yotd8jl2p7" path="res://data/scenes_and_scripts/phoenix/hangman_text_entry.gd" id="6_pdb44"]
+[ext_resource type="FontFile" uid="uid://ck8enod5kvk7l" path="res://data/fonts/lcd/LCDM2B__.TTF" id="8_f5oys"]
+[ext_resource type="Script" uid="uid://dfcfgsx6f2mii" path="res://data/scenes_and_scripts/phoenix/win_blocker.gd" id="9_g5olx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7as1b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pdb44"]
 bg_color = Color(0.572273, 0.685787, 0.840438, 0.737255)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g5olx"]
+bg_color = Color(0, 0.215686, 0.0980392, 0.270588)
 border_width_left = 8
 border_width_top = 8
 border_width_right = 8
@@ -35,6 +49,7 @@ script = ExtResource("1_c8i80")
 unique_name_in_owner = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer"]
+unique_name_in_owner = true
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 visible = false
@@ -46,17 +61,16 @@ grow_vertical = 2
 color = Color(1, 1, 0.917647, 1)
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+unique_name_in_owner = true
 modulate = Color(1, 1, 0.937255, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -35.0
-offset_top = -20.0
-offset_right = 1746.0
-offset_bottom = 1574.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.3, 1.3)
 texture = ExtResource("2_ooqq5")
+expand_mode = 1
 stretch_mode = 2
 
 [node name="NextLetterTimerTitle" type="Label" parent="CanvasLayer"]
@@ -347,7 +361,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 7
 theme_override_fonts/font = ExtResource("6_f5oys")
 theme_override_font_sizes/font_size = 86
-text = "Archangel"
+text = "Chris"
 horizontal_alignment = 1
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/ParticipantHBox/PlayerVBox"]
@@ -419,7 +433,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 7
 theme_override_fonts/font = ExtResource("6_f5oys")
 theme_override_font_sizes/font_size = 86
-text = "Arch Demon"
+text = "Jason"
 horizontal_alignment = 1
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/ParticipantHBox/OpponentVBox"]
@@ -474,10 +488,17 @@ horizontal_alignment = 1
 
 [node name="HangmanTextEntry" type="LineEdit" parent="CanvasLayer"]
 unique_name_in_owner = true
-offset_left = 144.0
-offset_top = 1173.0
-offset_right = 1167.0
-offset_bottom = 1388.0
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -511.0
+offset_top = -209.0
+offset_right = 512.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/caret_width = 10
 theme_override_fonts/font = ExtResource("6_7as1b")
 theme_override_font_sizes/font_size = 131
@@ -494,5 +515,75 @@ caret_blink = true
 caret_blink_interval = 0.13
 caret_force_displayed = true
 script = ExtResource("6_pdb44")
+
+[node name="TurnTimerLabel" type="Label" parent="CanvasLayer/HangmanTextEntry"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 409.0
+offset_top = -219.0
+offset_right = 622.0
+offset_bottom = -50.0
+theme_override_colors/font_color = Color(0.529412, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_f5oys")
+theme_override_font_sizes/font_size = 131
+theme_override_styles/normal = SubResource("StyleBoxFlat_g5olx")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="WinBlocker" type="ColorRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+z_index = 7
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.607843, 0.588235, 0.584314, 0)
+script = ExtResource("9_g5olx")
+
+[node name="WinningWord" type="Label" parent="CanvasLayer/WinBlocker"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_f5oys")
+theme_override_font_sizes/font_size = 226
+text = "WWWWWWWW"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WinningWordTitle" type="Label" parent="CanvasLayer/WinBlocker"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -627.0
+offset_top = -532.0
+offset_right = 615.0
+offset_bottom = -340.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_f5oys")
+theme_override_font_sizes/font_size = 226
+text = "username
+found"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="CanvasLayer/HangmanTextEntry" to="." method="_on_hangman_text_entry_pressed"]

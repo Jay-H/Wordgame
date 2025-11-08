@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://dkuq8lxub8gf1" path="res://data/images/BlurredCircleParticle.png" id="1_xdwow"]
 
 [sub_resource type="Curve" id="Curve_yha5c"]
-_data = [Vector2(0.213483, 1), 0.0, 0.0, 0, 0, Vector2(0.606742, 0.656009), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0.213483, 1), 0.0, 0.0, 0, 0, Vector2(0.606742, 0.656009), 0.0, 0.0, 0, 0, Vector2(0.957865, 0.720507), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="CurveTexture" id="CurveTexture_ysy8c"]
 curve = SubResource("Curve_yha5c")
@@ -44,4 +44,6 @@ amount = 100
 texture = ExtResource("1_xdwow")
 lifetime = 0.64
 randomness = 1.0
+fixed_fps = 60
+visibility_rect = Rect2(-2500, -2500, 5000, 5000)
 process_material = SubResource("ParticleProcessMaterial_358wy")

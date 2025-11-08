@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=3 uid="uid://bihv5nal8gtcb"]
 
-[ext_resource type="Script" uid="uid://nhq037qac5vh" path="res://data/scenes_and_scripts/multiplayertesting/round_end_screen.gd" id="1_ivqvc"]
-[ext_resource type="Shader" uid="uid://ddb33olielmcv" path="res://data/scenes_and_scripts/scramble/FadeManager.gdshader" id="1_pw15r"]
-[ext_resource type="Script" uid="uid://cqxxr0e3ceok4" path="res://data/scenes_and_scripts/scramble/fade_overlay.gd" id="2_ivqvc"]
+[ext_resource type="Script" uid="uid://sgw7duyo3uyk" path="res://data/scenes_and_scripts/multiplayertesting/round_end_screen.gd" id="1_ivqvc"]
+[ext_resource type="Shader" uid="uid://bwn8xbur4d2jb" path="res://data/scenes_and_scripts/scramble/FadeManager.gdshader" id="1_pw15r"]
+[ext_resource type="Script" uid="uid://b83e4ccarefgq" path="res://data/scenes_and_scripts/scramble/fade_overlay.gd" id="2_ivqvc"]
 [ext_resource type="PackedScene" uid="uid://dvwvkufti1fb3" path="res://data/scenes_and_scripts/multiplayertesting/playerpic.tscn" id="3_bq4l6"]
 [ext_resource type="PackedScene" uid="uid://sdrrhsylopiu" path="res://data/scenes_and_scripts/multiplayertesting/opponentpic.tscn" id="4_qp0x8"]
 [ext_resource type="PackedScene" uid="uid://jhobmoghfpt" path="res://data/scenes_and_scripts/scramble/AnimatedX.tscn" id="6_qp0x8"]
