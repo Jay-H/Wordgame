@@ -1,8 +1,8 @@
 extends Control
 var PORT = 7777
 var MAX_PLAYERS = 1000
-var new_letter_interval_time = 2
-var interval_increase_time = 3
+var new_letter_interval_time = 5
+var interval_increase_time = 5
 var round_time = 100
 var reveal_letter_order_array = []
 var reveal_letter_order_dictionary = {}
@@ -48,17 +48,21 @@ var player_one_number_of_revealed_letters = 0
 var player_two_number_of_revealed_letters = 0
 var player_one_wrong_guesses = 0
 var player_two_wrong_guesses = 0
+var player_one_delay_multiplier = 1.00
+var player_two_delay_multiplier = 1.00
+var delay_multiplier_factor = 1.01
 
 var chaos_variant = true
 var turn_based_variant = false
 var reveal_hints_variant = false
-var lockout_variant = true
+var delay_variant = true
 
 var game_dictionary = {
 	"player_one_dictionary": {}, "player_two_dictionary": {}, "word_to_find": "", "player_one_time_to_new_letter": 0.0, 
-	"player_two_time_to_new_letter": 0.0, "player_one_last_guess": "", "player_two_last_guess": "", "player_one_wrong_guesses": 0,
+	"player_two_time_to_new_letter": 0.0, "player_one_last_guess": "_______", "player_two_last_guess": "_______", "player_one_wrong_guesses": 0,
 	"player_two_wrong_guesses": 0, "player_one_id": 0, "player_two_id": 0, "player_one_revealed_letters": 0,
-	"player_two_revealed_letters": 0, "reveal_letter_order_array": [], "reveal_letter_order_dictionary": {},
+	"player_two_revealed_letters": 0, "reveal_letter_order_array": [], "reveal_letter_order_dictionary": {}, 
+	"player_one_delay": 1.00, "player_two_delay": 1.00
 }
 var word_list = ["CAPTAIN", "ELEVEN", "NEPTUNE", "JUPITER", "ASTRAL", "WESTERN", "OCCIDENT", "ORIENT", "CEPHALIC"]
 
@@ -168,12 +172,14 @@ func _send_word_to_server(word):
 	if word == word_to_find:
 		print("Winner is: " + str(peer_id))
 	if peer_id == p1id:
+		
 		game_dictionary["player_one_last_guess"] = word
-		_lockout_calculator(p1id)
+		_delay_calculator(p1id)
 		
 	if peer_id == p2id:
+		
 		game_dictionary["player_two_last_guess"] = word
-		_lockout_calculator(p2id)
+		_delay_calculator(p2id)
 	rpc_id(p1id, "_send_dictionary_server_to_client", game_dictionary)
 	rpc_id(p2id, "_send_dictionary_server_to_client", game_dictionary)
 	pass
@@ -181,27 +187,44 @@ func _send_word_to_server(word):
 func _lockout():
 	pass
 
-func _lockout_calculator(id):
+
+# this function calculates the additional delay on seeing the new letter as you make incorrect guesses
+func _delay_calculator(id): 
 	var guesses
+	var timer
+	var number_of_revealed_letters
 	if id == p1id: 
+		player_one_wrong_guesses += 1
 		guesses = player_one_wrong_guesses
+		timer = %P1NewLetterTimer
+		number_of_revealed_letters = player_one_number_of_revealed_letters
 	if id == p2id:
+		player_two_wrong_guesses += 1
 		guesses = player_two_wrong_guesses
-	var time_left = %RoundTimer.time_left
-	var percent_of_time_left = (time_left/round_time) * 100
-	if percent_of_time_left < 50:
-		guesses +=1
-		var fraction = time_left/guesses
-		#if fraction > 
-	if percent_of_time_left < 75:
-		guesses += 1
-		var fraction = time_left/guesses
-		if fraction > 1.0:
-			print("lockout")
-	
+		timer = %P2NewLetterTimer
+		number_of_revealed_letters = player_two_number_of_revealed_letters
+	if number_of_revealed_letters <= 2: # this makes it so there is no penalty to guessing rapidly early on, and doesn't record wrong guesses
+		if id == p1id:
+			player_one_wrong_guesses = 0
+		if id == p2id:
+			player_two_wrong_guesses = 0
+		return
+	if number_of_revealed_letters > 2: # when more than two letters are revealed, we start counting the wrong guesses.
+		if id == p1id:
+			player_one_wrong_guesses += 1
+			player_one_delay_multiplier *= delay_multiplier_factor # this multiplier causes an exponential rise in delay as you guess wrong.
+			game_dictionary["player_one_delay"] = player_one_delay_multiplier
+			timer.start(new_letter_interval_time * player_one_delay_multiplier) # can play around with this stuff to altar the penalty of delay
+		if id == p2id:
+			player_two_wrong_guesses += 1
+			player_two_delay_multiplier *= delay_multiplier_factor
+			game_dictionary["player_two_delay"] = player_two_delay_multiplier
+			timer.start(new_letter_interval_time * player_two_delay_multiplier)		
+
 	
 
 	pass
+
 
 func _start_server():
 	# Create a new ENet multiplayer peer.

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Wordsearch"
-run/main_scene="uid://b836ehk27i7xl"
+run/main_scene="uid://cg8v76fr6uiyb"
 config/features=PackedStringArray("4.4", "Mobile")
 run/flush_stdout_on_print=true
 config/icon="res://icon.svg"

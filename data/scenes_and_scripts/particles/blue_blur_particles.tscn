@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://dtjgkocq5d4bi"]
+
+[ext_resource type="Texture2D" uid="uid://dkuq8lxub8gf1" path="res://data/images/BlurredCircleParticle.png" id="1_xdwow"]
+
+[sub_resource type="Curve" id="Curve_yha5c"]
+_data = [Vector2(0.213483, 1), 0.0, 0.0, 0, 0, Vector2(0.606742, 0.656009), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ysy8c"]
+curve = SubResource("Curve_yha5c")
+
+[sub_resource type="Curve" id="Curve_wmipw"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_l5sd0"]
+curve = SubResource("Curve_wmipw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_358wy"]
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+spread = 180.0
+initial_velocity_min = 131.43
+initial_velocity_max = 216.18
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.15
+color = Color(0.739115, 0.810602, 0.959244, 1)
+alpha_curve = SubResource("CurveTexture_ysy8c")
+hue_variation_curve = SubResource("CurveTexture_l5sd0")
+turbulence_noise_strength = 6.53
+turbulence_noise_scale = 4.377
+turbulence_noise_speed_random = 0.92
+turbulence_initial_displacement_min = -76.8
+turbulence_initial_displacement_max = 88.6
+
+[node name="BlueBlueParticles" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 100
+texture = ExtResource("1_xdwow")
+lifetime = 0.64
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_358wy")

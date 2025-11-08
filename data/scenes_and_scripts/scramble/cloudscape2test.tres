@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cutp7wv0qewh5"]
 
-[ext_resource type="Shader" uid="uid://utbh3wv3i367" path="res://data/scenes_and_scripts/scramble/cloudscape2.gdshader" id="1_phe12"]
+[ext_resource type="Shader" uid="uid://c14ncknun6c8h" path="res://data/scenes_and_scripts/scramble/cloudscape2.gdshader" id="1_phe12"]
 
 [resource]
 shader = ExtResource("1_phe12")

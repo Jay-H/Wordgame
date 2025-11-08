@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dd55dlv38c3kf"]
+[gd_scene load_steps=10 format=3 uid="uid://dd55dlv38c3kf"]
 
 [ext_resource type="Script" uid="uid://pb15cwnnrk4f" path="res://data/scenes_and_scripts/phoenix/hangman_client_scene.gd" id="1_c8i80"]
 [ext_resource type="FontFile" uid="uid://dskmx2extevrw" path="res://data/fonts/times.ttf" id="1_gndkq"]
@@ -7,6 +7,8 @@
 [ext_resource type="FontFile" uid="uid://csa2vdskduyio" path="res://data/fonts/OtherFonts/Kiddie-Store.otf" id="6_7as1b"]
 [ext_resource type="FontFile" uid="uid://4emmmfvay1to" path="res://data/fonts/OtherFonts/Kiddie-Store.woff" id="6_f5oys"]
 [ext_resource type="Script" uid="uid://cd6yotd8jl2p7" path="res://data/scenes_and_scripts/phoenix/hangman_text_entry.gd" id="6_pdb44"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7as1b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pdb44"]
 bg_color = Color(0.572273, 0.685787, 0.840438, 0.737255)
@@ -30,6 +32,7 @@ grow_vertical = 2
 script = ExtResource("1_c8i80")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer"]
 
@@ -103,99 +106,216 @@ grow_vertical = 2
 alignment = 1
 
 [node name="Label" type="Label" parent="CanvasLayer/LetterBox"]
-custom_minimum_size = Vector2(156, 240)
+custom_minimum_size = Vector2(152, 179)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.235294)
 theme_override_constants/shadow_offset_x = 15
 theme_override_constants/shadow_offset_y = 15
 theme_override_fonts/font = ExtResource("1_gndkq")
-theme_override_font_sizes/font_size = 216
-text = "x"
+theme_override_font_sizes/font_size = 161
+text = "_"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="CanvasLayer/LetterBox"]
-custom_minimum_size = Vector2(156, 240)
+custom_minimum_size = Vector2(152, 179)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.235294)
 theme_override_constants/shadow_offset_x = 15
 theme_override_constants/shadow_offset_y = 15
 theme_override_fonts/font = ExtResource("1_gndkq")
-theme_override_font_sizes/font_size = 216
-text = "x"
+theme_override_font_sizes/font_size = 161
+text = "_"
 horizontal_alignment = 1
 
 [node name="Label3" type="Label" parent="CanvasLayer/LetterBox"]
-custom_minimum_size = Vector2(156, 240)
+custom_minimum_size = Vector2(152, 179)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.235294)
 theme_override_constants/shadow_offset_x = 15
 theme_override_constants/shadow_offset_y = 15
 theme_override_fonts/font = ExtResource("1_gndkq")
-theme_override_font_sizes/font_size = 216
-text = "x"
+theme_override_font_sizes/font_size = 161
+text = "_"
 horizontal_alignment = 1
 
 [node name="Label4" type="Label" parent="CanvasLayer/LetterBox"]
-custom_minimum_size = Vector2(156, 240)
+custom_minimum_size = Vector2(152, 179)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.235294)
 theme_override_constants/shadow_offset_x = 15
 theme_override_constants/shadow_offset_y = 15
 theme_override_fonts/font = ExtResource("1_gndkq")
-theme_override_font_sizes/font_size = 216
-text = "x"
+theme_override_font_sizes/font_size = 161
+text = "_"
 horizontal_alignment = 1
 
 [node name="Label5" type="Label" parent="CanvasLayer/LetterBox"]
-custom_minimum_size = Vector2(156, 240)
+custom_minimum_size = Vector2(152, 179)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.235294)
 theme_override_constants/shadow_offset_x = 15
 theme_override_constants/shadow_offset_y = 15
 theme_override_fonts/font = ExtResource("1_gndkq")
-theme_override_font_sizes/font_size = 216
-text = "x"
+theme_override_font_sizes/font_size = 161
+text = "_"
 horizontal_alignment = 1
 
 [node name="Label6" type="Label" parent="CanvasLayer/LetterBox"]
-custom_minimum_size = Vector2(156, 240)
+custom_minimum_size = Vector2(152, 179)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.235294)
 theme_override_constants/shadow_offset_x = 15
 theme_override_constants/shadow_offset_y = 15
 theme_override_fonts/font = ExtResource("1_gndkq")
-theme_override_font_sizes/font_size = 216
-text = "x"
+theme_override_font_sizes/font_size = 161
+text = "_"
 horizontal_alignment = 1
 
 [node name="Label7" type="Label" parent="CanvasLayer/LetterBox"]
-custom_minimum_size = Vector2(156, 240)
+custom_minimum_size = Vector2(152, 179)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.235294)
 theme_override_constants/shadow_offset_x = 15
 theme_override_constants/shadow_offset_y = 15
 theme_override_fonts/font = ExtResource("1_gndkq")
-theme_override_font_sizes/font_size = 216
-text = "x"
+theme_override_font_sizes/font_size = 161
+text = "_"
 horizontal_alignment = 1
 
 [node name="Label8" type="Label" parent="CanvasLayer/LetterBox"]
-custom_minimum_size = Vector2(156, 240)
+custom_minimum_size = Vector2(152, 179)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.235294)
 theme_override_constants/shadow_offset_x = 15
 theme_override_constants/shadow_offset_y = 15
 theme_override_fonts/font = ExtResource("1_gndkq")
-theme_override_font_sizes/font_size = 216
-text = "x"
+theme_override_font_sizes/font_size = 161
+text = "_"
+horizontal_alignment = 1
+
+[node name="GhostBox" type="HBoxContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+z_index = 3
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 67.0
+offset_bottom = 183.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/GhostBox"]
+z_index = 3
+material = SubResource("ShaderMaterial_7as1b")
+custom_minimum_size = Vector2(152, 179)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.368627, 1)
+theme_override_constants/shadow_offset_x = 15
+theme_override_constants/shadow_offset_y = 15
+theme_override_fonts/font = ExtResource("1_gndkq")
+theme_override_font_sizes/font_size = 161
+text = "_"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/GhostBox"]
+z_index = 3
+material = SubResource("ShaderMaterial_7as1b")
+custom_minimum_size = Vector2(152, 179)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.368627, 1)
+theme_override_constants/shadow_offset_x = 15
+theme_override_constants/shadow_offset_y = 15
+theme_override_fonts/font = ExtResource("1_gndkq")
+theme_override_font_sizes/font_size = 161
+text = "_"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="CanvasLayer/GhostBox"]
+z_index = 3
+material = SubResource("ShaderMaterial_7as1b")
+custom_minimum_size = Vector2(152, 179)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.368627, 1)
+theme_override_constants/shadow_offset_x = 15
+theme_override_constants/shadow_offset_y = 15
+theme_override_fonts/font = ExtResource("1_gndkq")
+theme_override_font_sizes/font_size = 161
+text = "_"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="CanvasLayer/GhostBox"]
+z_index = 3
+material = SubResource("ShaderMaterial_7as1b")
+custom_minimum_size = Vector2(152, 179)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.368627, 1)
+theme_override_constants/shadow_offset_x = 15
+theme_override_constants/shadow_offset_y = 15
+theme_override_fonts/font = ExtResource("1_gndkq")
+theme_override_font_sizes/font_size = 161
+text = "_"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="CanvasLayer/GhostBox"]
+z_index = 3
+material = SubResource("ShaderMaterial_7as1b")
+custom_minimum_size = Vector2(152, 179)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.368627, 1)
+theme_override_constants/shadow_offset_x = 15
+theme_override_constants/shadow_offset_y = 15
+theme_override_fonts/font = ExtResource("1_gndkq")
+theme_override_font_sizes/font_size = 161
+text = "_"
+horizontal_alignment = 1
+
+[node name="Label6" type="Label" parent="CanvasLayer/GhostBox"]
+z_index = 3
+material = SubResource("ShaderMaterial_7as1b")
+custom_minimum_size = Vector2(152, 179)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.368627, 1)
+theme_override_constants/shadow_offset_x = 15
+theme_override_constants/shadow_offset_y = 15
+theme_override_fonts/font = ExtResource("1_gndkq")
+theme_override_font_sizes/font_size = 161
+text = "_"
+horizontal_alignment = 1
+
+[node name="Label7" type="Label" parent="CanvasLayer/GhostBox"]
+z_index = 3
+material = SubResource("ShaderMaterial_7as1b")
+custom_minimum_size = Vector2(152, 179)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.368627, 1)
+theme_override_constants/shadow_offset_x = 15
+theme_override_constants/shadow_offset_y = 15
+theme_override_fonts/font = ExtResource("1_gndkq")
+theme_override_font_sizes/font_size = 161
+text = "_"
+horizontal_alignment = 1
+
+[node name="Label8" type="Label" parent="CanvasLayer/GhostBox"]
+z_index = 3
+material = SubResource("ShaderMaterial_7as1b")
+custom_minimum_size = Vector2(152, 179)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.368627, 1)
+theme_override_constants/shadow_offset_x = 15
+theme_override_constants/shadow_offset_y = 15
+theme_override_fonts/font = ExtResource("1_gndkq")
+theme_override_font_sizes/font_size = 161
+text = "_"
 horizontal_alignment = 1
 
 [node name="ParticipantHBox" type="HBoxContainer" parent="CanvasLayer"]
@@ -268,7 +388,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 7
 theme_override_fonts/font = ExtResource("6_f5oys")
 theme_override_font_sizes/font_size = 86
-text = "Lockout Status"
+text = "Delay Mult."
 horizontal_alignment = 1
 
 [node name="PlayerDelay" type="Label" parent="CanvasLayer/ParticipantHBox/PlayerVBox/VBoxContainer2"]
@@ -338,7 +458,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 7
 theme_override_fonts/font = ExtResource("6_f5oys")
 theme_override_font_sizes/font_size = 86
-text = "Lockout Status"
+text = "Delay Mult."
 horizontal_alignment = 1
 
 [node name="OpponentDelay" type="Label" parent="CanvasLayer/ParticipantHBox/OpponentVBox/VBoxContainer2"]
@@ -354,10 +474,10 @@ horizontal_alignment = 1
 
 [node name="HangmanTextEntry" type="LineEdit" parent="CanvasLayer"]
 unique_name_in_owner = true
-offset_left = 151.0
-offset_top = 1149.0
-offset_right = 1174.0
-offset_bottom = 1423.0
+offset_left = 144.0
+offset_top = 1173.0
+offset_right = 1167.0
+offset_bottom = 1388.0
 theme_override_constants/caret_width = 10
 theme_override_fonts/font = ExtResource("6_7as1b")
 theme_override_font_sizes/font_size = 131
