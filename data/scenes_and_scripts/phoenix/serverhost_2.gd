@@ -19,6 +19,7 @@ var game_types_ref
 var selected_game_list_name
 var selected_game_list
 var timer_values_ref
+
 func _ready():
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
