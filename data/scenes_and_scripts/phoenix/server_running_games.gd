@@ -180,7 +180,7 @@ func _end_game(dict):
 func _game_selector(): 
 	
 	# this function will return three games at random from Globals.game_types (while preventing duplicates)
-	var games_array = Globals.game_types.duplicate()
+	var games_array = serverhost.selected_game_list.duplicate()
 	var games_array_size = games_array.size()
 	var game_one = games_array[(randi_range(0, (games_array_size - 1)))]
 	games_array.erase(game_one)
