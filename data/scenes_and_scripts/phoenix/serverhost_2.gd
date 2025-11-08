@@ -18,6 +18,7 @@ var available_game_type_lists = {}
 var game_types_ref
 var selected_game_list_name
 var selected_game_list
+var selected_game_list_2 = ["HangmanChaosVanilla", "HangmanChaosShared", "HangmanChaosEphemeral", "HangmanTurnbased", "HangmanDelay", "HangmanDelayEphemeral"]
 var timer_values_ref
 
 func _ready():
