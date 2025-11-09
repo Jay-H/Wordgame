@@ -165,3 +165,8 @@ func _on_quick_login_d_pressed() -> void:
 	%PasswordBox.text = "supersonic"
 	_on_login_pressed()
 	pass # Replace with function body.
+
+func _on_wstest_pressed() -> void:
+	Globals.WSTEST = true
+	get_tree().change_scene_to_file("res://data/scenes_and_scripts/Wordsearch/Wordsearch.tscn")
+	pass # Replace with function body.

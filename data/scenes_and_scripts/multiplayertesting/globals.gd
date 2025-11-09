@@ -69,15 +69,6 @@ const WIN_LABEL_FONT_COLOR = Color.PURPLE
 const LOSE_LABEL_FONT_SIZE = 100
 const LOSE_LABEL_FONT_COLOR = Color.CRIMSON
 
-# Just a random one for now, asked gemini to give me a list of words for a godot wordsearch :P
-# Eventually depending on certain things, figure we want to base these words on the nubmer of letters
-# per word that we want
-const WORD_LIST = [
-	"GODOT", "SWIFT", "MOBILE", "GAME", "GRID", "DRAG",
-	"NODE", "SCENE", "CODE", "DEBUG", "PIXEL", "VECTOR",
-	"SHADER", "SPRITE", "SIGNAL", "INPUT", "EXPORT"
-]
-
 const SERVER_ADDRESS: String = "127.0.0.1" # Use 127.0.0.1 for local testing
 const SERVER_PORT: int = 7777
 
@@ -105,6 +96,8 @@ const DIRECTIONS: Array[Vector2i] = [
 # We can figure this out at some point
 const PAIR_FREQUENCIES = {
 }
+
+var WSTEST = false
 
 const GAME_DURATION_SECONDS: int = 70
 const SUDDEN_DEATH_DURATION_SECONDS: int = 10

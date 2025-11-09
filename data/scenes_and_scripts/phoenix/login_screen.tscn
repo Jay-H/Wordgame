@@ -1,18 +1,18 @@
 [gd_scene load_steps=32 format=3 uid="uid://ms43gnmmu3g3"]
 
 [ext_resource type="FontFile" uid="uid://dskmx2extevrw" path="res://data/fonts/times.ttf" id="1_52rl6"]
-[ext_resource type="Script" uid="uid://lj43fl6ocrf3" path="res://data/scenes_and_scripts/phoenix/login_screen.gd" id="1_vynka"]
+[ext_resource type="Script" uid="uid://cmkt7e21tjn1f" path="res://data/scenes_and_scripts/phoenix/login_screen.gd" id="1_vynka"]
 [ext_resource type="FontFile" uid="uid://dnyvxhvqed50e" path="res://data/fonts/OtherFonts/Crisp-Walnut.ttf" id="3_ki628"]
 [ext_resource type="FontFile" uid="uid://brx8ufgx2sv54" path="res://data/fonts/OtherFonts/Kiddie-Store.ttf" id="3_kx71p"]
-[ext_resource type="Shader" uid="uid://csbu7dldwloow" path="res://data/scenes_and_scripts/multiplayertesting/flashlight.gdshader" id="3_lchx1"]
-[ext_resource type="Script" uid="uid://fjildfqdib8h" path="res://data/scenes_and_scripts/multiplayertesting/label_pressed.gd" id="3_qf86c"]
+[ext_resource type="Shader" uid="uid://bs4gkavqbf2ok" path="res://data/scenes_and_scripts/multiplayertesting/flashlight.gdshader" id="3_lchx1"]
+[ext_resource type="Script" uid="uid://kd8w4xdgqts4" path="res://data/scenes_and_scripts/multiplayertesting/label_pressed.gd" id="3_qf86c"]
 [ext_resource type="Texture2D" uid="uid://crknm7gdg7jon" path="res://data/images/fog.png" id="4_aiv7l"]
 [ext_resource type="FontFile" uid="uid://dehm6x83duy2e" path="res://data/fonts/space-ranger/spaceranger.ttf" id="4_w6vpo"]
-[ext_resource type="Script" uid="uid://bp4dtiex0f3ss" path="res://data/scenes_and_scripts/phoenix/splash_screen.gd" id="4_wk1ki"]
+[ext_resource type="Script" uid="uid://bg2u4vu80aor" path="res://data/scenes_and_scripts/phoenix/splash_screen.gd" id="4_wk1ki"]
 [ext_resource type="Texture2D" uid="uid://dkuq8lxub8gf1" path="res://data/images/BlurredCircleParticle.png" id="5_2reso"]
 [ext_resource type="Texture2D" uid="uid://cfawov84ked10" path="res://data/images/Brain1.png" id="5_wk1ki"]
 [ext_resource type="AudioStream" uid="uid://n35hhg7ig1bd" path="res://data/sounds/login_button.mp3" id="9_nr2tq"]
-[ext_resource type="Script" uid="uid://b6kkx5rrpfdcp" path="res://data/scenes_and_scripts/phoenix/bottom_particle_control.gd" id="11_lchx1"]
+[ext_resource type="Script" path="res://data/scenes_and_scripts/phoenix/bottom_particle_control.gd" id="11_lchx1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4ivgp"]
 shader = ExtResource("3_lchx1")
@@ -266,6 +266,15 @@ offset_right = 540.0
 offset_bottom = 2770.0
 text = "QuickLoginA"
 
+[node name="WSTEST" type="Button" parent="CanvasLayer/FirstScreenControl"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 500.0
+offset_top = 130.0
+offset_right = 922.0
+offset_bottom = 313.0
+text = "TEST"
+
 [node name="QuickLoginB" type="Button" parent="CanvasLayer/FirstScreenControl"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
@@ -347,6 +356,7 @@ horizontal_alignment = 1
 [node name="ParticlePathControl" type="Control" parent="CanvasLayer/SplashScreen/Label2"]
 unique_name_in_owner = true
 layout_mode = 1
+anchors_preset = 0
 offset_left = -290.0
 
 [node name="Path2D2" type="Path2D" parent="CanvasLayer/SplashScreen/Label2/ParticlePathControl"]
@@ -457,6 +467,7 @@ volume_db = 8.056
 [connection signal="pressed" from="CanvasLayer/FirstScreenControl/VBoxContainer3/VBoxContainer2/Login" to="." method="_on_login_pressed"]
 [connection signal="pressed" from="CanvasLayer/FirstScreenControl/VBoxContainer3/VBoxContainer2/CreateAccount" to="." method="_on_create_account_pressed"]
 [connection signal="pressed" from="CanvasLayer/FirstScreenControl/QuickLoginA" to="." method="_on_quick_login_a_pressed"]
+[connection signal="pressed" from="CanvasLayer/FirstScreenControl/WSTEST" to="." method="_on_wstest_pressed"]
 [connection signal="pressed" from="CanvasLayer/FirstScreenControl/QuickLoginB" to="." method="_on_quick_login_b_pressed"]
 [connection signal="pressed" from="CanvasLayer/FirstScreenControl/QuickLoginC" to="." method="_on_quick_login_c_pressed"]
 [connection signal="pressed" from="CanvasLayer/FirstScreenControl/QuickLoginD" to="." method="_on_quick_login_d_pressed"]

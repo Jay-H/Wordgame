@@ -69,6 +69,8 @@ var opponent_found_sound = preload("res://data/sounds/WS_temp_opponent_found.mp3
 
 @export var found_word_animation: CellAnimationResource
 
+var ws_test_words = []
+
 func _process(delta):
 	if pregame_timer_node != null:
 		%PreTimerLabel.text = str(int(pregame_timer_node.time_left))
@@ -101,13 +103,20 @@ func _ready() -> void:
 	
 	set_process_priority(1) # Ensure this node processes drawing after its children
 	queue_redraw() # Request a redraw when the grid is generated/ready
+	
+	generate_grid_testing()
+	generate_grid()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and !event.is_pressed():
 		if is_dragging: # Only process if a drag was active
 			is_dragging = false
 			start_cell = null
-			process_selection()
+			if Globals.WSTEST:
+				print("TESTINGGGGG")
+				process_selection_test()
+			else:
+				process_selection()
 			get_viewport().set_input_as_handled()
 			return # Event handled, stop processing
 
@@ -297,6 +306,7 @@ func process_selection() -> void:
 		################################################################
 		
 		_animate_correct_label()
+		_animate_found_word_pulse(selection_path)
 		if found_word_animation:
 			found_word_animation.apply_animation(selection_path) 
 		else:
@@ -560,3 +570,228 @@ func unhighlight_current_selection():
 	for cell in selection_path:
 		if is_instance_valid(cell):
 			cell.unhighlight()
+
+####### PURELY FOR TESTING #######
+func generate_grid_testing() -> void:
+	grid_cells.clear()
+	ws_test_words.clear()
+
+	# Create the 2D array structure
+	grid_cells.resize(Globals.GRID_SIZE.y)
+	ws_test_words.resize(Globals.GRID_SIZE.y)
+	
+	# Populate the grid with words and letters
+	for y in range(Globals.GRID_SIZE.y):
+		grid_cells[y] = []
+		grid_cells[y].resize(Globals.GRID_SIZE.x)
+		ws_test_words[y] = []
+		ws_test_words[y].resize(Globals.GRID_SIZE.x)
+		for x in range(Globals.GRID_SIZE.x):
+			ws_test_words[y][x] = false
+			grid_cells[y][x] = "X"
+
+	# --- FIRST: Insert words into the grid ---
+	insert_words()
+	
+	# --- SECOND: Populate the remaining cells with random letters and start animation ---
+	for y in range(Globals.GRID_SIZE.y):
+		for x in range(Globals.GRID_SIZE.x):
+			var cell = grid_cells[y][x]
+			if not ws_test_words[y][x]: # If this cell is NOT occupied by a word
+				cell = "X"
+
+func insert_words() -> void:
+	var words_to_place = []
+	var placed_count = 0
+	
+	# The list of words that have been attempted and failed
+	var failed_words: Array[String] = []
+	
+	"""
+	 Keep trying until we reach the the word count we need
+	 
+	 When the length of words allowed are like, above 8, SOMETIMES it fails to place it after 1000 attempts and would
+	 just not try another word. So I asked gemini to make another loop that handles adding another word if one fails. it added
+	 a touch of complexity but still understandable.
+	 I've yet to see this problem occur at words of only 6 or less length, but need to account for it!
+	"""
+	while placed_count < Globals.GUARANTEED_WORD_COUNT:
+		# Step 1: Get a word to place
+		var word_to_try: String
+		var fake_word = "TRUCK"
+
+		var attempts = 0
+		var word_found = false
+		while not word_found and attempts < 1000:
+			var picked_word = fake_word
+			if not failed_words.has(picked_word) and not words_to_place.has(picked_word):
+				word_to_try = picked_word.to_upper()
+				words_to_place.append(word_to_try) # Add to our list of words for the puzzle
+				word_found = true
+			attempts += 1
+		
+		if not word_found:
+			print("Could not find a new valid word to try. Exiting.")
+			break
+
+		var word_len = word_to_try.length()
+		var placed_this_word = false
+		
+		var placement_attempts = 0
+		
+		# Step 2: Try to place the word
+		while placement_attempts < 1000 and not placed_this_word:
+			placement_attempts += 1
+			
+			# Random starting position
+			var start_x = randi_range(0, Globals.GRID_SIZE.x - 1)
+			var start_y = randi_range(0, Globals.GRID_SIZE.y - 1)
+			var start_pos = Vector2i(start_x, start_y)
+			
+			# Random direction
+			var direction_idx = randi_range(0, Globals.DIRECTIONS.size() - 1)
+			var direction = Globals.DIRECTIONS[direction_idx]
+			
+			var can_place = true
+			var cells_to_occupy: Array[Vector2i] = []
+			
+			for j in range(word_len):
+				var current_pos = start_pos + direction * j
+				
+				if not (current_pos.x >= 0 and current_pos.x < Globals.GRID_SIZE.x and current_pos.y >= 0 and current_pos.y < Globals.GRID_SIZE.y):
+					can_place = false
+					break
+				
+				if ws_test_words[current_pos.y][current_pos.x]:
+					if grid_cells[current_pos.y][current_pos.x] != word_to_try[j]:
+						can_place = false
+						break
+				
+				cells_to_occupy.append(current_pos)
+			
+			if can_place:
+				for j in range(word_len):
+					var cell_pos = cells_to_occupy[j]
+					grid_cells[cell_pos.y][cell_pos.x] = word_to_try[j]
+					ws_test_words[cell_pos.y][cell_pos.x] = true
+				
+				placed_this_word = true
+				placed_count += 1
+				print("Successfully placed word: ", word_to_try)
+		
+		if not placed_this_word:
+			# If the word fails to place after 1000 attempts, mark it as failed
+			# so we don't try it again, and let the outer loop pick a new one.
+			print("Could not place word: ", word_to_try, " after ", placement_attempts, " attempts.")
+			failed_words.append(word_to_try)
+			# Do not increment placed_count, the outer loop will continue.
+
+	print("Finished placing words. Placed count: ", placed_count, " out of ", Globals.GUARANTEED_WORD_COUNT)
+
+func process_selection_test() -> void:
+	if selection_path.is_empty():
+		return
+	
+	# tracks how many letters in the selection path are already found
+	var cell_found_count = 0
+
+	var selected_word: String = ""
+	for cell in selection_path:
+		if cell.is_found or cell.is_found_by_opponent:
+			cell_found_count += 1
+		selected_word += cell.letter
+
+	if selected_word == "TRUCK":
+		sound_player.stream = sounds_to_play[play_count]
+		sound_player.play()
+		play_count = play_count + 1
+		var label
+		label = find_label_by_text(words_labels, str(multiplayer.get_unique_id()), selected_word)
+		_animate_correct_label()
+		_animate_found_word_pulse(selection_path)
+		if found_word_animation:
+			found_word_animation.apply_animation(selection_path) 
+		else:
+			push_error("Animation borked, something went wrong")
+		
+		for cell in selection_path:
+			cell.set_found(true)
+			
+	else:
+		sound_player.stream = wrong_sound
+		sound_player.play()
+		_animate_wrong_label()
+		for cell in selection_path:
+			cell.unhighlight()
+		
+	selection_path.clear()
+
+## ✨ Creates a directional pulse spanning the entire screen.
+func _animate_found_word_pulse(selection: Array[LetterCell]) -> void:
+	if selection.size() < 2:
+		return
+
+	var pulse_line = Line2D.new()
+	var chungus_layer = get_node("chungus") 
+	pulse_line.z_index = 100 
+	chungus_layer.add_child(pulse_line) 
+	
+	var pulse_duration = 0.9
+	var viewport_size = get_viewport().size
+	# The diagonal length of the viewport, which is the minimum size needed to cover the screen.
+	var massive_coverage_dimension = viewport_size.length() 
+	# Use a factor of 2x the diagonal to guarantee the line is longer and wider than the screen.
+	var line_dimension = massive_coverage_dimension * 20.0
+	
+	# ------------------ Directional Calculation ------------------
+	var start_cell = selection.front()
+	var end_cell = selection.back()
+
+	var start_global_center = start_cell.get_global_position() + start_cell.size / 2.0
+	var end_global_center = end_cell.get_global_position() + end_cell.size / 2.0
+	
+	var word_direction = (end_global_center - start_global_center).normalized()
+	var wavefront_direction = Vector2(-word_direction.y, word_direction.x).normalized()
+	
+	# 4. Define the line's two points using the wavefront direction.
+	# These points define a line segment that is much longer than the screen's diagonal 
+	# and is centered near the found word.
+	var point_a = start_global_center + word_direction * line_dimension
+	var point_b = start_global_center - word_direction * line_dimension
+
+	# 5. Convert points to the CanvasLayer's local space
+	var start_local_pos = pulse_line.to_local(point_a)
+	var end_local_pos = pulse_line.to_local(point_b)
+	
+	# To ensure the pulse travels in the direction of the word, 
+	# we set the line points to go from START_of_word direction to END_of_word direction.
+	# If the pulse direction is wrong, swap these two lines!
+	pulse_line.add_point(end_local_pos)
+	pulse_line.add_point(start_local_pos)
+	
+	# ------------------ SHADER & ANIMATION SETUP ------------------
+	
+	var pulse_shader = preload("res://data/shaders/pulse_shader.gdshader")
+	var material = ShaderMaterial.new()
+	material.shader = pulse_shader
+	pulse_line.material = material
+	material.set_shader_parameter("total_pulse_width", 0.5)
+	material.set_shader_parameter("fade_fraction", 1.0)
+	
+	pulse_line.default_color = Color.WHITE
+	pulse_line.width = line_dimension 
+	pulse_line.texture_mode = Line2D.LINE_TEXTURE_TILE
+
+	# 1. Animate the Pulse Movement 
+	var tween_offset = create_tween()
+	tween_offset.play()
+	
+	tween_offset.tween_method(
+		func(value): material.set_shader_parameter("progress", value), 
+		0.0,  # Start the pulse entirely off-screen
+		2.0,   # End the pulse entirely off-screen
+		pulse_duration
+	).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	
+	# 2. Clean up the node
+	tween_offset.tween_callback(pulse_line.queue_free)
