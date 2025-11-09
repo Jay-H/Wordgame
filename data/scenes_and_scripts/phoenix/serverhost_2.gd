@@ -32,6 +32,9 @@ func _ready():
 	print("server has logged in")
 	pass
 	
+func _process(_delta):
+	await _debug_vm(selected_game_list)
+
 func _on_FirebaseAuth_login_succeeded(auth):
 
 	game_types_ref = Firebase.Database.get_database_reference("server_data/game_types", {})
@@ -333,4 +336,12 @@ func _ask_server_for_info(info_dictionary):
 	info_dictionary["players"] = logged_in_firebase_ids.size()
 	info_dictionary["matches"] = running_matches.size()
 	rpc_id(multiplayer.get_remote_sender_id(), "_ask_server_for_info", info_dictionary)
+	pass
+
+
+@rpc("any_peer", "call_remote", "reliable")	
+func _debug_vm(data):
+	await get_tree().create_timer(1).timeout
+	for i in multiplayer.get_peers():
+		rpc_id(i, "_debug_vm", data)
 	pass
