@@ -18,3 +18,15 @@ one_shot = true
 [node name="P2NewLetterTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 one_shot = true
+
+[node name="RoundTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="P1TurnTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="P2TurnTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true

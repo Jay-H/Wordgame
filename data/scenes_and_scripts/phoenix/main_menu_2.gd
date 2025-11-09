@@ -226,11 +226,14 @@ func _show_rules_screen(rules, dict): #this function will choose the rules scree
 	if opponent_disconnected == false:
 		var scramble_rules = "res://data/scenes_and_scripts/phoenix/RulesTransition2.tscn"
 		var wordsearch_rules = "res://data/scenes_and_scripts/phoenix/RulesTransitionWordsearch.tscn"
+		var hangman_rules = "res://data/scenes_and_scripts/phoenix/HangmanRules.tscn"
 		var current_rules_node
 		if rules.contains("Scramble"):
 			current_rules_node = ((load(scramble_rules)).instantiate())
 		if rules.contains("Wordsearch"):
 			current_rules_node = ((load(scramble_rules)).instantiate())
+		if rules.contains("Hangman"):
+			current_rules_node = ((load(hangman_rules)).instantiate())
 		add_child(current_rules_node)
 		current_rules_node.setup(rules,dict)
 		rules_instance = current_rules_node
@@ -386,3 +389,7 @@ func _end_single_player_game(node):
 	_true_menu_fade_in()
 	node.queue_free()
 	
+@rpc("authority", "call_remote", "reliable")	
+func _debug_vm(data):
+	print(data)
+	pass

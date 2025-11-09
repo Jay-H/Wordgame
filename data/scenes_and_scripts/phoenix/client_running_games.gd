@@ -70,6 +70,8 @@ func _start_game(dict):
 			game = load("res://data/scenes_and_scripts/scramble/scramble_client_scene.tscn")
 		if dict["selected_games"][dict["current_round"]].contains("Wordsearch"):
 			game = load("res://data/scenes_and_scripts/wordsearch/WordSearch.tscn")
+		if dict["selected_games"][dict["current_round"]].contains("Hangman"):
+			game = load("res://data/scenes_and_scripts/phoenix/hangman_client_scene.tscn")
 		var game_instance = game.instantiate()
 		game_instance._initialize(dict)
 		#game_instance.name = str(dict["player_one_dictionary"]["email"]) + str(dict["player_two_dictionary"]["email"]) 

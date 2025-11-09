@@ -14,21 +14,67 @@ var players_looking_for_match = []
 var legendary_dictionary = {}
 var running_matches = []
 var process_test = false
-
-
+var available_game_type_lists = {}
+var game_types_ref
+var selected_game_list_name
+var selected_game_list
+var selected_game_list_2 = ["HangmanChaosVanilla", "HangmanChaosShared", "HangmanChaosEphemeral", "HangmanTurnbased", "HangmanDelay", "HangmanDelayEphemeral"]
+var timer_values_ref
+var timer_values_dictionary = {}
 
 func _ready():
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	_start_server()
+	Firebase.Auth.login_succeeded.connect(_on_FirebaseAuth_login_succeeded)
 	Firebase.Auth.login_with_email_and_password("server@server.com", "supersonic")
 	%RunningGames.connect("match_ended", _match_over_data_collection)
 	print("server has logged in")
 	pass
 	
+func _process(_delta):
+	await _debug_vm(selected_game_list)
+
+func _on_FirebaseAuth_login_succeeded(auth):
+
+	game_types_ref = Firebase.Database.get_database_reference("server_data/game_types", {})
+	game_types_ref.new_data_update.connect(_on_game_types_ref_update)
+	game_types_ref.patch_data_update.connect(_on_game_types_ref_update)
+	game_types_ref.delete_data_update.connect(_on_game_types_ref_update)
+	timer_values_ref = Firebase.Database.get_database_reference("server_data/timer_values", {})
+	timer_values_ref.new_data_update.connect(_on_timer_ref_update)
+	timer_values_ref.patch_data_update.connect(_on_timer_ref_update)
+	timer_values_ref.delete_data_update.connect(_on_timer_ref_update)	
+	pass	
+	
+	
 	
  # here we will let the client know that they are connected to the server for the purpose of allowing them to now login through firebase
+func _on_game_types_ref_update(resource):
+	if resource.key == "selected_game":
+		selected_game_list_name = resource.data 
+	else:
+		available_game_type_lists[str(resource.key)] = resource.data
+	if available_game_type_lists != null and selected_game_list_name != null:
+		if available_game_type_lists.has(selected_game_list_name):
+			selected_game_list = available_game_type_lists[str(selected_game_list_name)]	
+			
+		
+	
+	print(resource)
+	#print(resource["selected_game_list"])
  
+func _on_timer_ref_update(resource):
+	if resource.key == "match_found_timer":
+		timer_values_dictionary["match_found_timer"] = resource.data
+	if resource.key == "round_timer":
+		timer_values_dictionary["round_timer"] = resource.data
+	if resource.key == "rules_screen_timer":
+		timer_values_dictionary["rules_screen_timer"] = resource.data
+	if resource.key == "score_timer":
+		timer_values_dictionary["score_timer"] = resource.data
+	pass
+	
 func _on_peer_connected(id):
 	print(id)
 	rpc_id(id, "_confirm_connected_to_server")
@@ -55,6 +101,7 @@ func _on_peer_disconnected(id):
 	pass
 
 
+	
 
 @rpc("any_peer", "call_remote", "reliable")
 func _send_firebase_info_to_server(auth):
@@ -79,6 +126,7 @@ func _save_new_user_data(auth, peer_id):
 	user_data["email"] = auth["email"] #applies the email to database entry
 	var db_ref = Database.get_database_reference("users")
 	db_ref.update(auth["localid"], user_data) # this is what puts in the user data into the specific firebase id's section of the database
+
 
 
 func _start_server():
@@ -125,6 +173,7 @@ func _find_game():
 	print("received find game rpc")
 	%RunningGames.players_looking_for_match.append(multiplayer.get_remote_sender_id())
 
+	
 @rpc("any_peer", "call_remote", "reliable")	
 func _cancel_find_game():
 	var peer_id = multiplayer.get_remote_sender_id()
@@ -287,4 +336,12 @@ func _ask_server_for_info(info_dictionary):
 	info_dictionary["players"] = logged_in_firebase_ids.size()
 	info_dictionary["matches"] = running_matches.size()
 	rpc_id(multiplayer.get_remote_sender_id(), "_ask_server_for_info", info_dictionary)
+	pass
+
+
+@rpc("any_peer", "call_remote", "reliable")	
+func _debug_vm(data):
+	await get_tree().create_timer(1).timeout
+	for i in multiplayer.get_peers():
+		rpc_id(i, "_debug_vm", data)
 	pass

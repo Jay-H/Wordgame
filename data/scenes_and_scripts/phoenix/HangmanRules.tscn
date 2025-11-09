@@ -1,0 +1,825 @@
+[gd_scene load_steps=38 format=3 uid="uid://drho4vpbpx43i"]
+
+[ext_resource type="Script" uid="uid://b087631usxdtg" path="res://data/scenes_and_scripts/phoenix/hangman_rules.gd" id="1_dx5yh"]
+[ext_resource type="PackedScene" uid="uid://dptsatxug1hhb" path="res://data/scenes_and_scripts/multiplayertesting/profile_picture.tscn" id="2_fdth5"]
+[ext_resource type="StyleBox" uid="uid://cko0rnujhddvu" path="res://data/scenes_and_scripts/phoenix/rulestransitionpanels.tres" id="3_f0how"]
+[ext_resource type="Shader" uid="uid://cqqkik0yqdnto" path="res://data/scenes_and_scripts/scramble/ScrambleWord.gdshader" id="4_edyll"]
+[ext_resource type="FontFile" uid="uid://bhvt5rw7k2iwk" path="res://data/fonts/OtherFonts/HARLOWSI_1.TTF" id="5_ctuye"]
+[ext_resource type="Script" uid="uid://dofoc2faacmyb" path="res://data/scenes_and_scripts/scramble/scramble_rules.gd" id="6_kdodq"]
+[ext_resource type="FontFile" uid="uid://ls1tsnsgjmae" path="res://data/fonts/microbrew-one/Microbrew One 3D.otf" id="7_2hswh"]
+[ext_resource type="Script" uid="uid://q6qwh8i0ewnv" path="res://data/scenes_and_scripts/scramble/bonus_letter_rules.gd" id="8_cdprs"]
+[ext_resource type="FontFile" uid="uid://lakpyxevgy8" path="res://data/fonts/OtherFonts/Majesty Goldera.woff" id="9_8x51o"]
+[ext_resource type="Script" uid="uid://cx0j5pe7fk253" path="res://data/scenes_and_scripts/scramble/obscurityrules.gd" id="10_ju3gv"]
+[ext_resource type="FontFile" uid="uid://chwu0nwsvcxp7" path="res://data/fonts/OtherFonts/You are my Everythink/you are my everythink script font duo.ttf" id="11_rkyvi"]
+[ext_resource type="Script" uid="uid://vhynrsdg5jai" path="res://data/scenes_and_scripts/scramble/wonder.gd" id="12_5hjnx"]
+[ext_resource type="Script" uid="uid://c82hcw1fjnvy5" path="res://data/scenes_and_scripts/scramble/red_line.gd" id="13_je202"]
+[ext_resource type="Texture2D" uid="uid://t71ul0257vc7" path="res://data/images/noun-finger-7180936.svg" id="14_xonrw"]
+[ext_resource type="Script" uid="uid://il2ri3xxjue5" path="res://data/scenes_and_scripts/scramble/texture_rect_2.gd" id="15_nbchk"]
+[ext_resource type="FontFile" uid="uid://dskmx2extevrw" path="res://data/fonts/times.ttf" id="16_d28a7"]
+[ext_resource type="Texture2D" uid="uid://dkuq8lxub8gf1" path="res://data/images/BlurredCircleParticle.png" id="17_1msyd"]
+[ext_resource type="StyleBox" uid="uid://oebjvbrtcsc5" path="res://data/scenes_and_scripts/phoenix/RulesTransition2.tres" id="18_foddd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wp2ep"]
+resource_local_to_scene = true
+shader = ExtResource("4_edyll")
+shader_parameter/color1 = Color(0.907457, 0.71582, 1, 1)
+shader_parameter/color2 = Color(0.417167, 0.727298, 1, 1)
+shader_parameter/color3 = Color(0.378377, 0.313947, 0.399109, 1)
+shader_parameter/speed = 1.06
+shader_parameter/width = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4nuvn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gnjvv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hw73j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_erf32"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0cwjb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0t4pt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7ojfp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ochjx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_85b3d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3ylq5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_medsp"]
+bg_color = Color(0.729412, 0.815686, 0.815686, 0)
+draw_center = false
+border_color = Color(0, 0, 0, 0)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+expand_margin_left = 25.0
+expand_margin_top = 25.0
+expand_margin_right = 25.0
+expand_margin_bottom = 25.0
+
+[sub_resource type="Curve" id="Curve_ylin2"]
+_data = [Vector2(0.244, 0), 0.0, 0.0, 0, 0, Vector2(0.86, 0.977929), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_cxpsr"]
+curve = SubResource("Curve_ylin2")
+
+[sub_resource type="Gradient" id="Gradient_hhy1a"]
+colors = PackedColorArray(1, 0.912102, 0.994297, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ype3i"]
+gradient = SubResource("Gradient_hhy1a")
+
+[sub_resource type="Curve" id="Curve_e4uby"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.59542, 0.2096), 1.00095, 1.00095, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_j0qn1"]
+curve = SubResource("Curve_e4uby")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vkpby"]
+lifetime_randomness = 0.46
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(600, 1, 1)
+gravity = Vector3(0, -50, 0)
+scale_min = 0.75
+scale_max = 2.0
+color_ramp = SubResource("GradientTexture1D_ype3i")
+alpha_curve = SubResource("CurveTexture_cxpsr")
+turbulence_noise_strength = 8.63
+turbulence_noise_scale = 6.501
+turbulence_influence_min = 0.304
+turbulence_influence_max = 0.304
+turbulence_initial_displacement_min = 53.3
+turbulence_initial_displacement_max = 53.3
+turbulence_influence_over_life = SubResource("CurveTexture_j0qn1")
+
+[node name="HangmanRules" type="CanvasLayer"]
+layer = 12
+script = ExtResource("1_dx5yh")
+
+[node name="Control" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="ColoredBlocker" type="ColorRect" parent="Control"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_right = 1320.0
+offset_bottom = 2868.0
+mouse_filter = 2
+
+[node name="playerpic" parent="Control" instance=ExtResource("2_fdth5")]
+unique_name_in_owner = true
+visible = false
+offset_left = 74.0
+offset_top = 66.0
+offset_right = 574.0
+offset_bottom = 566.0
+
+[node name="opponentpic" parent="Control" instance=ExtResource("2_fdth5")]
+unique_name_in_owner = true
+visible = false
+offset_left = 761.0
+offset_top = 75.0
+offset_right = 1261.0
+offset_bottom = 575.0
+
+[node name="HangmanPanel" type="Panel" parent="Control"]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 0
+offset_left = 292.0
+offset_top = 945.0
+offset_right = 1262.0
+offset_bottom = 1193.0
+theme_override_styles/panel = ExtResource("3_f0how")
+metadata/_edit_use_anchors_ = true
+
+[node name="BedlamPanel" type="Panel" parent="Control"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.164706)
+z_index = 1
+layout_mode = 0
+offset_left = 296.0
+offset_top = 1485.0
+offset_right = 1266.0
+offset_bottom = 1733.0
+theme_override_styles/panel = ExtResource("3_f0how")
+metadata/_edit_use_anchors_ = true
+
+[node name="DeliberatePanel" type="Panel" parent="Control"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.164706)
+z_index = 1
+layout_mode = 0
+offset_left = 303.0
+offset_top = 1757.0
+offset_right = 1273.0
+offset_bottom = 2005.0
+theme_override_styles/panel = ExtResource("3_f0how")
+metadata/_edit_use_anchors_ = true
+
+[node name="EphemeralPanel" type="Panel" parent="Control"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.164706)
+z_index = 1
+layout_mode = 0
+offset_left = 303.0
+offset_top = 2029.0
+offset_right = 1273.0
+offset_bottom = 2277.0
+theme_override_styles/panel = ExtResource("3_f0how")
+metadata/_edit_use_anchors_ = true
+
+[node name="Hangman" type="RichTextLabel" parent="Control"]
+unique_name_in_owner = true
+z_index = 1
+material = SubResource("ShaderMaterial_wp2ep")
+layout_mode = 0
+offset_left = 498.0
+offset_top = 961.0
+offset_right = 1203.0
+offset_bottom = 1179.0
+theme_override_fonts/normal_font = ExtResource("5_ctuye")
+theme_override_font_sizes/normal_font_size = 166
+text = "Hangman"
+script = ExtResource("6_kdodq")
+metadata/_edit_use_anchors_ = true
+
+[node name="Bedlam" type="RichTextLabel" parent="Control"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.164706)
+z_index = 1
+material = SubResource("ShaderMaterial_wp2ep")
+layout_mode = 0
+offset_left = 527.0
+offset_top = 1530.0
+offset_right = 1209.0
+offset_bottom = 1691.0
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("7_2hswh")
+theme_override_font_sizes/normal_font_size = 126
+text = "Bedlam"
+autowrap_mode = 1
+horizontal_alignment = 1
+script = ExtResource("8_cdprs")
+metadata/_edit_use_anchors_ = true
+
+[node name="Deliberate" type="RichTextLabel" parent="Control"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.164706)
+z_index = 1
+material = SubResource("ShaderMaterial_wp2ep")
+layout_mode = 0
+offset_left = 611.0
+offset_top = 1787.0
+offset_right = 1252.0
+offset_bottom = 2005.0
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("9_8x51o")
+theme_override_font_sizes/normal_font_size = 126
+text = "Deliberate"
+horizontal_alignment = 1
+script = ExtResource("10_ju3gv")
+metadata/_edit_use_anchors_ = true
+
+[node name="Ephemeral" type="RichTextLabel" parent="Control"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.164706)
+z_index = 1
+material = SubResource("ShaderMaterial_wp2ep")
+layout_mode = 0
+offset_left = 597.0
+offset_top = 2049.0
+offset_right = 1165.0
+offset_bottom = 2267.0
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("11_rkyvi")
+theme_override_font_sizes/normal_font_size = 86
+text = "Ephemeral"
+horizontal_alignment = 1
+script = ExtResource("12_5hjnx")
+metadata/_edit_use_anchors_ = true
+
+[node name="BedlamRedLine" type="Node2D" parent="Control"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.384314)
+z_index = 1
+position = Vector2(505, 1609)
+script = ExtResource("13_je202")
+
+[node name="DeliberateRedLine" type="Node2D" parent="Control"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.384314)
+z_index = 1
+position = Vector2(505, 1883)
+script = ExtResource("13_je202")
+
+[node name="EphemeralRedLine" type="Node2D" parent="Control"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.384314)
+z_index = 1
+position = Vector2(506, 2160)
+script = ExtResource("13_je202")
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = 473.0
+offset_top = 814.0
+offset_right = 573.0
+offset_bottom = 939.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Control"]
+z_index = 1
+layout_mode = 0
+offset_left = 42.0
+offset_top = 737.0
+offset_right = 995.0
+offset_bottom = 941.0
+theme_override_colors/font_color = Color(0.535602, 0.686181, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("5_ctuye")
+theme_override_font_sizes/font_size = 126
+text = "Upcoming Game:"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label3" type="Label" parent="Control"]
+z_index = 1
+layout_mode = 0
+offset_left = 163.0
+offset_top = 344.0
+offset_right = 1116.0
+offset_bottom = 587.0
+theme_override_colors/font_color = Color(0.535602, 0.686181, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("5_ctuye")
+theme_override_font_sizes/font_size = 191
+text = "Rules"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="Control"]
+z_index = 1
+layout_mode = 0
+offset_left = 41.0
+offset_top = 1307.0
+offset_right = 994.0
+offset_bottom = 1511.0
+theme_override_colors/font_color = Color(0.535602, 0.686181, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("5_ctuye")
+theme_override_font_sizes/font_size = 126
+text = "Variants:"
+metadata/_edit_use_anchors_ = true
+
+[node name="HangmanButton" type="TextureRect" parent="Control"]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 0
+offset_left = 348.0
+offset_top = 985.0
+offset_right = 498.0
+offset_bottom = 1160.0
+scale = Vector2(0.815, 0.815)
+pivot_offset = Vector2(75, 87.5)
+texture = ExtResource("14_xonrw")
+script = ExtResource("15_nbchk")
+metadata/_edit_use_anchors_ = true
+
+[node name="BedlamButton" type="TextureRect" parent="Control"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.164706)
+z_index = 1
+layout_mode = 0
+offset_left = 384.0
+offset_top = 1520.0
+offset_right = 534.0
+offset_bottom = 1695.0
+scale = Vector2(0.815, 0.815)
+pivot_offset = Vector2(75, 87.5)
+texture = ExtResource("14_xonrw")
+script = ExtResource("15_nbchk")
+metadata/_edit_use_anchors_ = true
+
+[node name="DeliberateButton" type="TextureRect" parent="Control"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.164706)
+z_index = 1
+layout_mode = 0
+offset_left = 384.0
+offset_top = 1795.0
+offset_right = 534.0
+offset_bottom = 1970.0
+scale = Vector2(0.815, 0.815)
+pivot_offset = Vector2(75, 87.5)
+texture = ExtResource("14_xonrw")
+script = ExtResource("15_nbchk")
+metadata/_edit_use_anchors_ = true
+
+[node name="EphemeralButton" type="TextureRect" parent="Control"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.164706)
+z_index = 1
+layout_mode = 0
+offset_left = 384.0
+offset_top = 2071.0
+offset_right = 534.0
+offset_bottom = 2246.0
+scale = Vector2(0.815, 0.815)
+pivot_offset = Vector2(75, 87.5)
+texture = ExtResource("14_xonrw")
+script = ExtResource("15_nbchk")
+metadata/_edit_use_anchors_ = true
+
+[node name="P1Label" type="Label" parent="Control"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 20.0
+offset_top = 500.0
+offset_right = 831.0
+offset_bottom = 637.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("16_d28a7")
+theme_override_font_sizes/font_size = 100
+text = "ARCANDELUSOR"
+horizontal_alignment = 1
+
+[node name="P2Label" type="Label" parent="Control"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 638.0
+offset_top = 667.0
+offset_right = 1449.0
+offset_bottom = 804.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("16_d28a7")
+theme_override_font_sizes/font_size = 100
+text = "ARCANDELUSOR"
+horizontal_alignment = 1
+
+[node name="SkipButton" type="Button" parent="Control"]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -306.0
+offset_top = -145.0
+offset_right = 306.0
+offset_bottom = -169.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4nuvn")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_gnjvv")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_hw73j")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_erf32")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_0cwjb")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_0t4pt")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7ojfp")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_ochjx")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_85b3d")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_3ylq5")
+theme_override_styles/normal = SubResource("StyleBoxFlat_medsp")
+text = "Skip Rules"
+icon = ExtResource("14_xonrw")
+metadata/_edit_use_anchors_ = true
+
+[node name="SkipWaiting" type="Label" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 458.0
+offset_top = 2651.0
+offset_right = 894.0
+offset_bottom = 2788.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="NonFadeables" type="CanvasGroup" parent="Control"]
+unique_name_in_owner = true
+
+[node name="ColorRect" type="ColorRect" parent="Control/NonFadeables"]
+z_index = -1
+offset_right = 1320.0
+offset_bottom = 2868.0
+mouse_filter = 2
+color = Color(0.850774, 0.928434, 1, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Control/NonFadeables"]
+z_index = 1
+position = Vector2(658, 2831)
+amount = 30
+texture = ExtResource("17_1msyd")
+lifetime = 15.0
+randomness = 0.34
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_vkpby")
+
+[node name="HangmanRulesPanel" type="Panel" parent="Control/NonFadeables"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+z_index = 3
+offset_left = 19.0
+offset_top = 667.0
+offset_right = 1301.0
+offset_bottom = 2043.0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("18_foddd")
+metadata/_edit_use_anchors_ = true
+
+[node name="HangmanRules" type="Label" parent="Control/NonFadeables/HangmanRulesPanel"]
+z_index = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -461.5
+offset_top = -453.5
+offset_right = 461.5
+offset_bottom = 453.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("16_d28a7")
+theme_override_font_sizes/font_size = 55
+text = "Make as many words as you can out 
+of seven available letters.
+
+Every time you submit an invalid word, 
+the penalty increases.
+
+The more uncommon the letter,
+the more it is worth in a word.
+
+If your opponent finds a word before you,
+it is no longer available to submit.
+
+Bonus points for seven letter words!
+At least one is guaranteed per round!"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="BackButton" type="Button" parent="Control/NonFadeables/HangmanRulesPanel"]
+modulate = Color(1, 1, 1, 0)
+z_index = 3
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -172.5
+offset_top = -137.0
+offset_right = 172.5
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4nuvn")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_gnjvv")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_hw73j")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_erf32")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_0cwjb")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_0t4pt")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7ojfp")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_ochjx")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_85b3d")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_3ylq5")
+theme_override_styles/normal = SubResource("StyleBoxFlat_medsp")
+text = "Back"
+icon = ExtResource("14_xonrw")
+metadata/_edit_use_anchors_ = true
+
+[node name="EphemeralRulesPanel" type="Panel" parent="Control/NonFadeables"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+z_index = 3
+offset_left = 19.0
+offset_top = 667.0
+offset_right = 1301.0
+offset_bottom = 2043.0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("18_foddd")
+metadata/_edit_use_anchors_ = true
+
+[node name="Ephemeral2" type="RichTextLabel" parent="Control/NonFadeables/EphemeralRulesPanel"]
+unique_name_in_owner = true
+z_index = 3
+material = SubResource("ShaderMaterial_wp2ep")
+layout_mode = 0
+offset_left = 433.0
+offset_top = 191.0
+offset_right = 835.0
+offset_bottom = 438.0
+theme_override_fonts/normal_font = ExtResource("11_rkyvi")
+theme_override_font_sizes/normal_font_size = 86
+text = "Wonder"
+metadata/_edit_use_anchors_ = true
+
+[node name="EphemeralRulesPanel" type="Label" parent="Control/NonFadeables/EphemeralRulesPanel"]
+z_index = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -484.5
+offset_top = -161.0
+offset_right = 484.5
+offset_bottom = 161.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("16_d28a7")
+theme_override_font_sizes/font_size = 55
+text = "If someone gets the 7-letter word,
+they win.
+That's it.
+If no one finds it,
+          all other rules apply."
+metadata/_edit_use_anchors_ = true
+
+[node name="BackButton" type="Button" parent="Control/NonFadeables/EphemeralRulesPanel"]
+modulate = Color(1, 1, 1, 0)
+z_index = 3
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -172.5
+offset_top = -137.0
+offset_right = 172.5
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4nuvn")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_gnjvv")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_hw73j")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_erf32")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_0cwjb")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_0t4pt")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7ojfp")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_ochjx")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_85b3d")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_3ylq5")
+theme_override_styles/normal = SubResource("StyleBoxFlat_medsp")
+text = "Back"
+icon = ExtResource("14_xonrw")
+metadata/_edit_use_anchors_ = true
+
+[node name="BedlamLetterRulesPanel" type="Panel" parent="Control/NonFadeables"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+z_index = 3
+offset_left = 19.0
+offset_top = 670.0
+offset_right = 1272.0
+offset_bottom = 2046.0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("18_foddd")
+metadata/_edit_use_anchors_ = true
+
+[node name="Bedlam2" type="RichTextLabel" parent="Control/NonFadeables/BedlamLetterRulesPanel"]
+unique_name_in_owner = true
+z_index = 3
+material = SubResource("ShaderMaterial_wp2ep")
+layout_mode = 0
+offset_left = 267.0
+offset_top = 69.0
+offset_right = 970.0
+offset_bottom = 326.0
+theme_override_fonts/normal_font = ExtResource("7_2hswh")
+theme_override_font_sizes/normal_font_size = 126
+text = " Bonus Letter"
+autowrap_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="BedlamLetterRules" type="Label" parent="Control/NonFadeables/BedlamLetterRulesPanel"]
+z_index = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -545.5
+offset_top = -433.0
+offset_right = 545.5
+offset_bottom = 433.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("16_d28a7")
+theme_override_font_sizes/font_size = 55
+text = "A bonus letter is available for use to 
+make words.
+
+It is shared between the two players.
+
+Once it is used a new bonus letter 
+is generated.
+
+Its value goes up over time.
+
+Extra bonus points for eight letter words!"
+metadata/_edit_use_anchors_ = true
+
+[node name="BackButton" type="Button" parent="Control/NonFadeables/BedlamLetterRulesPanel"]
+modulate = Color(1, 1, 1, 0)
+z_index = 3
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -172.5
+offset_top = -137.0
+offset_right = 172.5
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4nuvn")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_gnjvv")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_hw73j")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_erf32")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_0cwjb")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_0t4pt")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7ojfp")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_ochjx")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_85b3d")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_3ylq5")
+theme_override_styles/normal = SubResource("StyleBoxFlat_medsp")
+text = "Back"
+icon = ExtResource("14_xonrw")
+metadata/_edit_use_anchors_ = true
+
+[node name="DeliberateRulesPanel" type="Panel" parent="Control/NonFadeables"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+z_index = 3
+offset_left = 19.0
+offset_top = 670.0
+offset_right = 1272.0
+offset_bottom = 2046.0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("18_foddd")
+metadata/_edit_use_anchors_ = true
+
+[node name="Deliberate2" type="RichTextLabel" parent="Control/NonFadeables/DeliberateRulesPanel"]
+unique_name_in_owner = true
+z_index = 3
+material = SubResource("ShaderMaterial_wp2ep")
+layout_mode = 0
+offset_left = 322.0
+offset_top = 74.0
+offset_right = 963.0
+offset_bottom = 292.0
+theme_override_fonts/normal_font = ExtResource("9_8x51o")
+theme_override_font_sizes/normal_font_size = 126
+text = "Obscurity"
+metadata/_edit_use_anchors_ = true
+
+[node name="DeliberateRules" type="Label" parent="Control/NonFadeables/DeliberateRulesPanel"]
+z_index = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -503.0
+offset_top = -393.5
+offset_right = 503.0
+offset_bottom = 393.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("16_d28a7")
+theme_override_font_sizes/font_size = 55
+text = "In this variant, words are worth more 
+based on their rarity.
+
+This value will display after your 
+word is submitted.
+
+Points awarded will increase 
+logarithmically.."
+metadata/_edit_use_anchors_ = true
+
+[node name="BackButton" type="Button" parent="Control/NonFadeables/DeliberateRulesPanel"]
+modulate = Color(1, 1, 1, 0)
+z_index = 3
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -172.5
+offset_top = -137.0
+offset_right = 172.5
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4nuvn")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_gnjvv")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_hw73j")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_erf32")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_0cwjb")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_0t4pt")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7ojfp")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_ochjx")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_85b3d")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_3ylq5")
+theme_override_styles/normal = SubResource("StyleBoxFlat_medsp")
+text = "Back"
+icon = ExtResource("14_xonrw")
+metadata/_edit_use_anchors_ = true
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+unique_name_in_owner = true
+
+[connection signal="pressed" from="Control/Hangman" to="." method="_on_Hangman_pressed"]
+[connection signal="pressed" from="Control/Bedlam" to="." method="_on_Bedlam_letter_pressed"]
+[connection signal="pressed" from="Control/Deliberate" to="." method="_on_Deliberate_pressed"]
+[connection signal="pressed" from="Control/Ephemeral" to="." method="_on_Ephemeral_pressed"]
+[connection signal="pressed" from="Control/SkipButton" to="." method="_on_skip_button_pressed"]

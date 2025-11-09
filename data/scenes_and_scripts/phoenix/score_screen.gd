@@ -13,6 +13,25 @@ func _setup(dict, big_dictionary, firebase_id):
 	%opponentpic.setup(GlobalData.profile_pics[dict["player_two_dictionary"]["profilepic"]])
 	if (big_dictionary.has("game_type") && big_dictionary["game_type"] == "wordsearch"):
 		pass
+	if (big_dictionary.has("game_type") && big_dictionary["game_type"] == "hangman"):
+		if firebase_local_id == dict["player_one_firebase_id"]:
+			player_number = "one"
+		else:
+			player_number = "two"		
+		if player_number == "one":
+			%playerscore.text = "Guesses\n" + str(big_dictionary["player_one_wrong_guesses"])
+			%opponentscore.text = "Guesses\n" + str(big_dictionary["player_two_wrong_guesses"])
+			%playerbestword.text = "Last Guess\n" + str(big_dictionary["player_one_last_guess"])
+			%opponentbestword.text = "Last Guess\n" + str(big_dictionary["player_two_last_guess"])
+			%playername.text = dict["player_one_dictionary"]["username"]
+			%opponentname.text = dict["player_two_dictionary"]["username"]
+		if player_number == "two":
+			%playerscore.text = "Guesses\n" + str(big_dictionary["player_two_wrong_guesses"])
+			%opponentscore.text = "Guesses\n" + str(big_dictionary["player_one_wrong_guesses"])
+			%playerbestword.text = "Last Guess\n" + str(big_dictionary["player_two_last_guess"])
+			%opponentbestword.text = "Last Guess\n" + str(big_dictionary["player_one_last_guess"])
+			%playername.text = dict["player_two_dictionary"]["username"]
+			%opponentname.text = dict["player_one_dictionary"]["username"]	
 	else:
 		var player_one_best_word = best_word_finder(big_dictionary["Player One Found Words"])
 		var player_two_best_word = best_word_finder(big_dictionary["Player Two Found Words"])

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cqsh7sgao7ccl"]
 
 [ext_resource type="Texture2D" uid="uid://crknm7gdg7jon" path="res://data/images/fog.png" id="1_3cpss"]
-[ext_resource type="Script" uid="uid://cvdo1v8k00jqo" path="res://data/scenes_and_scripts/scramble/gpu_particles_2d.gd" id="2_rr8v0"]
+[ext_resource type="Script" uid="uid://c1bcwarx32kt3" path="res://data/scenes_and_scripts/scramble/gpu_particles_2d.gd" id="2_rr8v0"]
 
 [sub_resource type="Gradient" id="Gradient_emw3b"]
 offsets = PackedFloat32Array(0, 0.237942, 0.514469, 1)

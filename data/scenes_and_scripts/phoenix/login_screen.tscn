@@ -1,14 +1,26 @@
-[gd_scene load_steps=17 format=3 uid="uid://ms43gnmmu3g3"]
+[gd_scene load_steps=32 format=3 uid="uid://ms43gnmmu3g3"]
 
 [ext_resource type="FontFile" uid="uid://dskmx2extevrw" path="res://data/fonts/times.ttf" id="1_52rl6"]
 [ext_resource type="Script" uid="uid://lj43fl6ocrf3" path="res://data/scenes_and_scripts/phoenix/login_screen.gd" id="1_vynka"]
+[ext_resource type="FontFile" uid="uid://dnyvxhvqed50e" path="res://data/fonts/OtherFonts/Crisp-Walnut.ttf" id="3_ki628"]
+[ext_resource type="FontFile" uid="uid://brx8ufgx2sv54" path="res://data/fonts/OtherFonts/Kiddie-Store.ttf" id="3_kx71p"]
+[ext_resource type="Shader" uid="uid://csbu7dldwloow" path="res://data/scenes_and_scripts/multiplayertesting/flashlight.gdshader" id="3_lchx1"]
 [ext_resource type="Script" uid="uid://fjildfqdib8h" path="res://data/scenes_and_scripts/multiplayertesting/label_pressed.gd" id="3_qf86c"]
 [ext_resource type="Texture2D" uid="uid://crknm7gdg7jon" path="res://data/images/fog.png" id="4_aiv7l"]
 [ext_resource type="FontFile" uid="uid://dehm6x83duy2e" path="res://data/fonts/space-ranger/spaceranger.ttf" id="4_w6vpo"]
 [ext_resource type="Script" uid="uid://bp4dtiex0f3ss" path="res://data/scenes_and_scripts/phoenix/splash_screen.gd" id="4_wk1ki"]
+[ext_resource type="Texture2D" uid="uid://dkuq8lxub8gf1" path="res://data/images/BlurredCircleParticle.png" id="5_2reso"]
 [ext_resource type="Texture2D" uid="uid://cfawov84ked10" path="res://data/images/Brain1.png" id="5_wk1ki"]
-[ext_resource type="AudioStream" uid="uid://xuko8gsg2vou" path="res://data/music/login_screen.mp3" id="8_n3bdt"]
 [ext_resource type="AudioStream" uid="uid://n35hhg7ig1bd" path="res://data/sounds/login_button.mp3" id="9_nr2tq"]
+[ext_resource type="Script" uid="uid://b6kkx5rrpfdcp" path="res://data/scenes_and_scripts/phoenix/bottom_particle_control.gd" id="11_lchx1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ivgp"]
+shader = ExtResource("3_lchx1")
+shader_parameter/light_position_pixels = Vector2(293.475, 256)
+shader_parameter/light_color = Color(0.999999, 0.999145, 0.850927, 1)
+shader_parameter/light_radius_pixels = 340.506
+shader_parameter/softness_pixels = 296.231
+shader_parameter/ambient_light = 0.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nr2tq"]
 
@@ -18,6 +30,62 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ki628"]
 
+[sub_resource type="Curve2D" id="Curve2D_kx71p"]
+bake_interval = 50.0
+_data = {
+"points": PackedVector2Array(-713.815, -165.056, 713.815, 165.056, 0, 0, -51.3561, -550.652, 51.3561, 550.652, 1549, 845, -14.2656, -667.63, 14.2656, 667.63, -217, 1678, 0, 0, 0, 0, 1581.13, 2628.02)
+}
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_yha5c"]
+_data = [Vector2(0.213483, 1), 0.0, 0.0, 0, 0, Vector2(0.606742, 0.656009), 0.0, 0.0, 0, 0, Vector2(0.957865, 0.720507), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_ysy8c"]
+curve = SubResource("Curve_yha5c")
+
+[sub_resource type="Gradient" id="Gradient_kx71p"]
+offsets = PackedFloat32Array(0, 0.321212, 1)
+colors = PackedColorArray(0, 0.892817, 0.905715, 1, 0.917555, 0.776205, 0.414008, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ki628"]
+gradient = SubResource("Gradient_kx71p")
+
+[sub_resource type="Curve" id="Curve_wmipw"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_l5sd0"]
+curve = SubResource("Curve_wmipw")
+
+[sub_resource type="Curve" id="Curve_2reso"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.831461, 1.06505), 0.0, 0.0, 0, 0, Vector2(0.910112, 1.68853), 0.0, 0.0, 0, 0, Vector2(1, 1.71003), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_kx71p"]
+curve = SubResource("Curve_2reso")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lchx1"]
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+spread = 180.0
+initial_velocity_min = 131.43
+initial_velocity_max = 216.18
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.15
+scale_curve = SubResource("CurveTexture_kx71p")
+color_ramp = SubResource("GradientTexture1D_ki628")
+alpha_curve = SubResource("CurveTexture_ysy8c")
+hue_variation_curve = SubResource("CurveTexture_l5sd0")
+turbulence_noise_strength = 6.53
+turbulence_noise_scale = 4.377
+turbulence_noise_speed_random = 0.92
+turbulence_initial_displacement_min = -76.8
+turbulence_initial_displacement_max = 88.6
+
 [sub_resource type="Gradient" id="Gradient_aiv7l"]
 offsets = PackedFloat32Array(0, 0.109677, 1)
 colors = PackedColorArray(0.152941, 0, 0.921569, 0, 0.152941, 0, 0.921569, 1, 0.938295, 0.817838, 1, 1)
@@ -26,6 +94,7 @@ colors = PackedColorArray(0.152941, 0, 0.921569, 0, 0.152941, 0, 0.921569, 1, 0.
 gradient = SubResource("Gradient_aiv7l")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vynka"]
+lifetime_randomness = 0.37
 particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(1000, 300, 1)
@@ -70,7 +139,108 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="RichTextLabel" parent="CanvasLayer/FirstScreenControl"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/FirstScreenControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -399.0
+offset_top = -434.5
+offset_right = 399.0
+offset_bottom = 434.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 225
+
+[node name="ChrisLabel" type="RichTextLabel" parent="CanvasLayer/FirstScreenControl/VBoxContainer3"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_4ivgp")
+clip_contents = false
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_ki628")
+theme_override_font_sizes/normal_font_size = 187
+bbcode_enabled = true
+text = "wordwar."
+scroll_active = false
+horizontal_alignment = 1
+justification_flags = 162
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="Placeholder1" type="Control" parent="CanvasLayer/FirstScreenControl/VBoxContainer3"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/FirstScreenControl/VBoxContainer3"]
+layout_mode = 2
+
+[node name="EmailBox" type="LineEdit" parent="CanvasLayer/FirstScreenControl/VBoxContainer3/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/caret_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(0.392163, 0.372995, 0.328265, 0.321569)
+theme_override_constants/caret_width = 2
+theme_override_fonts/font = ExtResource("3_kx71p")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nr2tq")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2reso")
+placeholder_text = "email"
+alignment = 1
+max_length = 100
+virtual_keyboard_type = 5
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="PasswordBox" type="LineEdit" parent="CanvasLayer/FirstScreenControl/VBoxContainer3/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_placeholder_color = Color(0.392157, 0.372549, 0.329412, 0.321569)
+theme_override_constants/caret_width = 2
+theme_override_fonts/font = ExtResource("3_kx71p")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kx71p")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ki628")
+placeholder_text = "password"
+alignment = 1
+max_length = 100
+virtual_keyboard_type = 6
+caret_blink = true
+caret_blink_interval = 0.5
+secret = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/FirstScreenControl/VBoxContainer3"]
+layout_mode = 2
+theme_override_constants/separation = 65
+
+[node name="Login" type="Label" parent="CanvasLayer/FirstScreenControl/VBoxContainer3/VBoxContainer2"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_4ivgp")
+layout_mode = 2
+mouse_filter = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_ki628")
+theme_override_font_sizes/font_size = 116
+text = "log in."
+horizontal_alignment = 1
+script = ExtResource("3_qf86c")
+
+[node name="CreateAccount" type="Label" parent="CanvasLayer/FirstScreenControl/VBoxContainer3/VBoxContainer2"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_4ivgp")
+layout_mode = 2
+mouse_filter = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_ki628")
+theme_override_font_sizes/font_size = 116
+text = "create account."
+horizontal_alignment = 1
+script = ExtResource("3_qf86c")
+
+[node name="JasonLabel" type="RichTextLabel" parent="CanvasLayer/FirstScreenControl"]
+visible = false
 clip_contents = false
 layout_mode = 1
 anchors_preset = -1
@@ -86,76 +256,6 @@ text = "[center][wave amp=50.0 freq=5.0 connected=1][pulse freq=1.0 color=#fffff
 scroll_active = false
 deselect_on_focus_loss_enabled = false
 drag_and_drop_selection_enabled = false
-
-[node name="EmailBox" type="LineEdit" parent="CanvasLayer/FirstScreenControl"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 248.0
-offset_top = 1174.0
-offset_right = 1048.0
-offset_bottom = 1386.0
-theme_override_colors/caret_color = Color(1, 1, 1, 1)
-theme_override_colors/font_placeholder_color = Color(0.392163, 0.372995, 0.328265, 0.321569)
-theme_override_constants/caret_width = 2
-theme_override_fonts/font = ExtResource("1_52rl6")
-theme_override_font_sizes/font_size = 100
-theme_override_styles/focus = SubResource("StyleBoxEmpty_nr2tq")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_2reso")
-placeholder_text = "email"
-max_length = 100
-virtual_keyboard_type = 5
-caret_blink = true
-caret_blink_interval = 0.5
-
-[node name="PasswordBox" type="LineEdit" parent="CanvasLayer/FirstScreenControl"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 251.0
-offset_top = 1370.0
-offset_right = 1051.0
-offset_bottom = 1582.0
-theme_override_colors/font_placeholder_color = Color(0.392157, 0.372549, 0.329412, 0.321569)
-theme_override_constants/caret_width = 2
-theme_override_fonts/font = ExtResource("1_52rl6")
-theme_override_font_sizes/font_size = 100
-theme_override_styles/focus = SubResource("StyleBoxEmpty_kx71p")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_ki628")
-placeholder_text = "password"
-max_length = 100
-virtual_keyboard_type = 6
-caret_blink = true
-caret_blink_interval = 0.5
-secret = true
-
-[node name="Login" type="Label" parent="CanvasLayer/FirstScreenControl"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 420.0
-offset_top = 1769.0
-offset_right = 897.0
-offset_bottom = 1899.0
-mouse_filter = 0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("1_52rl6")
-theme_override_font_sizes/font_size = 116
-text = "log in."
-horizontal_alignment = 1
-script = ExtResource("3_qf86c")
-
-[node name="CreateAccount" type="Label" parent="CanvasLayer/FirstScreenControl"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 305.0
-offset_top = 1945.0
-offset_right = 1001.0
-offset_bottom = 2075.0
-mouse_filter = 0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("1_52rl6")
-theme_override_font_sizes/font_size = 116
-text = "create account."
-horizontal_alignment = 1
-script = ExtResource("3_qf86c")
 
 [node name="QuickLoginA" type="Button" parent="CanvasLayer/FirstScreenControl"]
 modulate = Color(1, 1, 1, 0)
@@ -206,11 +306,18 @@ script = ExtResource("4_wk1ki")
 
 [node name="Label3" type="Label" parent="CanvasLayer/SplashScreen"]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 206.0
-offset_top = 2036.0
-offset_right = 1097.0
-offset_bottom = 2264.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -445.5
+offset_top = -228.0
+offset_right = 445.5
+offset_bottom = -621.0
+grow_horizontal = 2
+grow_vertical = 0
 theme_override_colors/font_color = Color(0.438889, 0.299364, 2.40654e-07, 1)
 theme_override_fonts/font = ExtResource("4_w6vpo")
 theme_override_font_sizes/font_size = 106
@@ -220,11 +327,15 @@ horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="CanvasLayer/SplashScreen"]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 233.0
-offset_top = 383.0
-offset_right = 1124.0
-offset_bottom = 674.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -445.5
+offset_top = 290.0
+offset_right = 445.5
+offset_bottom = 291.0
+grow_horizontal = 2
 theme_override_colors/font_color = Color(0.438889, 0.299364, 2.40654e-07, 1)
 theme_override_fonts/font = ExtResource("4_w6vpo")
 theme_override_font_sizes/font_size = 106
@@ -233,14 +344,52 @@ CJ Enterprises
 Production"
 horizontal_alignment = 1
 
+[node name="ParticlePathControl" type="Control" parent="CanvasLayer/SplashScreen/Label2"]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = -290.0
+
+[node name="Path2D2" type="Path2D" parent="CanvasLayer/SplashScreen/Label2/ParticlePathControl"]
+curve = SubResource("Curve2D_kx71p")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="CanvasLayer/SplashScreen/Label2/ParticlePathControl/Path2D2"]
+unique_name_in_owner = true
+rotation = 0.227237
+
+[node name="PathParticles" type="Control" parent="CanvasLayer/SplashScreen/Label2/ParticlePathControl/Path2D2/PathFollow2D"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -254.099
+offset_top = 178.853
+offset_right = -254.099
+offset_bottom = 178.853
+mouse_filter = 2
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="CanvasLayer/SplashScreen/Label2/ParticlePathControl/Path2D2/PathFollow2D/PathParticles"]
+amount = 300
+texture = ExtResource("5_2reso")
+lifetime = 1.65
+randomness = 1.0
+fixed_fps = 60
+visibility_rect = Rect2(-2500, -2500, 5000, 5000)
+process_material = SubResource("ParticleProcessMaterial_lchx1")
+
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/SplashScreen"]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 336.0
-offset_top = 1214.0
-offset_right = 978.0
-offset_bottom = 1801.0
-mouse_filter = 0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -321.0
+offset_top = -293.5
+offset_right = 321.0
+offset_bottom = 293.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("5_wk1ki")
 expand_mode = 1
 stretch_mode = 4
@@ -263,26 +412,34 @@ offset_left = -44.0
 offset_top = 99.0
 offset_right = 660.0
 offset_bottom = 390.0
-mouse_filter = 0
 theme_override_colors/font_color = Color(0.438889, 0.299364, 2.40654e-07, 1)
 theme_override_fonts/font = ExtResource("4_w6vpo")
 theme_override_font_sizes/font_size = 106
-text = "Cortex
+text = "mesocortex
 Stochastic
 Anti-cheat"
 horizontal_alignment = 1
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="CanvasLayer"]
+[node name="BottomParticleControl" type="Control" parent="CanvasLayer"]
 unique_name_in_owner = true
-position = Vector2(668, 2732)
-amount = 100
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("11_lchx1")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="CanvasLayer/BottomParticleControl"]
+unique_name_in_owner = true
+amount = 300
 texture = ExtResource("4_aiv7l")
 lifetime = 10.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_vynka")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("8_n3bdt")
 volume_db = 8.056
 autoplay = true
 
@@ -297,8 +454,8 @@ unique_name_in_owner = true
 stream = ExtResource("9_nr2tq")
 volume_db = 8.056
 
-[connection signal="pressed" from="CanvasLayer/FirstScreenControl/Login" to="." method="_on_login_pressed"]
-[connection signal="pressed" from="CanvasLayer/FirstScreenControl/CreateAccount" to="." method="_on_create_account_pressed"]
+[connection signal="pressed" from="CanvasLayer/FirstScreenControl/VBoxContainer3/VBoxContainer2/Login" to="." method="_on_login_pressed"]
+[connection signal="pressed" from="CanvasLayer/FirstScreenControl/VBoxContainer3/VBoxContainer2/CreateAccount" to="." method="_on_create_account_pressed"]
 [connection signal="pressed" from="CanvasLayer/FirstScreenControl/QuickLoginA" to="." method="_on_quick_login_a_pressed"]
 [connection signal="pressed" from="CanvasLayer/FirstScreenControl/QuickLoginB" to="." method="_on_quick_login_b_pressed"]
 [connection signal="pressed" from="CanvasLayer/FirstScreenControl/QuickLoginC" to="." method="_on_quick_login_c_pressed"]
