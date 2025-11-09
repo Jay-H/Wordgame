@@ -20,6 +20,7 @@ var selected_game_list_name
 var selected_game_list
 var selected_game_list_2 = ["HangmanChaosVanilla", "HangmanChaosShared", "HangmanChaosEphemeral", "HangmanTurnbased", "HangmanDelay", "HangmanDelayEphemeral"]
 var timer_values_ref
+var timer_values_dictionary = {}
 
 func _ready():
 	multiplayer.peer_connected.connect(_on_peer_connected)
@@ -61,7 +62,16 @@ func _on_game_types_ref_update(resource):
 	#print(resource["selected_game_list"])
  
 func _on_timer_ref_update(resource):
+	if resource.key == "match_found_timer":
+		timer_values_dictionary["match_found_timer"] = resource.data
+	if resource.key == "round_timer":
+		timer_values_dictionary["round_timer"] = resource.data
+	if resource.key == "rules_screen_timer":
+		timer_values_dictionary["rules_screen_timer"] = resource.data
+	if resource.key == "score_timer":
+		timer_values_dictionary["score_timer"] = resource.data
 	pass
+	
 func _on_peer_connected(id):
 	print(id)
 	rpc_id(id, "_confirm_connected_to_server")
