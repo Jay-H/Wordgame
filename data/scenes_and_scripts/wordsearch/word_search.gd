@@ -736,7 +736,7 @@ func _animate_found_word_pulse(selection: Array[LetterCell]) -> void:
 	pulse_line.z_index = 100 
 	chungus_layer.add_child(pulse_line) 
 	
-	var pulse_duration = 0.9
+	var pulse_duration = 1.3
 	var viewport_size = get_viewport().size
 	# The diagonal length of the viewport, which is the minimum size needed to cover the screen.
 	var massive_coverage_dimension = viewport_size.length() 

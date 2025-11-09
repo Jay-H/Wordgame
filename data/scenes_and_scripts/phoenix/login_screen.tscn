@@ -270,9 +270,9 @@ text = "QuickLoginA"
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 500.0
-offset_top = 130.0
+offset_top = 247.32
 offset_right = 922.0
-offset_bottom = 313.0
+offset_bottom = 430.32
 text = "TEST"
 
 [node name="QuickLoginB" type="Button" parent="CanvasLayer/FirstScreenControl"]
