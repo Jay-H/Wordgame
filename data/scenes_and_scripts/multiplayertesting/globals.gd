@@ -50,16 +50,15 @@ const LABEL_FONT_SIZE = 80
 const LABEL_FONT_COLOR = Color.WHITE
 
 const CELL_BACKGROUND_COLOR = Color.TRANSPARENT # Background color of each cell
-const CELL_HOVER_COLOR = Color.DARK_GRAY # Hover color of each cell
 const CELL_HIGHLIGHT_COLOR = Color.LIGHT_SKY_BLUE # Highlight color of each cell
 const CELL_FOUND_COLOR = Color.GREEN_YELLOW # Found color of each cell
 const CELL_FOUND_BY_OPPONENT_COLOR = Color.ORANGE_RED # Found color of each opponent's cells
 
-const WRONG_LABEL_FONT_SIZE = 100
-const WRONG_LABEL_FONT_COLOR = Color.ORANGE
+const WRONG_LABEL_FONT_SIZE = 130
+const WRONG_LABEL_FONT_COLOR = Color.DARK_ORANGE
 
-const CORRECT_LABEL_FONT_SIZE = 100
-const CORRECT_LABEL_FONT_COLOR = Color.GREEN
+const CORRECT_LABEL_FONT_SIZE = 130
+const CORRECT_LABEL_FONT_COLOR = Color.DARK_GREEN
 
 const TIMER_LABEL_FONT_SIZE = 100
 const TIMER_LABEL_FONT_COLOR = Color.BLUE
@@ -69,15 +68,6 @@ const WIN_LABEL_FONT_COLOR = Color.PURPLE
 
 const LOSE_LABEL_FONT_SIZE = 100
 const LOSE_LABEL_FONT_COLOR = Color.CRIMSON
-
-# Just a random one for now, asked gemini to give me a list of words for a godot wordsearch :P
-# Eventually depending on certain things, figure we want to base these words on the nubmer of letters
-# per word that we want
-const WORD_LIST = [
-	"GODOT", "SWIFT", "MOBILE", "GAME", "GRID", "DRAG",
-	"NODE", "SCENE", "CODE", "DEBUG", "PIXEL", "VECTOR",
-	"SHADER", "SPRITE", "SIGNAL", "INPUT", "EXPORT"
-]
 
 const SERVER_ADDRESS: String = "127.0.0.1" # Use 127.0.0.1 for local testing
 const SERVER_PORT: int = 7777
@@ -106,6 +96,8 @@ const DIRECTIONS: Array[Vector2i] = [
 # We can figure this out at some point
 const PAIR_FREQUENCIES = {
 }
+
+var WSTEST = false
 
 const GAME_DURATION_SECONDS: int = 70
 const SUDDEN_DEATH_DURATION_SECONDS: int = 10

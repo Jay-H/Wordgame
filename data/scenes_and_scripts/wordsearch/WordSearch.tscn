@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://ddc7u2h6cfyni"]
+[gd_scene load_steps=9 format=3 uid="uid://ddc7u2h6cfyni"]
 
-[ext_resource type="Script" uid="uid://d3rrj4hxhrd2j" path="res://data/scenes_and_scripts/wordsearch/word_search.gd" id="1_3kvo5"]
+[ext_resource type="Script" uid="uid://ch2wq30nyeiey" path="res://data/scenes_and_scripts/wordsearch/word_search.gd" id="1_3kvo5"]
 [ext_resource type="PackedScene" uid="uid://bk6yqt04dl0v2" path="res://data/scenes_and_scripts/wordsearch/LetterCell.tscn" id="2_2stpv"]
 [ext_resource type="Resource" uid="uid://c20xqxq0lwmyo" path="res://data/animations/default_wave_animation.tres" id="3_0dbxo"]
 [ext_resource type="PackedScene" uid="uid://b1ox8dcj0yscl" path="res://data/scenes_and_scripts/wordsearch/GameTimer.tscn" id="3_mgi5u"]
 [ext_resource type="PackedScene" uid="uid://cyqux5urfqgpp" path="res://data/scenes_and_scripts/wordsearch/Background.tscn" id="4_mgi5u"]
 [ext_resource type="AudioStream" uid="uid://cx0176ru31d0h" path="res://data/music/WS_temp.mp3" id="6_c6bbx"]
+[ext_resource type="Material" uid="uid://bnq728n31dq7c" path="res://data/shaders/pulse_shader.tres" id="7_rk3yi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0dbxo"]
 content_margin_left = 20.0
@@ -43,6 +44,18 @@ found_word_animation = ExtResource("3_0dbxo")
 
 [node name="chungus" type="CanvasLayer" parent="."]
 
+[node name="ColorRect" type="ColorRect" parent="chungus"]
+unique_name_in_owner = true
+visible = false
+z_index = 7
+material = ExtResource("7_rk3yi")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [node name="CanvasModulate" type="CanvasModulate" parent="chungus"]
 unique_name_in_owner = true
 
@@ -51,26 +64,36 @@ unique_name_in_owner = true
 [node name="WrongLabel" type="Label" parent="chungus"]
 unique_name_in_owner = true
 visible = false
-anchors_preset = 5
+z_index = 1
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -28.0
+offset_top = -11.5
 offset_right = 28.0
-offset_bottom = 23.0
+offset_bottom = 11.5
 grow_horizontal = 2
+grow_vertical = 2
 text = "Wrong!"
 
 [node name="CorrectLabel" type="Label" parent="chungus"]
 unique_name_in_owner = true
 visible = false
-anchors_preset = 5
+z_index = 1
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -31.0
+offset_top = -11.5
 offset_right = 31.0
-offset_bottom = 23.0
+offset_bottom = 11.5
 grow_horizontal = 2
-text = "Correct!"
+grow_vertical = 2
+text = "Nice!"
 
 [node name="GameTimer" parent="chungus" instance=ExtResource("3_mgi5u")]
 unique_name_in_owner = true

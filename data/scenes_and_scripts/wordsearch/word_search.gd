@@ -33,6 +33,9 @@ var words_labels: Dictionary = {}
 # the variant that the server has chosen
 var variant
 
+var is_scanline_active: bool = false
+var scanline_current_time: float = 0.0
+
 #TODO: temporary until we have a real setup
 var sounds_to_play = [
 	preload("res://data/sounds/WS_temp_1.mp3"),
@@ -55,21 +58,33 @@ var opponent_found_sound = preload("res://data/sounds/WS_temp_opponent_found.mp3
 
 # Wrong Label Animation Properties
 @export_group("Wrong Label Animation")
-@export var wrong_label_duration: float = 1.0 # How long the label stays visible
-@export var wrong_label_move_distance: float = 20.0 # How far it moves left/right
+@export var wrong_label_duration: float = 1.0 # Total time for grow and fade
+@export var wrong_label_initial_scale: Vector2 = Vector2(0.5, 0.5) # Start small
+@export var wrong_label_final_scale: Vector2 = Vector2(2.5, 2.5) # Grow larger
+@export var wrong_label_initial_alpha: float = 1.0 # Start invisible
 
 # Correct Label Animation Properties
 @export_group("Correct Label Animation")
-@export var correct_label_duration: float = 0.8 # Total time for grow and fade
+@export var correct_label_duration: float = 1.0 # Total time for grow and fade
 @export var correct_label_initial_scale: Vector2 = Vector2(0.5, 0.5) # Start small
-@export var correct_label_final_scale: Vector2 = Vector2(2.0, 2.0) # Grow larger
+@export var correct_label_final_scale: Vector2 = Vector2(2.5, 2.5) # Grow larger
 @export var correct_label_initial_alpha: float = 1.0 # Start invisible
 
 @export var found_word_animation: CellAnimationResource
+@onready var scanline_overlay: ColorRect = %ColorRect
+
+var ws_test_words = []
 
 func _process(delta):
 	if pregame_timer_node != null:
 		%PreTimerLabel.text = str(int(pregame_timer_node.time_left))
+	# Only run the timer if the scanline effect is active
+	if is_scanline_active:
+		scanline_current_time += delta
+		
+		var material = scanline_overlay.material as ShaderMaterial
+		if material:
+			material.set_shader_parameter("custom_time", scanline_current_time)
 
 func _ready() -> void:
 	wrong_label.visible = false
@@ -99,13 +114,20 @@ func _ready() -> void:
 	
 	set_process_priority(1) # Ensure this node processes drawing after its children
 	queue_redraw() # Request a redraw when the grid is generated/ready
+	
+	generate_grid_testing()
+	generate_grid()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and !event.is_pressed():
 		if is_dragging: # Only process if a drag was active
 			is_dragging = false
 			start_cell = null
-			process_selection()
+			if Globals.WSTEST:
+				print("TESTINGGGGG")
+				process_selection_test()
+			else:
+				process_selection()
 			get_viewport().set_input_as_handled()
 			return # Event handled, stop processing
 
@@ -295,6 +317,7 @@ func process_selection() -> void:
 		################################################################
 		
 		_animate_correct_label()
+		_animate_found_word_pulse(selection_path)
 		if found_word_animation:
 			found_word_animation.apply_animation(selection_path) 
 		else:
@@ -326,37 +349,36 @@ func unhighlight_all_cells() -> void:
 				
 func _animate_wrong_label() -> void:
 	wrong_label.visible = true
-	var original_pos = wrong_label.position
 	
-	var tween = create_tween()
-	tween.set_parallel(false) # Make these animations sequential
+	#So that it grows from the center-top of the label, and not the default top-left
+	wrong_label.pivot_offset = wrong_label.size / 2.0
+	
+	wrong_label.scale = wrong_label_initial_scale
+	var current_modulate = wrong_label.modulate # Get the label's current modulate (color)
+	current_modulate.a = 1.0 # Set alpha to fully opaque
+	wrong_label.modulate = current_modulate
 	
 	Haptics.stacatto_singleton_longer()
+	var tween = create_tween()
+	tween.set_parallel(true) # Animate scale and alpha simultaneously
 	
-	# Move right
-	tween.tween_property(wrong_label, "position:x", original_pos.x + wrong_label_move_distance, 0.1)\
+	# Animate scale: grow from initial to final scale
+	tween.tween_property(wrong_label, "scale", wrong_label_final_scale, wrong_label_duration)\
 		.set_ease(Tween.EASE_OUT)\
-		.set_trans(Tween.TRANS_SINE)
-	# Move left
-	tween.tween_property(wrong_label, "position:x", original_pos.x - wrong_label_move_distance, 0.1)\
-		.set_ease(Tween.EASE_OUT)\
-		.set_trans(Tween.TRANS_SINE)
-	# Move right
-	tween.tween_property(wrong_label, "position:x", original_pos.x + wrong_label_move_distance, 0.1)\
-		.set_ease(Tween.EASE_OUT)\
-		.set_trans(Tween.TRANS_SINE)
-	# Move left
-	tween.tween_property(wrong_label, "position:x", original_pos.x - wrong_label_move_distance, 0.1)\
-		.set_ease(Tween.EASE_OUT)\
-		.set_trans(Tween.TRANS_SINE)
-	# Move back to center
-	tween.tween_property(wrong_label, "position:x", original_pos.x, 0.1)\
-		.set_ease(Tween.EASE_OUT)\
-		.set_trans(Tween.TRANS_SINE)
+		.set_trans(Tween.TRANS_QUAD)
 		
-	# Wait for a bit, then hide
-	tween.tween_interval(wrong_label_duration - (0.1*7)) # Subtract animation time
+	# Animate modulate alpha: fade out (from 1.0 to 0.0)
+	# The target alpha is 0.0. The starting alpha is already set to 1.0 above.
+	tween.tween_property(wrong_label, "modulate:a", 0.0, wrong_label_duration)\
+		.set_ease(Tween.EASE_OUT)\
+		.set_trans(Tween.TRANS_QUAD)
+		
+	tween.set_parallel(false) # Switch to sequential mode for the following steps
+	tween.tween_interval(0.0) # Wait for the parallel animations to complete
+	
 	tween.tween_callback(func(): wrong_label.visible = false)
+	
+
 
 func _animate_correct_label() -> void:
 	correct_label.visible = true
@@ -559,3 +581,196 @@ func unhighlight_current_selection():
 	for cell in selection_path:
 		if is_instance_valid(cell):
 			cell.unhighlight()
+
+####### PURELY FOR TESTING #######
+func generate_grid_testing() -> void:
+	grid_cells.clear()
+	ws_test_words.clear()
+
+	# Create the 2D array structure
+	grid_cells.resize(Globals.GRID_SIZE.y)
+	ws_test_words.resize(Globals.GRID_SIZE.y)
+	
+	# Populate the grid with words and letters
+	for y in range(Globals.GRID_SIZE.y):
+		grid_cells[y] = []
+		grid_cells[y].resize(Globals.GRID_SIZE.x)
+		ws_test_words[y] = []
+		ws_test_words[y].resize(Globals.GRID_SIZE.x)
+		for x in range(Globals.GRID_SIZE.x):
+			ws_test_words[y][x] = false
+			grid_cells[y][x] = "X"
+
+	# --- FIRST: Insert words into the grid ---
+	insert_words()
+	
+	# --- SECOND: Populate the remaining cells with random letters and start animation ---
+	for y in range(Globals.GRID_SIZE.y):
+		for x in range(Globals.GRID_SIZE.x):
+			var cell = grid_cells[y][x]
+			if not ws_test_words[y][x]: # If this cell is NOT occupied by a word
+				cell = "X"
+
+func insert_words() -> void:
+	var words_to_place = []
+	var placed_count = 0
+	
+	# The list of words that have been attempted and failed
+	var failed_words: Array[String] = []
+	
+	"""
+	 Keep trying until we reach the the word count we need
+	 
+	 When the length of words allowed are like, above 8, SOMETIMES it fails to place it after 1000 attempts and would
+	 just not try another word. So I asked gemini to make another loop that handles adding another word if one fails. it added
+	 a touch of complexity but still understandable.
+	 I've yet to see this problem occur at words of only 6 or less length, but need to account for it!
+	"""
+	while placed_count < Globals.GUARANTEED_WORD_COUNT:
+		# Step 1: Get a word to place
+		var word_to_try: String
+		var fake_word = "TRUCK"
+
+		var attempts = 0
+		var word_found = false
+		while not word_found and attempts < 1000:
+			var picked_word = fake_word
+			if not failed_words.has(picked_word) and not words_to_place.has(picked_word):
+				word_to_try = picked_word.to_upper()
+				words_to_place.append(word_to_try) # Add to our list of words for the puzzle
+				word_found = true
+			attempts += 1
+		
+		if not word_found:
+			print("Could not find a new valid word to try. Exiting.")
+			break
+
+		var word_len = word_to_try.length()
+		var placed_this_word = false
+		
+		var placement_attempts = 0
+		
+		# Step 2: Try to place the word
+		while placement_attempts < 1000 and not placed_this_word:
+			placement_attempts += 1
+			
+			# Random starting position
+			var start_x = randi_range(0, Globals.GRID_SIZE.x - 1)
+			var start_y = randi_range(0, Globals.GRID_SIZE.y - 1)
+			var start_pos = Vector2i(start_x, start_y)
+			
+			# Random direction
+			var direction_idx = randi_range(0, Globals.DIRECTIONS.size() - 1)
+			var direction = Globals.DIRECTIONS[direction_idx]
+			
+			var can_place = true
+			var cells_to_occupy: Array[Vector2i] = []
+			
+			for j in range(word_len):
+				var current_pos = start_pos + direction * j
+				
+				if not (current_pos.x >= 0 and current_pos.x < Globals.GRID_SIZE.x and current_pos.y >= 0 and current_pos.y < Globals.GRID_SIZE.y):
+					can_place = false
+					break
+				
+				if ws_test_words[current_pos.y][current_pos.x]:
+					if grid_cells[current_pos.y][current_pos.x] != word_to_try[j]:
+						can_place = false
+						break
+				
+				cells_to_occupy.append(current_pos)
+			
+			if can_place:
+				for j in range(word_len):
+					var cell_pos = cells_to_occupy[j]
+					grid_cells[cell_pos.y][cell_pos.x] = word_to_try[j]
+					ws_test_words[cell_pos.y][cell_pos.x] = true
+				
+				placed_this_word = true
+				placed_count += 1
+				print("Successfully placed word: ", word_to_try)
+		
+		if not placed_this_word:
+			# If the word fails to place after 1000 attempts, mark it as failed
+			# so we don't try it again, and let the outer loop pick a new one.
+			print("Could not place word: ", word_to_try, " after ", placement_attempts, " attempts.")
+			failed_words.append(word_to_try)
+			# Do not increment placed_count, the outer loop will continue.
+
+	print("Finished placing words. Placed count: ", placed_count, " out of ", Globals.GUARANTEED_WORD_COUNT)
+
+func process_selection_test() -> void:
+	if selection_path.is_empty():
+		return
+	
+	# tracks how many letters in the selection path are already found
+	var cell_found_count = 0
+
+	var selected_word: String = ""
+	for cell in selection_path:
+		if cell.is_found or cell.is_found_by_opponent:
+			cell_found_count += 1
+		selected_word += cell.letter
+
+	if selected_word == "TRUCK":
+		sound_player.stream = sounds_to_play[play_count]
+		sound_player.play()
+		play_count = play_count + 1
+		var label
+		label = find_label_by_text(words_labels, str(multiplayer.get_unique_id()), selected_word)
+		_animate_correct_label()
+		_animate_found_word_pulse(selection_path)
+		if found_word_animation:
+			found_word_animation.apply_animation(selection_path) 
+		else:
+			push_error("Animation borked, something went wrong")
+		
+		for cell in selection_path:
+			cell.set_found(true)
+			
+	else:
+		sound_player.stream = wrong_sound
+		sound_player.play()
+		_animate_wrong_label()
+		for cell in selection_path:
+			cell.unhighlight()
+		
+	selection_path.clear()
+
+## ✨ Function modified to reset the shader's custom timer.
+func _animate_found_word_pulse(selection: Array[LetterCell]) -> void:
+	# ... (Error checks and variable setup remain the same) ...
+
+	var material = scanline_overlay.material as ShaderMaterial
+	if not material:
+		push_error("ScanlineOverlay material is not a ShaderMaterial!")
+		return
+
+	# --- FIX: Reset the internal timer and activate the process ---
+	scanline_current_time = 0.0 # <--- THIS IS THE RESET
+	is_scanline_active = true   # <--- Activate the _process logic
+
+	scanline_overlay.modulate = Color(1, 1, 1, 1) 
+	scanline_overlay.visible = true 
+
+	material.set_shader_parameter("line_color", Color(1.0, 1.0, 1.0, 1.0))
+	material.set_shader_parameter("speed", 3.0)
+	material.set_shader_parameter("custom_time", 0.0) # Ensure shader starts at zero
+
+	var tween_fade = create_tween()
+	tween_fade.set_parallel(false) 
+
+	# Step 1: Hold the full opacity for a brief flash duration (0.3s)
+	tween_fade.tween_interval(0.3) 
+
+	tween_fade.tween_property(
+		scanline_overlay, 
+		"modulate", 
+		Color(1, 1, 1, 0), 
+		1 # Fade duration
+	).set_ease(Tween.EASE_OUT)
+
+	tween_fade.tween_callback(func(): 
+		scanline_overlay.visible = false
+		is_scanline_active = false # <--- STOP the continuous process
+	)
