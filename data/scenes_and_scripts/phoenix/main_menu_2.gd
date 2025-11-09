@@ -389,7 +389,7 @@ func _end_single_player_game(node):
 	_true_menu_fade_in()
 	node.queue_free()
 	
-@rpc("authority", "call_remote", "reliable")	
-func _debug_vm(data):
-	print(data)
-	pass
+#@rpc("authority", "call_remote", "reliable")	
+#func _debug_vm(data):
+	##print(data)
+	#pass

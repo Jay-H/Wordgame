@@ -23,6 +23,7 @@ var timer_values_ref
 var timer_values_dictionary = {}
 
 func _ready():
+	print("IF THIS PRINTS IT MEANS THE SERVER IS USING NEW BUILD")
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	_start_server()
@@ -33,8 +34,9 @@ func _ready():
 	pass
 	
 func _process(_delta):
-	await _debug_vm(selected_game_list)
-
+	#await _debug_vm(selected_game_list)
+	pass
+	
 func _on_FirebaseAuth_login_succeeded(auth):
 
 	game_types_ref = Firebase.Database.get_database_reference("server_data/game_types", {})
@@ -339,9 +341,9 @@ func _ask_server_for_info(info_dictionary):
 	pass
 
 
-@rpc("any_peer", "call_remote", "reliable")	
-func _debug_vm(data):
-	await get_tree().create_timer(1).timeout
-	for i in multiplayer.get_peers():
-		rpc_id(i, "_debug_vm", data)
-	pass
+#@rpc("any_peer", "call_remote", "reliable")	
+#func _debug_vm(data):
+	#await get_tree().create_timer(1).timeout
+	#for i in multiplayer.get_peers():
+		#rpc_id(i, "_debug_vm", data)
+	#pass
