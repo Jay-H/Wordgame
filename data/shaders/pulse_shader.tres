@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bnq728n31dq7c"]
+
+[ext_resource type="Shader" uid="uid://en35woqlgx12" path="res://data/shaders/pulse_shader.gdshader" id="1_qhof4"]
+
+[resource]
+shader = ExtResource("1_qhof4")
+shader_parameter/speed = 1.0
+shader_parameter/line_width = 0.15
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/pause_duration = 0.0
+shader_parameter/offset = 2.0
+shader_parameter/pixelate_line = 0

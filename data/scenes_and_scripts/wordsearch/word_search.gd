@@ -33,6 +33,9 @@ var words_labels: Dictionary = {}
 # the variant that the server has chosen
 var variant
 
+var is_scanline_active: bool = false
+var scanline_current_time: float = 0.0
+
 #TODO: temporary until we have a real setup
 var sounds_to_play = [
 	preload("res://data/sounds/WS_temp_1.mp3"),
@@ -68,12 +71,20 @@ var opponent_found_sound = preload("res://data/sounds/WS_temp_opponent_found.mp3
 @export var correct_label_initial_alpha: float = 1.0 # Start invisible
 
 @export var found_word_animation: CellAnimationResource
+@onready var scanline_overlay: ColorRect = %ColorRect
 
 var ws_test_words = []
 
 func _process(delta):
 	if pregame_timer_node != null:
 		%PreTimerLabel.text = str(int(pregame_timer_node.time_left))
+	# Only run the timer if the scanline effect is active
+	if is_scanline_active:
+		scanline_current_time += delta
+		
+		var material = scanline_overlay.material as ShaderMaterial
+		if material:
+			material.set_shader_parameter("custom_time", scanline_current_time)
 
 func _ready() -> void:
 	wrong_label.visible = false
@@ -726,72 +737,40 @@ func process_selection_test() -> void:
 		
 	selection_path.clear()
 
-## ✨ Creates a directional pulse spanning the entire screen.
+## ✨ Function modified to reset the shader's custom timer.
 func _animate_found_word_pulse(selection: Array[LetterCell]) -> void:
-	if selection.size() < 2:
+	# ... (Error checks and variable setup remain the same) ...
+
+	var material = scanline_overlay.material as ShaderMaterial
+	if not material:
+		push_error("ScanlineOverlay material is not a ShaderMaterial!")
 		return
 
-	var pulse_line = Line2D.new()
-	var chungus_layer = get_node("chungus") 
-	pulse_line.z_index = 100 
-	chungus_layer.add_child(pulse_line) 
-	
-	var pulse_duration = 1.3
-	var viewport_size = get_viewport().size
-	# The diagonal length of the viewport, which is the minimum size needed to cover the screen.
-	var massive_coverage_dimension = viewport_size.length() 
-	# Use a factor of 2x the diagonal to guarantee the line is longer and wider than the screen.
-	var line_dimension = massive_coverage_dimension * 20.0
-	
-	# ------------------ Directional Calculation ------------------
-	var start_cell = selection.front()
-	var end_cell = selection.back()
+	# --- FIX: Reset the internal timer and activate the process ---
+	scanline_current_time = 0.0 # <--- THIS IS THE RESET
+	is_scanline_active = true   # <--- Activate the _process logic
 
-	var start_global_center = start_cell.get_global_position() + start_cell.size / 2.0
-	var end_global_center = end_cell.get_global_position() + end_cell.size / 2.0
-	
-	var word_direction = (end_global_center - start_global_center).normalized()
-	var wavefront_direction = Vector2(-word_direction.y, word_direction.x).normalized()
-	
-	# 4. Define the line's two points using the wavefront direction.
-	# These points define a line segment that is much longer than the screen's diagonal 
-	# and is centered near the found word.
-	var point_a = start_global_center + word_direction * line_dimension
-	var point_b = start_global_center - word_direction * line_dimension
+	scanline_overlay.modulate = Color(1, 1, 1, 1) 
+	scanline_overlay.visible = true 
 
-	# 5. Convert points to the CanvasLayer's local space
-	var start_local_pos = pulse_line.to_local(point_a)
-	var end_local_pos = pulse_line.to_local(point_b)
-	
-	# To ensure the pulse travels in the direction of the word, 
-	# we set the line points to go from START_of_word direction to END_of_word direction.
-	# If the pulse direction is wrong, swap these two lines!
-	pulse_line.add_point(end_local_pos)
-	pulse_line.add_point(start_local_pos)
-	
-	# ------------------ SHADER & ANIMATION SETUP ------------------
-	
-	var pulse_shader = preload("res://data/shaders/pulse_shader.gdshader")
-	var material = ShaderMaterial.new()
-	material.shader = pulse_shader
-	pulse_line.material = material
-	material.set_shader_parameter("total_pulse_width", 0.5)
-	material.set_shader_parameter("fade_fraction", 1.0)
-	
-	pulse_line.default_color = Color.WHITE
-	pulse_line.width = line_dimension 
-	pulse_line.texture_mode = Line2D.LINE_TEXTURE_TILE
+	material.set_shader_parameter("line_color", Color(1.0, 1.0, 1.0, 1.0))
+	material.set_shader_parameter("speed", 2.0)
+	material.set_shader_parameter("custom_time", 0.0) # Ensure shader starts at zero
 
-	# 1. Animate the Pulse Movement 
-	var tween_offset = create_tween()
-	tween_offset.play()
-	
-	tween_offset.tween_method(
-		func(value): material.set_shader_parameter("progress", value), 
-		0.0,  # Start the pulse entirely off-screen
-		2.0,   # End the pulse entirely off-screen
-		pulse_duration
-	).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
-	
-	# 2. Clean up the node
-	tween_offset.tween_callback(pulse_line.queue_free)
+	var tween_fade = create_tween()
+	tween_fade.set_parallel(false) 
+
+	# Step 1: Hold the full opacity for a brief flash duration (0.3s)
+	tween_fade.tween_interval(0.3) 
+
+	tween_fade.tween_property(
+		scanline_overlay, 
+		"modulate", 
+		Color(1, 1, 1, 0), 
+		0.4 # Fade duration
+	).set_ease(Tween.EASE_OUT)
+
+	tween_fade.tween_callback(func(): 
+		scanline_overlay.visible = false
+		is_scanline_active = false # <--- STOP the continuous process
+	)

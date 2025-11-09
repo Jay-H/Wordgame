@@ -1,56 +1,59 @@
 shader_type canvas_item;
-render_mode blend_mix;
 
-uniform float progress = 0.0;
-uniform sampler2D gradient_tex;
-
-// Define overall thickness (e.g., 30% of line length)
-uniform float total_pulse_width = 0.3; 
-// Define the fraction of the total width that should be the fade (e.g., 30% fade, 70% solid)
-uniform float fade_fraction = 0.3; 
+uniform float speed : hint_range(0.0, 5.0) = 1.0;
+uniform float line_width : hint_range(0.0, 0.2) = 0.15;
+uniform vec4 line_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform float custom_time = 0.0;
+uniform float pause_duration : hint_range(0.0, 2.0) = 0.15;
+uniform float offset = 2.0;
+uniform int pixelate_line : hint_range(0, 1) = 1;
+uniform sampler2D screen_texture : hint_screen_texture;
 
 void fragment() {
-	// UV.x is the normalized distance along the Line2D path (0.0 to 1.0).
-	float line_progress = clamp(UV.x, 0.0, 1.0); 
-
-	float fade_length = total_pulse_width * fade_fraction;
-	float solid_length = total_pulse_width - fade_length;
+    // --- CHANGE 1: Use SCREEN_UV for position ---
+    // SCREEN_UV ranges from (0,0) to (1,1) across the entire viewport.
+    vec2 pos_uv = SCREEN_UV;
     
-    // Define the start and end points of the entire pulse window based on the animated 'progress'
-    float pulse_end = progress;                  // Leading edge (where the pulse stops)
-    float pulse_start = progress - total_pulse_width; // Trailing edge (where the pulse begins)
-    float fade_point = progress - fade_length;       // Point where the solid white ends
+    // Cycle timing with pause at end
+    float cycle_duration = offset + pause_duration;
+    float adjusted_time = mod(custom_time * speed, cycle_duration);    
 
-    float alpha_val = 0.0;
-    
-    // 1. Check if the fragment is within the solid white region
-    if (line_progress >= pulse_start && line_progress < fade_point) {
-        // We are in the solid white part of the pulse.
-        alpha_val = 1.0;
+    // Line movement with pause (right to left)
+    float line_position;
+    if (adjusted_time <= offset) {
+        // The line position starts high (off-screen right) and moves left
+        line_position = offset - adjusted_time; 
+    } else {
+        // Pause duration: set the line far off-screen
+        line_position = -0.5; 
     }
     
-    // 2. Check if the fragment is within the gradient region
-    if (line_progress >= fade_point && line_progress < pulse_end) {
-        // Use smoothstep to create a perfect gradient ramp from 1.0 down to 0.0.
-        // The ramp goes from 1.0 at fade_point to 0.0 at pulse_end.
-        // We use an inverse smoothstep to make it fade out (1.0 to 0.0).
-        // The value should be 1.0 at fade_point and 0.0 at pulse_end.
-        
-        // This calculates the distance of the fragment into the fade zone (0.0 to fade_length)
-        float distance_into_fade = line_progress - fade_point;
-        
-        // Normalize the distance (0.0 to 1.0) for the fade length
-        float normalized_fade = distance_into_fade / fade_length;
-
-        // Since we want the color to fade from white (1.0) to transparent (0.0)
-        // we use (1.0 - normalized_fade)
-        alpha_val = normalized_fade;
+    // Line position source: SCREEN_UV
+    vec2 uv_for_line = pos_uv;
+    
+    // Pixelate the line position calculation (on screen space)
+    if (pixelate_line == 1) {
+        // Get the size of the viewport in pixels
+        vec2 viewport_size = 1.0 / SCREEN_PIXEL_SIZE;
+        // Pixelate the UV coordinate
+        uv_for_line = floor(pos_uv * viewport_size) / viewport_size;
     }
     
-    // Read the color
-	vec4 color = texture(gradient_tex, vec2(line_progress, 0.5));
-	
-	// Apply the final alpha
-	COLOR = color;
-	COLOR.a *= alpha_val;
+    // Diagonal line rotation (This remains the core effect)
+    // The rotation formula should be adjusted slightly since SCREEN_UV is used.
+    float rotated_pos = (uv_for_line.x + uv_for_line.y) * 0.5;
+    float dist = abs(rotated_pos - line_position);
+    
+    // Line width and smoothness
+    float line_intensity = smoothstep(line_width, 0.0, dist);
+    
+    // --- CHANGE 2: Combine with the entire screen color ---
+    // Sample the screen (what's already drawn)
+    vec4 base_color = texture(screen_texture, SCREEN_UV);
+
+    // Apply the line effect only where the line intensity is high
+    vec3 final_color = mix(base_color.rgb, line_color.rgb, line_intensity * line_color.a);
+    
+    // Preserve original alpha and output
+    COLOR = vec4(final_color, base_color.a);
 }
