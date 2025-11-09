@@ -23,6 +23,7 @@ var timer_values_ref
 var timer_values_dictionary = {}
 
 func _ready():
+	print("server initiation check")
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	_start_server()
@@ -340,9 +341,9 @@ func _ask_server_for_info(info_dictionary):
 	pass
 
 
-@rpc("any_peer", "call_remote", "reliable")	
-func _debug_vm(data):
-	await get_tree().create_timer(1).timeout
-	for i in multiplayer.get_peers():
-		rpc_id(i, "_debug_vm", data)
-	pass
+#@rpc("any_peer", "call_remote", "reliable")	
+#func _debug_vm(data):
+	#await get_tree().create_timer(1).timeout
+	#for i in multiplayer.get_peers():
+		#rpc_id(i, "_debug_vm", data)
+	#pass
