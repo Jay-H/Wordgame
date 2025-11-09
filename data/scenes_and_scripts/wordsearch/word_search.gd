@@ -754,7 +754,7 @@ func _animate_found_word_pulse(selection: Array[LetterCell]) -> void:
 	scanline_overlay.visible = true 
 
 	material.set_shader_parameter("line_color", Color(1.0, 1.0, 1.0, 1.0))
-	material.set_shader_parameter("speed", 2.0)
+	material.set_shader_parameter("speed", 3.0)
 	material.set_shader_parameter("custom_time", 0.0) # Ensure shader starts at zero
 
 	var tween_fade = create_tween()
@@ -767,7 +767,7 @@ func _animate_found_word_pulse(selection: Array[LetterCell]) -> void:
 		scanline_overlay, 
 		"modulate", 
 		Color(1, 1, 1, 0), 
-		0.4 # Fade duration
+		1 # Fade duration
 	).set_ease(Tween.EASE_OUT)
 
 	tween_fade.tween_callback(func(): 
