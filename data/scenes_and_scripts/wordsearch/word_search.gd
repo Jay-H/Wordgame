@@ -739,22 +739,40 @@ func process_selection_test() -> void:
 
 ## ✨ Function modified to reset the shader's custom timer.
 func _animate_found_word_pulse(selection: Array[LetterCell]) -> void:
-	# ... (Error checks and variable setup remain the same) ...
+	scanline_overlay.modulate = Color(1, 1, 1, 1) 
+	scanline_overlay.visible = true 
+	
+	var start_cell = selection.front()
+	var end_cell = selection.back()
+	
+	var start_global_center = start_cell.get_global_position() + start_cell.size / 2.0
+	var end_global_center = end_cell.get_global_position() + end_cell.size / 2.0
 
+	var direction_vector = end_global_center - start_global_center
+	var angle_rad = direction_vector.angle()
+	
+	const PI_OVER_4 = PI / 4.0
+	var final_rotation_angle = angle_rad + PI_OVER_4
+	
+	if abs(direction_vector.y) < direction_vector.x * 0.1: # Threshold check
+		# Add 180 degrees (PI radians) to flip the direction.
+		final_rotation_angle += PI
+	
 	var material = scanline_overlay.material as ShaderMaterial
 	if not material:
 		push_error("ScanlineOverlay material is not a ShaderMaterial!")
 		return
 
 	# --- FIX: Reset the internal timer and activate the process ---
-	scanline_current_time = 0.0 # <--- THIS IS THE RESET
-	is_scanline_active = true   # <--- Activate the _process logic
-
+	scanline_current_time = 0.0
+	is_scanline_active = true   
 	scanline_overlay.modulate = Color(1, 1, 1, 1) 
-	scanline_overlay.visible = true 
+	scanline_overlay.visible = true
 
+	material.set_shader_parameter("rotation_angle", final_rotation_angle)
 	material.set_shader_parameter("line_color", Color(1.0, 1.0, 1.0, 1.0))
-	material.set_shader_parameter("speed", 3.0)
+	material.set_shader_parameter("speed", 6)
+	material.set_shader_parameter("line_width", 0.8)
 	material.set_shader_parameter("custom_time", 0.0) # Ensure shader starts at zero
 
 	var tween_fade = create_tween()
@@ -767,7 +785,7 @@ func _animate_found_word_pulse(selection: Array[LetterCell]) -> void:
 		scanline_overlay, 
 		"modulate", 
 		Color(1, 1, 1, 0), 
-		1 # Fade duration
+		7 # Fade duration
 	).set_ease(Tween.EASE_OUT)
 
 	tween_fade.tween_callback(func(): 
