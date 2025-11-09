@@ -1,5 +1,5 @@
 extends Control
-var debug_mode = true
+var debug_mode = false
 var my_client_id
 var my_player_number
 var opponent_player_number

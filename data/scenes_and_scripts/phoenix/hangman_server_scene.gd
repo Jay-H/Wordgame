@@ -1,6 +1,6 @@
 extends Control
 signal game_over
-var debug_mode = true
+var debug_mode = false
 var PORT = 7777
 var MAX_PLAYERS = 1000
 var new_letter_interval_time = 5
