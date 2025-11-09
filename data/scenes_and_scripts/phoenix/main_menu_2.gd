@@ -391,5 +391,5 @@ func _end_single_player_game(node):
 	
 @rpc("authority", "call_remote", "reliable")	
 func _debug_vm(data):
-	print(data)
+	#print(data)
 	pass

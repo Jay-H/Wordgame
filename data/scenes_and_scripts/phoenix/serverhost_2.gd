@@ -33,8 +33,9 @@ func _ready():
 	pass
 	
 func _process(_delta):
-	await _debug_vm(selected_game_list)
-
+	#await _debug_vm(selected_game_list)
+	pass
+	
 func _on_FirebaseAuth_login_succeeded(auth):
 
 	game_types_ref = Firebase.Database.get_database_reference("server_data/game_types", {})
