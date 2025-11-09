@@ -23,7 +23,7 @@ var timer_values_ref
 var timer_values_dictionary = {}
 
 func _ready():
-	print("server initiation check")
+	print("IF THIS PRINTS IT MEANS THE SERVER IS USING NEW BUILD")
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	_start_server()
