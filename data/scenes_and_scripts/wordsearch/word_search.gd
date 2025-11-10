@@ -61,6 +61,7 @@ var drag_sounds = [
 	]
 
 @onready var sound_player: AudioStreamPlayer2D = %SoundPlayer
+@onready var music_player: AudioStreamPlayer2D = %MusicPlayer
 
 # --- Animation Properties ---
 @export_group("Grid Spawn Animation")
@@ -132,6 +133,7 @@ func _ready() -> void:
 	generate_grid()
 	
 	sound_player.play()
+	music_player.play()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and !event.is_pressed():
