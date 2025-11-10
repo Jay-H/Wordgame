@@ -1,48 +1,17 @@
-[gd_scene load_steps=33 format=3 uid="uid://htad6c5wox1x"]
+[gd_scene load_steps=16 format=3 uid="uid://htad6c5wox1x"]
 
 [ext_resource type="Script" uid="uid://cnf5uewq3vhqq" path="res://data/scenes_and_scripts/scramble/scramble_client_scene.gd" id="1_50ayc"]
-[ext_resource type="Texture2D" uid="uid://crknm7gdg7jon" path="res://data/images/fog.png" id="2_7wj4i"]
 [ext_resource type="AudioStream" uid="uid://pclwk720i0ch" path="res://data/music/Piano1.wav" id="2_8dyrl"]
-[ext_resource type="Script" uid="uid://c1bcwarx32kt3" path="res://data/scenes_and_scripts/scramble/gpu_particles_2d.gd" id="3_agcab"]
-[ext_resource type="Shader" uid="uid://bllkhvpx2wvkv" path="res://data/scenes_and_scripts/multiplayertesting/mars.gdshader" id="3_synos"]
 [ext_resource type="Script" uid="uid://cy1a7adjburkj" path="res://data/scenes_and_scripts/scramble/mini_score.gd" id="3_wlll2"]
-[ext_resource type="Texture2D" uid="uid://toy4qh1c35cl" path="res://data/images/mars_high_res.jpg" id="4_8dyrl"]
+[ext_resource type="Texture2D" uid="uid://dwjasqd1m1mcp" path="res://data/images/textures/kiwihug-MS9Tnh3if1o-unsplash.jpg" id="4_1gm2h"]
 [ext_resource type="Shader" uid="uid://dwfv7tbunsf61" path="res://data/scenes_and_scripts/scramble/scramble_client_scene.gdshader" id="4_agcab"]
-[ext_resource type="Material" uid="uid://xtnsfpcccyin" path="res://data/scenes_and_scripts/scramble/jupiter4test.tres" id="4_dnafr"]
 [ext_resource type="Script" uid="uid://6jp6wyjp33aw" path="res://data/scenes_and_scripts/scramble/richtextletter.gd" id="4_mge6w"]
-[ext_resource type="Script" uid="uid://cqjgchwh21nc1" path="res://data/scenes_and_scripts/scramble/mars.gd" id="5_j23f3"]
-[ext_resource type="Material" uid="uid://cutp7wv0qewh5" path="res://data/scenes_and_scripts/scramble/cloudscape2test.tres" id="6_kg312"]
 [ext_resource type="Script" uid="uid://htbcgdaaygan" path="res://data/scenes_and_scripts/scramble/letter.gd" id="8_04gus"]
-[ext_resource type="Shader" uid="uid://xh4c2hxx3xs1" path="res://data/scenes_and_scripts/scramble/jupiter.gdshader" id="8_vsvxw"]
-[ext_resource type="Shader" uid="uid://ddoeuq4rvc1ri" path="res://data/scenes_and_scripts/scramble/coloredblocker.gdshader" id="11_5m83b"]
-[ext_resource type="Shader" uid="uid://baj561mjeqcoh" path="res://data/scenes_and_scripts/scramble/pregamelabels.gdshader" id="12_04gus"]
 [ext_resource type="FontFile" uid="uid://dskmx2extevrw" path="res://data/fonts/times.ttf" id="12_8dyrl"]
-[ext_resource type="FontFile" uid="uid://ca75bijbhrqu7" path="res://data/fonts/akando/Akando.otf" id="13_5fyvy"]
 [ext_resource type="PackedScene" uid="uid://bmm23rwsctf0d" path="res://data/scenes_and_scripts/multiplayertesting/piano_controller.tscn" id="14_5fyvy"]
 [ext_resource type="Shader" uid="uid://c0ptn8g2ds8f6" path="res://data/scenes_and_scripts/scramble/cloudscape.gdshader" id="16_utcc8"]
-[ext_resource type="FontFile" uid="uid://btkq12upc3w1a" path="res://data/fonts/fc-barcelona/barselona.ttf" id="21_714vc"]
+[ext_resource type="FontFile" uid="uid://csa2vdskduyio" path="res://data/fonts/OtherFonts/Kiddie-Store.otf" id="21_714vc"]
 [ext_resource type="Script" uid="uid://b8428ns4cw1ig" path="res://data/scenes_and_scripts/scramble/found_word_label.gd" id="21_j23f3"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_eyk14"]
-shader = ExtResource("8_vsvxw")
-shader_parameter/color_dark = Color(0.35, 0.2, 0.15, 1)
-shader_parameter/color_mid = Color(0.65, 0.5, 0.35, 1)
-shader_parameter/color_light = Color(0.9, 0.85, 0.75, 1)
-shader_parameter/noise_scale = 1.653
-shader_parameter/swirl_speed = 0.588
-shader_parameter/distortion = 0.5
-shader_parameter/band_stretch = 0.1
-shader_parameter/band_softness = 0.179
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1gm2h"]
-shader = ExtResource("3_synos")
-shader_parameter/aberration_amount = 0.0
-shader_parameter/bloom_threshold = 0.136
-shader_parameter/bloom_intensity = 0.464
-shader_parameter/fade = 0.0
-shader_parameter/wave_speed = 0.589
-shader_parameter/wave_frequency = 20.0
-shader_parameter/wave_amplitude = 0.001
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kg312"]
 shader = ExtResource("16_utcc8")
@@ -58,29 +27,6 @@ shader_parameter/cloud_color = Color(1, 0.87451, 0.933333, 1)
 shader_parameter/speed_primary = 0.69
 shader_parameter/speed_secondary = 0.818
 
-[sub_resource type="Gradient" id="Gradient_vsvxw"]
-offsets = PackedFloat32Array(0, 0.125, 0.285714, 0.761905, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.552941, 0.00392157, 0, 0, 0.407843, 0.607843, 0.780392, 0.92549, 0.584314, 0.607843, 0.780392, 0.92549, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_rr8v0"]
-gradient = SubResource("Gradient_vsvxw")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eyk14"]
-lifetime_randomness = 0.5
-emission_shape = 3
-emission_box_extents = Vector3(660, 0, 1)
-direction = Vector3(0, 1000, 0)
-spread = 180.0
-initial_velocity_min = 818.1
-initial_velocity_max = 1000.0
-gravity = Vector3(0, 2000, -5000)
-scale_min = 4.0
-scale_max = 6.0
-color_ramp = SubResource("GradientTexture1D_rr8v0")
-turbulence_noise_strength = 0.5
-turbulence_noise_scale = 2.0
-turbulence_influence_max = 1.0
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vsvxw"]
 shader = ExtResource("4_agcab")
 shader_parameter/sun_color = Color(1, 0.901961, 0.501961, 1)
@@ -90,24 +36,6 @@ shader_parameter/noise_intensity = 0.074
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_48hoo"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_utcc8"]
-shader = ExtResource("11_5m83b")
-shader_parameter/pink_color = Color(1, 0.952941, 0.803922, 1)
-shader_parameter/blue_color = Color(0.673158, 0.746813, 1, 1)
-shader_parameter/noise_scale = 20.0
-shader_parameter/motion_speed = 0.5
-shader_parameter/fbm_octaves = 4
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dnafr"]
-shader = ExtResource("12_04gus")
-shader_parameter/base_color = Color(0.430503, 0.549134, 0.988768, 1)
-shader_parameter/glow_intensity = 4.068
-shader_parameter/pulse_speed = 10.0
-shader_parameter/pulse_depth = 0.423
-shader_parameter/color_aberration = 0.002
-shader_parameter/distortion_amount = 0.0
-shader_parameter/distortion_speed = 0.1
 
 [node name="ScrambleScene" type="Control"]
 layout_mode = 3
@@ -135,52 +63,6 @@ offset_right = 1320.0
 offset_bottom = 2868.0
 color = Color(0, 0, 0, 1)
 
-[node name="Jupiter" type="ColorRect" parent="CanvasLayer"]
-visible = false
-modulate = Color(1, 1, 1, 0.235294)
-material = SubResource("ShaderMaterial_eyk14")
-offset_right = 1320.0
-offset_bottom = 2868.0
-
-[node name="MarsBase" type="ColorRect" parent="CanvasLayer"]
-unique_name_in_owner = true
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
-[node name="Mars" type="TextureRect" parent="CanvasLayer/MarsBase"]
-unique_name_in_owner = true
-material = SubResource("ShaderMaterial_1gm2h")
-layout_mode = 2
-offset_left = -824.0
-offset_top = 1044.0
-offset_right = 2146.0
-offset_bottom = 4014.0
-texture = ExtResource("4_8dyrl")
-script = ExtResource("5_j23f3")
-
-[node name="Jupiter3" type="ColorRect" parent="CanvasLayer"]
-visible = false
-material = ExtResource("4_dnafr")
-offset_left = -1561.0
-offset_top = -13.0
-offset_right = -241.0
-offset_bottom = 2863.0
-
-[node name="Jupiter4" type="ColorRect" parent="CanvasLayer"]
-unique_name_in_owner = true
-visible = false
-modulate = Color(1, 1, 1, 0.682353)
-material = ExtResource("4_dnafr")
-offset_left = -247.0
-offset_top = -179.0
-offset_right = 1647.0
-offset_bottom = 3282.0
-
 [node name="Cloudscape1" type="ColorRect" parent="CanvasLayer"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_kg312")
@@ -191,62 +73,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Cloudscape2" type="ColorRect" parent="CanvasLayer"]
-visible = false
-material = ExtResource("6_kg312")
-custom_minimum_size = Vector2(1320, 2868)
-offset_right = 1320.0
-offset_bottom = 2868.0
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="CanvasLayer"]
-visible = false
-position = Vector2(658, 1711)
-amount = 55
-texture = ExtResource("2_7wj4i")
-lifetime = 8.16
-speed_scale = 0.4
-randomness = 0.21
-fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_eyk14")
-script = ExtResource("3_agcab")
-
-[node name="GPUParticles2D3" type="GPUParticles2D" parent="CanvasLayer"]
-visible = false
-position = Vector2(677, 1336)
-amount = 200
-texture = ExtResource("2_7wj4i")
-lifetime = 2.0
-speed_scale = 0.4
-randomness = 0.21
-fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_eyk14")
-script = ExtResource("3_agcab")
-
-[node name="GPUParticles2D2" type="GPUParticles2D" parent="CanvasLayer"]
-visible = false
-modulate = Color(1, 1, 1, 0.215686)
-position = Vector2(665, 1082)
-amount = 40
-texture = ExtResource("2_7wj4i")
-lifetime = 2.0
-speed_scale = 0.4
-randomness = 0.21
-fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_eyk14")
-script = ExtResource("3_agcab")
-
-[node name="GPUParticles2D4" type="GPUParticles2D" parent="CanvasLayer"]
-visible = false
-modulate = Color(1, 1, 1, 0.215686)
-position = Vector2(1354, 2672)
-amount = 55
-texture = ExtResource("2_7wj4i")
-lifetime = 8.16
-speed_scale = 0.4
-randomness = 0.21
-fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_eyk14")
-script = ExtResource("3_agcab")
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1196.0
+offset_top = -1350.0
+offset_right = 1196.0
+offset_bottom = 1350.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_1gm2h")
 
 [node name="Sun" type="ColorRect" parent="CanvasLayer"]
 unique_name_in_owner = true
@@ -295,8 +132,8 @@ mouse_filter = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("12_8dyrl")
-theme_override_font_sizes/font_size = 150
+theme_override_fonts/font = ExtResource("21_714vc")
+theme_override_font_sizes/font_size = 215
 text = "7"
 horizontal_alignment = 1
 script = ExtResource("8_04gus")
@@ -309,8 +146,8 @@ mouse_filter = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("12_8dyrl")
-theme_override_font_sizes/font_size = 150
+theme_override_fonts/font = ExtResource("21_714vc")
+theme_override_font_sizes/font_size = 215
 text = "7"
 horizontal_alignment = 1
 script = ExtResource("8_04gus")
@@ -323,8 +160,8 @@ mouse_filter = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("12_8dyrl")
-theme_override_font_sizes/font_size = 150
+theme_override_fonts/font = ExtResource("21_714vc")
+theme_override_font_sizes/font_size = 215
 text = "7"
 horizontal_alignment = 1
 script = ExtResource("8_04gus")
@@ -337,8 +174,8 @@ mouse_filter = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("12_8dyrl")
-theme_override_font_sizes/font_size = 150
+theme_override_fonts/font = ExtResource("21_714vc")
+theme_override_font_sizes/font_size = 215
 text = "7"
 horizontal_alignment = 1
 script = ExtResource("8_04gus")
@@ -353,8 +190,8 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 200
 theme_override_constants/outline_size = 10
 theme_override_constants/shadow_outline_size = -135
-theme_override_fonts/font = ExtResource("12_8dyrl")
-theme_override_font_sizes/font_size = 150
+theme_override_fonts/font = ExtResource("21_714vc")
+theme_override_font_sizes/font_size = 215
 text = "7"
 horizontal_alignment = 1
 script = ExtResource("8_04gus")
@@ -367,8 +204,8 @@ mouse_filter = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("12_8dyrl")
-theme_override_font_sizes/font_size = 150
+theme_override_fonts/font = ExtResource("21_714vc")
+theme_override_font_sizes/font_size = 215
 text = "7"
 horizontal_alignment = 1
 script = ExtResource("8_04gus")
@@ -381,8 +218,8 @@ mouse_filter = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("12_8dyrl")
-theme_override_font_sizes/font_size = 150
+theme_override_fonts/font = ExtResource("21_714vc")
+theme_override_font_sizes/font_size = 215
 text = "7"
 horizontal_alignment = 1
 script = ExtResource("8_04gus")
@@ -500,8 +337,8 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("12_8dyrl")
-theme_override_font_sizes/font_size = 100
+theme_override_fonts/font = ExtResource("21_714vc")
+theme_override_font_sizes/font_size = 145
 theme_override_styles/focus = SubResource("StyleBoxFlat_48hoo")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_48hoo")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_48hoo")
@@ -534,8 +371,8 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("12_8dyrl")
-theme_override_font_sizes/font_size = 100
+theme_override_fonts/font = ExtResource("21_714vc")
+theme_override_font_sizes/font_size = 145
 theme_override_styles/focus = SubResource("StyleBoxFlat_48hoo")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_48hoo")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_48hoo")
@@ -569,8 +406,8 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("12_8dyrl")
-theme_override_font_sizes/font_size = 100
+theme_override_fonts/font = ExtResource("21_714vc")
+theme_override_font_sizes/font_size = 145
 theme_override_styles/focus = SubResource("StyleBoxFlat_48hoo")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_48hoo")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_48hoo")
@@ -599,7 +436,8 @@ offset_bottom = 102.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 150
+theme_override_fonts/font = ExtResource("21_714vc")
+theme_override_font_sizes/font_size = 210
 text = "00:45"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -618,6 +456,7 @@ offset_bottom = 102.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("21_714vc")
 theme_override_font_sizes/font_size = 150
 text = "0"
 horizontal_alignment = 1
@@ -637,7 +476,7 @@ offset_bottom = -393.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("12_8dyrl")
+theme_override_fonts/font = ExtResource("21_714vc")
 theme_override_font_sizes/font_size = 150
 text = "Score = 0 "
 horizontal_alignment = 1
@@ -656,7 +495,7 @@ offset_bottom = -218.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("12_8dyrl")
+theme_override_fonts/font = ExtResource("21_714vc")
 theme_override_font_sizes/font_size = 140
 text = "XXXXXXX"
 horizontal_alignment = 1
@@ -669,100 +508,50 @@ anchor_top = 0.852
 anchor_right = 0.5
 anchor_bottom = 0.852
 offset_left = -660.0
-offset_top = -159.0
+offset_top = -231.536
 offset_right = 660.0
-offset_bottom = 159.0
+offset_bottom = 105.464
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/default_color = Color(0.767862, 0, 0.254953, 1)
-theme_override_fonts/normal_font = ExtResource("12_8dyrl")
-theme_override_font_sizes/normal_font_size = 200
-text = "B"
+theme_override_fonts/normal_font = ExtResource("21_714vc")
+theme_override_font_sizes/normal_font_size = 310
+text = "S"
 horizontal_alignment = 1
+vertical_alignment = 2
 script = ExtResource("4_mge6w")
 
-[node name="BonusScore" type="Label" parent="CanvasLayer"]
-unique_name_in_owner = true
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/BonusLetter"]
 visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 472.0
+offset_top = -105.0
+offset_right = 149.5
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BonusScore" type="Label" parent="CanvasLayer/BonusLetter/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(285, 137)
-offset_left = 887.0
-offset_top = 2340.0
-offset_right = 1172.0
-offset_bottom = 2477.0
+layout_mode = 2
 theme_override_colors/font_color = Color(0.796078, 0.494118, 1, 1)
 theme_override_font_sizes/font_size = 100
 text = "10+10"
 horizontal_alignment = 1
 
-[node name="BonusReminder" type="Label" parent="CanvasLayer"]
+[node name="BonusReminder" type="Label" parent="CanvasLayer/BonusLetter/VBoxContainer"]
 unique_name_in_owner = true
-visible = false
-offset_left = 883.0
-offset_top = 2465.0
-offset_right = 1182.0
-offset_bottom = 2534.0
+layout_mode = 2
 theme_override_colors/font_color = Color(0.796078, 0.494118, 1, 1)
 theme_override_font_sizes/font_size = 50
 text = "Bonus Value"
 horizontal_alignment = 1
-
-[node name="ColoredBlocker" type="ColorRect" parent="CanvasLayer"]
-unique_name_in_owner = true
-visible = false
-material = SubResource("ShaderMaterial_utcc8")
-offset_right = 1320.0
-offset_bottom = 2868.0
-mouse_filter = 2
-color = Color(1, 0.860672, 0.999645, 1)
-
-[node name="PreTimerLabel" type="Label" parent="CanvasLayer/ColoredBlocker"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 642.0
-offset_top = 1471.0
-offset_right = 898.0
-offset_bottom = 1608.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 100
-text = "00:00"
-
-[node name="GameStartingInLabel" type="Label" parent="CanvasLayer/ColoredBlocker"]
-layout_mode = 0
-offset_left = 69.0
-offset_top = 1184.0
-offset_right = 908.0
-offset_bottom = 1321.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 100
-text = "Game Starting In:"
-
-[node name="Background" type="RichTextLabel" parent="CanvasLayer/ColoredBlocker"]
-unique_name_in_owner = true
-material = SubResource("ShaderMaterial_dnafr")
-layout_mode = 0
-offset_left = 43.0
-offset_top = 2339.0
-offset_right = 1289.0
-offset_bottom = 2462.0
-mouse_filter = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("13_5fyvy")
-theme_override_font_sizes/normal_font_size = 100
-text = "Background: Jupiter"
-
-[node name="Music" type="RichTextLabel" parent="CanvasLayer/ColoredBlocker"]
-unique_name_in_owner = true
-material = SubResource("ShaderMaterial_dnafr")
-layout_mode = 0
-offset_left = 46.0
-offset_top = 2547.0
-offset_right = 1269.0
-offset_bottom = 2716.0
-mouse_filter = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("13_5fyvy")
-theme_override_font_sizes/normal_font_size = 100
-text = "Music: Interstellar"
 
 [node name="Button" type="Button" parent="CanvasLayer"]
 modulate = Color(1, 1, 1, 0)
@@ -1091,7 +880,7 @@ grow_vertical = 2
 
 [node name="FoundWordLabel" type="RichTextLabel" parent="CanvasLayer"]
 unique_name_in_owner = true
-anchors_preset = -1
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -587.0
@@ -1110,6 +899,72 @@ horizontal_alignment = 1
 vertical_alignment = 2
 script = ExtResource("21_j23f3")
 
+[node name="VariantControl" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 7.0
+offset_top = 2130.0
+offset_right = 505.0
+offset_bottom = 2546.0
+
+[node name="VariantBox" type="VBoxContainer" parent="CanvasLayer/VariantControl"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 45
+
+[node name="CurrentWord2" type="Label" parent="CanvasLayer/VariantControl/VariantBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 0.976471)
+theme_override_fonts/font = ExtResource("21_714vc")
+theme_override_font_sizes/font_size = 85
+text = "Active
+Variants"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/VariantControl/VariantBox"]
+layout_mode = 2
+
+[node name="Variant1" type="Label" parent="CanvasLayer/VariantControl/VariantBox/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 0.976471)
+theme_override_fonts/font = ExtResource("21_714vc")
+theme_override_font_sizes/font_size = 85
+text = "Bonus"
+horizontal_alignment = 1
+
+[node name="Variant2" type="Label" parent="CanvasLayer/VariantControl/VariantBox/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 0.976471)
+theme_override_fonts/font = ExtResource("21_714vc")
+theme_override_font_sizes/font_size = 85
+text = "Obscurity"
+horizontal_alignment = 1
+
+[node name="Variant3" type="Label" parent="CanvasLayer/VariantControl/VariantBox/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 0.976471)
+theme_override_fonts/font = ExtResource("21_714vc")
+theme_override_font_sizes/font_size = 85
+text = "Wonder"
+horizontal_alignment = 1
+
+[node name="VariantButton" type="Button" parent="CanvasLayer/VariantControl"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [connection signal="pressed" from="CanvasLayer/SubmitShadow" to="." method="_on_submit_pressed"]
 [connection signal="pressed" from="CanvasLayer/ClearShadow" to="." method="_on_clear_pressed"]
 [connection signal="pressed" from="CanvasLayer/ShuffleShadow" to="." method="_on_shuffle_pressed"]
@@ -1119,3 +974,4 @@ script = ExtResource("21_j23f3")
 [connection signal="pressed" from="CanvasLayer/BonusLetter" to="." method="_on_bonus_letter_pressed"]
 [connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="CanvasLayer/VariantControl/VariantButton" to="." method="_on_variant_button_pressed"]

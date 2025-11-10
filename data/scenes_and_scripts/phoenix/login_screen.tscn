@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://ms43gnmmu3g3"]
+[gd_scene load_steps=33 format=3 uid="uid://ms43gnmmu3g3"]
 
 [ext_resource type="Script" uid="uid://lj43fl6ocrf3" path="res://data/scenes_and_scripts/phoenix/login_screen.gd" id="1_vynka"]
 [ext_resource type="FontFile" uid="uid://dnyvxhvqed50e" path="res://data/fonts/OtherFonts/Crisp-Walnut.ttf" id="3_ki628"]
@@ -10,8 +10,10 @@
 [ext_resource type="Script" uid="uid://bp4dtiex0f3ss" path="res://data/scenes_and_scripts/phoenix/splash_screen.gd" id="4_wk1ki"]
 [ext_resource type="Texture2D" uid="uid://dkuq8lxub8gf1" path="res://data/images/BlurredCircleParticle.png" id="5_2reso"]
 [ext_resource type="Texture2D" uid="uid://cfawov84ked10" path="res://data/images/Brain1.png" id="5_wk1ki"]
+[ext_resource type="PackedScene" uid="uid://cshfnccq06gum" path="res://data/scenes_and_scripts/particles/letter_comet.tscn" id="9_lchx1"]
 [ext_resource type="AudioStream" uid="uid://n35hhg7ig1bd" path="res://data/sounds/login_button.mp3" id="9_nr2tq"]
 [ext_resource type="Script" uid="uid://b6kkx5rrpfdcp" path="res://data/scenes_and_scripts/phoenix/bottom_particle_control.gd" id="11_lchx1"]
+[ext_resource type="AudioStream" uid="uid://cntujh67a6lp5" path="res://data/music/LoginPiano1.wav" id="13_4ivgp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4ivgp"]
 shader = ExtResource("3_lchx1")
@@ -44,7 +46,7 @@ point_count = 4
 curve = SubResource("Curve_yha5c")
 
 [sub_resource type="Gradient" id="Gradient_kx71p"]
-offsets = PackedFloat32Array(0, 0.321212, 1)
+offsets = PackedFloat32Array(0, 0.575758, 1)
 colors = PackedColorArray(0, 0.892817, 0.905715, 1, 0.917555, 0.776205, 0.414008, 1, 1, 1, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ki628"]
@@ -331,8 +333,10 @@ grow_horizontal = 2
 theme_override_colors/font_color = Color(0.711229, 0.494767, 3.85046e-07, 1)
 theme_override_fonts/font = ExtResource("4_w6vpo")
 theme_override_font_sizes/font_size = 106
-text = "Ganymede
-Studios"
+text = "A
+Ganymede
+Studios
+Production"
 horizontal_alignment = 1
 
 [node name="ParticlePathControl" type="Control" parent="CanvasLayer/SplashScreen/Label2"]
@@ -366,6 +370,9 @@ randomness = 1.0
 fixed_fps = 60
 visibility_rect = Rect2(-2500, -2500, 5000, 5000)
 process_material = SubResource("ParticleProcessMaterial_lchx1")
+
+[node name="BlueBlueParticles" parent="CanvasLayer/SplashScreen/Label2/ParticlePathControl/Path2D2/PathFollow2D/PathParticles" instance=ExtResource("9_lchx1")]
+visible = false
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/SplashScreen"]
 unique_name_in_owner = true
@@ -427,13 +434,14 @@ script = ExtResource("11_lchx1")
 unique_name_in_owner = true
 amount = 300
 texture = ExtResource("4_aiv7l")
-lifetime = 10.0
+lifetime = 15.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_vynka")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="LoginScreenMusic" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("13_4ivgp")
 volume_db = 8.056
-autoplay = true
 
 [node name="login_btn" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true

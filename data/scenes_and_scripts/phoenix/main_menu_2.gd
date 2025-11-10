@@ -41,9 +41,9 @@ var username
 var db_ref
 var path
 #var IP_ADDRESS =  "185.98.1.219"
-var IP_ADDRESS = "localhost"
+#var IP_ADDRESS = "localhost"
 #var IP_ADDRESS = "185.98.171.129"
-#var IP_ADDRESS = "136.112.186.218" # VM
+var IP_ADDRESS = "136.112.186.218" # VM
 var PORT = 7777
 var match_found_instance
 var rules_instance

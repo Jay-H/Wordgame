@@ -4,6 +4,7 @@ var duration = 2
 var connected_to_server = false
 var shader_array = []
 func _ready():
+	
 	%BottomParticles.emitting = false
 	await %SplashScreen.fade_process()
 	%SplashScreen.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -89,6 +90,7 @@ func fade_out():
 	var tween_particles = create_tween()
 	tween_text.tween_property(%FirstScreenControl, "modulate", Color.TRANSPARENT, 1)
 	tween.tween_property(%ColorRect, "color", Color.WHITE, 1)
+	tween.parallel().tween_property(%LoginScreenMusic, "volume_linear", 0, 1)
 	tween_particles.tween_property(%BottomParticles, "modulate", Color.TRANSPARENT, 1)
 	await tween.finished
 	await tween_particles.finished

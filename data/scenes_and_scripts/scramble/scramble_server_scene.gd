@@ -36,7 +36,7 @@ var wonder_variant = false
 #endregion
 
 
-var big_dictionary = {}
+var big_dictionary = {"Player One Last Word Counter": 0, "Player Two Last Word Counter": 0}
 var number_of_connected_players = 0
 var player_one_id : int = 0
 var player_two_id : int = 0
@@ -368,6 +368,10 @@ func word_scorer(word, bonus): # this will get the score of the word, not includ
 func word_listener(word, bonus):
 	print("word listener running")
 	var client_id = multiplayer.get_remote_sender_id()
+	if client_id == player_one_id:
+		big_dictionary["Player One Last Word Counter"] += 1
+	if client_id == player_two_id:
+		big_dictionary["Player Two Last Word Counter"] += 1
 	var upper_word = word.to_upper()
 	var score_to_add :int = 0
 	# Call word_verifier ONCE and store the result
@@ -427,7 +431,6 @@ func word_listener(word, bonus):
 				rpc_id(player_two_id, "wrong_word_alert", wrong_word_penalty_player_two)
 				player_two_score -= wrong_word_penalty_player_two
 				wrong_word_penalty_player_two += wrong_word_penalty_addition
-
 	send_player_information()
 	
 	print(" P1 words: " + str(player_one_found_words_array))

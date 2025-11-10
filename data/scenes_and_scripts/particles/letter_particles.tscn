@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://bi03nhppr357n"]
+
+[ext_resource type="FontFile" uid="uid://cpavm8lp2mx3e" path="res://data/fonts/lcd/LCD2B___.TTF" id="1_6vait"]
+[ext_resource type="Script" uid="uid://cqtmbx7qemv4i" path="res://data/scenes_and_scripts/particles/letter_particle.gd" id="1_ila1y"]
+
+[node name="LetterParticle" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(128, 128)
+script = ExtResource("1_ila1y")
+
+[node name="LetterLabel" type="Label" parent="SubViewport"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -67.5
+offset_right = 35.0
+offset_bottom = 67.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_6vait")
+theme_override_font_sizes/font_size = 128
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 2

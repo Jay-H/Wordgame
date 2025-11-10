@@ -1,9 +1,12 @@
 extends Control
 
+
+var submit_style = "double_press" # "submit_button", "asap", "double_press" # issue with asap mode is it nullifies the penalty to submitting wrong wordv
+var double_press_buttons = []
 var SERVER_PORT = 7777
 const SERVER_NODE_PATH = "res://data/scenes_and_scripts/scramble/scramble_server_scene.tscn"
 @onready var pregame_timer_node = get_node("/root/MainMenu/PregameTimer")
-var big_dictionary = {}
+var big_dictionary = { "Player One ID": 0, "Player Two ID": 0 , "All Found Words": [], "Player One Found Words": [], "Player Two Found Words": [], "Letters": [], "Player One Last Word Status": "", "Player Two Last Word Status": "", "Player One Score": 0, "Player Two Score": 0, "Server Time Left": 0, "Bonus Letter": "H", "Bonus Time Value": 0, "Bonus Letter Value": 0, "Player One Last Obscurity Value": null, "Player Two Last Obscurity Value": null, "Player One Number Of Found Words": 0, "Player Two Number Of Found Words": 0, "Parent": "RpcAwait", "Player One Last Word Counter": 0, "Player Two Last Word Counter": 0}
 var is_player_one = false
 var is_player_two = false
 var user_id
@@ -34,8 +37,8 @@ var tie_game = false
 var tie_cycles 
 var tie_animations_running = false
 var sun_color = Color(1.0, 0.902, 0.502)
-
-
+var last_found_word_counter = 0
+var variant_button_status = "on" # on, off, dim
 func _ready():
 	#username = arguments[1]
 	
@@ -99,19 +102,41 @@ func setup(background):
 
 func letter_collector(letter, letternode, bonus): #updates the current chosen letter array and disables already pressed letters
 	%PianoController.play_random_note()
-	
+	Haptics.stacatto_singleton()
 	current_chosen_letters_array.append(letter)
-	current_chosen_letters_string += str(letter) 
-	letternode.mouse_filter = MOUSE_FILTER_IGNORE
-	small_green_letters(letternode)
-	letternode.add_theme_color_override("font_color", Color.LIGHT_BLUE)
+	current_chosen_letters_string += str(letter)
+	if submit_style == "submit_button": 
+		letternode.mouse_filter = MOUSE_FILTER_IGNORE
+		small_green_letters(letternode)
+		letternode.add_theme_color_override("font_color", Color.LIGHT_BLUE)
+		
+
 	
+	if submit_style == "double_press":
+		var button = Button.new()
+		button.modulate = Color.TRANSPARENT
+		double_press_buttons.append(button)
+		button.size = letternode.size
+		button.pressed.connect(submitter)
+		letternode.add_child(button)
+		small_green_letters(letternode)
+		letternode.add_theme_color_override("font_color", Color.LIGHT_BLUE)
+		
+	if submit_style == "asap": 
+		if current_chosen_letters_string.length() > 2:
+			if GlobalData.is_valid_word(current_chosen_letters_string):
+				if big_dictionary.has("All Found Words"):
+					if big_dictionary["All Found Words"].has(current_chosen_letters_string):
+						pass
+					else:
+						Haptics.stacatto_doublet()
+						if bonus:
+							bonus_pressed = true
+							submitter()
 	if bonus:
 		bonus_pressed = true
 		
 	mini_score_display()
-	
-
 func mini_score_display():
 	var score = 0
 	if miniscore_ispulsing:
@@ -140,7 +165,12 @@ func mini_score_display():
 	%MiniScore.text = str(miniscore)
 
 func submitter():
-	
+	if submit_style == "double_press":
+		Haptics.stacatto_doublet()
+		for i in double_press_buttons:
+			i.queue_free()
+		double_press_buttons = []
+		
 	send_word_to_server(current_chosen_letters_string)
 	current_chosen_letters_string = ""
 	current_chosen_letters_array = []
@@ -282,6 +312,62 @@ func shuffler():
 @rpc("authority", "call_local")
 func receive_player_information(dictionary):
 	
+	
+
+	
+	
+	
+	if is_player_one:
+		if last_found_word_counter != big_dictionary["Player One Last Word Counter"]:
+			last_found_word_counter = big_dictionary["Player One Last Word Counter"]
+			if big_dictionary["Player One Last Word Status"] == "word too short" or big_dictionary["Player One Last Word Status"] == "word already found" or big_dictionary["Player One Last Word Status"] == "invalid word":
+				var status = big_dictionary["Player One Last Word Status"]
+				var temp_label = %GameScore.duplicate()
+				
+				temp_label.add_theme_color_override("font_color", Color.DARK_RED)
+				temp_label.modulate = Color.TRANSPARENT
+				if status == "word too short":
+					temp_label.text = "Too Short!"
+				elif status == "word already found":
+					temp_label.text = "Already Found!"
+				elif status == "invalid word":
+					temp_label.text = "Invalid Word!"
+				
+				%CanvasLayer.add_child(temp_label)
+				var tween = create_tween()
+				tween.set_ease(Tween.EASE_IN_OUT)
+				tween.chain().tween_property(%GameScore, "modulate", Color.TRANSPARENT, 0.25)
+				tween.chain().tween_property(temp_label, "modulate", Color.WHITE, 0.25)
+				tween.chain().tween_property(temp_label, "modulate", Color.TRANSPARENT, 0.25)
+				tween.chain().tween_property(%GameScore, "modulate", Color.WHITE, 0.25)
+				await tween.finished
+				temp_label.queue_free()
+			
+	if is_player_two:
+		if last_found_word_counter != big_dictionary["Player Two Last Word Counter"]:
+			last_found_word_counter = big_dictionary["Player Two Last Word Counter"]
+			if big_dictionary["Player Two Last Word Status"] == "word too short" or big_dictionary["Player Two Last Word Status"] == "word already found" or big_dictionary["Player Two Last Word Status"] == "invalid word":
+				var status = big_dictionary["Player Two Last Word Status"]
+				var temp_label = %GameScore.duplicate()
+				
+				temp_label.add_theme_color_override("font_color", Color.DARK_RED)
+				temp_label.modulate = Color.TRANSPARENT
+				if status == "word too short":
+					temp_label.text = "Too Short!"
+				elif status == "word already found":
+					temp_label.text = "Already Found!"
+				elif status == "invalid word":
+					temp_label.text = "Invalid Word!"
+				%CanvasLayer.add_child(temp_label)
+				var tween = create_tween()
+				tween.set_ease(Tween.EASE_IN_OUT)
+				tween.chain().tween_property(%GameScore, "modulate", Color.TRANSPARENT, 0.25)
+				tween.chain().tween_property(temp_label, "modulate", Color.WHITE, 0.25)
+				tween.chain().tween_property(temp_label, "modulate", Color.TRANSPARENT, 0.25)
+				tween.chain().tween_property(%GameScore, "modulate", Color.WHITE, 0.25)
+				await tween.finished
+				temp_label.queue_free()
+			
 	big_dictionary = dictionary
 	found_words_populator()
 	user_id = multiplayer.get_unique_id()
@@ -332,6 +418,10 @@ func _on_submit_pressed():
 
 
 func _on_clear_pressed() -> void:
+	if submit_style == "double_press":
+		for i in double_press_buttons:
+			i.queue_free()
+		double_press_buttons = []
 	%PianoController.play_random_chord()
 	current_chosen_letters_string = ""
 	current_chosen_letters_array = []
@@ -364,47 +454,19 @@ func show_obscurity_popup():
 			if is_player_two == true:
 				obscurity = big_dictionary["Player Two Last Obscurity Value"]
 				print(obscurity)
-		var label = Label.new()
-		if obscurity != null:
-			label.text = "Obscurity = %s/10" % obscurity
-			label.add_theme_font_size_override("font_size", 80)
-			label.add_theme_color_override("font_color", Color.BLACK)
-			# Optional: Add an outline for better visibility
-			#var outline = LabelSettings.new()
-			#outline.outline_size = 5
-			#outline.outline_color = Color.BLACK
-			#label.label_settings = outline
-			
-			# 2. Add to scene and wait one frame for its size to be calculated
-			%GameScore.add_child(label)
-			await get_tree().process_frame
-
 		
+		if obscurity != null:
 			
-			label.position = label.size/2
-			var start_pos = label.position 
-			var end_pos = label.position
-			end_pos.y -= 300
+			var obscurity_label = %GameScore.duplicate()
+			obscurity_label.text = "Obscurity = %s/10" % obscurity
+			obscurity_label.modulate = Color.TRANSPARENT
+			%CanvasLayer.add_child(obscurity_label)
+			var tween = create_tween()
+			tween.chain().tween_property(%GameScore, "modulate", Color.TRANSPARENT, 0.25)
+			tween.chain().tween_property(obscurity_label, "modulate", Color.WHITE, 0.3)
+			tween.chain().tween_property(obscurity_label, "modulate", Color.TRANSPARENT, 0.3)
+			tween.chain().tween_property(%GameScore, "modulate", Color.WHITE, 0.25)
 			
-			# 4. Set initial state (invisible and at the start position)
-			
-			label.modulate.a = 0.0
-			
-			# 5. Create and run animations
-			# This tween handles the movement over 1 second
-			var move_tween = create_tween()
-			move_tween.tween_property(label, "position", end_pos, 1.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-			
-			# This tween handles the fade-in and fade-out sequence
-			var fade_tween = create_tween()
-			fade_tween.tween_property(label, "modulate:a", 1.0, 0.3) # Fade in over 0.3s
-			fade_tween.tween_property(label, "modulate:a", 0.0, 2) # Fade out over the remaining 0.7s
-			
-			# 6. Clean up the label after the animation is done
-			await fade_tween.finished
-
-			
-			label.queue_free()
 	else:
 		return
 func wrong_word_display():
@@ -770,13 +832,21 @@ func _on_button_pressed() -> void:
 	pass # Replace with function body.
 
 func _initialize(dict):
+	for i in [%Variant1, %Variant2, %Variant3]:
+		i.visible = false
 	var variant = dict["selected_games"][dict["current_round"]]
 	if variant.contains("Bonus"):
 		bonus_variant = true
+		%Variant1.text = "Bonus"
+		%Variant1.visible = true
 	if variant.contains("Obscurity"):
-		obscurity_variant = true	
+		obscurity_variant = true
+		%Variant2.text = "Obscurity"	
+		%Variant2.visible = true
 	if variant.contains("Wonder"):
 		wonder_variant = true		
+		%Variant3.text = "Wonder"
+		%Variant3.visible = true
 	pass
 
 func fade_blocker():
@@ -824,4 +894,28 @@ func tie_game_cloudscape():
 func _on_button_2_pressed() -> void:
 	for i in %LetterContainer.get_children():
 		i.text = "A"
+	pass # Replace with function body.
+
+
+func _on_variant_button_pressed() -> void:
+	Haptics.double_quick_medium()
+	if variant_button_status == "on":
+		var tween = create_tween()
+		tween.tween_property(%VariantBox, "modulate:a", 0.5, 0.5)
+		await tween.finished
+		variant_button_status = "dim"
+		return
+	if variant_button_status == "dim":
+		var tween = create_tween()
+		tween.tween_property(%VariantBox, "modulate:a", 0.05, 0.5)
+		await tween.finished
+		variant_button_status = "off"
+		return
+	if variant_button_status == "off":
+		var tween = create_tween()
+		tween.tween_property(%VariantBox, "modulate:a", 1.0, 0.5)
+		await tween.finished
+		variant_button_status = "on"	
+		return
+		
 	pass # Replace with function body.
