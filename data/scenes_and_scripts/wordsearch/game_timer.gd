@@ -53,4 +53,4 @@ func _on_InternalTimer_timeout() -> void:
 func update_timer_display() -> void:
 	var minutes = floor(time_remaining_seconds / 60)
 	var seconds = fmod(time_remaining_seconds, 60)
-	time_label.text = "%02d:%02d" % [minutes, seconds]
+	time_label.text = "%2d:%02d" % [minutes, seconds]

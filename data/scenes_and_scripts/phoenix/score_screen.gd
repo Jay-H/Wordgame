@@ -13,7 +13,7 @@ func _setup(dict, big_dictionary, firebase_id):
 	%opponentpic.setup(GlobalData.profile_pics[dict["player_two_dictionary"]["profilepic"]])
 	if (big_dictionary.has("game_type") && big_dictionary["game_type"] == "wordsearch"):
 		pass
-	if (big_dictionary.has("game_type") && big_dictionary["game_type"] == "hangman"):
+	elif (big_dictionary.has("game_type") && big_dictionary["game_type"] == "hangman"):
 		if firebase_local_id == dict["player_one_firebase_id"]:
 			player_number = "one"
 		else:
