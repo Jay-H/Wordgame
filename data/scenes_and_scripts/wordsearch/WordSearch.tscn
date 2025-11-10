@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ddc7u2h6cfyni"]
+[gd_scene load_steps=10 format=3 uid="uid://ddc7u2h6cfyni"]
 
 [ext_resource type="Script" uid="uid://ch2wq30nyeiey" path="res://data/scenes_and_scripts/wordsearch/word_search.gd" id="1_3kvo5"]
 [ext_resource type="PackedScene" uid="uid://bk6yqt04dl0v2" path="res://data/scenes_and_scripts/wordsearch/LetterCell.tscn" id="2_2stpv"]
@@ -27,6 +27,8 @@ corner_radius_bottom_left = 10
 shadow_color = Color(0, 0, 0, 0)
 shadow_size = 20
 shadow_offset = Vector2(4, 4)
+
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_rk3yi"]
 
 [node name="WSFirst" type="Control"]
 z_index = 4096
@@ -157,7 +159,9 @@ stream = ExtResource("6_c6bbx")
 
 [node name="SoundPlayer" type="AudioStreamPlayer2D" parent="chungus"]
 unique_name_in_owner = true
+stream = SubResource("AudioStreamPolyphonic_rk3yi")
 volume_db = 16.865
+max_polyphony = 12
 
 [node name="Words" type="HBoxContainer" parent="chungus"]
 unique_name_in_owner = true

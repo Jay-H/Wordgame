@@ -42,10 +42,23 @@ var sounds_to_play = [
 	preload("res://data/sounds/WS_temp_2.mp3"),
 	preload("res://data/sounds/WS_temp_3.mp3"),
 	preload("res://data/sounds/WS_temp_4.mp3"),
-	preload("res://data/sounds/WS_temp_5.mp3"),
+	preload("res://data/sounds/WS_temp_5.mp3")
 	]
 var wrong_sound = preload("res://data/sounds/WS_temp_wrong.mp3")
 var opponent_found_sound = preload("res://data/sounds/WS_temp_opponent_found.mp3")
+var drag_sounds = [
+	preload("res://data/sounds/WS_drag1.mp3"),
+	preload("res://data/sounds/WS_drag2.mp3"),
+	preload("res://data/sounds/WS_drag3.mp3"),
+	preload("res://data/sounds/WS_drag4.mp3"),
+	preload("res://data/sounds/WS_drag5.mp3"),
+	preload("res://data/sounds/WS_drag6.mp3"),
+	preload("res://data/sounds/WS_drag7.mp3"),
+	preload("res://data/sounds/WS_drag8.mp3"),
+	preload("res://data/sounds/WS_drag9.mp3"),
+	preload("res://data/sounds/WS_drag10.mp3"),
+	preload("res://data/sounds/WS_drag11.mp3")
+	]
 
 @onready var sound_player: AudioStreamPlayer2D = %SoundPlayer
 
@@ -117,6 +130,8 @@ func _ready() -> void:
 	
 	generate_grid_testing()
 	generate_grid()
+	
+	sound_player.play()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and !event.is_pressed():
@@ -213,6 +228,9 @@ func _on_cell_drag_started(cell: LetterCell) -> void:
 	
 	# Start the new selection
 	selection_path.append(cell)
+	var playback = sound_player.get_stream_playback()
+	if playback:
+		playback.play_stream(drag_sounds[selection_path.size()-1])
 	cell.highlight(Globals.CELL_HIGHLIGHT_COLOR)
 
 func _on_cell_mouse_entered(cell: LetterCell) -> void:
@@ -222,9 +240,12 @@ func _on_cell_mouse_entered(cell: LetterCell) -> void:
 	var start_to_hover_vec: Vector2i = cell.grid_position - start_cell.grid_position
 	
 	if start_to_hover_vec == Vector2i.ZERO:
-		# This handles moving off and back to the start cell
+		# this handles moving off and back to the start cell
 		unhighlight_current_selection()
 		selection_path = [start_cell]
+		var playback = sound_player.get_stream_playback()
+		if playback:
+			playback.play_stream(drag_sounds[selection_path.size()-1])
 		start_cell.highlight(Globals.CELL_HIGHLIGHT_COLOR)
 		current_locked_direction = Vector2i.ZERO
 		return
@@ -257,8 +278,10 @@ func _on_cell_mouse_entered(cell: LetterCell) -> void:
 		else:
 			#this means we are off the grid, just break and ignore
 			break
+	var playback = sound_player.get_stream_playback()
+	if playback:
+		playback.play_stream(drag_sounds[selection_path.size()-1])
 
-# --- Selection Logic ---
 func process_selection() -> void:
 	if selection_path.is_empty():
 		return
@@ -282,8 +305,9 @@ func process_selection() -> void:
 	
 	# just check first if they won
 	if word_result == Globals.WordResult.WIN:
-		sound_player.stream = sounds_to_play[play_count]
-		sound_player.play()
+		var playback = sound_player.get_stream_playback()
+		if playback:
+			playback.player_stream(sounds_to_play[play_count])
 		_animate_correct_label()
 		if found_word_animation:
 			found_word_animation.apply_animation(selection_path) 
@@ -298,8 +322,9 @@ func process_selection() -> void:
 		win_label.visible = true
 			
 	elif word_result == Globals.WordResult.RIGHT:
-		sound_player.stream = sounds_to_play[play_count]
-		sound_player.play()
+		var playback = sound_player.get_stream_playback()
+		if playback:
+			playback.play_stream(sounds_to_play[play_count])
 		play_count = play_count + 1
 		var label
 		# here we find the label in this clients list and make it green
@@ -328,8 +353,9 @@ func process_selection() -> void:
 			
 	# this means they submitted a wrong word
 	else:
-		sound_player.stream = wrong_sound
-		sound_player.play()
+		var playback = sound_player.get_stream_playback()
+		if playback:
+			playback.play_stream(wrong_sound)
 		_animate_wrong_label()
 		# Iterate through the current selection_path and unhighlight.
 		# LetterCell's unhighlight() method handles if it should stay green or go to default.
@@ -429,8 +455,9 @@ func set_red_label(word: String, opponent_id: int, selection_path_opponent: Arra
 		if found_word_animation:
 			found_word_animation.apply_animation(cells_to_animate)
 		label = find_label_by_text_shared(words_labels, "shared_words", word)
-		sound_player.stream = opponent_found_sound
-		sound_player.play()
+		var playback = sound_player.get_stream_playback()
+		if playback:
+			playback.play_stream(opponent_found_sound)
 	
 	# label is hidden in HIDDEN variant
 	elif variant == Globals.WordsearchVariants.HIDDEN:
@@ -472,6 +499,7 @@ func _server_ready(_information_from_server):
 		lblP1.text = word
 		lblP1.add_theme_font_size_override("font_size", 70)
 		lblP1.add_theme_color_override("font_color", Color.BLACK)
+		lblP1.add_theme_font_override("font", load("res://data/fonts/montreal/Montreal-Regular.ttf"))
 		
 		# default is the standard game, make both lists
 		if variant == Globals.WordsearchVariants.DEFAULT:
@@ -713,8 +741,9 @@ func process_selection_test() -> void:
 		selected_word += cell.letter
 
 	if selected_word == "TRUCK":
-		sound_player.stream = sounds_to_play[play_count]
-		sound_player.play()
+		var playback = sound_player.get_stream_playback()
+		if playback:
+			playback.play_stream(sounds_to_play[play_count])
 		play_count = play_count + 1
 		var label
 		label = find_label_by_text(words_labels, str(multiplayer.get_unique_id()), selected_word)
@@ -729,15 +758,15 @@ func process_selection_test() -> void:
 			cell.set_found(true)
 			
 	else:
-		sound_player.stream = wrong_sound
-		sound_player.play()
+		var playback = sound_player.get_stream_playback()
+		if playback:
+			playback.play_stream( wrong_sound)
 		_animate_wrong_label()
 		for cell in selection_path:
 			cell.unhighlight()
 		
 	selection_path.clear()
 
-## ✨ Function modified to reset the shader's custom timer.
 func _animate_found_word_pulse(selection: Array[LetterCell]) -> void:
 	scanline_overlay.modulate = Color(1, 1, 1, 1) 
 	scanline_overlay.visible = true 
@@ -754,8 +783,7 @@ func _animate_found_word_pulse(selection: Array[LetterCell]) -> void:
 	const PI_OVER_4 = PI / 4.0
 	var final_rotation_angle = angle_rad + PI_OVER_4
 	
-	if abs(direction_vector.y) < direction_vector.x * 0.1: # Threshold check
-		# Add 180 degrees (PI radians) to flip the direction.
+	if abs(direction_vector.y) < direction_vector.x * 0.1: 
 		final_rotation_angle += PI
 	
 	var material = scanline_overlay.material as ShaderMaterial
@@ -763,7 +791,6 @@ func _animate_found_word_pulse(selection: Array[LetterCell]) -> void:
 		push_error("ScanlineOverlay material is not a ShaderMaterial!")
 		return
 
-	# --- FIX: Reset the internal timer and activate the process ---
 	scanline_current_time = 0.0
 	is_scanline_active = true   
 	scanline_overlay.modulate = Color(1, 1, 1, 1) 
@@ -773,12 +800,11 @@ func _animate_found_word_pulse(selection: Array[LetterCell]) -> void:
 	material.set_shader_parameter("line_color", Color(1.0, 1.0, 1.0, 1.0))
 	material.set_shader_parameter("speed", 6)
 	material.set_shader_parameter("line_width", 0.8)
-	material.set_shader_parameter("custom_time", 0.0) # Ensure shader starts at zero
+	material.set_shader_parameter("custom_time", 0.0)
 
 	var tween_fade = create_tween()
 	tween_fade.set_parallel(false) 
 
-	# Step 1: Hold the full opacity for a brief flash duration (0.3s)
 	tween_fade.tween_interval(0.3) 
 
 	tween_fade.tween_property(
@@ -790,5 +816,5 @@ func _animate_found_word_pulse(selection: Array[LetterCell]) -> void:
 
 	tween_fade.tween_callback(func(): 
 		scanline_overlay.visible = false
-		is_scanline_active = false # <--- STOP the continuous process
+		is_scanline_active = false #
 	)
