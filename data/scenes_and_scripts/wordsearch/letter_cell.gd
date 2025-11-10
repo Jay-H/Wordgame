@@ -43,20 +43,23 @@ func highlight(color: Color) -> void:
 func set_found(found: bool) -> void:
 	is_found = found
 	if is_found:
-		color_rect.color = Globals.CELL_FOUND_COLOR
+		%FoundParticles.emitting = true
+		color_rect.color = Globals.CELL_FOUND_COLOR.darkened(0.2)
 	else:
+		%FoundParticles.emitting = false
 		color_rect.color = Globals.CELL_BACKGROUND_COLOR
 		
 func set_found_by_opponent():
 	is_found_by_opponent = true
-	color_rect.color = Globals.CELL_FOUND_BY_OPPONENT_COLOR
+	%FoundParticlesOpponent.emitting = true
+	color_rect.color = Globals.CELL_FOUND_BY_OPPONENT_COLOR.darkened(0.2)
 
 func unhighlight() -> void:
 	# If the cell is found, it should remain the FOUND_COLOR.
 	# Otherwise, revert to the DEFAULT_COLOR.
 	if is_found:
-		color_rect.color = Globals.CELL_FOUND_COLOR
+		color_rect.color = Globals.CELL_FOUND_COLOR.darkened(0.2)
 	elif is_found_by_opponent:
-		color_rect.color = Globals.CELL_FOUND_BY_OPPONENT_COLOR
+		color_rect.color = Globals.CELL_FOUND_BY_OPPONENT_COLOR.darkened(0.2)
 	else:
 		color_rect.color = Globals.CELL_BACKGROUND_COLOR

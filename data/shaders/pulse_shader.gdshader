@@ -6,6 +6,7 @@ uniform vec4 line_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
 uniform float custom_time = 0.0;
 uniform float pause_duration : hint_range(0.0, 2.0) = 0.15;
 uniform float offset = 2.0;
+uniform float rotation_angle = 0.0;
 uniform int pixelate_line : hint_range(0, 1) = 1;
 uniform sampler2D screen_texture : hint_screen_texture;
 
@@ -16,7 +17,7 @@ void fragment() {
     
     // Cycle timing with pause at end
     float cycle_duration = offset + pause_duration;
-    float adjusted_time = mod(custom_time * speed, cycle_duration);    
+    float adjusted_time = custom_time * speed;
 
     // Line movement with pause (right to left)
     float line_position;
@@ -28,20 +29,34 @@ void fragment() {
         line_position = -0.5; 
     }
     
-    // Line position source: SCREEN_UV
+    // Diagonal line position source: SCREEN_UV
     vec2 uv_for_line = pos_uv;
     
     // Pixelate the line position calculation (on screen space)
     if (pixelate_line == 1) {
-        // Get the size of the viewport in pixels
         vec2 viewport_size = 1.0 / SCREEN_PIXEL_SIZE;
-        // Pixelate the UV coordinate
         uv_for_line = floor(pos_uv * viewport_size) / viewport_size;
     }
     
-    // Diagonal line rotation (This remains the core effect)
-    // The rotation formula should be adjusted slightly since SCREEN_UV is used.
-    float rotated_pos = (uv_for_line.x + uv_for_line.y) * 0.5;
+    // --- FIX: Apply Rotation Matrix ---
+    // Center the UVs before rotation (move origin to 0.5, 0.5)
+    vec2 centered_uv = uv_for_line - vec2(0.5);
+    
+    float cos_a = cos(rotation_angle);
+    float sin_a = sin(rotation_angle);
+    
+    // Perform rotation
+    vec2 rotated_uv_coords;
+    rotated_uv_coords.x = centered_uv.x * cos_a - centered_uv.y * sin_a;
+    rotated_uv_coords.y = centered_uv.x * sin_a + centered_uv.y * cos_a;
+    
+    // Un-center the UVs after rotation (move origin back)
+    rotated_uv_coords += vec2(0.5);
+    
+    // Diagonal line position is a single float value (using the rotated X and Y)
+    float rotated_pos = (rotated_uv_coords.x + rotated_uv_coords.y) * 0.5;
+    
+    // Calculate the distance from the animated line position
     float dist = abs(rotated_pos - line_position);
     
     // Line width and smoothness
