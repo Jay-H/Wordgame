@@ -195,26 +195,39 @@ func found_words_populator():
 		p2foundwords = big_dictionary["Player Two Found Words"]
 	if big_dictionary.has("All Found Words"):
 		all_found_words = big_dictionary["All Found Words"]
+	%FoundWordLabel.text = ""
+	#all_found_words.sort() #enable this option if you want to sort the list of found words before listing them
+	for i in all_found_words:
+		if p1foundwords.has(i):
+			if is_player_one:
+				%FoundWordLabel.text += "[color=dark_green]" + str(i) + "[/color]  "
+			else:
+				%FoundWordLabel.text += "[color=web_maroon]" + str(i) + "[/color]  "
+		if p2foundwords.has(i):
+			if is_player_one:
+				%FoundWordLabel.text += "[color=web_maroon]" + str(i) + "[/color]  "
+			else:
+				%FoundWordLabel.text += "[color=dark_green]" + str(i) + "[/color]  "
 	
-	for i in range(1,45):
-		var labelnodestring = "%FoundWord" + str(i)
-		var labelnode = get_node(labelnodestring)
-		if all_found_words.size() > i-1:
-			var word = all_found_words[i-1]
-			labelnode.text = word
-	for i in range(1,45): # setting opponent words to red
-		var labelnodestring = "%FoundWord" + str(i)
-		var labelnode = get_node(labelnodestring)
-		if is_player_one:
-			if p2foundwords.has(labelnode.text):
-				labelnode.add_theme_color_override("font_color", Color.RED)
-			if p1foundwords.has(labelnode.text):
-				labelnode.add_theme_color_override("font_color", Color.BLACK)
-		if is_player_two:
-			if p1foundwords.has(labelnode.text):
-				labelnode.add_theme_color_override("font_color", Color.RED)
-			if p2foundwords.has(labelnode.text):
-				labelnode.add_theme_color_override("font_color", Color.BLACK)
+	#for i in range(1,45):
+		#var labelnodestring = "%FoundWord" + str(i)
+		#var labelnode = get_node(labelnodestring)
+		#if all_found_words.size() > i-1:
+			#var word = all_found_words[i-1]
+			#labelnode.text = word
+	#for i in range(1,45): # setting opponent words to red
+		#var labelnodestring = "%FoundWord" + str(i)
+		#var labelnode = get_node(labelnodestring)
+		#if is_player_one:
+			#if p2foundwords.has(labelnode.text):
+				#labelnode.add_theme_color_override("font_color", Color.RED)
+			#if p1foundwords.has(labelnode.text):
+				#labelnode.add_theme_color_override("font_color", Color.BLACK)
+		#if is_player_two:
+			#if p1foundwords.has(labelnode.text):
+				#labelnode.add_theme_color_override("font_color", Color.RED)
+			#if p2foundwords.has(labelnode.text):
+				#labelnode.add_theme_color_override("font_color", Color.BLACK)
 			
 		 
 	

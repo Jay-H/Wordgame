@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://htad6c5wox1x"]
+[gd_scene load_steps=33 format=3 uid="uid://htad6c5wox1x"]
 
 [ext_resource type="Script" uid="uid://cnf5uewq3vhqq" path="res://data/scenes_and_scripts/scramble/scramble_client_scene.gd" id="1_50ayc"]
 [ext_resource type="Texture2D" uid="uid://crknm7gdg7jon" path="res://data/images/fog.png" id="2_7wj4i"]
@@ -20,6 +20,8 @@
 [ext_resource type="FontFile" uid="uid://ca75bijbhrqu7" path="res://data/fonts/akando/Akando.otf" id="13_5fyvy"]
 [ext_resource type="PackedScene" uid="uid://bmm23rwsctf0d" path="res://data/scenes_and_scripts/multiplayertesting/piano_controller.tscn" id="14_5fyvy"]
 [ext_resource type="Shader" uid="uid://c0ptn8g2ds8f6" path="res://data/scenes_and_scripts/scramble/cloudscape.gdshader" id="16_utcc8"]
+[ext_resource type="FontFile" uid="uid://btkq12upc3w1a" path="res://data/fonts/fc-barcelona/barselona.ttf" id="21_714vc"]
+[ext_resource type="Script" uid="uid://b8428ns4cw1ig" path="res://data/scenes_and_scripts/scramble/found_word_label.gd" id="21_j23f3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eyk14"]
 shader = ExtResource("8_vsvxw")
@@ -792,6 +794,7 @@ mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
 unique_name_in_owner = true
+visible = false
 offset_left = 100.0
 offset_top = 100.0
 offset_right = 40.0
@@ -1085,6 +1088,27 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="FoundWordLabel" type="RichTextLabel" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -587.0
+offset_top = 124.0
+offset_right = 587.0
+offset_bottom = 817.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("21_714vc")
+theme_override_font_sizes/normal_font_size = 150
+bbcode_enabled = true
+text = "right stand clear brain flights"
+fit_content = true
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("21_j23f3")
 
 [connection signal="pressed" from="CanvasLayer/SubmitShadow" to="." method="_on_submit_pressed"]
 [connection signal="pressed" from="CanvasLayer/ClearShadow" to="." method="_on_clear_pressed"]

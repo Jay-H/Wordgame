@@ -20,10 +20,9 @@ var selected_game_list_name
 var selected_game_list
 var selected_game_list_2 = ["HangmanChaosVanilla", "HangmanChaosShared", "HangmanChaosEphemeral", "HangmanTurnbased", "HangmanDelay", "HangmanDelayEphemeral"]
 var timer_values_ref
-var timer_values_dictionary = {}
+var timer_values_dictionary = {"round_timer": 60, "match_found_timer": 5, "rules_screen_timer": 30, "score_timer": 10}
 
 func _ready():
-	print("IF THIS PRINTS IT MEANS THE SERVER IS USING NEW BUILD")
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	_start_server()
@@ -34,7 +33,6 @@ func _ready():
 	pass
 	
 func _process(_delta):
-	#await _debug_vm(selected_game_list)
 	pass
 	
 func _on_FirebaseAuth_login_succeeded(auth):
@@ -75,7 +73,11 @@ func _on_timer_ref_update(resource):
 		timer_values_dictionary["rules_screen_timer"] = resource.data
 	if resource.key == "score_timer":
 		timer_values_dictionary["score_timer"] = resource.data
-	pass
+	$RunningGames.round_time = timer_values_dictionary["round_timer"]
+	$RunningGames.match_found_time = timer_values_dictionary["match_found_timer"]
+	$RunningGames.rules_time = timer_values_dictionary["rules_screen_timer"]
+	$RunningGames.score_time = timer_values_dictionary["score_timer"]
+
 	
 func _on_peer_connected(id):
 	print(id)

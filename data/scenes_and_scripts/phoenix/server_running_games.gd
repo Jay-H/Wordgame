@@ -19,6 +19,7 @@ func _process(_delta):
 		players_looking_for_match = []
 		_new_match(matched_players)
 		matched_players = []
+	
 	pass
 
 #this function takes the two matched players, and sets up a dictionary below with all the pertinent match info
@@ -181,6 +182,7 @@ func _game_selector():
 	
 	# this function will return three games at random from Globals.game_types (while preventing duplicates)
 	var games_array = serverhost.selected_game_list.duplicate()
+	#var games_array = ["HangmanChaosShared", "HangmanChaosShared", "HangmanChaosShared"]
 	var games_array_size = games_array.size()
 	var game_one = games_array[(randi_range(0, (games_array_size - 1)))]
 	games_array.erase(game_one)
@@ -222,7 +224,9 @@ func _end_match_prefunction(dict):
 func _end_match(dict):
 	rpc_id(dict["player_one_peer_id"], "_end_match", dict)
 	rpc_id(dict["player_two_peer_id"], "_end_match", dict)
-	serverhost.running_matches.erase(str(dict["match_node_name"]))
+	for i in serverhost.running_matches:
+		if i["match_node_name"] == dict["match_node_name"]:
+			serverhost.running_matches.erase(i)
 	pass
 
 

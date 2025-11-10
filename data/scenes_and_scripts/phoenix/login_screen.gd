@@ -4,12 +4,14 @@ var duration = 2
 var connected_to_server = false
 var shader_array = []
 func _ready():
+	%BottomParticles.emitting = false
 	await %SplashScreen.fade_process()
 	%SplashScreen.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	%TextureRect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	fade_in(duration)
 
 func fade_in(duration):
+	%BottomParticles.emitting = true
 	shader_array = [%Login, %CreateAccount, %ChrisLabel]
 	for i in shader_array:
 		i.material.set_shader_parameter("light_radius_pixels", 0)
@@ -87,7 +89,7 @@ func fade_out():
 	var tween_particles = create_tween()
 	tween_text.tween_property(%FirstScreenControl, "modulate", Color.TRANSPARENT, 1)
 	tween.tween_property(%ColorRect, "color", Color.WHITE, 1)
-	tween_particles.tween_property(%GPUParticles2D, "modulate", Color.TRANSPARENT, 1)
+	tween_particles.tween_property(%BottomParticles, "modulate", Color.TRANSPARENT, 1)
 	await tween.finished
 	await tween_particles.finished
 	return
@@ -111,7 +113,7 @@ func shake_effect(node: Control, duration: float = 0.5, strength: float = 16.0):
 	# Immediately override the color to red.
 	node.add_theme_color_override("font_placeholder_color", Color(0.341, 0.1, 0.07, 0.718))
 
-	%GPUParticles2D.modulate = Color.RED
+	%BottomParticles.modulate = Color.RED
 	
 	# --- Part 2: Shake Motion ---
 	var initial_x = node.position.x
@@ -136,7 +138,7 @@ func shake_effect(node: Control, duration: float = 0.5, strength: float = 16.0):
 	# After all movement is finished, chain a callback to remove the color override,
 	# which restores the original font color.
 	tween.tween_callback(func(): node.remove_theme_color_override("font_placeholder_color"))
-	%GPUParticles2D.modulate = Color(1,1,1,1)
+	%BottomParticles.modulate = Color(1,1,1,1)
 
 
 func _on_quick_login_a_pressed() -> void:

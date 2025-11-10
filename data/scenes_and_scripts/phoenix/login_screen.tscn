@@ -1,18 +1,17 @@
-[gd_scene load_steps=32 format=3 uid="uid://ms43gnmmu3g3"]
+[gd_scene load_steps=31 format=3 uid="uid://ms43gnmmu3g3"]
 
-[ext_resource type="FontFile" uid="uid://dskmx2extevrw" path="res://data/fonts/times.ttf" id="1_52rl6"]
-[ext_resource type="Script" uid="uid://cmkt7e21tjn1f" path="res://data/scenes_and_scripts/phoenix/login_screen.gd" id="1_vynka"]
+[ext_resource type="Script" uid="uid://lj43fl6ocrf3" path="res://data/scenes_and_scripts/phoenix/login_screen.gd" id="1_vynka"]
 [ext_resource type="FontFile" uid="uid://dnyvxhvqed50e" path="res://data/fonts/OtherFonts/Crisp-Walnut.ttf" id="3_ki628"]
 [ext_resource type="FontFile" uid="uid://brx8ufgx2sv54" path="res://data/fonts/OtherFonts/Kiddie-Store.ttf" id="3_kx71p"]
-[ext_resource type="Shader" uid="uid://bs4gkavqbf2ok" path="res://data/scenes_and_scripts/multiplayertesting/flashlight.gdshader" id="3_lchx1"]
-[ext_resource type="Script" uid="uid://kd8w4xdgqts4" path="res://data/scenes_and_scripts/multiplayertesting/label_pressed.gd" id="3_qf86c"]
+[ext_resource type="Shader" uid="uid://csbu7dldwloow" path="res://data/scenes_and_scripts/multiplayertesting/flashlight.gdshader" id="3_lchx1"]
+[ext_resource type="Script" uid="uid://fjildfqdib8h" path="res://data/scenes_and_scripts/multiplayertesting/label_pressed.gd" id="3_qf86c"]
 [ext_resource type="Texture2D" uid="uid://crknm7gdg7jon" path="res://data/images/fog.png" id="4_aiv7l"]
 [ext_resource type="FontFile" uid="uid://dehm6x83duy2e" path="res://data/fonts/space-ranger/spaceranger.ttf" id="4_w6vpo"]
-[ext_resource type="Script" uid="uid://bg2u4vu80aor" path="res://data/scenes_and_scripts/phoenix/splash_screen.gd" id="4_wk1ki"]
+[ext_resource type="Script" uid="uid://bp4dtiex0f3ss" path="res://data/scenes_and_scripts/phoenix/splash_screen.gd" id="4_wk1ki"]
 [ext_resource type="Texture2D" uid="uid://dkuq8lxub8gf1" path="res://data/images/BlurredCircleParticle.png" id="5_2reso"]
 [ext_resource type="Texture2D" uid="uid://cfawov84ked10" path="res://data/images/Brain1.png" id="5_wk1ki"]
 [ext_resource type="AudioStream" uid="uid://n35hhg7ig1bd" path="res://data/sounds/login_button.mp3" id="9_nr2tq"]
-[ext_resource type="Script" path="res://data/scenes_and_scripts/phoenix/bottom_particle_control.gd" id="11_lchx1"]
+[ext_resource type="Script" uid="uid://b6kkx5rrpfdcp" path="res://data/scenes_and_scripts/phoenix/bottom_particle_control.gd" id="11_lchx1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4ivgp"]
 shader = ExtResource("3_lchx1")
@@ -38,7 +37,7 @@ _data = {
 point_count = 4
 
 [sub_resource type="Curve" id="Curve_yha5c"]
-_data = [Vector2(0.213483, 1), 0.0, 0.0, 0, 0, Vector2(0.606742, 0.656009), 0.0, 0.0, 0, 0, Vector2(0.957865, 0.720507), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.213483, 1), 0.0, 0.0, 0, 0, Vector2(0.606742, 0.656009), 0.0, 0.0, 0, 0, Vector2(0.86236, 0.677508), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
 [sub_resource type="CurveTexture" id="CurveTexture_ysy8c"]
@@ -68,6 +67,7 @@ point_count = 4
 curve = SubResource("Curve_2reso")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lchx1"]
+lifetime_randomness = 0.55
 particle_flag_disable_z = true
 direction = Vector3(0, 1, 0)
 spread = 180.0
@@ -176,6 +176,7 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/FirstScreenControl/VBoxContainer3"]
 layout_mode = 2
+theme_override_constants/separation = 90
 
 [node name="EmailBox" type="LineEdit" parent="CanvasLayer/FirstScreenControl/VBoxContainer3/VBoxContainer"]
 unique_name_in_owner = true
@@ -238,24 +239,6 @@ theme_override_font_sizes/font_size = 116
 text = "create account."
 horizontal_alignment = 1
 script = ExtResource("3_qf86c")
-
-[node name="JasonLabel" type="RichTextLabel" parent="CanvasLayer/FirstScreenControl"]
-visible = false
-clip_contents = false
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.059
-anchor_right = 1.0
-anchor_bottom = 0.067
-offset_top = 620.0
-offset_bottom = 962.0
-theme_override_fonts/normal_font = ExtResource("1_52rl6")
-theme_override_font_sizes/normal_font_size = 187
-bbcode_enabled = true
-text = "[center][wave amp=50.0 freq=5.0 connected=1][pulse freq=1.0 color=#ffffff40 ease=-2.0]wordwar.[/pulse][/wave][/center]"
-scroll_active = false
-deselect_on_focus_loss_enabled = false
-drag_and_drop_selection_enabled = false
 
 [node name="QuickLoginA" type="Button" parent="CanvasLayer/FirstScreenControl"]
 modulate = Color(1, 1, 1, 0)
@@ -327,7 +310,7 @@ offset_right = 445.5
 offset_bottom = -621.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_colors/font_color = Color(0.438889, 0.299364, 2.40654e-07, 1)
+theme_override_colors/font_color = Color(0.711229, 0.494767, 3.85046e-07, 1)
 theme_override_fonts/font = ExtResource("4_w6vpo")
 theme_override_font_sizes/font_size = 106
 text = "headphones
@@ -340,17 +323,16 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -445.5
+offset_left = -445.0
 offset_top = 290.0
-offset_right = 445.5
-offset_bottom = 291.0
+offset_right = 446.0
+offset_bottom = 483.0
 grow_horizontal = 2
-theme_override_colors/font_color = Color(0.438889, 0.299364, 2.40654e-07, 1)
+theme_override_colors/font_color = Color(0.711229, 0.494767, 3.85046e-07, 1)
 theme_override_fonts/font = ExtResource("4_w6vpo")
 theme_override_font_sizes/font_size = 106
-text = "a 
-CJ Enterprises
-Production"
+text = "Ganymede
+Studios"
 horizontal_alignment = 1
 
 [node name="ParticlePathControl" type="Control" parent="CanvasLayer/SplashScreen/Label2"]
@@ -410,7 +392,7 @@ offset_left = -115.0
 offset_top = -176.0
 offset_right = 776.0
 offset_bottom = -81.0
-theme_override_colors/font_color = Color(0.438889, 0.299364, 2.40654e-07, 1)
+theme_override_colors/font_color = Color(0.711229, 0.494767, 3.85046e-07, 1)
 theme_override_fonts/font = ExtResource("4_w6vpo")
 theme_override_font_sizes/font_size = 106
 text = "Protected by:"
@@ -422,7 +404,7 @@ offset_left = -44.0
 offset_top = 99.0
 offset_right = 660.0
 offset_bottom = 390.0
-theme_override_colors/font_color = Color(0.438889, 0.299364, 2.40654e-07, 1)
+theme_override_colors/font_color = Color(0.711229, 0.494767, 3.85046e-07, 1)
 theme_override_fonts/font = ExtResource("4_w6vpo")
 theme_override_font_sizes/font_size = 106
 text = "mesocortex
@@ -441,7 +423,7 @@ grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("11_lchx1")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="CanvasLayer/BottomParticleControl"]
+[node name="BottomParticles" type="GPUParticles2D" parent="CanvasLayer/BottomParticleControl"]
 unique_name_in_owner = true
 amount = 300
 texture = ExtResource("4_aiv7l")

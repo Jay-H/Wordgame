@@ -67,7 +67,7 @@ var game_dictionary = {
 	"player_two_wrong_guesses": 0, "player_one_id": 0, "player_two_id": 0, "player_one_revealed_letters": 0,
 	"player_two_revealed_letters": 0, "reveal_letter_order_array": [], "reveal_letter_order_dictionary": {}, 
 	"player_one_delay": 1.00, "player_two_delay": 1.00, "which_player_turn": "one", "last_turn_ended_by_timeout": false,
-	"player_one_turn_time": 0.00, "player_two_turn_time": 0.00, "turn_based_indices_found": [],
+	"player_one_turn_time": 0.00, "player_two_turn_time": 0.00, "turn_based_indices_found": [], "chaos_shared_indices_found" : [],
 	"Player One Score": 0, "Player Two Score": 0, "game_type": "hangman"
 }
 #var word_list = ["CAPTAIN", "ELEVEN", "NEPTUNE", "JUPITER", "ASTRAL", "WESTERN", "OCCIDENT", "ORIENT", "CEPHALIC"]
@@ -296,10 +296,32 @@ func _send_word_to_server(word):
 			game_dictionary["which_player_turn"] = "one"
 			%P1TurnTimer.start(turn_time_length)
 			%P2TurnTimer.stop()
+	if chaos_shared_clues:
+		_chaos_shared_indices_populator(word)
 	rpc_id(p1id, "_send_dictionary_server_to_client", game_dictionary)
 	rpc_id(p2id, "_send_dictionary_server_to_client", game_dictionary)
 	
 	pass
+
+func _chaos_shared_indices_populator(word):
+	if word.length() != word_to_find.length():
+		return "wrong length"
+	else:
+		var array_of_indices = []
+		for i in word.length():
+			if word_to_find[i] == word[i]:
+				array_of_indices.append(i)
+		for i in array_of_indices:
+			if game_dictionary["chaos_shared_indices_found"].has(i):
+				pass
+			else:
+				game_dictionary["chaos_shared_indices_found"].append(i)
+		pass
+	
+	pass
+
+	pass
+
 
 func _lockout():
 	pass
@@ -374,7 +396,6 @@ func _turn_based_letter_logic(word):
 				pass
 			else:
 				game_dictionary["turn_based_indices_found"].append(i)
-		
 		pass
 	
 	pass

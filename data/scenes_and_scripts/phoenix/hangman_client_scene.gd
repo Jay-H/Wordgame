@@ -164,7 +164,7 @@ func _process(_delta):
 				else:
 					array_of_letter_nodes[i].text = reveal_letter_order_dictionary[i]
 		if chaos_variant and chaos_shared_clues:
-			for i in game_dictionary["turn_based_indices_found"]:
+			for i in game_dictionary["chaos_shared_indices_found"]:
 				if i not in turn_based_known_indices:
 					await _turn_based_reveal_letter(i)
 					turn_based_known_indices.append(i)
