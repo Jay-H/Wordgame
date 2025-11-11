@@ -509,6 +509,7 @@ placeholder_text = "START TYPING!"
 alignment = 1
 max_length = 8
 keep_editing_on_text_submit = true
+virtual_keyboard_type = 6
 clear_button_enabled = true
 select_all_on_focus = true
 caret_blink = true
@@ -587,3 +588,4 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="pressed" from="CanvasLayer/HangmanTextEntry" to="." method="_on_hangman_text_entry_pressed"]
+[connection signal="text_submitted" from="CanvasLayer/HangmanTextEntry" to="." method="_on_hangman_text_entry_text_submitted"]

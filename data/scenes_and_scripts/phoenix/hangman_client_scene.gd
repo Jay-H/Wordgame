@@ -50,7 +50,7 @@ func _ready():
 		%PlayerDelay.visible = false
 		%OpponentDelay.visible = false
 		%OpponentDelayTitle.visible = false
-	
+	%HangmanTextEntry.text_submitted.connect(_on_hangman_text_entry_pressed.bind(%HangmanTextEntry.text))
 func _initial_sequence():
 	if my_player_number == "one":
 		%PlayerName.text = game_dictionary["player_one_dictionary"]["username"]
@@ -375,3 +375,25 @@ func fade_out():
 	var tween = create_tween()
 	tween.tween_property(%CanvasModulate, "color", Color.TRANSPARENT, 1)
 	await tween.finished
+
+
+func _on_hangman_text_entry_text_submitted(word: String) -> void:
+	word = word.to_upper()
+	%HangmanTextEntry.text = ""
+	if word == game_dictionary["word_to_find"]:
+		%LetterBox.visible = false
+		%GhostBox.visible = false
+	_ephemeral_hint(word)
+	if chaos_variant and not ephemeral_hints_variant and not chaos_shared_clues:
+		if word.length() != game_dictionary["word_to_find"].length():
+			return
+		else: 
+			for i in word.length():
+				if word[i] == game_dictionary["word_to_find"][i]:
+					if i not in chaos_known_indices:
+						await _turn_based_reveal_letter(i)
+						chaos_known_indices.append(i)
+				
+					
+	rpc_id(1, "_send_word_to_server", word)
+	pass # Replace with function body.
