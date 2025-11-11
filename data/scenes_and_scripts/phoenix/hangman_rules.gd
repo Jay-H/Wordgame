@@ -13,6 +13,8 @@ var waiting_text_running = false
 var nonrefadeables
 
 func _ready():
+	%Absolute.modulate = Color.TRANSPARENT
+	%Line2D.visible = false
 	pass
 
 
@@ -238,8 +240,9 @@ func customizer(game_type):
 			not_for_refade.append(%EphemeralRedLine)
 			
 	nonrefadeables = not_for_refade
-	print(words)
-	print(nonrefadeables)
+	if game_type.contains("Shared"):
+		_chaos_shared()
+	
 
 func _on_Ephemeral_pressed() -> void:
 	var fadingtween = create_tween()
@@ -254,3 +257,19 @@ func _on_Ephemeral_pressed() -> void:
 	await tween.finished
 	close_button.mouse_filter = Control.MOUSE_FILTER_STOP
 	pass # Replace with function body.
+
+func _chaos_shared():
+	%Bedlam2.text = "Absolute Bedlam"
+	%BedlamLetterRules.text += "and your opponent..." + "\n" + "and vice versa......."
+	%Line2D.visible = true
+	%SkipButton.add_theme_color_override("font_color", Color.WHITE)
+	var tween2 = create_tween()
+	tween2.tween_property(%ColorRect, "modulate", Color.BLACK, 1)
+	await get_tree().create_timer(1).timeout
+	var tween = create_tween()
+	tween.set_loops(0)
+	tween.chain().tween_property(%Bedlam, "modulate",Color.TRANSPARENT, 0.75)
+	tween.parallel().tween_property(%Absolute, "modulate", Color.WHITE, 0.75)
+	tween.chain().tween_property(%Bedlam, "modulate",Color.WHITE, 0.75)
+	tween.parallel().tween_property(%Absolute, "modulate", Color.TRANSPARENT, 0.75)
+	pass

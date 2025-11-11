@@ -455,6 +455,7 @@ offset_right = 660.0
 offset_bottom = 102.5
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(660, 102.5)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("21_714vc")
 theme_override_font_sizes/font_size = 150

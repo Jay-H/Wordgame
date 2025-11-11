@@ -37,7 +37,8 @@ func _ready():
 	tween.parallel().tween_property(%MainMenuBox, "modulate", Color.WHITE, 2)
 	tween.parallel().tween_property(%PlayersOnline, "modulate", Color.WHITE, 2)
 	tween.parallel().tween_property(%MatchesRunning, "modulate", Color.WHITE, 2)
-
+	%WeatherTimer.start(10)
+	%WeatherTimer.timeout.connect(_weather_function)
 func fade_in():
 	%Hider.color = Color.WHITE
 	visible = true
@@ -57,6 +58,7 @@ func _fade_out():
 func _on_profile_pressed() -> void:
 	Haptics.stacatto_doublet()
 	await %MainMenuItems._fade_out()
+	
 	%ProfileMenuItems._fade_in()
 	
 	pass # Replace with function body.
@@ -162,3 +164,9 @@ func _single_player_start(parameters):
 func _on_debug_pressed() -> void:
 	add_child(load("res://data/scenes_and_scripts/phoenix/vibration_tester.tscn").instantiate())
 	pass # Replace with function body.
+
+func _weather_function():
+	%RainParticles.amount_ratio = 0
+	%RainParticles.emitting = true
+	var tween = create_tween()
+	tween.tween_property(%RainParticles, "amount_ratio", 1.0, 25)

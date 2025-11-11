@@ -1,7 +1,7 @@
 extends Control
 
 
-var submit_style = "double_press" # "submit_button", "asap", "double_press" # issue with asap mode is it nullifies the penalty to submitting wrong wordv
+var submit_mode = "chris_mode" # "default_mode", "steph_mode", "double_press" # issue with asap mode is it nullifies the penalty to submitting wrong wordv
 var double_press_buttons = []
 var SERVER_PORT = 7777
 const SERVER_NODE_PATH = "res://data/scenes_and_scripts/scramble/scramble_server_scene.tscn"
@@ -41,7 +41,7 @@ var last_found_word_counter = 0
 var variant_button_status = "on" # on, off, dim
 func _ready():
 	#username = arguments[1]
-	
+	submit_mode = Globals.submit_mode
 	rpc_id(1, "send_player_information") # initial call to the server to give us some info
 	
 	for i in range (1,8): # this connects the signals from the 7 letters in the middle to this script, allowing us to get the text from those letter label nodes
@@ -105,14 +105,14 @@ func letter_collector(letter, letternode, bonus): #updates the current chosen le
 	Haptics.stacatto_singleton()
 	current_chosen_letters_array.append(letter)
 	current_chosen_letters_string += str(letter)
-	if submit_style == "submit_button": 
+	if submit_mode == "default_mode": 
 		letternode.mouse_filter = MOUSE_FILTER_IGNORE
 		small_green_letters(letternode)
 		letternode.add_theme_color_override("font_color", Color.LIGHT_BLUE)
 		
 
 	
-	if submit_style == "double_press":
+	if submit_mode == "chris_mode":
 		var button = Button.new()
 		button.modulate = Color.TRANSPARENT
 		double_press_buttons.append(button)
@@ -122,9 +122,13 @@ func letter_collector(letter, letternode, bonus): #updates the current chosen le
 		small_green_letters(letternode)
 		letternode.add_theme_color_override("font_color", Color.LIGHT_BLUE)
 		
-	if submit_style == "asap": 
+	if submit_mode == "steph_mode": 
+		letternode.add_theme_color_override("font_color", Color.LIGHT_BLUE)
+		letternode.mouse_filter = MOUSE_FILTER_IGNORE
 		if current_chosen_letters_string.length() > 2:
+			print("here")
 			if GlobalData.is_valid_word(current_chosen_letters_string):
+				print("here")
 				if big_dictionary.has("All Found Words"):
 					if big_dictionary["All Found Words"].has(current_chosen_letters_string):
 						pass
@@ -132,7 +136,7 @@ func letter_collector(letter, letternode, bonus): #updates the current chosen le
 						Haptics.stacatto_doublet()
 						if bonus:
 							bonus_pressed = true
-							submitter()
+						submitter()
 	if bonus:
 		bonus_pressed = true
 		
@@ -165,7 +169,7 @@ func mini_score_display():
 	%MiniScore.text = str(miniscore)
 
 func submitter():
-	if submit_style == "double_press":
+	if submit_mode == "chris_mode":
 		Haptics.stacatto_doublet()
 		for i in double_press_buttons:
 			i.queue_free()
@@ -416,7 +420,7 @@ func _on_submit_pressed():
 
 func _on_clear_pressed() -> void:
 	Haptics.triple_quick_soft()
-	if submit_style == "double_press":
+	if submit_mode == "chris_mode":
 		for i in double_press_buttons:
 			i.queue_free()
 		double_press_buttons = []

@@ -1,8 +1,9 @@
-[gd_scene load_steps=26 format=3 uid="uid://ny8idplgyu1s"]
+[gd_scene load_steps=30 format=3 uid="uid://ny8idplgyu1s"]
 
 [ext_resource type="Script" uid="uid://cpgbo42e7vse8" path="res://data/scenes_and_scripts/phoenix/true_menu.gd" id="1_mgwhk"]
 [ext_resource type="Shader" uid="uid://c14ncknun6c8h" path="res://data/scenes_and_scripts/scramble/cloudscape2.gdshader" id="2_7kx3w"]
 [ext_resource type="FontFile" uid="uid://dskmx2extevrw" path="res://data/fonts/times.ttf" id="3_7kx3w"]
+[ext_resource type="Script" uid="uid://cv0wbyb1t8jvq" path="res://data/scenes_and_scripts/phoenix/rain_particles_control.gd" id="3_v5tby"]
 [ext_resource type="Shader" uid="uid://dwfv7tbunsf61" path="res://data/scenes_and_scripts/scramble/scramble_client_scene.gdshader" id="4_2jwjy"]
 [ext_resource type="Script" uid="uid://duvgkncbmv0dr" path="res://data/scenes_and_scripts/phoenix/main_menu_items.gd" id="4_ptjkw"]
 [ext_resource type="PackedScene" uid="uid://dptsatxug1hhb" path="res://data/scenes_and_scripts/multiplayertesting/profile_picture.tscn" id="5_uueyb"]
@@ -29,6 +30,28 @@ shader_parameter/lighting_contrast = 0.183
 shader_parameter/speed = 0.759
 shader_parameter/perspective = 0.852
 shader_parameter/horizon_line = 0.623
+
+[sub_resource type="Gradient" id="Gradient_w2506"]
+offsets = PackedFloat32Array(0, 0.347594, 0.713904, 1)
+colors = PackedColorArray(0.113725, 0.352941, 1, 0.227451, 0.115084, 0.351773, 1, 1, 0, 0, 0.564706, 1, 0, 0, 0.564706, 0.521569)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_v5tby"]
+gradient = SubResource("Gradient_w2506")
+width = 3
+fill_from = Vector2(0.547009, 0)
+fill_to = Vector2(0.569801, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ylplv"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(660, 1, 1)
+gravity = Vector3(0, 98, 0)
+radial_accel_min = -5.0
+radial_accel_max = 5.0
+turbulence_noise_strength = 6.23
+turbulence_noise_scale = 0.5
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.017
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2g6dm"]
 shader = ExtResource("4_2jwjy")
@@ -125,6 +148,25 @@ grow_vertical = 2
 [node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer"]
 unique_name_in_owner = true
 
+[node name="RainParticlesControl" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchor_right = 1.0
+offset_top = -361.0
+grow_horizontal = 2
+script = ExtResource("3_v5tby")
+
+[node name="RainParticles" type="GPUParticles2D" parent="CanvasLayer/RainParticlesControl"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.227451)
+position = Vector2(668, 0)
+emitting = false
+amount = 1000
+texture = SubResource("GradientTexture2D_v5tby")
+lifetime = 10.0
+fixed_fps = 60
+visibility_rect = Rect2(-2000, -500, 4000, 4000)
+process_material = SubResource("ParticleProcessMaterial_ylplv")
+
 [node name="Sun" type="ColorRect" parent="CanvasLayer"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_2g6dm")
@@ -192,8 +234,21 @@ theme_override_font_sizes/normal_font_size = 186
 text = "wordwar."
 
 [node name="FindGame" type="Button" parent="CanvasLayer/MainMenuItems/MainMenuBox"]
+unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.498543, 0.659041, 0.996016, 1)
 theme_override_fonts/font = ExtResource("3_7kx3w")
 theme_override_font_sizes/font_size = 141
 theme_override_styles/focus = SubResource("StyleBoxEmpty_mljia")
@@ -211,8 +266,21 @@ text = "find game."
 alignment = 0
 
 [node name="Settings" type="Button" parent="CanvasLayer/MainMenuItems/MainMenuBox"]
+unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.498543, 0.659041, 0.996016, 1)
 theme_override_fonts/font = ExtResource("3_7kx3w")
 theme_override_font_sizes/font_size = 141
 theme_override_styles/focus = SubResource("StyleBoxEmpty_mljia")
@@ -230,8 +298,21 @@ text = "settings."
 alignment = 0
 
 [node name="SinglePlayer" type="Button" parent="CanvasLayer/MainMenuItems/MainMenuBox"]
+unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.498543, 0.659041, 0.996016, 1)
 theme_override_fonts/font = ExtResource("3_7kx3w")
 theme_override_font_sizes/font_size = 141
 theme_override_styles/focus = SubResource("StyleBoxEmpty_mljia")
@@ -249,8 +330,21 @@ text = "single player."
 alignment = 0
 
 [node name="Profile" type="Button" parent="CanvasLayer/MainMenuItems/MainMenuBox"]
+unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.498543, 0.659041, 0.996016, 1)
 theme_override_fonts/font = ExtResource("3_7kx3w")
 theme_override_font_sizes/font_size = 141
 theme_override_styles/focus = SubResource("StyleBoxEmpty_mljia")
@@ -1191,6 +1285,7 @@ clip_text = true
 
 [node name="cjenterprises" type="Label" parent="CanvasLayer"]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -1205,11 +1300,15 @@ grow_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_7kx3w")
 theme_override_font_sizes/font_size = 66
-text = "CJ Enterprises."
+text = "© Ganymede Studios "
 
 [node name="PianoController" parent="." instance=ExtResource("13_w2506")]
 unique_name_in_owner = true
 layout_mode = 1
+
+[node name="WeatherTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
 
 [connection signal="pressed" from="CanvasLayer/MainMenuItems/MainMenuBox/FindGame" to="." method="_on_find_game_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenuItems/MainMenuBox/Settings" to="." method="_on_settings_pressed"]

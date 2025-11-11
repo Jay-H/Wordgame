@@ -73,40 +73,6 @@ texture = ExtResource("2_ooqq5")
 expand_mode = 1
 stretch_mode = 2
 
-[node name="NextLetterTimerTitle" type="Label" parent="CanvasLayer"]
-unique_name_in_owner = true
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = 688.0
-offset_bottom = 98.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.227451)
-theme_override_fonts/font = ExtResource("6_7as1b")
-theme_override_font_sizes/font_size = 161
-text = "Time to next letter!"
-horizontal_alignment = 1
-
-[node name="NextLetterTimeLeft" type="Label" parent="CanvasLayer"]
-unique_name_in_owner = true
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = 1019.0
-offset_bottom = 98.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.227451)
-theme_override_fonts/font = ExtResource("6_7as1b")
-theme_override_font_sizes/font_size = 161
-text = "5 sec"
-horizontal_alignment = 1
-
 [node name="LetterBox" type="HBoxContainer" parent="CanvasLayer"]
 unique_name_in_owner = true
 anchors_preset = 14
@@ -585,6 +551,43 @@ text = "username
 found"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="NextLetterVBox" type="VBoxContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 300)
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -583.5
+offset_top = 1475.0
+offset_right = 583.5
+offset_bottom = 139.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NextLetterTimerTitle" type="Label" parent="CanvasLayer/NextLetterVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.227451)
+theme_override_fonts/font = ExtResource("6_7as1b")
+theme_override_font_sizes/font_size = 161
+text = "Time to next letter!"
+horizontal_alignment = 1
+
+[node name="NextLetterTimeLeft" type="Label" parent="CanvasLayer/NextLetterVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.227451)
+theme_override_fonts/font = ExtResource("6_7as1b")
+theme_override_font_sizes/font_size = 161
+text = "5 sec"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="CanvasLayer/HangmanTextEntry" to="." method="_on_hangman_text_entry_pressed"]
 [connection signal="text_submitted" from="CanvasLayer/HangmanTextEntry" to="." method="_on_hangman_text_entry_text_submitted"]

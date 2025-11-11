@@ -40,10 +40,7 @@ var old_info : Dictionary = {
 var username
 var db_ref
 var path
-#var IP_ADDRESS =  "185.98.1.219"
-#var IP_ADDRESS = "192.169.1.219"
 #var IP_ADDRESS = "localhost"
-#var IP_ADDRESS = "185.98.171.129"
 var IP_ADDRESS = "136.112.186.218" # VM
 var PORT = 7777
 var match_found_instance
@@ -148,7 +145,7 @@ func _receive_new_profile_info(auth): # this signals the client that their regis
 func _database_initializer(auth):
 	
 	path = "users/" + str(auth["localid"])
-	var general_client_settings_path = "client_data/IPs"
+	var general_client_settings_path = "client_data"
 	var client_settings_db_ref
 	db_ref = Database.get_database_reference(path, {})
 	db_ref.new_data_update.connect(_on_db_data_update)
@@ -164,7 +161,11 @@ func _database_initializer(auth):
 	#db_ref.once_failed.connect(_on_db_data_update)
 
 func _client_settings_db_update(argument):
+	print(argument)
 	
+	if argument.key == "scramble_constants":
+		Globals.submit_mode = argument.data["submit_mode"]
+		
 	pass
 	
 func _on_db_data_update(argument): 

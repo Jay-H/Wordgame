@@ -50,7 +50,7 @@ func _ready():
 		%PlayerDelay.visible = false
 		%OpponentDelay.visible = false
 		%OpponentDelayTitle.visible = false
-	%HangmanTextEntry.text_submitted.connect(_on_hangman_text_entry_pressed.bind(%HangmanTextEntry.text))
+	%HangmanTextEntry.text_submitted.connect(_on_hangman_text_entry_text_submitted.bind(%HangmanTextEntry.text))
 func _initial_sequence():
 	if my_player_number == "one":
 		%PlayerName.text = game_dictionary["player_one_dictionary"]["username"]
@@ -218,8 +218,8 @@ func _set_variants(variant):
 func _starting_animations():
 	var array_to_animate = [%ParticipantHBox, %HangmanTextEntry]
 	if delay_variant:
-		array_to_animate.append(%NextLetterTimerTitle)
-		array_to_animate.append(%NextLetterTimeLeft)
+		array_to_animate.append(%NextLetterVBox)
+	
 	for i in array_to_animate:
 		i.visible = true
 		var target_position = i.position
@@ -272,24 +272,6 @@ func connect_to_server():
 		print(error)
 
 
-func _on_hangman_text_entry_pressed(word) -> void:
-	if word == game_dictionary["word_to_find"]:
-		%LetterBox.visible = false
-		%GhostBox.visible = false
-	_ephemeral_hint(word)
-	if chaos_variant and not ephemeral_hints_variant and not chaos_shared_clues:
-		if word.length() != game_dictionary["word_to_find"].length():
-			return
-		else: 
-			for i in word.length():
-				if word[i] == game_dictionary["word_to_find"][i]:
-					if i not in chaos_known_indices:
-						await _turn_based_reveal_letter(i)
-						chaos_known_indices.append(i)
-				
-					
-	rpc_id(1, "_send_word_to_server", word)
-	pass # Replace with function body.
 
 @rpc("authority", "call_local", "reliable")
 func _send_word_to_server(word):
@@ -380,15 +362,21 @@ func fade_out():
 func _on_hangman_text_entry_text_submitted(word: String) -> void:
 	word = word.to_upper()
 	%HangmanTextEntry.text = ""
-	simulate_left_click()
+	
 	if word == game_dictionary["word_to_find"]:
 		%LetterBox.visible = false
 		%GhostBox.visible = false
-	
+		rpc_id(1, "_send_word_to_server", word)
+		return
 	if not GlobalData.is_valid_word(word):
 		print("not a valid word bro")
-		
+		%HangmanTextEntry.placeholder_text = "INVALID!"
+		await get_tree().create_timer(1).timeout
+		%HangmanTextEntry.placeholder_text = "START TYPING!"
 		return
+	await get_tree().create_timer(0.25).timeout
+	%HangmanTextEntry.grab_click_focus()
+	%HangmanTextEntry.grab_focus()
 	_ephemeral_hint(word)
 	if chaos_variant and not ephemeral_hints_variant and not chaos_shared_clues:
 		if word.length() != game_dictionary["word_to_find"].length():
@@ -403,14 +391,3 @@ func _on_hangman_text_entry_text_submitted(word: String) -> void:
 					
 	rpc_id(1, "_send_word_to_server", word)
 	pass # Replace with function body.
-
-
-func simulate_left_click() -> void:
-	var event = InputEventScreenTouch.new()
-	#event.button_index = MOUSE_BUTTON_LEFT
-	event.position = %HangmanTextEntry.position + %HangmanTextEntry.size/2 
-	event.pressed = true
-	Input.parse_input_event(event) # Simulate button press
-
-	event.pressed = false # Simulate button release
-	Input.parse_input_event(event)

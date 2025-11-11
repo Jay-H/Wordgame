@@ -62,7 +62,7 @@ expand_margin_right = 25.0
 expand_margin_bottom = 25.0
 
 [sub_resource type="Curve" id="Curve_ylin2"]
-_data = [Vector2(0.244, 0), 0.0, 0.0, 0, 0, Vector2(0.86, 0.977929), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.002809, 0.261852), 0.0, 0.0, 0, 0, Vector2(0.620786, 0.261852), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_cxpsr"]
@@ -213,6 +213,28 @@ mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("7_2hswh")
 theme_override_font_sizes/normal_font_size = 126
 text = "Bedlam"
+autowrap_mode = 1
+horizontal_alignment = 1
+script = ExtResource("8_cdprs")
+metadata/_edit_use_anchors_ = true
+
+[node name="Absolute" type="RichTextLabel" parent="Control"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.164706)
+z_index = 1
+material = SubResource("ShaderMaterial_wp2ep")
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.000348675
+anchor_bottom = -0.000348675
+offset_left = 527.0
+offset_top = 1530.0
+offset_right = 1209.0
+offset_bottom = 1691.0
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("7_2hswh")
+theme_override_font_sizes/normal_font_size = 126
+text = "ABSOLUTE"
 autowrap_mode = 1
 horizontal_alignment = 1
 script = ExtResource("8_cdprs")
@@ -464,16 +486,19 @@ metadata/_edit_use_anchors_ = true
 unique_name_in_owner = true
 
 [node name="ColorRect" type="ColorRect" parent="Control/NonFadeables"]
+unique_name_in_owner = true
 z_index = -1
 offset_right = 1320.0
 offset_bottom = 2868.0
 mouse_filter = 2
-color = Color(0.850774, 0.928434, 1, 1)
+color = Color(0.786602, 0.898041, 1, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Control/NonFadeables"]
+unique_name_in_owner = true
+visible = false
 z_index = 1
-position = Vector2(658, 2831)
+position = Vector2(658, 3279)
 amount = 30
 texture = ExtResource("17_1msyd")
 lifetime = 15.0
@@ -496,11 +521,11 @@ metadata/_edit_use_anchors_ = true
 [node name="HangmanRules" type="Label" parent="Control/NonFadeables/HangmanRulesPanel"]
 z_index = 3
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = -1
+anchor_left = 0.50039
+anchor_top = 0.500363
+anchor_right = 0.50039
+anchor_bottom = 0.511265
 offset_left = -461.5
 offset_top = -453.5
 offset_right = 461.5
@@ -510,21 +535,20 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("16_d28a7")
 theme_override_font_sizes/font_size = 55
-text = "Make as many words as you can out 
-of seven available letters.
+text = "Both you and your opponent are
+trying to find the same word.
 
-Every time you submit an invalid word, 
-the penalty increases.
+Depending on the variant, there may
+be changes in gameplay.
 
-The more uncommon the letter,
-the more it is worth in a word.
+What doesn't change is that any
+guess you submit must be a real word.
 
-If your opponent finds a word before you,
-it is no longer available to submit.
-
-Bonus points for seven letter words!
-At least one is guaranteed per round!"
+The length of your guessed word
+must be equal to that of 
+the word you are both trying to find."
 horizontal_alignment = 1
+vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="BackButton" type="Button" parent="Control/NonFadeables/HangmanRulesPanel"]
@@ -575,14 +599,18 @@ metadata/_edit_use_anchors_ = true
 unique_name_in_owner = true
 z_index = 3
 material = SubResource("ShaderMaterial_wp2ep")
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0912637
+anchor_right = 0.0631825
 offset_left = 433.0
 offset_top = 191.0
 offset_right = 835.0
 offset_bottom = 438.0
 theme_override_fonts/normal_font = ExtResource("11_rkyvi")
 theme_override_font_sizes/normal_font_size = 86
-text = "Wonder"
+text = "Ephemeral"
+horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="EphemeralRulesPanel" type="Label" parent="Control/NonFadeables/EphemeralRulesPanel"]
@@ -602,11 +630,15 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("16_d28a7")
 theme_override_font_sizes/font_size = 55
-text = "If someone gets the 7-letter word,
-they win.
-That's it.
-If no one finds it,
-          all other rules apply."
+text = "If the word you guess shares a letter in
+the same position as the word you are
+trying to find, it will be revealed to you,
+transiently.
+
+This will only reveal one letter, even
+if multiple fit the criteria."
+horizontal_alignment = 1
+vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="BackButton" type="Button" parent="Control/NonFadeables/EphemeralRulesPanel"]
@@ -657,18 +689,25 @@ metadata/_edit_use_anchors_ = true
 unique_name_in_owner = true
 z_index = 3
 material = SubResource("ShaderMaterial_wp2ep")
-layout_mode = 0
-offset_left = 267.0
-offset_top = 69.0
-offset_right = 970.0
-offset_bottom = 326.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -351.772
+offset_top = 83.0
+offset_right = 351.772
+offset_bottom = 167.0
+grow_horizontal = 2
 theme_override_fonts/normal_font = ExtResource("7_2hswh")
 theme_override_font_sizes/normal_font_size = 126
-text = " Bonus Letter"
-autowrap_mode = 1
+text = "bedlam"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="BedlamLetterRules" type="Label" parent="Control/NonFadeables/BedlamLetterRulesPanel"]
+unique_name_in_owner = true
 z_index = 3
 layout_mode = 1
 anchors_preset = 8
@@ -685,18 +724,24 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("16_d28a7")
 theme_override_font_sizes/font_size = 55
-text = "A bonus letter is available for use to 
-make words.
+text = "You and your opponent are guessing at 
+the same time.
 
-It is shared between the two players.
-
-Once it is used a new bonus letter 
-is generated.
-
-Its value goes up over time.
-
-Extra bonus points for eight letter words!"
+Any letters shared between your guess
+and the word to find are revealed to you,
+and you alone.
+"
+horizontal_alignment = 1
+vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="Line2D" type="Line2D" parent="Control/NonFadeables/BedlamLetterRulesPanel/BedlamLetterRules"]
+unique_name_in_owner = true
+z_index = 4
+position = Vector2(396, 571)
+points = PackedVector2Array(-59, 1, 362, -2)
+width = 15.0
+default_color = Color(1, 0, 0, 1)
 
 [node name="BackButton" type="Button" parent="Control/NonFadeables/BedlamLetterRulesPanel"]
 modulate = Color(1, 1, 1, 0)
