@@ -380,13 +380,14 @@ func fade_out():
 func _on_hangman_text_entry_text_submitted(word: String) -> void:
 	word = word.to_upper()
 	%HangmanTextEntry.text = ""
+	simulate_left_click()
 	if word == game_dictionary["word_to_find"]:
 		%LetterBox.visible = false
 		%GhostBox.visible = false
 	
 	if not GlobalData.is_valid_word(word):
 		print("not a valid word bro")
-		%HangmanTextEntry.text = ""
+		
 		return
 	_ephemeral_hint(word)
 	if chaos_variant and not ephemeral_hints_variant and not chaos_shared_clues:
@@ -402,3 +403,14 @@ func _on_hangman_text_entry_text_submitted(word: String) -> void:
 					
 	rpc_id(1, "_send_word_to_server", word)
 	pass # Replace with function body.
+
+
+func simulate_left_click() -> void:
+	var event = InputEventScreenTouch.new()
+	#event.button_index = MOUSE_BUTTON_LEFT
+	event.position = %HangmanTextEntry.position + %HangmanTextEntry.size/2 
+	event.pressed = true
+	Input.parse_input_event(event) # Simulate button press
+
+	event.pressed = false # Simulate button release
+	Input.parse_input_event(event)

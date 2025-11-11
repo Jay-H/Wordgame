@@ -41,9 +41,10 @@ var username
 var db_ref
 var path
 #var IP_ADDRESS =  "185.98.1.219"
-var IP_ADDRESS = "localhost"
+#var IP_ADDRESS = "192.169.1.219"
+#var IP_ADDRESS = "localhost"
 #var IP_ADDRESS = "185.98.171.129"
-#var IP_ADDRESS = "136.112.186.218" # VM
+var IP_ADDRESS = "136.112.186.218" # VM
 var PORT = 7777
 var match_found_instance
 var rules_instance
@@ -53,6 +54,8 @@ var auth_data
 var number_of_players_online 
 var number_of_matches_currently_being_played
 var process_test = false
+@onready var arguments = OS.get_cmdline_args()
+
 
 func _process(delta):
 	if opponent_disconnected:
@@ -76,6 +79,7 @@ func _process(delta):
 
 
 func _ready():
+	print(arguments)
 	%LoginScreen.connect("login_successful", _on_login_successful)
 	connect_to_server() # this function will also set the "my_client_id" variable at the top, so now we have all the identifying information together. 
 	
@@ -144,15 +148,24 @@ func _receive_new_profile_info(auth): # this signals the client that their regis
 func _database_initializer(auth):
 	
 	path = "users/" + str(auth["localid"])
-
-	db_ref = Database.get_database_reference(path, {FirebaseDatabaseReference.LIMIT_TO_LAST : 10})
+	var general_client_settings_path = "client_data/IPs"
+	var client_settings_db_ref
+	db_ref = Database.get_database_reference(path, {})
 	db_ref.new_data_update.connect(_on_db_data_update)
 	db_ref.patch_data_update.connect(_on_db_data_update)
 	db_ref.delete_data_update.connect(_on_db_data_update)
+	client_settings_db_ref = Database.get_database_reference(general_client_settings_path, {})
+	client_settings_db_ref.new_data_update.connect(_client_settings_db_update)
+	client_settings_db_ref.patch_data_update.connect(_client_settings_db_update)
+	client_settings_db_ref.delete_data_update.connect(_client_settings_db_update)	
 	#db_ref.push_successful.connect(_on_db_data_update)
 	#db_ref.push_failed.connect(_on_db_data_update)
 	#db_ref.once_successful.connect(_on_db_data_update)
 	#db_ref.once_failed.connect(_on_db_data_update)
+
+func _client_settings_db_update(argument):
+	
+	pass
 	
 func _on_db_data_update(argument): 
 	

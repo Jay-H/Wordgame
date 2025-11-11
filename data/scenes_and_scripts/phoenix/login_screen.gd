@@ -5,12 +5,18 @@ var connected_to_server = false
 var shader_array = []
 func _ready():
 	
+	
 	%BottomParticles.emitting = false
 	await %SplashScreen.fade_process()
 	%SplashScreen.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	%TextureRect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	fade_in(duration)
-
+	#await get_tree().create_timer(0.5).timeout
+	#if main_menu.arguments.has("user_1"):
+		#%QuickLoginA.pressed.emit()
+		#
+	#if main_menu.arguments.has("user_2"):
+		#%QuickLoginB.pressed.emit()
 func fade_in(duration):
 	%BottomParticles.emitting = true
 	shader_array = [%Login, %CreateAccount, %ChrisLabel]

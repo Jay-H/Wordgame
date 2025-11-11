@@ -272,6 +272,7 @@ func send_player_information():
 	pass
 	
 func shuffler():
+	Haptics.pitter_patter_light()
 	var seeds = ["asdfa", "132414", "sdfgshfg", "srgshrse", "ergjbnege", "rsegsrg", "ergiuhsrg", "gsrehjg", "giorsehg", "glisujerhg", "grsngss", "gserjklh", "gsioulhreg"]
 	var my_seed = seeds[randi_range(0, (seeds.size()-1))].hash()
 	
@@ -311,10 +312,6 @@ func shuffler():
 
 @rpc("authority", "call_local")
 func receive_player_information(dictionary):
-	
-	
-
-	
 	
 	
 	if is_player_one:
@@ -418,6 +415,7 @@ func _on_submit_pressed():
 
 
 func _on_clear_pressed() -> void:
+	Haptics.triple_quick_soft()
 	if submit_style == "double_press":
 		for i in double_press_buttons:
 			i.queue_free()
@@ -471,6 +469,7 @@ func show_obscurity_popup():
 		return
 func wrong_word_display():
 	
+	Haptics.double_normal_hard()
 	var sun_tween = create_tween()
 	sun_tween.set_ease(Tween.EASE_IN_OUT)
 	sun_tween.set_trans(Tween.TRANS_CIRC)
@@ -536,8 +535,9 @@ func wrong_word_display():
 	label_container.queue_free()
 	
 
-@rpc("any_peer", "call_local")
+@rpc("authority", "call_local")
 func wrong_word_alert(amount):
+	
 	current_penalty = amount
 	wrong_word_display()
 	pass
@@ -561,7 +561,7 @@ func fade_out():
 @rpc("authority", "call_local")
 func wonder_game_ender(winner_user_id):
 	#big_word_event()
-	var nodes_to_move = [%Submit, %Clear, %Shuffle, %BonusLetter, %BonusScore, %BonusReminder, %GameTimerLabel, %GameScore, %MiniScore, %HBoxContainer]
+	var nodes_to_move = [%Submit, %Clear, %Shuffle, %BonusLetter, %BonusScore, %BonusReminder, %GameTimerLabel, %GameScore, %MiniScore, %HBoxContainer, %FoundWordLabel, %VariantControl, %CurrentWord]
 	var nodes_to_disable = [%LetterContainer, %Submit, %Clear, %Shuffle, %BonusLetter]
 	for x in %LetterContainer.get_children():
 		nodes_to_disable.append(x)
