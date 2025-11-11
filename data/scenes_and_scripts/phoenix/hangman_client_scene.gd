@@ -383,6 +383,11 @@ func _on_hangman_text_entry_text_submitted(word: String) -> void:
 	if word == game_dictionary["word_to_find"]:
 		%LetterBox.visible = false
 		%GhostBox.visible = false
+	
+	if not GlobalData.is_valid_word(word):
+		print("not a valid word bro")
+		%HangmanTextEntry.text = ""
+		return
 	_ephemeral_hint(word)
 	if chaos_variant and not ephemeral_hints_variant and not chaos_shared_clues:
 		if word.length() != game_dictionary["word_to_find"].length():
