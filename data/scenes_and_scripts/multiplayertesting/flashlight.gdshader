@@ -24,6 +24,6 @@ void fragment() {
     vec4 lit_color = mix(texture_color * ambient_light, texture_color * light_color, light_intensity);
 
     // Set the final color of the pixel
-    COLOR = lit_color;
+    COLOR = lit_color * COLOR;
 }
 
