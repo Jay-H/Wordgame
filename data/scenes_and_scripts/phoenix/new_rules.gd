@@ -9,6 +9,7 @@ var active_variants = 0
 @onready var variant_label_node_array = [%Variant1, %Variant2, %Variant3, %Variant4]
 @onready var variant_HBox_node_array = [%Variant1HBox, %Variant2HBox, %Variant3HBox, %Variant4HBox]
 @onready var information_nodes = [%InformationBackground, %InformationControl, %RulesInformation, %BackButton, %TitleLabel]
+@onready var main_menu = get_parent()
 var information_screen_fading = false
 var skip_pressed = false
 var waiting_text_running = false
@@ -29,13 +30,24 @@ func _process(delta: float) -> void:
 			waiting_text_running = false
 
 func _ready():
+	%SkipButton.disabled = true
+	%SkipButton.modulate = Color.TRANSPARENT
 	Globals._load_rules()
 	%InformationControl.modulate = Color.TRANSPARENT
 	%InformationControl.visible = true
 	for i in information_nodes:
 		i.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	#_setup("HangmanDelay")
-
+	if main_menu.my_info["auto_skip_rules"] == true:
+		await get_tree().create_timer(1).timeout
+		var tween = create_tween()
+		tween.tween_property(%SkipButton, "modulate", Color.WHITE, 1)
+		_on_skip_button_pressed()
+	else:
+		await get_tree().create_timer(1).timeout
+		var tween = create_tween()
+		tween.tween_property(%SkipButton, "modulate", Color.WHITE, 1)
+		%SkipButton.disabled = false
+		
 func _setup(variant, dict):
 	if dict["rules_skipped"] == true:
 		%SkipButton.text = "AUTO SKIP!"

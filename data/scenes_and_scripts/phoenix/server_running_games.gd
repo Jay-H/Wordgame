@@ -94,7 +94,7 @@ func _match_runner(dict):
 
 			_start_game(dict)
 			var round_timer = get_node(str(dict["timers_node_name"]) + "/RoundTimer")
-			round_timer.start(100)
+			round_timer.start(999)
 			rpc_id(dict["player_one_peer_id"], "_start_game", dict)
 			rpc_id(dict["player_two_peer_id"], "_start_game", dict)		
 			return

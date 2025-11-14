@@ -71,7 +71,13 @@ var game_dictionary = {
 	"Player One Score": 0, "Player Two Score": 0, "game_type": "hangman"
 }
 #var word_list = ["CAPTAIN", "ELEVEN", "NEPTUNE", "JUPITER", "ASTRAL", "WESTERN", "OCCIDENT", "ORIENT", "CEPHALIC"]
-var word_list = ["CRAVE", "DOVES", "LEARN", "CLOUD", "FLAME", "ERUPT", "ALIVE", "LOVER", "STONE", "WIELD", "MOUNT"]
+var word_list = ["CRAVE", "DOVES", "LEARN", "CLOUD", "FLAME", "ERUPT", "ALIVE", "LOVER", "STONE", "WIELD", "MOUNT", "AREA", "NIGHT", "FLAMES",
+"DANGER", "LANDED", "WINTER", "BLOUSE", "BRAVERY", "LAVA", "GREEN", "BOUGH", "ATTACK", "QUEEN", "KING", "DUKE", "DUCHESS", "EARL", "KINGDOM",
+"HEAVEN", "ANGEL", "DEMON", "PLANET", "WINDY", "METEOR", "PULSE", "HELIUM", "GRAVITY", "LIGHT", "SPEED", "FORAGE", "FOREST", "ZEALOT", "SUMMER", 
+"MOON", "STARS", "START", "ABOUT", "QUIET", "QUEST", "CLAIM", "CLOVE", "APPLE", "PEAR", "CHERRY", "WINE", "ORANGE", "BLACK", "ORCHARD", "STANDARD", 
+"JUPITER", "SATURN", "VENUS", "EARTH", "MARS", "NEPTUNE", "PLUTO", "MERCURY", "URANUS", "ROSARY", "PRAYER", "PHASE", "SOLID", "LIQUID", "ACRID",
+"ACRIMONY", "VELVET", "BANISH", "EXORCISE", "SPIRIT", "GHOST", "FAIRY", "VAMPIRE", "BRONZE", "IRON", "STEEL", "COPPER", "BAKER", "MATTER", "ENERGY"
+]
 
 func _ready():
 	if debug_mode:

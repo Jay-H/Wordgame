@@ -40,6 +40,8 @@ var sun_color = Color(1.0, 0.902, 0.502)
 var last_found_word_counter = 0
 var variant_button_status = "on" # on, off, dim
 func _ready():
+	%CanvasModulate.color = Color.TRANSPARENT
+	%GameTimerLabel.modulate = Color.TRANSPARENT
 	#username = arguments[1]
 	submit_mode = Globals.submit_mode
 	rpc_id(1, "send_player_information") # initial call to the server to give us some info
@@ -53,15 +55,29 @@ func _ready():
 		%BonusReminder.visible = true
 		%BonusScore.visible = true
 		%BonusLetter.connect("pressed", letter_collector)
+	var tween = create_tween()
+	tween.tween_property(%CanvasModulate, "color", Color.WHITE, 1)
+	await tween.finished
+	%MouseBlocker.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var tween2 = create_tween()
+	tween2.tween_property(%GameTimerLabel, "modulate", Color.WHITE, 1)
 	
 		
 
 func _process(delta):
-
+	if bonus_pressed:
+		%BonusLetter.add_theme_color_override("default_color", Color.BLUE)
+		%BonusLetter.add_theme_font_size_override("normal_font_size", 350)
+	if not bonus_pressed:
+		%BonusLetter.add_theme_color_override("default_color", Color.DARK_RED)
+		%BonusLetter.add_theme_font_size_override("normal_font_size", 310)
 	%CurrentWord.text = current_chosen_letters_string
 	if big_dictionary.has("Server Time Left"):
 		if tie_game == false:
-			%GameTimerLabel.text = str(big_dictionary["Server Time Left"])
+			if big_dictionary["Server Time Left"] <900:
+				%GameTimerLabel.text = str(big_dictionary["Server Time Left"])
+			else:
+				%GameTimerLabel.text = ""
 		else:
 			%GameTimerLabel.add_theme_font_size_override("font_size", 100)
 			%GameTimerLabel.text = "TIE GAME, OVERTIME!"
@@ -89,19 +105,18 @@ func _process(delta):
 				number_of_words_found = big_dictionary["Player Two Number Of Found Words"]
 	
 
-func setup(background):
-	
-	
-	if background == "Mars":
-		%MarsBase.visible = true
-		
-	if background == "Jupiter":
-		%Jupiter4.visible = true	
-		%BackgroundFader.color = Color.TRANSPARENT
-	pass
+#func setup(background):
+	#
+	#
+	#if background == "Mars":
+		#%MarsBase.visible = true
+		#
+	#if background == "Jupiter":
+		#%Jupiter4.visible = true	
+		#%BackgroundFader.color = Color.TRANSPARENT
+	#pass
 
 func letter_collector(letter, letternode, bonus): #updates the current chosen letter array and disables already pressed letters
-	%PianoController.play_random_note()
 	Haptics.stacatto_singleton()
 	current_chosen_letters_array.append(letter)
 	current_chosen_letters_string += str(letter)
@@ -332,7 +347,7 @@ func receive_player_information(dictionary):
 				elif status == "word already found":
 					temp_label.text = "Already Found!"
 				elif status == "invalid word":
-					temp_label.text = "Invalid Word!"
+					temp_label.text = "Invalid Word! " + "- " + str(current_penalty) + " points" 
 				
 				%CanvasLayer.add_child(temp_label)
 				var tween = create_tween()
@@ -358,7 +373,7 @@ func receive_player_information(dictionary):
 				elif status == "word already found":
 					temp_label.text = "Already Found!"
 				elif status == "invalid word":
-					temp_label.text = "Invalid Word!"
+					temp_label.text = "Invalid Word! " + "- " + str(current_penalty) + " points" 
 				%CanvasLayer.add_child(temp_label)
 				var tween = create_tween()
 				tween.set_ease(Tween.EASE_IN_OUT)
@@ -367,6 +382,8 @@ func receive_player_information(dictionary):
 				tween.chain().tween_property(temp_label, "modulate", Color.TRANSPARENT, 0.25)
 				tween.chain().tween_property(%GameScore, "modulate", Color.WHITE, 0.25)
 				await tween.finished
+				
+				
 				temp_label.queue_free()
 			
 	big_dictionary = dictionary
@@ -400,7 +417,6 @@ func bonus_populator():
 	
 	
 func _on_shuffle_pressed():
-	%PianoController.play_random_chord()
 	shuffler()
 	remote_tester()
 	
@@ -413,7 +429,6 @@ func remote_tester():
 	pass
 	
 func _on_submit_pressed():
-	%PianoController.play_random_chord()
 	submitter()
 	
 
@@ -424,7 +439,6 @@ func _on_clear_pressed() -> void:
 		for i in double_press_buttons:
 			i.queue_free()
 		double_press_buttons = []
-	%PianoController.play_random_chord()
 	current_chosen_letters_string = ""
 	current_chosen_letters_array = []
 	bonus_pressed = false
@@ -488,55 +502,6 @@ func wrong_word_display():
 	jupiter_tween.chain().tween_property(%Jupiter4, "material:shader_parameter/band_A_color_2", Color(0.65, 0.53, 0.41), 0.5)
 	jupiter_tween.parallel().tween_property(%Jupiter4, "material:shader_parameter/band_D_color_2", Color(0.8, 0.7, 0.6), 0.5)
 	
-	var label = Label.new()
-	var label_container = CenterContainer.new()
-	var score_display = %GameScore
-	
-	
-	#label_container.position = score_display.position
-	
-	label.self_modulate.a = 0.0
-	add_child(label_container)
-	label_container.add_child(label)
-	label.name = "wrong_word_display"
-	label_container.name = "wrong_word_score_container"
-	label.add_theme_font_size_override("font_size", 200)
-	label.set_horizontal_alignment(HORIZONTAL_ALIGNMENT_CENTER)
-	label.set_vertical_alignment(VERTICAL_ALIGNMENT_CENTER)
-	label.add_theme_color_override("font_color", Color.RED)
-	label.text = "- " + str(current_penalty)
-	await get_tree().process_frame
-	await get_tree().process_frame
-	
-	
-	var label_container_original_size = label_container.size
-	
-	label_container.scale = Vector2(0,0)
-	
-	await get_tree().process_frame
-	label_container.set_pivot_offset(label_container.size / 2.0)
-	label_container.global_position = score_display.position
-	label_container.position.x += (score_display.size.x/2)
-	label_container.position.y -= 100
-	#label_container.position.y += (score_display.size.y) + ((score_display.size.y)/2)
-	await get_tree().process_frame
-	await get_tree().process_frame
-	
-	var tween = create_tween()
-	tween.set_ease(Tween.EASE_OUT) 
-	tween.set_trans(Tween.TRANS_SPRING)
-	score_display.add_theme_color_override("font_color", Color.RED)
-	tween.parallel().tween_property(score_display, "self_modulate", Color.BLACK, 0.5)
-	tween.parallel().tween_property(label, "self_modulate:a", 1, 0.5)
-	tween.parallel().tween_property(label_container, "scale", Vector2(1,1), 0.5)
-	
-	
-	tween.chain().tween_property(label, "self_modulate:a", 0, 0.5)
-	
-	await tween.finished
-	score_display.self_modulate = Color.WHITE
-	score_display.add_theme_color_override("font_color", Color.BLACK)
-	label_container.queue_free()
 	
 
 @rpc("authority", "call_local")

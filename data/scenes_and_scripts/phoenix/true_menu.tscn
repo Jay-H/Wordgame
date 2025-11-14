@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dot2fpw1u2y61"]
+[gd_scene load_steps=34 format=3 uid="uid://dot2fpw1u2y61"]
 
 [ext_resource type="Script" uid="uid://cpgbo42e7vse8" path="res://data/scenes_and_scripts/phoenix/true_menu.gd" id="1_mgwhk"]
 [ext_resource type="Shader" uid="uid://c14ncknun6c8h" path="res://data/scenes_and_scripts/scramble/cloudscape2.gdshader" id="2_7kx3w"]
@@ -16,6 +16,15 @@
 [ext_resource type="Script" uid="uid://cvo3flp0bxocd" path="res://data/scenes_and_scripts/phoenix/single_player_menu_items.gd" id="11_5ttty"]
 [ext_resource type="FontFile" uid="uid://cpavm8lp2mx3e" path="res://data/fonts/lcd/LCD2B___.TTF" id="12_aolt3"]
 [ext_resource type="PackedScene" uid="uid://bmm23rwsctf0d" path="res://data/scenes_and_scripts/multiplayertesting/piano_controller.tscn" id="13_w2506"]
+[ext_resource type="Script" uid="uid://bf15o5xg8en4f" path="res://data/scenes_and_scripts/phoenix/soak_spot_control.gd" id="15_u0fs1"]
+[ext_resource type="PackedScene" uid="uid://cfv842myh6os3" path="res://data/scenes_and_scripts/phoenix/soak_spot.tscn" id="16_ahu5q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2g6dm"]
+shader = ExtResource("4_2jwjy")
+shader_parameter/sun_color = Color(1, 0.901961, 0.501961, 1)
+shader_parameter/fluctuation_speed = 1.644
+shader_parameter/edge_softness = 0.46
+shader_parameter/noise_intensity = 0.063
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3eet2"]
 shader = ExtResource("2_7kx3w")
@@ -32,13 +41,6 @@ shader_parameter/lighting_contrast = 0.183
 shader_parameter/speed = 0.759
 shader_parameter/perspective = 0.852
 shader_parameter/horizon_line = 0.623
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2g6dm"]
-shader = ExtResource("4_2jwjy")
-shader_parameter/sun_color = Color(1, 0.901961, 0.501961, 1)
-shader_parameter/fluctuation_speed = 1.644
-shader_parameter/edge_softness = 0.46
-shader_parameter/noise_intensity = 0.063
 
 [sub_resource type="Gradient" id="Gradient_w2506"]
 offsets = PackedFloat32Array(0, 0.347594, 0.713904, 1)
@@ -142,20 +144,18 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="CanvasBackground" type="TextureRect" parent="CanvasLayer"]
 unique_name_in_owner = true
-visible = false
-material = SubResource("ShaderMaterial_3eet2")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("3_wv4wv")
 
-[node name="Sun" type="ColorRect" parent="CanvasLayer/ColorRect"]
+[node name="Sun" type="ColorRect" parent="CanvasLayer"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_2g6dm")
-layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -166,14 +166,15 @@ offset_bottom = 1292.0
 grow_horizontal = 0
 color = Color(1, 1, 1, 0.396078)
 
-[node name="CanvasBackground" type="TextureRect" parent="CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 unique_name_in_owner = true
+visible = false
+material = SubResource("ShaderMaterial_3eet2")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_wv4wv")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer"]
 unique_name_in_owner = true
@@ -887,6 +888,7 @@ offset_bottom = 1362.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_ylplv")
 theme_override_font_sizes/font_size = 66
 theme_override_styles/focus = SubResource("StyleBoxFlat_2jwjy")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_2jwjy")
@@ -924,7 +926,7 @@ offset_bottom = 74.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.463365, 0.549187, 0.722637, 1)
-theme_override_fonts/font = ExtResource("3_7kx3w")
+theme_override_fonts/font = ExtResource("6_ylplv")
 theme_override_font_sizes/font_size = 150
 text = "single player."
 horizontal_alignment = 1
@@ -979,7 +981,7 @@ offset_bottom = 63.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.463365, 0.549187, 0.722637, 1)
-theme_override_fonts/font = ExtResource("3_7kx3w")
+theme_override_fonts/font = ExtResource("6_ylplv")
 theme_override_font_sizes/font_size = 150
 text = "game"
 horizontal_alignment = 1
@@ -1127,7 +1129,7 @@ offset_bottom = 77.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.463365, 0.549187, 0.722637, 1)
-theme_override_fonts/font = ExtResource("3_7kx3w")
+theme_override_fonts/font = ExtResource("6_ylplv")
 theme_override_font_sizes/font_size = 150
 text = "variants"
 horizontal_alignment = 1
@@ -1139,6 +1141,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_ylplv")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_5ttty")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_5ttty")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_5ttty")
@@ -1292,6 +1295,25 @@ theme_override_colors/font_color = Color(0.489834, 0.654025, 1, 1)
 theme_override_fonts/font = ExtResource("3_7kx3w")
 theme_override_font_sizes/font_size = 100
 text = "time limit"
+
+[node name="SoakSpotControl" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("15_u0fs1")
+
+[node name="SoakSpot" parent="CanvasLayer/SoakSpotControl" instance=ExtResource("16_ahu5q")]
+visible = false
+layout_mode = 0
+
+[node name="SoakSpotTimer" type="Timer" parent="CanvasLayer/SoakSpotControl"]
+unique_name_in_owner = true
+one_shot = true
 
 [node name="TimeLimitLabel" type="Label" parent="CanvasLayer"]
 unique_name_in_owner = true

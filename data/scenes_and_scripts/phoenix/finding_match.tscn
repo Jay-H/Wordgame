@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://ca1a4c5jmd3nr"]
+[gd_scene load_steps=9 format=3 uid="uid://ca1a4c5jmd3nr"]
 
 [ext_resource type="Script" uid="uid://cki3vil7bjwia" path="res://data/scenes_and_scripts/phoenix/finding_match.gd" id="1_u67om"]
 [ext_resource type="Shader" uid="uid://c0ptn8g2ds8f6" path="res://data/scenes_and_scripts/scramble/cloudscape.gdshader" id="2_2hk30"]
 [ext_resource type="FontFile" uid="uid://csa2vdskduyio" path="res://data/fonts/OtherFonts/Kiddie-Store.otf" id="3_2hk30"]
 [ext_resource type="PackedScene" uid="uid://dptsatxug1hhb" path="res://data/scenes_and_scripts/multiplayertesting/profile_picture.tscn" id="3_w5enl"]
-[ext_resource type="FontFile" uid="uid://dskmx2extevrw" path="res://data/fonts/times.ttf" id="4_eg0yy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ss7o6"]
 shader = ExtResource("2_2hk30")
@@ -26,8 +25,7 @@ border_width_left = 10
 border_width_top = 10
 border_width_right = 10
 border_width_bottom = 10
-border_color = Color(0.999687, 0.722502, 0.94231, 0.168627)
-border_blend = true
+border_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
@@ -125,7 +123,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_2hk30")
-theme_override_font_sizes/font_size = 120
+theme_override_font_sizes/font_size = 100
 text = "Level:"
 horizontal_alignment = 1
 
@@ -134,7 +132,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_2hk30")
-theme_override_font_sizes/font_size = 120
+theme_override_font_sizes/font_size = 100
 text = "Rank:"
 horizontal_alignment = 1
 
@@ -190,7 +188,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_2hk30")
-theme_override_font_sizes/font_size = 120
+theme_override_font_sizes/font_size = 100
 text = "Level:"
 horizontal_alignment = 1
 
@@ -199,7 +197,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_2hk30")
-theme_override_font_sizes/font_size = 120
+theme_override_font_sizes/font_size = 100
 text = "Rank:"
 horizontal_alignment = 1
 
@@ -216,7 +214,7 @@ offset_right = 290.5
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_eg0yy")
+theme_override_fonts/font = ExtResource("3_2hk30")
 theme_override_font_sizes/font_size = 101
 theme_override_styles/focus = SubResource("StyleBoxEmpty_u67om")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_u67om")

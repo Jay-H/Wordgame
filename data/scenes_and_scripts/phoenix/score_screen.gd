@@ -3,10 +3,19 @@ extends Control
 var firebase_local_id
 var player_number
 @onready var main_menu = get_parent()
+@onready var winner_light = %WinnerLightPanel.duplicate()
+@onready var loser_light = %LoserLightPanel.duplicate()
+var dictionary
 
+
+func _ready():
+	await get_tree().create_timer(1).timeout
+	_light_mover(dictionary)
 
 func _setup(dict, big_dictionary, firebase_id):
+	dictionary = dict
 	firebase_local_id = firebase_id
+	
 	var player_one_username = dict["player_one_dictionary"]["username"]
 	var player_two_username = dict["player_two_dictionary"]["username"]
 	%playerpic.setup(GlobalData.profile_pics[dict["player_one_dictionary"]["profilepic"]])
@@ -74,6 +83,51 @@ func _setup(dict, big_dictionary, firebase_id):
 			%round3winner.text = "Round 3: " + player_one_username
 		if dict["round3winner"] == "two":
 			%round3winner.text = "Round 3: " + player_two_username
+	pass
+
+func _light_mover(dict):
+	var current_round_string
+	var number
+	print(dict["current_round"])
+	if dict["current_round"] == 0:
+		current_round_string = "round1winner"
+	if dict["current_round"] == 1:
+		current_round_string = "round2winner"
+	if dict["current_round"] == 2:
+		current_round_string = "round3winner"
+	if firebase_local_id == dict["player_one_firebase_id"]:
+		number = "one"
+	else:
+		number = "two"	
+	if number == "one":
+		if dict[str(current_round_string)] == "one":
+			%playerpic.add_child(winner_light)
+			%opponentpic.add_child(loser_light)
+			#%WinnerLightPanel.global_position = %playerpic.global_position
+			#%LoserLightPanel.global_position = %opponentpic.global_position
+		else:
+			%playerpic.add_child(loser_light)
+			%opponentpic.add_child(winner_light)
+			#%LoserLightPanel.global_position = %playerpic.global_position
+			#%WinnerLightPanel.global_position = %opponentpic.global_position			
+	if number == "two":
+		if dict[str(current_round_string)] == "two":
+			%playerpic.add_child(winner_light)
+			%opponentpic.add_child(loser_light)
+			#%WinnerLightPanel.global_position = %playerpic.global_position
+			#%LoserLightPanel.global_position = %opponentpic.global_position
+		else:
+			%playerpic.add_child(loser_light)
+			%opponentpic.add_child(winner_light)
+			#%LoserLightPanel.global_position = %playerpic.global_position
+			#%WinnerLightPanel.global_position = %opponentpic.global_position	
+	var tween = create_tween()
+	winner_light.modulate = Color.TRANSPARENT
+	loser_light.modulate = Color.TRANSPARENT
+	winner_light.visible = true
+	loser_light.visible = true
+	tween.tween_property(winner_light, "modulate", Color.WHITE, 1)
+	tween.tween_property(loser_light, "modulate", Color.WHITE, 1)	
 	pass
 
 func best_word_finder(found_words):
