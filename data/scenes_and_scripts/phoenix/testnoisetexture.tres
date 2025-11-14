@@ -1,0 +1,8 @@
+[gd_resource type="NoiseTexture2D" load_steps=2 format=3 uid="uid://bfb7mjffbvr2c"]
+
+[ext_resource type="FastNoiseLite" uid="uid://dunnu8pjsrr2e" path="res://data/scenes_and_scripts/phoenix/testnoise.tres" id="1_eyekb"]
+
+[resource]
+width = 305
+height = 100
+noise = ExtResource("1_eyekb")

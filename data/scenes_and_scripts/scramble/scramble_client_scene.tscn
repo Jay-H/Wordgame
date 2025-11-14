@@ -65,6 +65,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="Cloudscape1" type="ColorRect" parent="CanvasLayer"]
 unique_name_in_owner = true
+visible = false
 material = SubResource("ShaderMaterial_kg312")
 custom_minimum_size = Vector2(1320, 2868)
 anchors_preset = 15
@@ -74,6 +75,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+modulate = Color(1, 1, 0.937255, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -523,7 +525,6 @@ vertical_alignment = 2
 script = ExtResource("4_mge6w")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/BonusLetter"]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5

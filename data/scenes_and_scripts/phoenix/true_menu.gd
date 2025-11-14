@@ -28,7 +28,9 @@ func _ready():
 	%MainMenuBox.modulate = Color.TRANSPARENT
 	%PlayersOnline.modulate = Color.TRANSPARENT
 	%MatchesRunning.modulate = Color.TRANSPARENT
+	await get_tree().process_frame
 	var initial_position = %MainMenuBox.global_position
+	print(initial_position)
 	%MainMenuBox.position.x = initial_position.x - 1000
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_IN_OUT)
@@ -43,13 +45,13 @@ func fade_in():
 	%Hider.color = Color.WHITE
 	visible = true
 	var tween = create_tween()
-	tween.tween_property(%Hider, "color", Color.TRANSPARENT, 1)
+	tween.tween_property(%Hider, "color", Color.TRANSPARENT, 0.5)
 
 func _fade_out():
 	%CanvasModulate.color = Color.WHITE
 	visible = true
 	var tween = create_tween()
-	tween.tween_property(%CanvasModulate, "color", Color.TRANSPARENT, 1)
+	tween.tween_property(%CanvasModulate, "color", Color.TRANSPARENT, 0.5)
 	
 	await tween.finished
 	

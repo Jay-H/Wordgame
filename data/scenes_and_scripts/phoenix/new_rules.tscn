@@ -1,0 +1,682 @@
+[gd_scene load_steps=24 format=3 uid="uid://qwd6tysiuond"]
+
+[ext_resource type="Script" uid="uid://bpu8fphmvl3rs" path="res://data/scenes_and_scripts/phoenix/new_rules.gd" id="1_b5r2h"]
+[ext_resource type="Texture2D" uid="uid://bd1mld73etpg0" path="res://data/images/textures/yellow-paper-texture-background.jpg" id="1_mcum2"]
+[ext_resource type="Texture2D" uid="uid://b8qcy7ivo3cot" path="res://data/images/textures/scribbles/BlueScribble2.png" id="2_uggr3"]
+[ext_resource type="Texture2D" uid="uid://3etnuyvyl5s6" path="res://data/images/textures/scribbles/DoodleUnderline1.png" id="3_mcum2"]
+[ext_resource type="Texture2D" uid="uid://burhto806s71c" path="res://data/images/textures/scribbles/PinkScribble2.png" id="3_p3gg4"]
+[ext_resource type="Texture2D" uid="uid://bd8bnxysehbrp" path="res://data/images/textures/scribbles/DoodleCorner1.png" id="6_qmuxc"]
+[ext_resource type="Texture2D" uid="uid://dued0fypb5r42" path="res://data/images/textures/scribbles/DoodleFinger1.png" id="6_uggr3"]
+[ext_resource type="FontFile" uid="uid://7xq73rqjccfu" path="res://data/fonts/Pencil-Regular.ttf" id="7_pin6e"]
+[ext_resource type="Texture2D" uid="uid://xjy65c1h0aw0" path="res://data/images/textures/scribbles/DoodleCube1.png" id="9_8a704"]
+[ext_resource type="Texture2D" uid="uid://bxo1f6x02rrf3" path="res://data/images/textures/scribbles/DoodleRandom1.png" id="10_7s5dk"]
+[ext_resource type="Texture2D" uid="uid://b82iw5y6mm52i" path="res://data/images/textures/scribbles/DoodleRandom2.png" id="11_qnqth"]
+[ext_resource type="Texture2D" uid="uid://mb6oosn73r5g" path="res://data/images/textures/scribbles/DoodleRandom3.png" id="12_4wuyr"]
+[ext_resource type="Texture2D" uid="uid://cr1o03vycvrli" path="res://data/images/textures/scribbles/DoodleButton2Green.png" id="13_7s5dk"]
+[ext_resource type="Texture2D" uid="uid://nikvk0y4tj70" path="res://data/images/textures/scribbles/DoodleRandom5.png" id="13_en2j1"]
+[ext_resource type="Texture2D" uid="uid://cty2pt7gj656u" path="res://data/images/textures/scribbles/DoodleRandom4.png" id="14_5qbcq"]
+[ext_resource type="FontFile" uid="uid://burymbb80klap" path="res://data/fonts/pencilgrid.ttf" id="15_mvap8"]
+[ext_resource type="Texture2D" uid="uid://delu4nlswfcyq" path="res://data/images/textures/scribbles/PinkBlueScribble2.png" id="17_4wuyr"]
+[ext_resource type="Texture2D" uid="uid://bk6stpj2akq15" path="res://data/images/textures/scribbles/DoodleBackground1.png" id="17_qnqth"]
+[ext_resource type="FontFile" uid="uid://csa2vdskduyio" path="res://data/fonts/OtherFonts/Kiddie-Store.otf" id="18_4wuyr"]
+[ext_resource type="Texture2D" uid="uid://br7ld5oe8bajm" path="res://data/images/textures/scribbles/DoodleBackground2.png" id="19_en2j1"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5qbcq"]
+texture = ExtResource("17_4wuyr")
+expand_margin_left = 100.0
+expand_margin_top = 111.0
+expand_margin_right = 47.0
+expand_margin_bottom = 100.0
+modulate_color = Color(1, 1, 1, 0.282353)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mjndd"]
+texture = ExtResource("2_uggr3")
+expand_margin_left = 100.0
+expand_margin_top = 100.0
+expand_margin_right = 100.0
+expand_margin_bottom = 100.0
+modulate_color = Color(0.800349, 0.886892, 1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k8dd2"]
+texture = ExtResource("19_en2j1")
+expand_margin_left = 50.0
+expand_margin_top = 50.0
+expand_margin_right = 50.0
+expand_margin_bottom = 50.0
+
+[node name="New_Rules" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b5r2h")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer"]
+unique_name_in_owner = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0.396078)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1580.0
+offset_top = -1926.0
+offset_right = 2860.0
+offset_bottom = 4754.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_mcum2")
+
+[node name="Scribbles" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1320, 2868)
+layout_mode = 3
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -660.0
+offset_right = 660.0
+offset_bottom = 2828.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(660, 1434)
+
+[node name="CornerScribble2" type="TextureRect" parent="CanvasLayer/Scribbles"]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 958.0
+offset_right = 322.0
+offset_bottom = 1214.0
+rotation = -0.208545
+texture = ExtResource("6_qmuxc")
+
+[node name="CornerScribble7" type="TextureRect" parent="CanvasLayer/Scribbles"]
+layout_mode = 0
+offset_left = -12.0
+offset_top = 140.0
+offset_right = 244.0
+offset_bottom = 396.0
+rotation = -0.0652211
+texture = ExtResource("6_qmuxc")
+
+[node name="CornerScribble3" type="TextureRect" parent="CanvasLayer/Scribbles"]
+layout_mode = 0
+offset_left = 992.0
+offset_top = 923.0
+offset_right = 1248.0
+offset_bottom = 1179.0
+rotation = 0.0940781
+texture = ExtResource("6_qmuxc")
+flip_h = true
+
+[node name="CornerScribble6" type="TextureRect" parent="CanvasLayer/Scribbles"]
+layout_mode = 0
+offset_left = 1046.0
+offset_top = 136.0
+offset_right = 1302.0
+offset_bottom = 392.0
+rotation = -0.069025
+texture = ExtResource("6_qmuxc")
+flip_h = true
+
+[node name="CornerScribble4" type="TextureRect" parent="CanvasLayer/Scribbles"]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 2518.0
+offset_right = 303.0
+offset_bottom = 2774.0
+rotation = -0.111907
+texture = ExtResource("6_qmuxc")
+flip_v = true
+
+[node name="CornerScribble9" type="TextureRect" parent="CanvasLayer/Scribbles"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 629.0
+offset_right = 277.0
+offset_bottom = 885.0
+rotation = -0.0853989
+texture = ExtResource("6_qmuxc")
+flip_v = true
+
+[node name="CornerScribble5" type="TextureRect" parent="CanvasLayer/Scribbles"]
+layout_mode = 0
+offset_left = 1033.0
+offset_top = 2462.0
+offset_right = 1289.0
+offset_bottom = 2718.0
+rotation = 0.120155
+texture = ExtResource("6_qmuxc")
+flip_h = true
+flip_v = true
+
+[node name="CornerScribble8" type="TextureRect" parent="CanvasLayer/Scribbles"]
+layout_mode = 0
+offset_left = 1015.0
+offset_top = 633.0
+offset_right = 1271.0
+offset_bottom = 889.0
+rotation = -0.0211561
+texture = ExtResource("6_qmuxc")
+flip_h = true
+flip_v = true
+
+[node name="CubeScribble1" type="TextureRect" parent="CanvasLayer/Scribbles"]
+modulate = Color(1, 1, 1, 0.376471)
+layout_mode = 0
+offset_left = -4.0
+offset_top = 963.0
+offset_right = 129.0
+offset_bottom = 1095.0
+texture = ExtResource("9_8a704")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="CubeScribble2" type="TextureRect" parent="CanvasLayer/Scribbles"]
+modulate = Color(1, 1, 1, 0.376471)
+layout_mode = 0
+offset_left = 133.0
+offset_top = 1080.0
+offset_right = 266.0
+offset_bottom = 1212.0
+rotation = -0.52316
+texture = ExtResource("9_8a704")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="CubeScribble4" type="TextureRect" parent="CanvasLayer/Scribbles"]
+modulate = Color(1, 1, 1, 0.376471)
+layout_mode = 0
+offset_left = 1125.0
+offset_top = 509.0
+offset_right = 1273.0
+offset_bottom = 653.0
+rotation = -0.260188
+texture = ExtResource("10_7s5dk")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="CubeScribble3" type="TextureRect" parent="CanvasLayer/Scribbles"]
+modulate = Color(1, 1, 1, 0.376471)
+layout_mode = 0
+offset_left = 182.0
+offset_top = 1233.0
+offset_right = 315.0
+offset_bottom = 1365.0
+rotation = 2.29534
+texture = ExtResource("9_8a704")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="CubeScribble5" type="TextureRect" parent="CanvasLayer/Scribbles"]
+modulate = Color(1, 1, 1, 0.376471)
+layout_mode = 0
+offset_left = 800.0
+offset_top = 849.0
+offset_right = 933.0
+offset_bottom = 981.0
+rotation = -0.373395
+texture = ExtResource("11_qnqth")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="CubeScribble6" type="TextureRect" parent="CanvasLayer/Scribbles"]
+modulate = Color(1, 1, 1, 0.376471)
+layout_mode = 0
+offset_left = 982.0
+offset_top = 1588.0
+offset_right = 1115.0
+offset_bottom = 1720.0
+rotation = 0.344895
+texture = ExtResource("12_4wuyr")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="CubeScribble8" type="TextureRect" parent="CanvasLayer/Scribbles"]
+modulate = Color(1, 1, 1, 0.376471)
+layout_mode = 0
+offset_left = 779.0
+offset_top = 1922.0
+offset_right = 912.0
+offset_bottom = 2054.0
+rotation = 1.18426
+texture = ExtResource("13_en2j1")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="CubeScribble7" type="TextureRect" parent="CanvasLayer/Scribbles"]
+modulate = Color(1, 1, 1, 0.376471)
+layout_mode = 0
+offset_left = 8.0
+offset_top = 2263.0
+offset_right = 141.0
+offset_bottom = 2395.0
+rotation = -0.162063
+texture = ExtResource("14_5qbcq")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="MainVBox" type="VBoxContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.05
+anchor_right = 0.5
+anchor_bottom = 0.055
+offset_left = -552.5
+offset_right = 552.5
+offset_bottom = 2460.0
+grow_horizontal = 2
+theme_override_constants/separation = 175
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainVBox"]
+layout_mode = 2
+
+[node name="UpcomingGameScribble" type="TextureRect" parent="CanvasLayer/MainVBox/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0.305882)
+layout_mode = 2
+texture = ExtResource("2_uggr3")
+
+[node name="UpcomingGameTitle" type="Label" parent="CanvasLayer/MainVBox/VBoxContainer/UpcomingGameScribble"]
+layout_mode = 0
+offset_left = 23.5
+offset_top = 128.0
+offset_right = 1033.5
+offset_bottom = 306.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("15_mvap8")
+theme_override_font_sizes/font_size = 181
+text = "Upcoming Game"
+
+[node name="UpcomingGameUnderline" type="TextureRect" parent="CanvasLayer/MainVBox/VBoxContainer/UpcomingGameScribble"]
+layout_mode = 0
+offset_left = -84.0
+offset_top = 246.0
+offset_right = 1146.0
+offset_bottom = 372.0
+texture = ExtResource("3_mcum2")
+flip_h = true
+
+[node name="UpcomingGameHBox" type="HBoxContainer" parent="CanvasLayer/MainVBox/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+
+[node name="UpcomingGameButton" type="TextureRect" parent="CanvasLayer/MainVBox/VBoxContainer/UpcomingGameHBox"]
+modulate = Color(1, 1, 1, 0.705882)
+layout_mode = 2
+texture = ExtResource("13_7s5dk")
+
+[node name="HandScribble1" type="TextureRect" parent="CanvasLayer/MainVBox/VBoxContainer/UpcomingGameHBox/UpcomingGameButton"]
+modulate = Color(1, 1, 1, 0.921569)
+layout_mode = 2
+offset_left = -20.5
+offset_top = 6.59998
+offset_right = 107.5
+offset_bottom = 134.6
+texture = ExtResource("6_uggr3")
+expand_mode = 1
+stretch_mode = 4
+flip_h = true
+
+[node name="UpcomingGame" type="Label" parent="CanvasLayer/MainVBox/VBoxContainer/UpcomingGameHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.617161, 0.284757, 0, 1)
+theme_override_fonts/font = ExtResource("7_pin6e")
+theme_override_font_sizes/font_size = 206
+text = "hangman"
+horizontal_alignment = 1
+
+[node name="MainVariantVBox" type="VBoxContainer" parent="CanvasLayer/MainVBox"]
+layout_mode = 2
+
+[node name="VariantScribble" type="TextureRect" parent="CanvasLayer/MainVBox/MainVariantVBox"]
+self_modulate = Color(1, 1, 1, 0.305882)
+layout_mode = 2
+texture = ExtResource("3_p3gg4")
+
+[node name="VariantUnderline" type="TextureRect" parent="CanvasLayer/MainVBox/MainVariantVBox/VariantScribble"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -404.0
+offset_top = -190.02
+offset_right = 404.0
+offset_bottom = -90.02
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("3_mcum2")
+
+[node name="VariantsTitle" type="Label" parent="CanvasLayer/MainVBox/MainVariantVBox/VariantScribble"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -242.5
+offset_top = -89.0
+offset_right = 242.5
+offset_bottom = 89.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("15_mvap8")
+theme_override_font_sizes/font_size = 181
+text = "Variants"
+horizontal_alignment = 1
+
+[node name="SubVariantVBox" type="VBoxContainer" parent="CanvasLayer/MainVBox/MainVariantVBox"]
+layout_mode = 2
+theme_override_constants/separation = 65
+
+[node name="Variant1HBox" type="HBoxContainer" parent="CanvasLayer/MainVBox/MainVariantVBox/SubVariantVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 135
+
+[node name="ButtonScribble" type="TextureRect" parent="CanvasLayer/MainVBox/MainVariantVBox/SubVariantVBox/Variant1HBox"]
+modulate = Color(1, 1, 1, 0.705882)
+layout_mode = 2
+texture = ExtResource("13_7s5dk")
+flip_h = true
+
+[node name="HandScribble" type="TextureRect" parent="CanvasLayer/MainVBox/MainVariantVBox/SubVariantVBox/Variant1HBox/ButtonScribble"]
+modulate = Color(1, 1, 1, 0.921569)
+layout_mode = 2
+offset_left = 82.5
+offset_top = 35.6
+offset_right = 210.5
+offset_bottom = 163.6
+rotation = -0.770043
+texture = ExtResource("6_uggr3")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Variant1" type="Label" parent="CanvasLayer/MainVBox/MainVariantVBox/SubVariantVBox/Variant1HBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.617161, 0.284757, 0, 1)
+theme_override_fonts/font = ExtResource("7_pin6e")
+theme_override_font_sizes/font_size = 206
+text = "bedlam"
+horizontal_alignment = 2
+
+[node name="Variant2HBox" type="HBoxContainer" parent="CanvasLayer/MainVBox/MainVariantVBox/SubVariantVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 135
+
+[node name="ButtonScribble" type="TextureRect" parent="CanvasLayer/MainVBox/MainVariantVBox/SubVariantVBox/Variant2HBox"]
+modulate = Color(1, 1, 1, 0.705882)
+layout_mode = 2
+texture = ExtResource("13_7s5dk")
+
+[node name="HandScribble" type="TextureRect" parent="CanvasLayer/MainVBox/MainVariantVBox/SubVariantVBox/Variant2HBox/ButtonScribble"]
+modulate = Color(1, 1, 1, 0.921569)
+layout_mode = 2
+offset_left = 29.5
+offset_top = -16.4
+offset_right = 157.5
+offset_bottom = 111.6
+texture = ExtResource("6_uggr3")
+expand_mode = 1
+stretch_mode = 4
+flip_h = true
+
+[node name="Variant2" type="Label" parent="CanvasLayer/MainVBox/MainVariantVBox/SubVariantVBox/Variant2HBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.617161, 0.284757, 0, 1)
+theme_override_fonts/font = ExtResource("7_pin6e")
+theme_override_font_sizes/font_size = 206
+text = "deliberate"
+horizontal_alignment = 2
+
+[node name="Variant3HBox" type="HBoxContainer" parent="CanvasLayer/MainVBox/MainVariantVBox/SubVariantVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 135
+
+[node name="ButtonScribble" type="TextureRect" parent="CanvasLayer/MainVBox/MainVariantVBox/SubVariantVBox/Variant3HBox"]
+modulate = Color(1, 1, 1, 0.705882)
+layout_mode = 2
+texture = ExtResource("13_7s5dk")
+flip_h = true
+
+[node name="HandScribble" type="TextureRect" parent="CanvasLayer/MainVBox/MainVariantVBox/SubVariantVBox/Variant3HBox/ButtonScribble"]
+modulate = Color(1, 1, 1, 0.921569)
+layout_mode = 2
+offset_left = 44.5
+offset_top = -39.4
+offset_right = 172.5
+offset_bottom = 88.6
+rotation = 0.619426
+texture = ExtResource("6_uggr3")
+expand_mode = 1
+stretch_mode = 4
+flip_h = true
+
+[node name="Variant3" type="Label" parent="CanvasLayer/MainVBox/MainVariantVBox/SubVariantVBox/Variant3HBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.617161, 0.284757, 0, 1)
+theme_override_fonts/font = ExtResource("7_pin6e")
+theme_override_font_sizes/font_size = 206
+text = "ephemeral"
+horizontal_alignment = 2
+
+[node name="Variant4HBox" type="HBoxContainer" parent="CanvasLayer/MainVBox/MainVariantVBox/SubVariantVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 135
+
+[node name="ButtonScribble" type="TextureRect" parent="CanvasLayer/MainVBox/MainVariantVBox/SubVariantVBox/Variant4HBox"]
+modulate = Color(1, 1, 1, 0.705882)
+layout_mode = 2
+texture = ExtResource("13_7s5dk")
+
+[node name="HandScribble" type="TextureRect" parent="CanvasLayer/MainVBox/MainVariantVBox/SubVariantVBox/Variant4HBox/ButtonScribble"]
+modulate = Color(1, 1, 1, 0.921569)
+layout_mode = 2
+offset_left = 231.5
+offset_top = -6.3999
+offset_right = 359.5
+offset_bottom = 121.6
+rotation = 0.814096
+texture = ExtResource("6_uggr3")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Variant4" type="Label" parent="CanvasLayer/MainVBox/MainVariantVBox/SubVariantVBox/Variant4HBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.617161, 0.284757, 0, 1)
+theme_override_fonts/font = ExtResource("7_pin6e")
+theme_override_font_sizes/font_size = 206
+text = "liminal"
+horizontal_alignment = 2
+
+[node name="SkipButton" type="Button" parent="CanvasLayer/MainVBox/MainVariantVBox/SubVariantVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("15_mvap8")
+theme_override_font_sizes/font_size = 131
+theme_override_styles/focus = SubResource("StyleBoxTexture_5qbcq")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxTexture_5qbcq")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_5qbcq")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_5qbcq")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_5qbcq")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_5qbcq")
+theme_override_styles/hover = SubResource("StyleBoxTexture_5qbcq")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_5qbcq")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_5qbcq")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_5qbcq")
+theme_override_styles/normal = SubResource("StyleBoxTexture_5qbcq")
+text = "Skip Rules"
+
+[node name="InformationControl" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(1000, 1500)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InformationBackground" type="TextureRect" parent="CanvasLayer/InformationControl"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -750.0
+offset_right = 500.0
+offset_bottom = 750.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+texture = ExtResource("17_qnqth")
+
+[node name="RulesInformation" type="Label" parent="CanvasLayer/InformationControl/InformationBackground"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.157
+anchor_top = 0.136
+anchor_right = 0.874
+anchor_bottom = 0.854
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+theme_override_colors/font_color = Color(0.244776, 0.244776, 0.244776, 1)
+theme_override_fonts/font = ExtResource("18_4wuyr")
+theme_override_font_sizes/font_size = 50
+text = "The most difficult of modes.
+
+There are five words within the word search that you and your opponent will search for.
+
+However, you will not know what they are.
+
+The first player to find the five words wins. 
+
+If the time limit is reached,  a sudden death mode will ensue.
+
+Godspeed."
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="BackButton" type="Button" parent="CanvasLayer/InformationControl/InformationBackground"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 293.0
+offset_top = 1348.0
+offset_right = 684.0
+offset_bottom = 1500.0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("15_mvap8")
+theme_override_font_sizes/font_size = 161
+theme_override_styles/focus = SubResource("StyleBoxTexture_mjndd")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxTexture_mjndd")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_mjndd")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_mjndd")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_mjndd")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_mjndd")
+theme_override_styles/hover = SubResource("StyleBoxTexture_mjndd")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_mjndd")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_mjndd")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_mjndd")
+theme_override_styles/normal = SubResource("StyleBoxTexture_mjndd")
+text = "Back"
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/InformationControl/InformationBackground"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -245.5
+offset_right = 245.5
+offset_bottom = 129.0
+grow_horizontal = 2
+mouse_filter = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.965128, 1, 0.89941, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/font = ExtResource("15_mvap8")
+theme_override_font_sizes/font_size = 141
+theme_override_styles/normal = SubResource("StyleBoxTexture_k8dd2")
+text = "Bedlam"
+horizontal_alignment = 1
+
+[connection signal="gui_input" from="CanvasLayer/MainVBox/VBoxContainer/UpcomingGameHBox" to="." method="_on_upcoming_game_h_box_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/MainVBox/MainVariantVBox/SubVariantVBox/Variant1HBox" to="." method="_on_variant_1h_box_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/MainVBox/MainVariantVBox/SubVariantVBox/Variant2HBox" to="." method="_on_variant_2h_box_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/MainVBox/MainVariantVBox/SubVariantVBox/Variant3HBox" to="." method="_on_variant_3h_box_gui_input"]
+[connection signal="gui_input" from="CanvasLayer/MainVBox/MainVariantVBox/SubVariantVBox/Variant4HBox" to="." method="_on_variant_4h_box_gui_input"]
+[connection signal="pressed" from="CanvasLayer/MainVBox/MainVariantVBox/SubVariantVBox/SkipButton" to="." method="_on_skip_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/InformationControl/InformationBackground/BackButton" to="." method="_on_back_button_pressed"]

@@ -6,7 +6,7 @@ extends Node
 
 func _fade_out():
 	var tween = create_tween()
-	tween.tween_property(self, "modulate", Color.TRANSPARENT, 1)
+	tween.tween_property(self, "modulate", Color.TRANSPARENT, 0.5)
 	await tween.finished
 	self.visible = false
 
@@ -14,7 +14,7 @@ func _fade_in():
 	self.modulate = Color.TRANSPARENT
 	self.visible = true
 	var tween = create_tween()
-	tween.tween_property(self, "modulate", Color.WHITE, 1)
+	tween.tween_property(self, "modulate", Color.WHITE, 0.5)
 
 
 func _on_back_button_pressed() -> void:
@@ -43,15 +43,19 @@ func _username_entry_flash_red(text):
 
 
 func _on_change_profile_picture_pressed() -> void:
+	%ScrollContainer.position.y = %ProfilePicture.global_position.y
+	
 	%ScrollContainer.visible = true
-	%VBoxContainer3.visible = false
+	#%VBoxContainer3.visible = false
+	%VBoxContainer3.modulate = Color.TRANSPARENT
 	for i in %HBoxContainer.get_children():
 		i.connect("pressed", _new_profile_picture_pressed.bind(i.profile_picture))
 	pass # Replace with function body.
 
 func _new_profile_picture_pressed(picture):
 	%ScrollContainer.visible = false
-	%VBoxContainer3.visible = true
+	#%VBoxContainer3.visible = true
+	%VBoxContainer3.modulate = Color.WHITE
 	%ProfilePicture.setup(picture)
 	var picture_index = GlobalData.profile_pics.find(str(picture))
 	true_menu._on_profile_pic_changed(picture_index)

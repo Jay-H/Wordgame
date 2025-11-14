@@ -31,7 +31,7 @@ func _process(_delta):
 
 func _fade_out():
 	var tween = create_tween()
-	tween.tween_property(self, "modulate", Color.TRANSPARENT, 1)
+	tween.tween_property(self, "modulate", Color.TRANSPARENT, 0.5)
 	await tween.finished
 	self.visible = false
 
@@ -39,7 +39,7 @@ func _fade_in():
 	self.modulate = Color.TRANSPARENT
 	self.visible = true
 	var tween = create_tween()
-	tween.tween_property(self, "modulate", Color.WHITE, 1)
+	tween.tween_property(self, "modulate", Color.WHITE, 0.5)
 
 func _on_back_button_pressed() -> void:
 	await _fade_out()

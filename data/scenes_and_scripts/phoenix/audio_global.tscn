@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://50iaslej1pnu"]
+
+[ext_resource type="Script" uid="uid://c70rkti7ve1e6" path="res://data/scenes_and_scripts/phoenix/audio_global.gd" id="1_u8nyy"]
+
+[node name="AudioGlobal" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u8nyy")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+volume_db = 8.056

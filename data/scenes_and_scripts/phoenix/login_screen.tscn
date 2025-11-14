@@ -34,9 +34,9 @@ shader_parameter/ambient_light = 0.0
 [sub_resource type="Curve2D" id="Curve2D_kx71p"]
 bake_interval = 50.0
 _data = {
-"points": PackedVector2Array(-713.815, -165.056, 713.815, 165.056, 0, 0, -51.3561, -550.652, 51.3561, 550.652, 1549, 845, -14.2656, -667.63, 14.2656, 667.63, -217, 1678, 0, 0, 0, 0, 1581.13, 2628.02)
+"points": PackedVector2Array(-713.815, -165.056, 713.815, 165.056, 0, 0, -51.3561, -550.652, 51.3561, 550.652, 1549, 845, -14.2656, -667.63, 14.2656, 667.63, -217, 1678, 0, 0, 0, 0, 1290.52, 2578.64, 0, 0, 0, 0, 1388, 2603, 0, 0, 0, 0, 1473, 2671, 0, 0, 0, 0, 1544, 2765, 0, 0, 0, 0, 1608, 2867)
 }
-point_count = 4
+point_count = 8
 
 [sub_resource type="Curve" id="Curve_yha5c"]
 _data = [Vector2(0.213483, 1), 0.0, 0.0, 0, 0, Vector2(0.606742, 0.656009), 0.0, 0.0, 0, 0, Vector2(0.86236, 0.677508), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -389,11 +389,10 @@ offset_bottom = 178.853
 mouse_filter = 2
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="CanvasLayer/SplashScreen/Label2/ParticlePathControl/Path2D2/PathFollow2D/PathParticles"]
-amount = 300
+amount = 375
 texture = ExtResource("5_2reso")
-lifetime = 1.65
-randomness = 1.0
-fixed_fps = 60
+lifetime = 2.1
+fixed_fps = 120
 visibility_rect = Rect2(-2500, -2500, 5000, 5000)
 process_material = SubResource("ParticleProcessMaterial_lchx1")
 
