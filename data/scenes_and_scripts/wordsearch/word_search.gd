@@ -141,7 +141,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			is_dragging = false
 			start_cell = null
 			if Globals.WSTEST:
-				print("TESTINGGGGG")
 				process_selection_test()
 			else:
 				process_selection()

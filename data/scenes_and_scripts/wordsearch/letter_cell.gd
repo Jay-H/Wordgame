@@ -12,7 +12,7 @@ var is_found_by_opponent: bool = false
 
 func _ready() -> void:
 	# Set a minimum size for the cell to ensure it's visible in the grid.
-	custom_minimum_size = Vector2(120, 120)
+	custom_minimum_size = Vector2(140, 140)
 	
 	unhighlight()
 	

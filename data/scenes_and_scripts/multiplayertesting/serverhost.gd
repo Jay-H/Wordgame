@@ -23,7 +23,6 @@ var array_of_timers = []
 
 
 func _ready():	
-	print("FOISDUHFWLEIFUHEWLKFHJUWELKFUJHWELFIUHWEF")
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	printerr("It is me, server-chan")
