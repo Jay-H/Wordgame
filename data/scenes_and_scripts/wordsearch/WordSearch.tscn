@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ddc7u2h6cfyni"]
+[gd_scene load_steps=11 format=3 uid="uid://ddc7u2h6cfyni"]
 
 [ext_resource type="Script" uid="uid://ch2wq30nyeiey" path="res://data/scenes_and_scripts/wordsearch/word_search.gd" id="1_3kvo5"]
 [ext_resource type="PackedScene" uid="uid://bk6yqt04dl0v2" path="res://data/scenes_and_scripts/wordsearch/LetterCell.tscn" id="2_2stpv"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b1ox8dcj0yscl" path="res://data/scenes_and_scripts/wordsearch/GameTimer.tscn" id="3_mgi5u"]
 [ext_resource type="PackedScene" uid="uid://cyqux5urfqgpp" path="res://data/scenes_and_scripts/wordsearch/Background.tscn" id="4_mgi5u"]
 [ext_resource type="AudioStream" uid="uid://cx0176ru31d0h" path="res://data/music/WS_temp.mp3" id="6_c6bbx"]
+[ext_resource type="FontFile" uid="uid://csa2vdskduyio" path="res://data/fonts/OtherFonts/Kiddie-Store.otf" id="6_qggaq"]
 [ext_resource type="Material" uid="uid://bnq728n31dq7c" path="res://data/shaders/pulse_shader.tres" id="7_rk3yi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0dbxo"]
@@ -14,11 +15,11 @@ content_margin_top = 20.0
 content_margin_right = 20.0
 content_margin_bottom = 20.0
 bg_color = Color(1, 1, 1, 0.415686)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.933326, 4.81308e-06, 9.62615e-07, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
 border_blend = true
 corner_radius_top_left = 10
 corner_radius_top_right = 10
@@ -78,6 +79,7 @@ offset_right = 28.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_qggaq")
 text = "Wrong!"
 
 [node name="CorrectLabel" type="Label" parent="chungus"]
@@ -95,6 +97,7 @@ offset_right = 31.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_qggaq")
 text = "Nice!"
 
 [node name="GameTimer" parent="chungus" instance=ExtResource("3_mgi5u")]

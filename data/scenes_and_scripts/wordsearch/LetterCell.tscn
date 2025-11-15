@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://bk6yqt04dl0v2"]
 
 [ext_resource type="Script" uid="uid://cccyytaxnc3rx" path="res://data/scenes_and_scripts/wordsearch/letter_cell.gd" id="1_365sp"]
-[ext_resource type="FontFile" uid="uid://reev7811vmq8" path="res://data/fonts/montreal/Montreal-Regular.ttf" id="2_ah6ji"]
+[ext_resource type="FontFile" uid="uid://csa2vdskduyio" path="res://data/fonts/OtherFonts/Kiddie-Store.otf" id="2_ah6ji"]
 [ext_resource type="Script" uid="uid://cc7n4aqjmrfqi" path="res://data/scenes_and_scripts/wordsearch/letter_cell_label.gd" id="2_x84bm"]
 [ext_resource type="Texture2D" uid="uid://dkuq8lxub8gf1" path="res://data/images/BlurredCircleParticle.png" id="3_fxa3q"]
 

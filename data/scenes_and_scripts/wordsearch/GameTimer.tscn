@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b1ox8dcj0yscl"]
 
 [ext_resource type="Script" uid="uid://cc1t4qvpgtc2v" path="res://data/scenes_and_scripts/wordsearch/game_timer.gd" id="1_pcon8"]
-[ext_resource type="FontFile" uid="uid://reev7811vmq8" path="res://data/fonts/montreal/Montreal-Regular.ttf" id="2_psyqd"]
+[ext_resource type="FontFile" uid="uid://csa2vdskduyio" path="res://data/fonts/OtherFonts/Kiddie-Store.otf" id="2_psyqd"]
 
 [node name="GameTimer" type="Control"]
 layout_mode = 3
@@ -23,4 +23,5 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_psyqd")
+theme_override_font_sizes/font_size = 300
 text = "0:00"

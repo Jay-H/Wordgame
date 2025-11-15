@@ -498,9 +498,9 @@ func _server_ready(_information_from_server):
 		# it's called lblP1, but in the shared mode variant, it's just the word with no player association
 		var lblP1 = Label.new()
 		lblP1.text = word
-		lblP1.add_theme_font_size_override("font_size", 70)
+		lblP1.add_theme_font_size_override("font_size", 90)
 		lblP1.add_theme_color_override("font_color", Color.BLACK)
-		lblP1.add_theme_font_override("font", load("res://data/fonts/montreal/Montreal-Regular.ttf"))
+		lblP1.add_theme_font_override("font", load("res://data/fonts/OtherFonts/Kiddie-Store.otf"))
 		
 		# default is the standard game, make both lists
 		if variant == Globals.WordsearchVariants.DEFAULT:
