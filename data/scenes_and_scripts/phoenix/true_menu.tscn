@@ -1,12 +1,14 @@
-[gd_scene load_steps=30 format=3 uid="uid://ny8idplgyu1s"]
+[gd_scene load_steps=34 format=3 uid="uid://dot2fpw1u2y61"]
 
 [ext_resource type="Script" uid="uid://cpgbo42e7vse8" path="res://data/scenes_and_scripts/phoenix/true_menu.gd" id="1_mgwhk"]
 [ext_resource type="Shader" uid="uid://c14ncknun6c8h" path="res://data/scenes_and_scripts/scramble/cloudscape2.gdshader" id="2_7kx3w"]
 [ext_resource type="FontFile" uid="uid://dskmx2extevrw" path="res://data/fonts/times.ttf" id="3_7kx3w"]
 [ext_resource type="Script" uid="uid://cv0wbyb1t8jvq" path="res://data/scenes_and_scripts/phoenix/rain_particles_control.gd" id="3_v5tby"]
+[ext_resource type="Texture2D" uid="uid://dwjasqd1m1mcp" path="res://data/images/textures/kiwihug-MS9Tnh3if1o-unsplash.jpg" id="3_wv4wv"]
 [ext_resource type="Shader" uid="uid://dwfv7tbunsf61" path="res://data/scenes_and_scripts/scramble/scramble_client_scene.gdshader" id="4_2jwjy"]
 [ext_resource type="Script" uid="uid://duvgkncbmv0dr" path="res://data/scenes_and_scripts/phoenix/main_menu_items.gd" id="4_ptjkw"]
 [ext_resource type="PackedScene" uid="uid://dptsatxug1hhb" path="res://data/scenes_and_scripts/multiplayertesting/profile_picture.tscn" id="5_uueyb"]
+[ext_resource type="FontFile" uid="uid://csa2vdskduyio" path="res://data/fonts/OtherFonts/Kiddie-Store.otf" id="6_ylplv"]
 [ext_resource type="Script" uid="uid://dx3a58ijmxoiv" path="res://data/scenes_and_scripts/phoenix/profile_scroll_container.gd" id="7_2g6dm"]
 [ext_resource type="Texture2D" uid="uid://bux67bkd2teot" path="res://data/images/Icons/SwitchOnBold128x128.png" id="8_cppe5"]
 [ext_resource type="Texture2D" uid="uid://lalidk0dce2g" path="res://data/images/Icons/SwitchOffBold128x128.png" id="9_mljia"]
@@ -14,6 +16,15 @@
 [ext_resource type="Script" uid="uid://cvo3flp0bxocd" path="res://data/scenes_and_scripts/phoenix/single_player_menu_items.gd" id="11_5ttty"]
 [ext_resource type="FontFile" uid="uid://cpavm8lp2mx3e" path="res://data/fonts/lcd/LCD2B___.TTF" id="12_aolt3"]
 [ext_resource type="PackedScene" uid="uid://bmm23rwsctf0d" path="res://data/scenes_and_scripts/multiplayertesting/piano_controller.tscn" id="13_w2506"]
+[ext_resource type="Script" uid="uid://bf15o5xg8en4f" path="res://data/scenes_and_scripts/phoenix/soak_spot_control.gd" id="15_u0fs1"]
+[ext_resource type="PackedScene" uid="uid://cfv842myh6os3" path="res://data/scenes_and_scripts/phoenix/soak_spot.tscn" id="16_ahu5q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2g6dm"]
+shader = ExtResource("4_2jwjy")
+shader_parameter/sun_color = Color(1, 0.901961, 0.501961, 1)
+shader_parameter/fluctuation_speed = 1.644
+shader_parameter/edge_softness = 0.46
+shader_parameter/noise_intensity = 0.063
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3eet2"]
 shader = ExtResource("2_7kx3w")
@@ -53,17 +64,19 @@ turbulence_noise_scale = 0.5
 turbulence_influence_min = 0.0
 turbulence_influence_max = 0.017
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2g6dm"]
-shader = ExtResource("4_2jwjy")
-shader_parameter/sun_color = Color(1, 0.901961, 0.501961, 1)
-shader_parameter/fluctuation_speed = 1.644
-shader_parameter/edge_softness = 0.46
-shader_parameter/noise_intensity = 0.063
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mljia"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n284u"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uueyb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2g6dm"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2jwjy"]
 bg_color = Color(0, 0.00392157, 0.0352941, 0.141176)
@@ -76,11 +89,6 @@ expand_margin_left = 20.0
 expand_margin_top = 20.0
 expand_margin_right = 20.0
 expand_margin_bottom = 20.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uueyb"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2g6dm"]
-bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_83fcs"]
 
@@ -136,8 +144,31 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="CanvasBackground" type="TextureRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_wv4wv")
+
+[node name="Sun" type="ColorRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_2g6dm")
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1185.0
+offset_top = -847.0
+offset_right = 1186.0
+offset_bottom = 1292.0
+grow_horizontal = 0
+color = Color(1, 1, 1, 0.396078)
+
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 unique_name_in_owner = true
+visible = false
 material = SubResource("ShaderMaterial_3eet2")
 anchors_preset = 15
 anchor_right = 1.0
@@ -150,6 +181,7 @@ unique_name_in_owner = true
 
 [node name="RainParticlesControl" type="Control" parent="CanvasLayer"]
 layout_mode = 3
+anchors_preset = 10
 anchor_right = 1.0
 offset_top = -361.0
 grow_horizontal = 2
@@ -167,19 +199,6 @@ fixed_fps = 60
 visibility_rect = Rect2(-2000, -500, 4000, 4000)
 process_material = SubResource("ParticleProcessMaterial_ylplv")
 
-[node name="Sun" type="ColorRect" parent="CanvasLayer"]
-unique_name_in_owner = true
-material = SubResource("ShaderMaterial_2g6dm")
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -1185.0
-offset_top = -847.0
-offset_right = 1186.0
-offset_bottom = 1292.0
-grow_horizontal = 0
-color = Color(1, 1, 1, 0.396078)
-
 [node name="MainMenuItems" type="Control" parent="CanvasLayer"]
 unique_name_in_owner = true
 layout_mode = 3
@@ -190,50 +209,39 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_ptjkw")
 
-[node name="PlayersOnline" type="Label" parent="CanvasLayer/MainMenuItems"]
-unique_name_in_owner = true
-layout_mode = 2
-offset_left = 64.0
-offset_top = 2084.0
-offset_right = 816.0
-offset_bottom = 2189.0
-theme_override_colors/font_color = Color(0.138187, 0.211115, 0.55465, 1)
-theme_override_font_sizes/font_size = 71
-text = "Players Online:"
-
-[node name="MatchesRunning" type="Label" parent="CanvasLayer/MainMenuItems"]
-unique_name_in_owner = true
-layout_mode = 2
-offset_left = 64.0
-offset_top = 2190.0
-offset_right = 816.0
-offset_bottom = 2295.0
-theme_override_colors/font_color = Color(0.138187, 0.211115, 0.55465, 1)
-theme_override_font_sizes/font_size = 71
-text = "Matches Running:"
-
 [node name="MainMenuBox" type="VBoxContainer" parent="CanvasLayer/MainMenuItems"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 86.0
-offset_top = -447.0
-offset_right = 752.0
-offset_bottom = 447.0
+anchor_left = 0.056
+anchor_top = 0.53
+anchor_right = 0.056
+anchor_bottom = 0.53
+offset_top = -595.0
+offset_right = 850.0
+offset_bottom = 595.0
 grow_vertical = 2
+theme_override_constants/separation = 55
 script = ExtResource("4_ptjkw")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MainMenuItems/MainMenuBox"]
 custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("3_7kx3w")
-theme_override_font_sizes/normal_font_size = 186
+theme_override_constants/outline_size = 0
+theme_override_fonts/normal_font = ExtResource("6_ylplv")
+theme_override_font_sizes/normal_font_size = 271
 text = "wordwar."
+fit_content = true
 
-[node name="FindGame" type="Button" parent="CanvasLayer/MainMenuItems/MainMenuBox"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenuItems/MainMenuBox"]
+layout_mode = 2
+theme_override_constants/separation = 115
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenuItems/MainMenuBox/VBoxContainer"]
+layout_mode = 2
+
+[node name="FindGame" type="Button" parent="CanvasLayer/MainMenuItems/MainMenuBox/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
@@ -245,12 +253,12 @@ theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.27451)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0.498543, 0.659041, 0.996016, 1)
-theme_override_fonts/font = ExtResource("3_7kx3w")
-theme_override_font_sizes/font_size = 141
+theme_override_fonts/font = ExtResource("6_ylplv")
+theme_override_font_sizes/font_size = 186
 theme_override_styles/focus = SubResource("StyleBoxEmpty_mljia")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_mljia")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_mljia")
@@ -265,7 +273,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_n284u")
 text = "find game."
 alignment = 0
 
-[node name="Settings" type="Button" parent="CanvasLayer/MainMenuItems/MainMenuBox"]
+[node name="SinglePlayer" type="Button" parent="CanvasLayer/MainMenuItems/MainMenuBox/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
@@ -277,12 +285,44 @@ theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.27451)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0.498543, 0.659041, 0.996016, 1)
-theme_override_fonts/font = ExtResource("3_7kx3w")
-theme_override_font_sizes/font_size = 141
+theme_override_fonts/font = ExtResource("6_ylplv")
+theme_override_font_sizes/font_size = 186
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/normal = SubResource("StyleBoxFlat_n284u")
+text = "mom mode."
+alignment = 0
+
+[node name="Settings" type="Button" parent="CanvasLayer/MainMenuItems/MainMenuBox/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.27451)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.498543, 0.659041, 0.996016, 1)
+theme_override_fonts/font = ExtResource("6_ylplv")
+theme_override_font_sizes/font_size = 186
 theme_override_styles/focus = SubResource("StyleBoxEmpty_mljia")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_mljia")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_mljia")
@@ -297,7 +337,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_n284u")
 text = "settings."
 alignment = 0
 
-[node name="SinglePlayer" type="Button" parent="CanvasLayer/MainMenuItems/MainMenuBox"]
+[node name="Profile" type="Button" parent="CanvasLayer/MainMenuItems/MainMenuBox/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
@@ -309,44 +349,12 @@ theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.27451)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0.498543, 0.659041, 0.996016, 1)
-theme_override_fonts/font = ExtResource("3_7kx3w")
-theme_override_font_sizes/font_size = 141
-theme_override_styles/focus = SubResource("StyleBoxEmpty_mljia")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_mljia")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_mljia")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_mljia")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_mljia")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_mljia")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_mljia")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_mljia")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_mljia")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_mljia")
-theme_override_styles/normal = SubResource("StyleBoxFlat_n284u")
-text = "single player."
-alignment = 0
-
-[node name="Profile" type="Button" parent="CanvasLayer/MainMenuItems/MainMenuBox"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0.498543, 0.659041, 0.996016, 1)
-theme_override_fonts/font = ExtResource("3_7kx3w")
-theme_override_font_sizes/font_size = 141
+theme_override_fonts/font = ExtResource("6_ylplv")
+theme_override_font_sizes/font_size = 186
 theme_override_styles/focus = SubResource("StyleBoxEmpty_mljia")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_mljia")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_mljia")
@@ -361,6 +369,28 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_n284u")
 text = "profile."
 alignment = 0
 
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/MainMenuItems/MainMenuBox/VBoxContainer"]
+modulate = Color(1, 1, 1, 0.227451)
+layout_mode = 2
+
+[node name="PlayersOnline" type="Label" parent="CanvasLayer/MainMenuItems/MainMenuBox/VBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.138187, 0.211115, 0.55465, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("6_ylplv")
+theme_override_font_sizes/font_size = 71
+text = "Players Online:"
+
+[node name="MatchesRunning" type="Label" parent="CanvasLayer/MainMenuItems/MainMenuBox/VBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.138187, 0.211115, 0.55465, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("6_ylplv")
+theme_override_font_sizes/font_size = 71
+text = "Matches Running:"
+
 [node name="ProfileMenuItems" type="Control" parent="CanvasLayer"]
 unique_name_in_owner = true
 visible = false
@@ -371,6 +401,174 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_ptjkw")
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="CanvasLayer/ProfileMenuItems"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -548.0
+offset_top = -836.5
+offset_right = 548.0
+offset_bottom = 836.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 125
+
+[node name="Label2" type="Label" parent="CanvasLayer/ProfileMenuItems/VBoxContainer4"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_ylplv")
+theme_override_font_sizes/font_size = 170
+text = "profile settings"
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/ProfileMenuItems/VBoxContainer4"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ProfileMenuItems/VBoxContainer4/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="CanvasLayer/ProfileMenuItems/VBoxContainer4/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_ylplv")
+theme_override_font_sizes/font_size = 115
+text = "current username"
+horizontal_alignment = 1
+
+[node name="CurrentUsername" type="Label" parent="CanvasLayer/ProfileMenuItems/VBoxContainer4/VBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_ylplv")
+theme_override_font_sizes/font_size = 115
+text = "XXXXXXXXXX"
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/ProfileMenuItems/VBoxContainer4/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 102
+
+[node name="NewUsername" type="LineEdit" parent="CanvasLayer/ProfileMenuItems/VBoxContainer4/VBoxContainer2/VBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_ylplv")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = SubResource("StyleBoxEmpty_uueyb")
+theme_override_styles/normal = SubResource("StyleBoxFlat_2g6dm")
+placeholder_text = "enter new username"
+alignment = 1
+caret_blink = true
+caret_force_displayed = true
+
+[node name="ChangeUsername" type="Button" parent="CanvasLayer/ProfileMenuItems/VBoxContainer4/VBoxContainer2/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_ylplv")
+theme_override_font_sizes/font_size = 66
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/normal = SubResource("StyleBoxFlat_2jwjy")
+text = "change username"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/ProfileMenuItems/VBoxContainer4"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(906, 814)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 80
+
+[node name="Label2" type="Label" parent="CanvasLayer/ProfileMenuItems/VBoxContainer4/VBoxContainer3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_ylplv")
+theme_override_font_sizes/font_size = 115
+text = "current profile picture"
+horizontal_alignment = 1
+
+[node name="ProfilePicture" parent="CanvasLayer/ProfileMenuItems/VBoxContainer4/VBoxContainer3" instance=ExtResource("5_uueyb")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ChangeProfilePicture" type="Button" parent="CanvasLayer/ProfileMenuItems/VBoxContainer4/VBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_ylplv")
+theme_override_font_sizes/font_size = 66
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/normal = SubResource("StyleBoxFlat_2jwjy")
+text = "change profile picture"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ProfileMenuItems/VBoxContainer4"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="level" type="Label" parent="CanvasLayer/ProfileMenuItems/VBoxContainer4/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_ylplv")
+theme_override_font_sizes/font_size = 100
+text = "level:"
+
+[node name="rank" type="Label" parent="CanvasLayer/ProfileMenuItems/VBoxContainer4/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_ylplv")
+theme_override_font_sizes/font_size = 100
+text = "rank:"
+
+[node name="wins" type="Label" parent="CanvasLayer/ProfileMenuItems/VBoxContainer4/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.419608, 0, 1)
+theme_override_fonts/font = ExtResource("6_ylplv")
+theme_override_font_sizes/font_size = 100
+text = "wins:"
+
+[node name="losses" type="Label" parent="CanvasLayer/ProfileMenuItems/VBoxContainer4/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.47451, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_ylplv")
+theme_override_font_sizes/font_size = 100
+text = "losses:"
+
+[node name="matchesplayed" type="Label" parent="CanvasLayer/ProfileMenuItems/VBoxContainer4/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_ylplv")
+theme_override_font_sizes/font_size = 100
+text = "matches:"
 
 [node name="BackButton" type="Button" parent="CanvasLayer/ProfileMenuItems"]
 unique_name_in_owner = true
@@ -387,155 +585,20 @@ offset_bottom = -72.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_ylplv")
 theme_override_font_sizes/font_size = 66
+theme_override_styles/focus = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_2jwjy")
 theme_override_styles/normal = SubResource("StyleBoxFlat_2jwjy")
-text = "back to menu."
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ProfileMenuItems"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 113.0
-offset_top = -411.0
-offset_right = 305.0
-offset_bottom = -285.0
-grow_vertical = 0
-
-[node name="level" type="Label" parent="CanvasLayer/ProfileMenuItems/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_7kx3w")
-theme_override_font_sizes/font_size = 70
-text = "level:"
-
-[node name="rank" type="Label" parent="CanvasLayer/ProfileMenuItems/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_7kx3w")
-theme_override_font_sizes/font_size = 70
-text = "rank:"
-
-[node name="wins" type="Label" parent="CanvasLayer/ProfileMenuItems/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0.419608, 0, 1)
-theme_override_fonts/font = ExtResource("3_7kx3w")
-theme_override_font_sizes/font_size = 70
-text = "wins:"
-
-[node name="losses" type="Label" parent="CanvasLayer/ProfileMenuItems/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0.47451, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_7kx3w")
-theme_override_font_sizes/font_size = 70
-text = "losses:"
-
-[node name="matchesplayed" type="Label" parent="CanvasLayer/ProfileMenuItems/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_7kx3w")
-theme_override_font_sizes/font_size = 70
-text = "matches:"
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/ProfileMenuItems"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -525.0
-offset_top = -925.0
-offset_right = 507.0
-offset_bottom = -293.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 50
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ProfileMenuItems/VBoxContainer2"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="CanvasLayer/ProfileMenuItems/VBoxContainer2/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_7kx3w")
-theme_override_font_sizes/font_size = 110
-text = "current username."
-horizontal_alignment = 1
-
-[node name="CurrentUsername" type="Label" parent="CanvasLayer/ProfileMenuItems/VBoxContainer2/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_7kx3w")
-theme_override_font_sizes/font_size = 110
-text = "XXXXXXXXXX"
-horizontal_alignment = 1
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/ProfileMenuItems/VBoxContainer2"]
-layout_mode = 2
-theme_override_constants/separation = 67
-
-[node name="NewUsername" type="LineEdit" parent="CanvasLayer/ProfileMenuItems/VBoxContainer2/VBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_font_sizes/font_size = 100
-theme_override_styles/focus = SubResource("StyleBoxEmpty_uueyb")
-theme_override_styles/normal = SubResource("StyleBoxFlat_2g6dm")
-placeholder_text = "enter new username"
-alignment = 1
-caret_blink = true
-caret_force_displayed = true
-
-[node name="ChangeUsername" type="Button" parent="CanvasLayer/ProfileMenuItems/VBoxContainer2/VBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 66
-theme_override_styles/normal = SubResource("StyleBoxFlat_2jwjy")
-text = "change username."
-
-[node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/ProfileMenuItems"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -496.0
-offset_top = -190.0
-offset_right = 496.0
-offset_bottom = 643.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 50
-
-[node name="Label2" type="Label" parent="CanvasLayer/ProfileMenuItems/VBoxContainer3"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_7kx3w")
-theme_override_font_sizes/font_size = 110
-text = "current profile picture."
-horizontal_alignment = 1
-
-[node name="ProfilePicture" parent="CanvasLayer/ProfileMenuItems/VBoxContainer3" instance=ExtResource("5_uueyb")]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="ChangeProfilePicture" type="Button" parent="CanvasLayer/ProfileMenuItems/VBoxContainer3"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 66
-theme_override_styles/normal = SubResource("StyleBoxFlat_2jwjy")
-text = "change profile picture."
+text = "back to menu"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ProfileMenuItems"]
 layout_mode = 0
@@ -578,19 +641,40 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_ptjkw")
 
-[node name="SettingsBox" type="VBoxContainer" parent="CanvasLayer/SettingsMenuItems"]
-unique_name_in_owner = true
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/SettingsMenuItems"]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 50.0
-offset_top = -420.5
-offset_right = 918.0
-offset_bottom = 420.5
+offset_left = -494.0
+offset_top = -644.0
+offset_right = 494.0
+offset_bottom = 644.0
+grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 75
 
-[node name="MusicSwitch" type="CheckButton" parent="CanvasLayer/SettingsMenuItems/SettingsBox"]
+[node name="Label" type="Label" parent="CanvasLayer/SettingsMenuItems/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_ylplv")
+theme_override_font_sizes/font_size = 191
+text = "settings"
+horizontal_alignment = 1
+
+[node name="SettingsBox" type="VBoxContainer" parent="CanvasLayer/SettingsMenuItems/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 90
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/SettingsMenuItems/VBoxContainer/SettingsBox"]
+layout_mode = 2
+
+[node name="MusicSwitch" type="CheckButton" parent="CanvasLayer/SettingsMenuItems/VBoxContainer/SettingsBox/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
@@ -601,15 +685,15 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_7kx3w")
+theme_override_fonts/font = ExtResource("6_ylplv")
 theme_override_font_sizes/font_size = 141
 theme_override_styles/focus = SubResource("StyleBoxEmpty_83fcs")
 theme_override_icons/checked = ExtResource("8_cppe5")
 theme_override_icons/unchecked = ExtResource("9_mljia")
 button_pressed = true
-text = "music."
+text = "music"
 
-[node name="SoundSwitch" type="CheckButton" parent="CanvasLayer/SettingsMenuItems/SettingsBox"]
+[node name="SoundSwitch" type="CheckButton" parent="CanvasLayer/SettingsMenuItems/VBoxContainer/SettingsBox/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
@@ -620,15 +704,15 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_7kx3w")
+theme_override_fonts/font = ExtResource("6_ylplv")
 theme_override_font_sizes/font_size = 141
 theme_override_styles/focus = SubResource("StyleBoxEmpty_83fcs")
 theme_override_icons/checked = ExtResource("8_cppe5")
 theme_override_icons/unchecked = ExtResource("9_mljia")
 button_pressed = true
-text = "sound."
+text = "sound"
 
-[node name="AutoSkipRulesSwitch" type="CheckButton" parent="CanvasLayer/SettingsMenuItems/SettingsBox"]
+[node name="AutoSkipRulesSwitch" type="CheckButton" parent="CanvasLayer/SettingsMenuItems/VBoxContainer/SettingsBox/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
@@ -639,14 +723,14 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_7kx3w")
+theme_override_fonts/font = ExtResource("6_ylplv")
 theme_override_font_sizes/font_size = 141
 theme_override_styles/focus = SubResource("StyleBoxEmpty_83fcs")
 theme_override_icons/checked = ExtResource("8_cppe5")
 theme_override_icons/unchecked = ExtResource("9_mljia")
-text = "auto-skip rules."
+text = "autoskip rules"
 
-[node name="LowGraphicsSwitch" type="CheckButton" parent="CanvasLayer/SettingsMenuItems/SettingsBox"]
+[node name="LowGraphicsSwitch" type="CheckButton" parent="CanvasLayer/SettingsMenuItems/VBoxContainer/SettingsBox/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
@@ -657,14 +741,17 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_7kx3w")
+theme_override_fonts/font = ExtResource("6_ylplv")
 theme_override_font_sizes/font_size = 141
 theme_override_styles/focus = SubResource("StyleBoxEmpty_83fcs")
 theme_override_icons/checked = ExtResource("8_cppe5")
 theme_override_icons/unchecked = ExtResource("9_mljia")
-text = "low-graphics."
+text = "low graphics"
 
-[node name="LogoutSwitch" type="Button" parent="CanvasLayer/SettingsMenuItems/SettingsBox"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/SettingsMenuItems/VBoxContainer/SettingsBox"]
+layout_mode = 2
+
+[node name="LogoutSwitch" type="Button" parent="CanvasLayer/SettingsMenuItems/VBoxContainer/SettingsBox/VBoxContainer"]
 layout_mode = 2
 focus_mode = 0
 theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
@@ -674,7 +761,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_7kx3w")
+theme_override_fonts/font = ExtResource("6_ylplv")
 theme_override_font_sizes/font_size = 141
 theme_override_styles/focus = SubResource("StyleBoxEmpty_83fcs")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_83fcs")
@@ -687,12 +774,12 @@ theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_83fcs")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_83fcs")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_83fcs")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_83fcs")
-text = "logout."
+text = "logout"
 icon = ExtResource("10_mljia")
 alignment = 0
 expand_icon = true
 
-[node name="ReportBugSwitch" type="Button" parent="CanvasLayer/SettingsMenuItems/SettingsBox"]
+[node name="ReportBugSwitch" type="Button" parent="CanvasLayer/SettingsMenuItems/VBoxContainer/SettingsBox/VBoxContainer"]
 layout_mode = 2
 focus_mode = 0
 theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
@@ -702,7 +789,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_7kx3w")
+theme_override_fonts/font = ExtResource("6_ylplv")
 theme_override_font_sizes/font_size = 141
 theme_override_styles/focus = SubResource("StyleBoxEmpty_83fcs")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_83fcs")
@@ -715,12 +802,12 @@ theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_83fcs")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_83fcs")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_83fcs")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_83fcs")
-text = "report bug."
+text = "report bug"
 icon = ExtResource("10_mljia")
 alignment = 0
 expand_icon = true
 
-[node name="Debug" type="Button" parent="CanvasLayer/SettingsMenuItems/SettingsBox"]
+[node name="Debug" type="Button" parent="CanvasLayer/SettingsMenuItems/VBoxContainer/SettingsBox/VBoxContainer"]
 layout_mode = 2
 focus_mode = 0
 theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
@@ -730,7 +817,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_7kx3w")
+theme_override_fonts/font = ExtResource("6_ylplv")
 theme_override_font_sizes/font_size = 141
 theme_override_styles/focus = SubResource("StyleBoxEmpty_83fcs")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_83fcs")
@@ -762,25 +849,20 @@ offset_bottom = -72.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 66
+theme_override_fonts/font = ExtResource("6_ylplv")
+theme_override_font_sizes/font_size = 91
+theme_override_styles/focus = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_2jwjy")
 theme_override_styles/normal = SubResource("StyleBoxFlat_2jwjy")
 text = "back to menu."
-
-[node name="Label" type="Label" parent="CanvasLayer/SettingsMenuItems"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -235.5
-offset_top = 508.0
-offset_right = 235.5
-offset_bottom = 163.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_7kx3w")
-theme_override_font_sizes/font_size = 146
-text = "Settings"
-horizontal_alignment = 1
 
 [node name="SinglePlayerMenuItems" type="Control" parent="CanvasLayer"]
 unique_name_in_owner = true
@@ -806,7 +888,18 @@ offset_bottom = 1362.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_ylplv")
 theme_override_font_sizes/font_size = 66
+theme_override_styles/focus = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2jwjy")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_2jwjy")
 theme_override_styles/normal = SubResource("StyleBoxFlat_2jwjy")
 text = "back to menu."
 
@@ -833,7 +926,7 @@ offset_bottom = 74.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.463365, 0.549187, 0.722637, 1)
-theme_override_fonts/font = ExtResource("3_7kx3w")
+theme_override_fonts/font = ExtResource("6_ylplv")
 theme_override_font_sizes/font_size = 150
 text = "single player."
 horizontal_alignment = 1
@@ -888,7 +981,7 @@ offset_bottom = 63.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.463365, 0.549187, 0.722637, 1)
-theme_override_fonts/font = ExtResource("3_7kx3w")
+theme_override_fonts/font = ExtResource("6_ylplv")
 theme_override_font_sizes/font_size = 150
 text = "game"
 horizontal_alignment = 1
@@ -1036,7 +1129,7 @@ offset_bottom = 77.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.463365, 0.549187, 0.722637, 1)
-theme_override_fonts/font = ExtResource("3_7kx3w")
+theme_override_fonts/font = ExtResource("6_ylplv")
 theme_override_font_sizes/font_size = 150
 text = "variants"
 horizontal_alignment = 1
@@ -1048,6 +1141,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_ylplv")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_5ttty")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_5ttty")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_5ttty")
@@ -1202,6 +1296,25 @@ theme_override_fonts/font = ExtResource("3_7kx3w")
 theme_override_font_sizes/font_size = 100
 text = "time limit"
 
+[node name="SoakSpotControl" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("15_u0fs1")
+
+[node name="SoakSpot" parent="CanvasLayer/SoakSpotControl" instance=ExtResource("16_ahu5q")]
+visible = false
+layout_mode = 0
+
+[node name="SoakSpotTimer" type="Timer" parent="CanvasLayer/SoakSpotControl"]
+unique_name_in_owner = true
+one_shot = true
+
 [node name="TimeLimitLabel" type="Label" parent="CanvasLayer"]
 unique_name_in_owner = true
 visible = false
@@ -1310,18 +1423,18 @@ layout_mode = 1
 unique_name_in_owner = true
 one_shot = true
 
-[connection signal="pressed" from="CanvasLayer/MainMenuItems/MainMenuBox/FindGame" to="." method="_on_find_game_pressed"]
-[connection signal="pressed" from="CanvasLayer/MainMenuItems/MainMenuBox/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="CanvasLayer/MainMenuItems/MainMenuBox/SinglePlayer" to="." method="_on_single_player_pressed"]
-[connection signal="pressed" from="CanvasLayer/MainMenuItems/MainMenuBox/Profile" to="." method="_on_profile_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenuItems/MainMenuBox/VBoxContainer/VBoxContainer/FindGame" to="." method="_on_find_game_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenuItems/MainMenuBox/VBoxContainer/VBoxContainer/SinglePlayer" to="." method="_on_single_player_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenuItems/MainMenuBox/VBoxContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenuItems/MainMenuBox/VBoxContainer/VBoxContainer/Profile" to="." method="_on_profile_pressed"]
+[connection signal="pressed" from="CanvasLayer/ProfileMenuItems/VBoxContainer4/VBoxContainer2/VBoxContainer2/ChangeUsername" to="." method="_on_change_username_pressed"]
+[connection signal="pressed" from="CanvasLayer/ProfileMenuItems/VBoxContainer4/VBoxContainer3/ChangeProfilePicture" to="CanvasLayer/ProfileMenuItems" method="_on_change_profile_picture_pressed"]
 [connection signal="pressed" from="CanvasLayer/ProfileMenuItems/BackButton" to="CanvasLayer/ProfileMenuItems" method="_on_back_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/ProfileMenuItems/VBoxContainer2/VBoxContainer2/ChangeUsername" to="." method="_on_change_username_pressed"]
-[connection signal="pressed" from="CanvasLayer/ProfileMenuItems/VBoxContainer3/ChangeProfilePicture" to="CanvasLayer/ProfileMenuItems" method="_on_change_profile_picture_pressed"]
-[connection signal="toggled" from="CanvasLayer/SettingsMenuItems/SettingsBox/MusicSwitch" to="." method="_on_music_switch_toggled"]
-[connection signal="toggled" from="CanvasLayer/SettingsMenuItems/SettingsBox/SoundSwitch" to="." method="_on_sound_switch_toggled"]
-[connection signal="toggled" from="CanvasLayer/SettingsMenuItems/SettingsBox/AutoSkipRulesSwitch" to="." method="_on_auto_skip_rules_switch_toggled"]
-[connection signal="toggled" from="CanvasLayer/SettingsMenuItems/SettingsBox/LowGraphicsSwitch" to="." method="_on_low_graphics_switch_toggled"]
-[connection signal="pressed" from="CanvasLayer/SettingsMenuItems/SettingsBox/Debug" to="." method="_on_debug_pressed"]
+[connection signal="toggled" from="CanvasLayer/SettingsMenuItems/VBoxContainer/SettingsBox/VBoxContainer2/MusicSwitch" to="." method="_on_music_switch_toggled"]
+[connection signal="toggled" from="CanvasLayer/SettingsMenuItems/VBoxContainer/SettingsBox/VBoxContainer2/SoundSwitch" to="." method="_on_sound_switch_toggled"]
+[connection signal="toggled" from="CanvasLayer/SettingsMenuItems/VBoxContainer/SettingsBox/VBoxContainer2/AutoSkipRulesSwitch" to="." method="_on_auto_skip_rules_switch_toggled"]
+[connection signal="toggled" from="CanvasLayer/SettingsMenuItems/VBoxContainer/SettingsBox/VBoxContainer2/LowGraphicsSwitch" to="." method="_on_low_graphics_switch_toggled"]
+[connection signal="pressed" from="CanvasLayer/SettingsMenuItems/VBoxContainer/SettingsBox/VBoxContainer/Debug" to="." method="_on_debug_pressed"]
 [connection signal="pressed" from="CanvasLayer/SettingsMenuItems/BackButton" to="CanvasLayer/SettingsMenuItems" method="_on_back_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/SinglePlayerMenuItems/BackButton2" to="CanvasLayer/SinglePlayerMenuItems" method="_on_back_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/SinglePlayerMenuItems/GamePanel/GameButton" to="CanvasLayer/SinglePlayerMenuItems" method="_on_game_button_pressed"]

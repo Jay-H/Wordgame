@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://ms43gnmmu3g3"]
+[gd_scene load_steps=34 format=3 uid="uid://ms43gnmmu3g3"]
 
 [ext_resource type="Script" uid="uid://lj43fl6ocrf3" path="res://data/scenes_and_scripts/phoenix/login_screen.gd" id="1_vynka"]
 [ext_resource type="FontFile" uid="uid://dnyvxhvqed50e" path="res://data/fonts/OtherFonts/Crisp-Walnut.ttf" id="3_ki628"]
@@ -9,9 +9,9 @@
 [ext_resource type="FontFile" uid="uid://dehm6x83duy2e" path="res://data/fonts/space-ranger/spaceranger.ttf" id="4_w6vpo"]
 [ext_resource type="Script" uid="uid://bp4dtiex0f3ss" path="res://data/scenes_and_scripts/phoenix/splash_screen.gd" id="4_wk1ki"]
 [ext_resource type="Texture2D" uid="uid://dkuq8lxub8gf1" path="res://data/images/BlurredCircleParticle.png" id="5_2reso"]
-[ext_resource type="Texture2D" uid="uid://cfawov84ked10" path="res://data/images/Brain1.png" id="5_wk1ki"]
 [ext_resource type="PackedScene" uid="uid://cshfnccq06gum" path="res://data/scenes_and_scripts/particles/letter_comet.tscn" id="9_lchx1"]
 [ext_resource type="AudioStream" uid="uid://n35hhg7ig1bd" path="res://data/sounds/login_button.mp3" id="9_nr2tq"]
+[ext_resource type="Texture2D" uid="uid://dhbolumgl2aqs" path="res://data/images/Icons/brain2.png" id="10_4ivgp"]
 [ext_resource type="Script" uid="uid://b6kkx5rrpfdcp" path="res://data/scenes_and_scripts/phoenix/bottom_particle_control.gd" id="11_lchx1"]
 [ext_resource type="AudioStream" uid="uid://cntujh67a6lp5" path="res://data/music/LoginPiano1.wav" id="13_4ivgp"]
 
@@ -34,9 +34,9 @@ shader_parameter/ambient_light = 0.0
 [sub_resource type="Curve2D" id="Curve2D_kx71p"]
 bake_interval = 50.0
 _data = {
-"points": PackedVector2Array(-713.815, -165.056, 713.815, 165.056, 0, 0, -51.3561, -550.652, 51.3561, 550.652, 1549, 845, -14.2656, -667.63, 14.2656, 667.63, -217, 1678, 0, 0, 0, 0, 1581.13, 2628.02)
+"points": PackedVector2Array(-713.815, -165.056, 713.815, 165.056, 0, 0, -51.3561, -550.652, 51.3561, 550.652, 1549, 845, -14.2656, -667.63, 14.2656, 667.63, -217, 1678, 0, 0, 0, 0, 1290.52, 2578.64, 0, 0, 0, 0, 1388, 2603, 0, 0, 0, 0, 1473, 2671, 0, 0, 0, 0, 1544, 2765, 0, 0, 0, 0, 1608, 2867)
 }
-point_count = 4
+point_count = 8
 
 [sub_resource type="Curve" id="Curve_yha5c"]
 _data = [Vector2(0.213483, 1), 0.0, 0.0, 0, 0, Vector2(0.606742, 0.656009), 0.0, 0.0, 0, 0, Vector2(0.86236, 0.677508), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -87,6 +87,14 @@ turbulence_noise_scale = 4.377
 turbulence_noise_speed_random = 0.92
 turbulence_initial_displacement_min = -76.8
 turbulence_initial_displacement_max = 88.6
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_heko6"]
+shader = ExtResource("3_lchx1")
+shader_parameter/light_position_pixels = Vector2(257.1, 46.01)
+shader_parameter/light_color = Color(0.953173, 1, 0.983004, 0.639216)
+shader_parameter/light_radius_pixels = 178.071
+shader_parameter/softness_pixels = 500.0
+shader_parameter/ambient_light = 0.0
 
 [sub_resource type="Gradient" id="Gradient_aiv7l"]
 offsets = PackedFloat32Array(0, 0.109677, 1)
@@ -196,6 +204,18 @@ max_length = 100
 virtual_keyboard_type = 5
 caret_blink = true
 caret_blink_interval = 0.5
+
+[node name="MidlineControl" type="Control" parent="CanvasLayer/FirstScreenControl/VBoxContainer3/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="CanvasLayer/FirstScreenControl/VBoxContainer3/VBoxContainer/MidlineControl"]
+points = PackedVector2Array(100, 0, 700, 0)
+closed = true
+default_color = Color(0.116597, 0.0943858, 0.0890597, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
 
 [node name="PasswordBox" type="LineEdit" parent="CanvasLayer/FirstScreenControl/VBoxContainer3/VBoxContainer"]
 unique_name_in_owner = true
@@ -314,7 +334,9 @@ offset_right = 445.5
 offset_bottom = -621.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_colors/font_color = Color(0.711229, 0.494767, 3.85046e-07, 1)
+theme_override_colors/font_color = Color(0.286275, 0.227451, 0, 0)
+theme_override_colors/font_outline_color = Color(0.919691, 0.767851, 0, 1)
+theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("4_w6vpo")
 theme_override_font_sizes/font_size = 106
 text = "headphones
@@ -332,7 +354,9 @@ offset_top = 290.0
 offset_right = 446.0
 offset_bottom = 483.0
 grow_horizontal = 2
-theme_override_colors/font_color = Color(0.711229, 0.494767, 3.85046e-07, 1)
+theme_override_colors/font_color = Color(0.286275, 0.227451, 0, 0)
+theme_override_colors/font_outline_color = Color(0.919691, 0.767851, 0, 1)
+theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("4_w6vpo")
 theme_override_font_sizes/font_size = 106
 text = "A
@@ -365,11 +389,10 @@ offset_bottom = 178.853
 mouse_filter = 2
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="CanvasLayer/SplashScreen/Label2/ParticlePathControl/Path2D2/PathFollow2D/PathParticles"]
-amount = 300
+amount = 375
 texture = ExtResource("5_2reso")
-lifetime = 1.65
-randomness = 1.0
-fixed_fps = 60
+lifetime = 2.1
+fixed_fps = 120
 visibility_rect = Rect2(-2500, -2500, 5000, 5000)
 process_material = SubResource("ParticleProcessMaterial_lchx1")
 
@@ -378,30 +401,33 @@ visible = false
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/SplashScreen"]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_heko6")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -321.0
-offset_top = -293.5
-offset_right = 321.0
-offset_bottom = 293.5
+offset_left = -309.0
+offset_top = -304.0
+offset_right = 333.0
+offset_bottom = 283.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("5_wk1ki")
+texture = ExtResource("10_4ivgp")
 expand_mode = 1
 stretch_mode = 4
 
 [node name="Label3" type="Label" parent="CanvasLayer/SplashScreen/TextureRect"]
 layout_mode = 0
-offset_left = -115.0
-offset_top = -176.0
-offset_right = 776.0
-offset_bottom = -81.0
-theme_override_colors/font_color = Color(0.711229, 0.494767, 3.85046e-07, 1)
+offset_left = -133.0
+offset_top = -21.0
+offset_right = 758.0
+offset_bottom = 74.0
+theme_override_colors/font_color = Color(0.286275, 0.227451, 0, 0)
+theme_override_colors/font_outline_color = Color(0.919691, 0.767851, 0, 1)
+theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("4_w6vpo")
 theme_override_font_sizes/font_size = 106
 text = "Protected by:"
@@ -409,11 +435,13 @@ horizontal_alignment = 1
 
 [node name="Label" type="Label" parent="CanvasLayer/SplashScreen/TextureRect"]
 layout_mode = 0
-offset_left = -44.0
-offset_top = 99.0
-offset_right = 660.0
-offset_bottom = 390.0
-theme_override_colors/font_color = Color(0.711229, 0.494767, 3.85046e-07, 1)
+offset_left = -47.0
+offset_top = 204.0
+offset_right = 669.0
+offset_bottom = 495.0
+theme_override_colors/font_color = Color(0.286275, 0.227451, 0, 0)
+theme_override_colors/font_outline_color = Color(0.919691, 0.767851, 0, 1)
+theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("4_w6vpo")
 theme_override_font_sizes/font_size = 106
 text = "mesocortex

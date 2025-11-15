@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://c38ya1cpcilx3"]
+
+[ext_resource type="Texture2D" uid="uid://2spurf0kx8q4" path="res://addons/remove_all_theme_overrides/icons/eraser.png" id="1_mgp0v"]
+[ext_resource type="Texture2D" uid="uid://bjq4c3w5oxj5k" path="res://addons/remove_all_theme_overrides/icons/folder_download.png" id="2_e45v6"]
+
+[node name="remove_overrides_hbox" type="HBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="remove_overrides_button" type="Button" parent="."]
+texture_filter = 1
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+tooltip_text = "Remove all theme overrides"
+icon = ExtResource("1_mgp0v")
+icon_alignment = 1
+expand_icon = true
+
+[node name="convert_to_theme_button" type="Button" parent="."]
+texture_filter = 1
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+tooltip_text = "Convert theme overrrides from selected nodes to theme"
+icon = ExtResource("2_e45v6")
+icon_alignment = 1
+expand_icon = true

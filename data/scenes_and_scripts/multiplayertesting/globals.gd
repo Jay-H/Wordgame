@@ -8,7 +8,7 @@ extends Control
 var level_name_array = ["Dirt", "Bacterium", "Amoeba", "Fungus", "Fungi", "Fun Guy", "Naked Mole Rat", "Common Slug", "Uncommon Slug", "Mouse", "Guinea Pig", "Hamster", "Cat", "Dog", "Rare Slug", "Eagle", "Zebra", "Lion", "Elephant", "Chimpanzee", "Human Being", "Mythic Slug", "Lesser Angel", "Cherubim", "Seraphim", "Archangel", "Exotic Slug", "Demiurge", "Omnipotent God", "Multiverse God", "Holy Spirit", "Nirvanist", "Hologram Breaker", "Universal Eldritch Being", "Wielder of the Phoenix Armament", "Welder of the Phoenix Armament", "CJ Enterprises Co-CEO", "CJ Enterprises Co-CEO's Mom", "Legendary Slug", "Singularity", "One With Nothing"]
 var rank_name_array = ["Wood", "Bronze", "Iron", "Steel", "Platinum", "Diamond", "Antimatter"]
 var submit_mode = "default_mode"
-
+var rules_text_dictionary 
 
 #var game_types = [
 	#"ScrambleVanilla", "ScrambleBonus","ScrambleBonusObscurity", "ScrambleObscurity", "ScrambleWonder", "ScrambleBonusWonder",
@@ -103,6 +103,15 @@ var WSTEST = false
 
 const GAME_DURATION_SECONDS: int = 70
 const SUDDEN_DEATH_DURATION_SECONDS: int = 10
+
+func _load_rules():
+	var file_path = "res://data/text_files/rules.json"
+	var file = FileAccess.open(file_path, FileAccess.READ)
+	var json_string = file.get_as_text()
+	var data = JSON.parse_string(json_string)
+	if data:
+		rules_text_dictionary = data
+	pass
 
 func save_to_file():
 	#print("Attempting to save data: ", player_save_data)

@@ -17,6 +17,7 @@ var true_settings = "res://data/scenes_and_scripts/phoenix/true_settings.tscn"
 var finding_match_scene = "res://data/scenes_and_scripts/phoenix/finding_match.tscn"
 var score_screen = "res://data/scenes_and_scripts/phoenix/score_screen.tscn"
 var match_over_scene = "res://data/scenes_and_scripts/phoenix/match_over.tscn"
+var rules_scene = "res://data/scenes_and_scripts/phoenix/new_rules.tscn"
 var single_player_scramble_scene = "res://data/scenes_and_scripts/scramble/single_player_scramble_client_scene.tscn"
 
 @onready var Database = get_node("/root/Firebase/Database")
@@ -76,6 +77,7 @@ func _process(delta):
 
 
 func _ready():
+	Globals._load_rules()
 	print(arguments)
 	%LoginScreen.connect("login_successful", _on_login_successful)
 	connect_to_server() # this function will also set the "my_client_id" variable at the top, so now we have all the identifying information together. 
@@ -238,28 +240,29 @@ func _fade_out_match_found_screen():
 
 func _show_rules_screen(rules, dict): #this function will choose the rules screen based on the game, and display it.
 	if opponent_disconnected == false:
-		var scramble_rules = "res://data/scenes_and_scripts/phoenix/RulesTransition2.tscn"
-		var wordsearch_rules = "res://data/scenes_and_scripts/phoenix/RulesTransitionWordsearch.tscn"
-		var hangman_rules = "res://data/scenes_and_scripts/phoenix/HangmanRules.tscn"
-		var current_rules_node
-		if rules.contains("Scramble"):
-			current_rules_node = ((load(scramble_rules)).instantiate())
-		if rules.contains("Wordsearch"):
-			current_rules_node = ((load(scramble_rules)).instantiate())
-		if rules.contains("Hangman"):
-			current_rules_node = ((load(hangman_rules)).instantiate())
+		#var scramble_rules = "res://data/scenes_and_scripts/phoenix/RulesTransition2.tscn"
+		#var wordsearch_rules = "res://data/scenes_and_scripts/phoenix/RulesTransitionWordsearch.tscn"
+		#var hangman_rules = "res://data/scenes_and_scripts/phoenix/HangmanRules.tscn"
+		#var current_rules_node
+		#if rules.contains("Scramble"):
+			#current_rules_node = ((load(scramble_rules)).instantiate())
+		#if rules.contains("Wordsearch"):
+			#current_rules_node = ((load(scramble_rules)).instantiate())
+		#if rules.contains("Hangman"):
+			#current_rules_node = ((load(hangman_rules)).instantiate())
+		var current_rules_node = load(rules_scene).instantiate()
 		add_child(current_rules_node)
-		current_rules_node.setup(rules,dict)
+		current_rules_node._setup(rules, dict)
 		rules_instance = current_rules_node
 		current_rules_node.skip_button_pressed.connect(_skip_pressed.bind(dict))
-		await current_rules_node.fade_in()
+		await current_rules_node._fade_in()
 			
 		pass
 
 func _fade_out_rules_screen():
 	if opponent_disconnected == false:
 		if rules_instance != null:
-			await rules_instance.fade_out()
+			await rules_instance._fade_out()
 			rules_instance.queue_free()
 		else:
 			return

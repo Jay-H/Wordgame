@@ -25,6 +25,7 @@ func fade_in(duration):
 		i.material.set_shader_parameter("softness_pixels", 0)
 	%EmailBox.modulate = Color.TRANSPARENT
 	%PasswordBox.modulate = Color.TRANSPARENT
+	%MidlineControl.modulate = Color.TRANSPARENT
 	
 	var tween = create_tween()
 	tween.tween_property(%CanvasModulate, "color", Color.WHITE, duration)
@@ -36,7 +37,7 @@ func fade_in(duration):
 		tween2.parallel().tween_method(func(a):
 			i.material.set_shader_parameter("softness_pixels", a),
 			0, 340, 2)
-	for i in [%EmailBox, %PasswordBox]:
+	for i in [%EmailBox, %PasswordBox, %MidlineControl]:
 		var tween3 = create_tween()
 		tween3.tween_property(i, "modulate", Color.WHITE, 4)
 	

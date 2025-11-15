@@ -1,0 +1,92 @@
+{"hangman": "This version of hangman is played similarly to the well-known children's game.
+
+However, rather than guessing letters, you will guess words.
+
+While the active variant(s) will change the specific conceits affecting the game, the following will remain consistent:
+
+Any guessed word must be the length of the target word.
+
+Any guessed word must be a real word.
+
+Whomever guesses the target word first wins.
+
+Good luck!",
+"bedlam": "In this mode, you and your opponent are guessing simultaneously.
+
+Letters will be revealed to you as you discover them. They must be in the same location as the letter in the target word. 
+
+Your opponent cannot see the letters that you discover.",
+"absolutebedlam": "In this mode, you and your opponent are guessing simultaneously.
+
+Letters will be revealed to you as you discover them. They must be in the same location as the letter in the target word. 
+
+YOUR OPPONENT CAN SEE THE LETTERS YOU DISCOVER!
+
+AND VICE VERSA!",
+"deliberate": "In this mode, you and your opponent will take turns guessing the target word.
+
+Any letters that you discover will be revealed to both of you.",
+"liminal": "In this mode, letters from the target word are revealed at random after a period of time, denoted during the game.
+
+Your time to see the next letter will increase the more incorrect guesses you make.
+
+This penalty is negligible earlier in the game, but increases exponentially; you can see your delay multiplier during the game.",
+"ephemeral": "In this mode, if your guess word contains one or more letters that are also in the same positions within the target word, one of these will be revealed to you in a transient fashion.
+
+You must rely on the power of your memory to succeed.",
+"scramble": "Scramble is a game of speed, knowledge, and deliberation.
+
+You and your opponent will try to find as many words as you can out of the provided letters.
+
+However, there is a point penalty for submitting a word that doesn't exist, and this point penalty increases with infractions.
+
+A seven letter word does not always exist, but if it does, it provides a significant point bonus on submission.
+
+The active variants will affect further modifications to the rules.",
+"obscurity": "In this mode, submitted words gain points based on not only the individual point values of their letters, but on the obscurity of the word.
+
+Obscurity takes into account how rarely the word is used in the English language, as well as length and other proprietary algorithms.
+
+Here, knowledge takes precedence over raw speed.",
+"bonus": "In this mode, there is a Bonus Letter at the bottom of the play area.
+
+It is shared between your opponent and yourself. The value of this letter when used in a word rises over time which is denoted beside it.
+
+When the letter is used, it is replaced by a new one, and its bonus value is reset. 
+
+If both players submit a word within a close interval using the bonus letter, they will both get the bonus.
+
+If you are somehow able to construct an eight letter word, you will receive a massive point bonus.",
+"wonder":"This is a straightforward mode. 
+
+There is guaranteed to be a seven letter word in this puzzle.
+
+If you find it, and submit it, you win.
+
+Do you spend your time looking for  that sense of wonder, or simply play the usual way?
+
+We'll let you decide.",
+"wordsearch": "The progenitor of this very game, the simple wordsearch, but with a competitive twist.
+
+You and your opponent will race to solve this wordsearch, and the variants below will determine the specific manner in which this is to be done.
+
+A game of speed, focus, and likely no small measure of luck.",
+"separate": "In this classic mode, you and your opponent are both racing to find all the words within the wordsearch.
+
+Whomever finds them all first wins. 
+
+There may be other words within, but they are of no consequence; do not let them distract you.",
+"together": "In this mode, you and your opponent are sharing the same board. Whoever finds each word claims it, and the other can no longer do the same.
+
+The player who finds the majority of words wins, while the other, as is tradition, loses.",
+"nightmare": "The most difficult of modes.
+
+There are five words within the word search that you and your opponent will search for.
+
+However, you will not know what they are.
+
+The first player to find the five words wins. 
+
+If the time limit is reached,  a sudden death mode will ensue.
+
+Godspeed."}
