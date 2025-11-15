@@ -1,10 +1,11 @@
 extends Control
 
+@onready var viewport_size = get_viewport_rect().size
 
 
 
-
-func _begin():
+func _begin(delay):
+	await get_tree().create_timer(delay).timeout
 	var timer = Timer.new()
 	add_child(timer)
 	timer.one_shot = true
@@ -19,7 +20,7 @@ func _new_spot(timer_node):
 	timer.start(randf_range(0.1, 3.5))
 	timer.timeout.connect(_new_spot.bind(timer))
 	
-	var new_position = Vector2(randi_range(0,1320), randi_range(0,2868))
+	var new_position = Vector2(randi_range(0,viewport_size.x), randi_range(0,viewport_size.y))
 	var spot_node = load("res://data/scenes_and_scripts/phoenix/soak_spot.tscn").instantiate()
 	spot_node.position = new_position
 	spot_node.modulate.a = 0

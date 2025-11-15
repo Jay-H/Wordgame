@@ -1,8 +1,9 @@
-[gd_scene load_steps=34 format=3 uid="uid://dot2fpw1u2y61"]
+[gd_scene load_steps=36 format=3 uid="uid://dot2fpw1u2y61"]
 
 [ext_resource type="Script" uid="uid://cpgbo42e7vse8" path="res://data/scenes_and_scripts/phoenix/true_menu.gd" id="1_mgwhk"]
 [ext_resource type="Shader" uid="uid://c14ncknun6c8h" path="res://data/scenes_and_scripts/scramble/cloudscape2.gdshader" id="2_7kx3w"]
 [ext_resource type="FontFile" uid="uid://dskmx2extevrw" path="res://data/fonts/times.ttf" id="3_7kx3w"]
+[ext_resource type="Texture2D" uid="uid://c7ruhyait2kuy" path="res://data/images/textures/lined_paper.jpg" id="3_ciq0t"]
 [ext_resource type="Script" uid="uid://cv0wbyb1t8jvq" path="res://data/scenes_and_scripts/phoenix/rain_particles_control.gd" id="3_v5tby"]
 [ext_resource type="Texture2D" uid="uid://dwjasqd1m1mcp" path="res://data/images/textures/kiwihug-MS9Tnh3if1o-unsplash.jpg" id="3_wv4wv"]
 [ext_resource type="Shader" uid="uid://dwfv7tbunsf61" path="res://data/scenes_and_scripts/scramble/scramble_client_scene.gdshader" id="4_2jwjy"]
@@ -10,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dptsatxug1hhb" path="res://data/scenes_and_scripts/multiplayertesting/profile_picture.tscn" id="5_uueyb"]
 [ext_resource type="FontFile" uid="uid://csa2vdskduyio" path="res://data/fonts/OtherFonts/Kiddie-Store.otf" id="6_ylplv"]
 [ext_resource type="Script" uid="uid://dx3a58ijmxoiv" path="res://data/scenes_and_scripts/phoenix/profile_scroll_container.gd" id="7_2g6dm"]
+[ext_resource type="FontFile" uid="uid://7xq73rqjccfu" path="res://data/fonts/Pencil-Regular.ttf" id="8_ahs00"]
 [ext_resource type="Texture2D" uid="uid://bux67bkd2teot" path="res://data/images/Icons/SwitchOnBold128x128.png" id="8_cppe5"]
 [ext_resource type="Texture2D" uid="uid://lalidk0dce2g" path="res://data/images/Icons/SwitchOffBold128x128.png" id="9_mljia"]
 [ext_resource type="Texture2D" uid="uid://t71ul0257vc7" path="res://data/images/noun-finger-7180936.svg" id="10_mljia"]
@@ -144,14 +146,34 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="WhiteBackground" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="CanvasBackground" type="TextureRect" parent="CanvasLayer"]
 unique_name_in_owner = true
+visible = false
+modulate = Color(1, 1, 0.945098, 0.819608)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_wv4wv")
+
+[node name="CanvasBackground2" type="TextureRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 0.945098, 0.462745)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ciq0t")
+expand_mode = 1
 
 [node name="Sun" type="ColorRect" parent="CanvasLayer"]
 unique_name_in_owner = true
@@ -229,10 +251,11 @@ custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 0
-theme_override_fonts/normal_font = ExtResource("6_ylplv")
+theme_override_fonts/normal_font = ExtResource("8_ahs00")
 theme_override_font_sizes/normal_font_size = 271
 text = "wordwar."
 fit_content = true
+autowrap_mode = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenuItems/MainMenuBox"]
 layout_mode = 2
@@ -253,11 +276,11 @@ theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0.27451)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.233925, 0.233925, 0.233925, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0.498543, 0.659041, 0.996016, 1)
-theme_override_fonts/font = ExtResource("6_ylplv")
+theme_override_fonts/font = ExtResource("8_ahs00")
 theme_override_font_sizes/font_size = 186
 theme_override_styles/focus = SubResource("StyleBoxEmpty_mljia")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_mljia")
@@ -285,11 +308,11 @@ theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0.27451)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.233925, 0.233925, 0.233925, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0.498543, 0.659041, 0.996016, 1)
-theme_override_fonts/font = ExtResource("6_ylplv")
+theme_override_fonts/font = ExtResource("8_ahs00")
 theme_override_font_sizes/font_size = 186
 theme_override_styles/focus = SubResource("StyleBoxEmpty_mljia")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_mljia")
@@ -317,11 +340,11 @@ theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0.27451)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.233925, 0.233925, 0.233925, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0.498543, 0.659041, 0.996016, 1)
-theme_override_fonts/font = ExtResource("6_ylplv")
+theme_override_fonts/font = ExtResource("8_ahs00")
 theme_override_font_sizes/font_size = 186
 theme_override_styles/focus = SubResource("StyleBoxEmpty_mljia")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_mljia")
@@ -349,11 +372,11 @@ theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0.27451)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.233925, 0.233925, 0.233925, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0.498543, 0.659041, 0.996016, 1)
-theme_override_fonts/font = ExtResource("6_ylplv")
+theme_override_fonts/font = ExtResource("8_ahs00")
 theme_override_font_sizes/font_size = 186
 theme_override_styles/focus = SubResource("StyleBoxEmpty_mljia")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_mljia")
@@ -1310,6 +1333,10 @@ script = ExtResource("15_u0fs1")
 [node name="SoakSpot" parent="CanvasLayer/SoakSpotControl" instance=ExtResource("16_ahu5q")]
 visible = false
 layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 400.0
+offset_bottom = 400.0
 
 [node name="SoakSpotTimer" type="Timer" parent="CanvasLayer/SoakSpotControl"]
 unique_name_in_owner = true

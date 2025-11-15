@@ -6,22 +6,68 @@ var player_number
 @onready var winner_light = %WinnerLightPanel.duplicate()
 @onready var loser_light = %LoserLightPanel.duplicate()
 var dictionary
+var current_game
+var current_game_like_value
+var db_ref
+var path
 
 
 func _ready():
+	var game_likes_ref
+	path = "server_data/game_likes/" 
+	game_likes_ref = Firebase.Database.get_database_reference(path, {})
+	game_likes_ref.new_data_update.connect(_game_likes_ref_collector)
+	game_likes_ref.patch_data_update.connect(_game_likes_ref_collector)
+	game_likes_ref.delete_data_update.connect(_game_likes_ref_collector)
+	db_ref = game_likes_ref
 	await get_tree().create_timer(1).timeout
 	_light_mover(dictionary)
 
+
+func _game_likes_ref_collector(resource):
+	if resource.key == str(current_game):
+		var like_value = int(resource.data)
+		current_game_like_value = like_value
+	if resource.key == "":
+		if resource.data.has(str(current_game)):
+			current_game_like_value = resource.data[str(current_game)] 
+		
+	pass
+
 func _setup(dict, big_dictionary, firebase_id):
+	%Thanks.modulate = Color.TRANSPARENT
 	dictionary = dict
 	firebase_local_id = firebase_id
-	
+	current_game = dictionary["selected_games"][dict["current_round"]]
 	var player_one_username = dict["player_one_dictionary"]["username"]
 	var player_two_username = dict["player_two_dictionary"]["username"]
-	%playerpic.setup(GlobalData.profile_pics[dict["player_one_dictionary"]["profilepic"]])
-	%opponentpic.setup(GlobalData.profile_pics[dict["player_two_dictionary"]["profilepic"]])
+	if firebase_local_id == dict["player_one_firebase_id"]:
+		player_number = "one"
+		%playerpic.setup(GlobalData.profile_pics[dict["player_one_dictionary"]["profilepic"]])
+		%opponentpic.setup(GlobalData.profile_pics[dict["player_two_dictionary"]["profilepic"]])
+	else:
+		player_number = "two"	
+		%playerpic.setup(GlobalData.profile_pics[dict["player_two_dictionary"]["profilepic"]])
+		%opponentpic.setup(GlobalData.profile_pics[dict["player_one_dictionary"]["profilepic"]])
 	if (big_dictionary.has("game_type") && big_dictionary["game_type"] == "wordsearch"):
-		pass
+		if firebase_local_id == dict["player_one_firebase_id"]:
+			player_number = "one"
+		else:
+			player_number = "two"		
+		if player_number == "one":
+			%playerscore.text = ""
+			%opponentscore.text = ""
+			%playerbestword.text = ""
+			%opponentbestword.text = ""
+			%playername.text = dict["player_one_dictionary"]["username"]
+			%opponentname.text = dict["player_two_dictionary"]["username"]
+		if player_number == "two":
+			%playerscore.text = ""
+			%opponentscore.text = ""
+			%playerbestword.text = ""
+			%opponentbestword.text = ""
+			%playername.text = dict["player_two_dictionary"]["username"]
+			%opponentname.text = dict["player_one_dictionary"]["username"]
 	elif (big_dictionary.has("game_type") && big_dictionary["game_type"] == "hangman"):
 		if firebase_local_id == dict["player_one_firebase_id"]:
 			player_number = "one"
@@ -172,3 +218,29 @@ func _fade_out():
 	var tween = create_tween()
 	tween.tween_property(%CanvasModulate, "color", Color.TRANSPARENT, 1)
 	await tween.finished
+
+
+func _on_yes_button_pressed() -> void:
+	Haptics.double_quick_medium()
+	%YesButton.disabled = true
+	%NoButton.disabled = true
+	var new_like_value = current_game_like_value 
+	new_like_value += 1
+	db_ref.update("",{current_game: new_like_value})
+	var tween = create_tween()
+	tween.parallel().tween_property(%VBoxContainer, "modulate", Color.TRANSPARENT, 0.5)
+	tween.parallel().tween_property(%Thanks, "modulate", Color.WHITE, 0.5)
+	pass # Replace with function body.
+
+
+func _on_no_button_pressed() -> void:
+	Haptics.double_quick_medium()
+	%NoButton.disabled = true
+	%YesButton.disabled = true
+	var new_like_value = current_game_like_value 
+	new_like_value -= 1
+	db_ref.update("",{current_game: new_like_value})
+	var tween = create_tween()
+	tween.parallel().tween_property(%VBoxContainer, "modulate", Color.TRANSPARENT, 0.5)
+	tween.parallel().tween_property(%Thanks, "modulate", Color.WHITE, 0.5)
+	pass # Replace with function body.

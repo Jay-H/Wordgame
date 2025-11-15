@@ -170,6 +170,6 @@ func _on_debug_pressed() -> void:
 func _weather_function():
 	%RainParticles.amount_ratio = 0
 	%RainParticles.emitting = true
-	%SoakSpotControl._begin()
+	%SoakSpotControl._begin(5)
 	var tween = create_tween()
 	tween.tween_property(%RainParticles, "amount_ratio", 1.0, 25)

@@ -1,8 +1,8 @@
 [gd_scene load_steps=3 format=3 uid="uid://cfv842myh6os3"]
 
 [sub_resource type="Gradient" id="Gradient_ahu5q"]
-offsets = PackedFloat32Array(0.120321, 0.395722, 1)
-colors = PackedColorArray(0.384314, 0.384314, 0.384314, 0.490196, 0.72549, 0.72549, 0.72549, 0.227451, 0.827451, 0.827451, 0.827451, 0)
+offsets = PackedFloat32Array(0.168449, 1)
+colors = PackedColorArray(0.190762, 0.190762, 0.190762, 0.337255, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_u0fs1"]
 gradient = SubResource("Gradient_ahu5q")
@@ -10,6 +10,7 @@ width = 256
 height = 256
 fill = 1
 fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.760684, 0.239316)
 
 [node name="SoakSpot" type="TextureRect"]
 offset_left = 499.0
@@ -18,4 +19,5 @@ offset_right = 899.0
 offset_bottom = 648.0
 scale = Vector2(0.875, 0.875)
 pivot_offset = Vector2(200, 200)
+mouse_filter = 2
 texture = SubResource("GradientTexture2D_u0fs1")

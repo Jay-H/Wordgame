@@ -18,8 +18,8 @@ var opponent_disconnected
 
 func _fade_in():
 	await get_tree().process_frame
-	if main_menu.opponent_disconnected:
-		%TopBigLabel.text = "Technical Win!"
+	#if main_menu.opponent_disconnected:
+		#%TopBigLabel.text = "Technical Win!"
 	%LevelStatusLabel.text = "Good game!"
 	%RankStatusLabel.text = "Thanks for Playing!"
 	%CanvasModulate.color = Color.TRANSPARENT
@@ -51,12 +51,12 @@ func _fade_in():
 		 
 		await get_tree().create_timer(1).timeout
 		var tween2 = create_tween()
-		tween2.tween_property(%OldLevelLabel, "modulate", Color.TRANSPARENT, 0.5)
+		tween2.tween_property(%OldLevelLabel, "self_modulate", Color.TRANSPARENT, 0.5)
 		await tween2.finished
 		
 		%NewLevelLabel.text = "Level " + str(new_level) + ": " + Globals.level_name_array[new_level]
 		var tween3 = create_tween()
-		tween3.tween_property(%NewLevelLabel, "modulate", Color.WHITE, 1)
+		tween3.tween_property(%NewLevelLabel, "self_modulate", Color.WHITE, 1)
 		await tween3.finished
 		var tween4 = create_tween()
 		tween4.tween_method(_set_level_shader_value, 0.0, 1.0, 2)
@@ -82,12 +82,12 @@ func _fade_in():
 		
 		await get_tree().create_timer(1).timeout
 		var tween2 = create_tween()
-		tween2.tween_property(%OldRankLabel, "modulate", Color.TRANSPARENT, 0.5)
+		tween2.tween_property(%OldRankLabel, "self_modulate", Color.TRANSPARENT, 0.5)
 		await tween2.finished
 		
 		%NewRankLabel.text = "Rank " + str(new_rank) + ": " + Globals.rank_name_array[new_rank]
 		var tween3 = create_tween()
-		tween3.tween_property(%NewRankLabel, "modulate", Color.WHITE, 1)
+		tween3.tween_property(%NewRankLabel, "self_modulate", Color.WHITE, 1)
 		#await tween3.finished
 		
 		var tween4 = create_tween()
@@ -160,9 +160,9 @@ func _setup(new, old): # new is the updated dictionary from the match just playe
 		points[i].texture = load(rank_point_on_texture)
 	%ProfilePicture.setup(GlobalData.profile_pics[new["profilepic"]])
 	%LevelStatusLabel.text = ""
-	%NewLevelLabel.modulate = Color.TRANSPARENT
+	%NewLevelLabel.self_modulate = Color.TRANSPARENT
 	%RankStatusLabel.text = ""
-	%NewRankLabel.modulate = Color.TRANSPARENT
+	%NewRankLabel.self_modulate = Color.TRANSPARENT
 	%Username.text = new["username"]
 	%experiencebar.setup(previous_experience)
 	
@@ -184,8 +184,8 @@ func _on_button_pressed() -> void:
 		points[i].texture = load(rank_point_on_texture)
 	%LevelStatusLabel.text = ""
 	%RankStatusLabel.text = ""
-	%NewLevelLabel.modulate = Color.TRANSPARENT	
-	%NewRankLabel.modulate = Color.TRANSPARENT
+	%NewLevelLabel.self_modulate = Color.TRANSPARENT	
+	%NewRankLabel.self_modulate = Color.TRANSPARENT
 	
 	%Username.text = "Arcenciel"
 	_fade_in()

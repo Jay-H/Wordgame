@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://b8h5piucri0ws"]
+[gd_scene load_steps=16 format=3 uid="uid://b8h5piucri0ws"]
 
 [ext_resource type="Shader" uid="uid://c14ncknun6c8h" path="res://data/scenes_and_scripts/scramble/cloudscape2.gdshader" id="1_2i182"]
 [ext_resource type="Script" uid="uid://dwd7er6w2s50n" path="res://data/scenes_and_scripts/phoenix/score_screen.gd" id="1_paxoi"]
 [ext_resource type="PackedScene" uid="uid://dptsatxug1hhb" path="res://data/scenes_and_scripts/multiplayertesting/profile_picture.tscn" id="2_hoclt"]
 [ext_resource type="FontFile" uid="uid://csa2vdskduyio" path="res://data/fonts/OtherFonts/Kiddie-Store.otf" id="4_paxoi"]
+[ext_resource type="FontFile" uid="uid://4emmmfvay1to" path="res://data/fonts/OtherFonts/Kiddie-Store.woff" id="5_e6dcm"]
 [ext_resource type="FontFile" uid="uid://burymbb80klap" path="res://data/fonts/pencilgrid.ttf" id="5_rtvw5"]
+[ext_resource type="FontFile" uid="uid://darj1hvdwrbfr" path="res://data/fonts/kirifont/KiriFont.ttf" id="6_vchvw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_paxoi"]
 shader = ExtResource("1_2i182")
@@ -45,6 +47,32 @@ corner_radius_top_left = 100
 corner_radius_top_right = 100
 corner_radius_bottom_right = 100
 corner_radius_bottom_left = 100
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uw5se"]
+bg_color = Color(3.82639e-06, 0.657962, 1.15514e-06, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ak7f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c0rqs"]
+bg_color = Color(1, 0.0882157, 0.0824911, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3j2hr"]
 bg_color = Color(0.988235, 0.890196, 0.592157, 0.286275)
@@ -100,16 +128,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -464.5
-offset_top = -850.0
-offset_right = 464.5
-offset_bottom = 850.0
+offset_left = -625.0
+offset_top = -1315.0
+offset_right = 625.0
+offset_bottom = 1315.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 280
+theme_override_constants/separation = 15
 
 [node name="Panel" type="Panel" parent="CanvasLayer/VBoxContainer2"]
-custom_minimum_size = Vector2(1250, 1500)
+custom_minimum_size = Vector2(1250, 1450)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_paxoi")
 
@@ -220,8 +248,154 @@ text = "Best Word
 word"
 horizontal_alignment = 1
 
+[node name="Panel3" type="Panel" parent="CanvasLayer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rtvw5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/VBoxContainer2/Panel3"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -412.0
+offset_top = -47.5
+offset_right = 412.0
+offset_bottom = 47.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 45
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/VBoxContainer2/Panel3/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="CanvasLayer/VBoxContainer2/Panel3/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_e6dcm")
+theme_override_font_sizes/font_size = 81
+text = "Last Game"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer2/Panel3/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_e6dcm")
+theme_override_font_sizes/font_size = 81
+text = "Scramble | Bonus | Obscurity | Wonder"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/VBoxContainer2/Panel3/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_e6dcm")
+theme_override_font_sizes/font_size = 81
+text = "Did you like this game?"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer2/Panel3/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 130
+alignment = 1
+
+[node name="Panel" type="Panel" parent="CanvasLayer/VBoxContainer2/Panel3/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 150)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uw5se")
+
+[node name="YesButton" type="Button" parent="CanvasLayer/VBoxContainer2/Panel3/VBoxContainer/HBoxContainer/Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.5
+offset_top = -51.0
+offset_right = 114.5
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_vchvw")
+theme_override_font_sizes/font_size = 81
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2ak7f")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_2ak7f")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_2ak7f")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_2ak7f")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_2ak7f")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_2ak7f")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_2ak7f")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_2ak7f")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2ak7f")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_2ak7f")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2ak7f")
+text = "Yes!"
+
+[node name="Panel2" type="Panel" parent="CanvasLayer/VBoxContainer2/Panel3/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 150)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_c0rqs")
+
+[node name="NoButton" type="Button" parent="CanvasLayer/VBoxContainer2/Panel3/VBoxContainer/HBoxContainer/Panel2"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.5
+offset_top = -51.0
+offset_right = 114.5
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_vchvw")
+theme_override_font_sizes/font_size = 81
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2ak7f")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_2ak7f")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_2ak7f")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_2ak7f")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_2ak7f")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_2ak7f")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_2ak7f")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_2ak7f")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2ak7f")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_2ak7f")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2ak7f")
+text = "No!"
+
+[node name="Thanks" type="Label" parent="CanvasLayer/VBoxContainer2/Panel3"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_paxoi")
+theme_override_font_sizes/font_size = 146
+text = "Thanks for answering!"
+
 [node name="Panel2" type="Panel" parent="CanvasLayer/VBoxContainer2"]
-custom_minimum_size = Vector2(1250, 700)
+custom_minimum_size = Vector2(1250, 600)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rtvw5")
 
@@ -345,3 +519,6 @@ theme_override_fonts/font = ExtResource("5_rtvw5")
 theme_override_font_sizes/font_size = 166
 text = "Loser!"
 horizontal_alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer2/Panel3/VBoxContainer/HBoxContainer/Panel/YesButton" to="." method="_on_yes_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer2/Panel3/VBoxContainer/HBoxContainer/Panel2/NoButton" to="." method="_on_no_button_pressed"]
