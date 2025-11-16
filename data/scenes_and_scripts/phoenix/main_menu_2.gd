@@ -41,8 +41,8 @@ var old_info : Dictionary = {
 var username
 var db_ref
 var path
-var IP_ADDRESS = "localhost"
-#var IP_ADDRESS = "136.112.186.218" # VM
+#var IP_ADDRESS = "localhost"
+var IP_ADDRESS = "136.112.186.218" # VM
 var PORT = 7777
 var match_found_instance
 var rules_instance
@@ -392,7 +392,7 @@ func _ask_server_for_info(info_dictionary):
 func _start_single_player_game(parameters):
 	await $TrueMenu._fade_out()
 	$TrueMenu.queue_free()
-	if parameters[0] == "scramble":
+	if parameters[0] == "Scramble":
 		var single_player_node_instance = load(single_player_scramble_scene).instantiate()
 		single_player_node_instance.game_over.connect(_end_single_player_game)
 		single_player_node_instance._setup(parameters)

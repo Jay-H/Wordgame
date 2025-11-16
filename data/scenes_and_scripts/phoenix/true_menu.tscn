@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dot2fpw1u2y61"]
+[gd_scene load_steps=42 format=3 uid="uid://dot2fpw1u2y61"]
 
 [ext_resource type="Script" uid="uid://cpgbo42e7vse8" path="res://data/scenes_and_scripts/phoenix/true_menu.gd" id="1_mgwhk"]
 [ext_resource type="Shader" uid="uid://c14ncknun6c8h" path="res://data/scenes_and_scripts/scramble/cloudscape2.gdshader" id="2_7kx3w"]
@@ -20,6 +20,9 @@
 [ext_resource type="PackedScene" uid="uid://bmm23rwsctf0d" path="res://data/scenes_and_scripts/multiplayertesting/piano_controller.tscn" id="13_w2506"]
 [ext_resource type="Script" uid="uid://bf15o5xg8en4f" path="res://data/scenes_and_scripts/phoenix/soak_spot_control.gd" id="15_u0fs1"]
 [ext_resource type="PackedScene" uid="uid://cfv842myh6os3" path="res://data/scenes_and_scripts/phoenix/soak_spot.tscn" id="16_ahu5q"]
+[ext_resource type="Texture2D" uid="uid://cubeeahuqajeo" path="res://data/images/textures/scribbles/DoodleButton2.png" id="19_ahs00"]
+[ext_resource type="Script" uid="uid://dhx7ulwh80u46" path="res://data/scenes_and_scripts/phoenix/mom_mode.gd" id="19_jd82s"]
+[ext_resource type="FontFile" uid="uid://tfmhwij3sowf" path="res://data/fonts/lcd/digitalism.ttf" id="22_eengy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2g6dm"]
 shader = ExtResource("4_2jwjy")
@@ -109,6 +112,8 @@ corner_radius_bottom_left = 50
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5ttty"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jd82s"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w2506"]
 bg_color = Color(0.899309, 0.800136, 1, 0.462745)
 corner_radius_top_left = 50
@@ -122,6 +127,24 @@ corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nfgbr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jknyh"]
+bg_color = Color(0.90553, 0.816181, 0.893762, 0.639216)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
 
 [node name="TrueMenu" type="Control"]
 layout_mode = 3
@@ -200,6 +223,29 @@ grow_vertical = 2
 
 [node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer"]
 unique_name_in_owner = true
+
+[node name="SoakSpotControl" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("15_u0fs1")
+
+[node name="SoakSpot" parent="CanvasLayer/SoakSpotControl" instance=ExtResource("16_ahu5q")]
+visible = false
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 400.0
+offset_bottom = 400.0
+
+[node name="SoakSpotTimer" type="Timer" parent="CanvasLayer/SoakSpotControl"]
+unique_name_in_owner = true
+one_shot = true
 
 [node name="RainParticlesControl" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -959,7 +1005,7 @@ layout_mode = 0
 offset_left = 53.0
 offset_top = -882.0
 offset_right = 772.0
-offset_bottom = -543.0
+offset_bottom = -660.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_mljia")
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/SinglePlayerMenuItems/GamePanel"]
@@ -997,10 +1043,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -94.5
-offset_top = -103.5
-offset_right = 230.5
-offset_bottom = 63.5
+offset_left = -162.5
+offset_top = -83.5
+offset_right = 162.5
+offset_bottom = 83.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.463365, 0.549187, 0.722637, 1)
@@ -1008,6 +1054,7 @@ theme_override_fonts/font = ExtResource("6_ylplv")
 theme_override_font_sizes/font_size = 150
 text = "game"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="WordsearchPanel" type="Panel" parent="CanvasLayer/SinglePlayerMenuItems"]
 visible = false
@@ -1319,28 +1366,463 @@ theme_override_fonts/font = ExtResource("3_7kx3w")
 theme_override_font_sizes/font_size = 100
 text = "time limit"
 
-[node name="SoakSpotControl" type="Control" parent="CanvasLayer"]
+[node name="MomMode" type="Control" parent="CanvasLayer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("15_u0fs1")
+script = ExtResource("19_jd82s")
 
-[node name="SoakSpot" parent="CanvasLayer/SoakSpotControl" instance=ExtResource("16_ahu5q")]
-visible = false
-layout_mode = 0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 400.0
-offset_bottom = 400.0
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MomMode"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.061
+anchor_top = 0.5
+anchor_right = 0.061
+anchor_bottom = 0.5
+offset_top = -622.5
+offset_right = 826.0
+offset_bottom = 622.5
+grow_vertical = 2
+theme_override_constants/separation = 120
 
-[node name="SoakSpotTimer" type="Timer" parent="CanvasLayer/SoakSpotControl"]
+[node name="SinglePlayer" type="Label" parent="CanvasLayer/MomMode/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_ahs00")
+theme_override_font_sizes/font_size = 210
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jd82s")
+text = "Mom Mode"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MomMode/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="GameType" type="Label" parent="CanvasLayer/MomMode/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_ahs00")
+theme_override_font_sizes/font_size = 170
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jd82s")
+text = "Game Type"
+
+[node name="GameTypeBox" type="VBoxContainer" parent="CanvasLayer/MomMode/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
-one_shot = true
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MomMode/VBoxContainer/VBoxContainer/GameTypeBox"]
+layout_mode = 2
+theme_override_constants/separation = 70
+
+[node name="Light" type="TextureRect" parent="CanvasLayer/MomMode/VBoxContainer/VBoxContainer/GameTypeBox/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("19_ahs00")
+expand_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/MomMode/VBoxContainer/VBoxContainer/GameTypeBox/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.611565, 0.919029, 0.96463, 1)
+theme_override_fonts/font = ExtResource("8_ahs00")
+theme_override_font_sizes/font_size = 140
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jd82s")
+toggle_mode = true
+text = "Scramble"
+alignment = 0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/MomMode/VBoxContainer/VBoxContainer/GameTypeBox"]
+layout_mode = 2
+theme_override_constants/separation = 70
+
+[node name="Light" type="TextureRect" parent="CanvasLayer/MomMode/VBoxContainer/VBoxContainer/GameTypeBox/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("19_ahs00")
+expand_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/MomMode/VBoxContainer/VBoxContainer/GameTypeBox/HBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.611565, 0.919029, 0.96463, 1)
+theme_override_fonts/font = ExtResource("8_ahs00")
+theme_override_font_sizes/font_size = 140
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jd82s")
+toggle_mode = true
+text = "Wordsearch
+"
+alignment = 0
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/MomMode/VBoxContainer/VBoxContainer/GameTypeBox"]
+layout_mode = 2
+theme_override_constants/separation = 70
+
+[node name="Light" type="TextureRect" parent="CanvasLayer/MomMode/VBoxContainer/VBoxContainer/GameTypeBox/HBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("19_ahs00")
+expand_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/MomMode/VBoxContainer/VBoxContainer/GameTypeBox/HBoxContainer3"]
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.611565, 0.919029, 0.96463, 1)
+theme_override_fonts/font = ExtResource("8_ahs00")
+theme_override_font_sizes/font_size = 140
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jd82s")
+toggle_mode = true
+text = "Hangman"
+alignment = 0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/MomMode/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Modifiers" type="Label" parent="CanvasLayer/MomMode/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_ahs00")
+theme_override_font_sizes/font_size = 170
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jd82s")
+text = "Modifiers"
+
+[node name="ModifierBox" type="VBoxContainer" parent="CanvasLayer/MomMode/VBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MomMode/VBoxContainer/VBoxContainer2/ModifierBox"]
+layout_mode = 2
+theme_override_constants/separation = 80
+
+[node name="Light" type="TextureRect" parent="CanvasLayer/MomMode/VBoxContainer/VBoxContainer2/ModifierBox/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("19_ahs00")
+expand_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/MomMode/VBoxContainer/VBoxContainer2/ModifierBox/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.611565, 0.919029, 0.96463, 1)
+theme_override_fonts/font = ExtResource("8_ahs00")
+theme_override_font_sizes/font_size = 140
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jd82s")
+toggle_mode = true
+text = "Limit"
+alignment = 0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/MomMode/VBoxContainer/VBoxContainer2/ModifierBox"]
+layout_mode = 2
+theme_override_constants/separation = 80
+
+[node name="Light" type="TextureRect" parent="CanvasLayer/MomMode/VBoxContainer/VBoxContainer2/ModifierBox/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("19_ahs00")
+expand_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/MomMode/VBoxContainer/VBoxContainer2/ModifierBox/HBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.611565, 0.919029, 0.96463, 1)
+theme_override_fonts/font = ExtResource("8_ahs00")
+theme_override_font_sizes/font_size = 140
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jd82s")
+toggle_mode = true
+text = "Score
+"
+alignment = 0
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/MomMode/VBoxContainer/VBoxContainer2/ModifierBox"]
+layout_mode = 2
+theme_override_constants/separation = 80
+
+[node name="Light" type="TextureRect" parent="CanvasLayer/MomMode/VBoxContainer/VBoxContainer2/ModifierBox/HBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("19_ahs00")
+expand_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/MomMode/VBoxContainer/VBoxContainer2/ModifierBox/HBoxContainer3"]
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.611565, 0.919029, 0.96463, 1)
+theme_override_fonts/font = ExtResource("8_ahs00")
+theme_override_font_sizes/font_size = 140
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jd82s")
+toggle_mode = true
+text = "Clues"
+alignment = 0
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/MomMode/VBoxContainer/VBoxContainer2/ModifierBox"]
+layout_mode = 2
+theme_override_constants/separation = 80
+
+[node name="Light" type="TextureRect" parent="CanvasLayer/MomMode/VBoxContainer/VBoxContainer2/ModifierBox/HBoxContainer4"]
+layout_mode = 2
+texture = ExtResource("19_ahs00")
+expand_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/MomMode/VBoxContainer/VBoxContainer2/ModifierBox/HBoxContainer4"]
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.611565, 0.919029, 0.96463, 1)
+theme_override_fonts/font = ExtResource("8_ahs00")
+theme_override_font_sizes/font_size = 140
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jd82s")
+toggle_mode = true
+text = "Seven"
+alignment = 0
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="CanvasLayer/MomMode/VBoxContainer/VBoxContainer2/ModifierBox"]
+layout_mode = 2
+theme_override_constants/separation = 80
+
+[node name="Light" type="TextureRect" parent="CanvasLayer/MomMode/VBoxContainer/VBoxContainer2/ModifierBox/HBoxContainer5"]
+layout_mode = 2
+texture = ExtResource("19_ahs00")
+expand_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/MomMode/VBoxContainer/VBoxContainer2/ModifierBox/HBoxContainer5"]
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.611565, 0.919029, 0.96463, 1)
+theme_override_fonts/font = ExtResource("8_ahs00")
+theme_override_font_sizes/font_size = 140
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jd82s")
+toggle_mode = true
+text = "Hyper"
+alignment = 0
+
+[node name="Begin" type="Button" parent="CanvasLayer/MomMode/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_ahs00")
+theme_override_font_sizes/font_size = 200
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jd82s")
+toggle_mode = true
+text = "Begin."
+alignment = 0
+
+[node name="Back" type="Button" parent="CanvasLayer/MomMode/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_ahs00")
+theme_override_font_sizes/font_size = 130
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_jd82s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jd82s")
+toggle_mode = true
+text = "Back to menu."
+alignment = 0
 
 [node name="TimeLimitLabel" type="Label" parent="CanvasLayer"]
 unique_name_in_owner = true
@@ -1423,24 +1905,78 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_aolt3")
 text = "confirm."
 clip_text = true
 
-[node name="cjenterprises" type="Label" parent="CanvasLayer"]
+[node name="cjenterprises" type="Button" parent="CanvasLayer"]
 unique_name_in_owner = true
-visible = false
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -485.0
-offset_top = -159.0
+offset_left = -614.0
+offset_top = -182.0
 offset_right = -85.0
 offset_bottom = -85.0
 grow_horizontal = 0
 grow_vertical = 0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_7kx3w")
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("22_eengy")
 theme_override_font_sizes/font_size = 66
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nfgbr")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_nfgbr")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_nfgbr")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_nfgbr")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_nfgbr")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_nfgbr")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_nfgbr")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_nfgbr")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_nfgbr")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_nfgbr")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_nfgbr")
 text = "© Ganymede Studios "
+
+[node name="InfoPanel" type="Panel" parent="CanvasLayer/cjenterprises"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -351.0
+offset_top = -592.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jknyh")
+
+[node name="Label" type="Label" parent="CanvasLayer/cjenterprises/InfoPanel"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 18.0
+offset_right = 858.0
+offset_bottom = 510.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_ylplv")
+theme_override_font_sizes/font_size = 50
+text = "Ganymede Studios was established in July, 2025 with the goal of bringing fast-paced friendly competitive games to mobile platforms.
+
+We hope you enjoy this game and look forward to you discovering all the secrets within. 
+
+Feel free to send us feedback on the discord group within the settings menu!"
+autowrap_mode = 2
 
 [node name="PianoController" parent="." instance=ExtResource("13_w2506")]
 unique_name_in_owner = true
@@ -1473,6 +2009,9 @@ one_shot = true
 [connection signal="toggled" from="CanvasLayer/SinglePlayerMenuItems/ScrambleVariantsMenu/WordList" to="CanvasLayer/SinglePlayerMenuItems" method="_on_word_list_toggled"]
 [connection signal="toggled" from="CanvasLayer/SinglePlayerMenuItems/ScrambleVariantsMenu/SevenEnsure" to="CanvasLayer/SinglePlayerMenuItems" method="_on_seven_ensure_toggled"]
 [connection signal="toggled" from="CanvasLayer/SinglePlayerMenuItems/ScrambleVariantsMenu/TimeLimit" to="CanvasLayer/SinglePlayerMenuItems" method="_on_time_limit_toggled"]
+[connection signal="pressed" from="CanvasLayer/MomMode/VBoxContainer/Begin" to="CanvasLayer/MomMode" method="_on_begin_pressed"]
+[connection signal="pressed" from="CanvasLayer/MomMode/VBoxContainer/Back" to="CanvasLayer/MomMode" method="_on_back_pressed"]
 [connection signal="pressed" from="CanvasLayer/TimeLimitLabel/UpButton" to="CanvasLayer/SinglePlayerMenuItems" method="_on_up_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/TimeLimitLabel/DownButton" to="CanvasLayer/SinglePlayerMenuItems" method="_on_down_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/TimeLimitLabel/ConfirmButton" to="CanvasLayer/SinglePlayerMenuItems" method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/cjenterprises" to="." method="_on_cjenterprises_pressed"]

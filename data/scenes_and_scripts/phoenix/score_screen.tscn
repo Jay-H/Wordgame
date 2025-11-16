@@ -149,12 +149,12 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -573.5
-offset_top = -699.0
+offset_top = -679.0
 offset_right = 573.5
-offset_bottom = 699.0
+offset_bottom = 679.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 140
+theme_override_constants/separation = 100
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer2/Panel/VBoxContainer2"]
 layout_mode = 2
@@ -280,7 +280,8 @@ theme_override_font_sizes/font_size = 81
 text = "Last Game"
 horizontal_alignment = 1
 
-[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer2/Panel3/VBoxContainer/VBoxContainer"]
+[node name="GameLabel" type="Label" parent="CanvasLayer/VBoxContainer2/Panel3/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_e6dcm")
@@ -400,15 +401,16 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rtvw5")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/VBoxContainer2/Panel2"]
+custom_minimum_size = Vector2(1100, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -600.0
+offset_left = -177.0
 offset_top = -270.5
-offset_right = 600.0
+offset_right = 177.0
 offset_bottom = 270.5
 grow_horizontal = 2
 grow_vertical = 2

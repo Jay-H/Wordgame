@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bua76mxf28m2e"]
+[gd_scene load_steps=24 format=3 uid="uid://bua76mxf28m2e"]
 
 [ext_resource type="Script" uid="uid://cutv0mtnmypn0" path="res://data/scenes_and_scripts/scramble/single_player_scramble_client_scene.gd" id="1_bgm7i"]
 [ext_resource type="AudioStream" uid="uid://pclwk720i0ch" path="res://data/music/Piano1.wav" id="2_8c2gt"]
@@ -9,6 +9,7 @@
 [ext_resource type="Material" uid="uid://xtnsfpcccyin" path="res://data/scenes_and_scripts/scramble/jupiter4test.tres" id="7_nljo5"]
 [ext_resource type="Shader" uid="uid://c0ptn8g2ds8f6" path="res://data/scenes_and_scripts/scramble/cloudscape.gdshader" id="8_y3vu0"]
 [ext_resource type="Material" uid="uid://cutp7wv0qewh5" path="res://data/scenes_and_scripts/scramble/cloudscape2test.tres" id="9_gr4mr"]
+[ext_resource type="FontFile" uid="uid://csa2vdskduyio" path="res://data/fonts/OtherFonts/Kiddie-Store.otf" id="11_gtrcg"]
 [ext_resource type="Shader" uid="uid://dwfv7tbunsf61" path="res://data/scenes_and_scripts/scramble/scramble_client_scene.gdshader" id="12_myj8m"]
 [ext_resource type="FontFile" uid="uid://dskmx2extevrw" path="res://data/fonts/times.ttf" id="13_bkvhe"]
 [ext_resource type="Script" uid="uid://htbcgdaaygan" path="res://data/scenes_and_scripts/scramble/letter.gd" id="14_iog2l"]
@@ -210,8 +211,8 @@ mouse_filter = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("13_bkvhe")
-theme_override_font_sizes/font_size = 150
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 180
 text = "7"
 horizontal_alignment = 1
 script = ExtResource("14_iog2l")
@@ -224,8 +225,8 @@ mouse_filter = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("13_bkvhe")
-theme_override_font_sizes/font_size = 150
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 180
 text = "7"
 horizontal_alignment = 1
 script = ExtResource("14_iog2l")
@@ -238,8 +239,8 @@ mouse_filter = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("13_bkvhe")
-theme_override_font_sizes/font_size = 150
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 180
 text = "7"
 horizontal_alignment = 1
 script = ExtResource("14_iog2l")
@@ -252,8 +253,8 @@ mouse_filter = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("13_bkvhe")
-theme_override_font_sizes/font_size = 150
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 180
 text = "7"
 horizontal_alignment = 1
 script = ExtResource("14_iog2l")
@@ -268,8 +269,8 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 200
 theme_override_constants/outline_size = 10
 theme_override_constants/shadow_outline_size = -135
-theme_override_fonts/font = ExtResource("13_bkvhe")
-theme_override_font_sizes/font_size = 150
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 180
 text = "7"
 horizontal_alignment = 1
 script = ExtResource("14_iog2l")
@@ -282,8 +283,8 @@ mouse_filter = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("13_bkvhe")
-theme_override_font_sizes/font_size = 150
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 180
 text = "7"
 horizontal_alignment = 1
 script = ExtResource("14_iog2l")
@@ -296,8 +297,8 @@ mouse_filter = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("13_bkvhe")
-theme_override_font_sizes/font_size = 150
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 180
 text = "7"
 horizontal_alignment = 1
 script = ExtResource("14_iog2l")
@@ -415,8 +416,8 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("13_bkvhe")
-theme_override_font_sizes/font_size = 100
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 180
 theme_override_styles/focus = SubResource("StyleBoxFlat_48hoo")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_48hoo")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_48hoo")
@@ -449,8 +450,8 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("13_bkvhe")
-theme_override_font_sizes/font_size = 100
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 180
 theme_override_styles/focus = SubResource("StyleBoxFlat_48hoo")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_48hoo")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_48hoo")
@@ -484,8 +485,8 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("13_bkvhe")
-theme_override_font_sizes/font_size = 100
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 180
 theme_override_styles/focus = SubResource("StyleBoxFlat_48hoo")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_48hoo")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_48hoo")
@@ -573,8 +574,8 @@ offset_bottom = -393.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("13_bkvhe")
-theme_override_font_sizes/font_size = 150
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 180
 text = "Score = 0 "
 horizontal_alignment = 1
 
@@ -592,8 +593,8 @@ offset_bottom = -218.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("13_bkvhe")
-theme_override_font_sizes/font_size = 140
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 180
 text = "XXXXXXX"
 horizontal_alignment = 1
 
@@ -638,6 +639,7 @@ offset_right = 593.0
 offset_bottom = 711.28
 grow_horizontal = 2
 theme_override_constants/separation = 50
+alignment = 1
 
 [node name="FoundWordsVbox1" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
 unique_name_in_owner = true
@@ -648,361 +650,411 @@ alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord2" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord3" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord4" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord5" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord6" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord7" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord8" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord9" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord10" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox1"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWordsVbox2" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-alignment = 2
+alignment = 1
 
 [node name="FoundWord12" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord13" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord14" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord15" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord16" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord17" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord18" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord19" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord20" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord21" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWordsVbox3" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-alignment = 2
+alignment = 1
 
 [node name="FoundWord23" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord24" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord25" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord26" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord27" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord28" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord29" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord30" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord31" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord32" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox3"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWordsVbox4" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-alignment = 2
+alignment = 1
 
 [node name="FoundWord34" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord35" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord36" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord37" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord38" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord39" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord40" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord41" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord42" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord43" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox4"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWordsVbox5" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-alignment = 2
+alignment = 1
 
 [node name="FoundWord45" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord46" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord47" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord48" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord49" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord50" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord51" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord52" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord53" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="FoundWord54" type="Label" parent="CanvasLayer/HBoxContainer/FoundWordsVbox5"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "wagawa"
+theme_override_fonts/font = ExtResource("11_gtrcg")
+theme_override_font_sizes/font_size = 55
+text = "[][][][][][]"
 
 [node name="Blocker" type="ColorRect" parent="CanvasLayer"]
 unique_name_in_owner = true
@@ -1028,7 +1080,7 @@ offset_bottom = -27.3
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("13_bkvhe")
+theme_override_fonts/font = ExtResource("11_gtrcg")
 theme_override_font_sizes/font_size = 101
 theme_override_styles/focus = SubResource("StyleBoxEmpty_nqxtb")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_nqxtb")

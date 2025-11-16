@@ -104,6 +104,41 @@ var WSTEST = false
 const GAME_DURATION_SECONDS: int = 70
 const SUDDEN_DEATH_DURATION_SECONDS: int = 10
 
+func _translate_game_type(string):
+	if string == "ScrambleVanilla":
+		return ["Scramble", "Vanilla"]
+	if string == "ScrambleBonus":
+		return ["Scramble", "Bonus"]
+	if string == "ScrambleBonusObscurity":
+		return ["Scramble", "Bonus", "Obscurity"]
+	if string == "ScrambleObscurity":
+		return ["Scramble", "Obscurity"]
+	if string == "ScrambleWonder":
+		return ["Scramble", "Wonder"]
+	if string == "ScrambleBonusWonder":
+		return ["Scramble", "Bonus", "Wonder"]
+	if string == "ScrambleObscurityWonder":
+		return ["Scramble", "Obscurity", "Wonder"]
+	if string == "ScrambleBonusObscurityWonder":
+		return ["Scramble", "Bonus", "Obscurity", "Wonder"]
+	if string == "WordsearchVanilla":
+		return ["Wordsearch", "Separate"]
+	if string == "WordsearchShared":
+		return ["Wordsearch", "Together"]
+	if string == "HangmanChaosVanilla":
+		return ["Hangman", "Bedlam"]
+	if string == "HangmanChaosShared":
+		return ["Hangman", "Absolute", "Bedlam"]
+	if string == "HangmanChaosEphemeral":
+		return ["Hangman", "Ephemeral", "Bedlam"]
+	if string == "HangmanTurnbased":
+		return ["Hangman", "Deliberate"]
+	if string == "HangmanDelay":
+		return ["Hangman", "Liminal"]
+	if string == "HangmanDelayEphemeral":
+		return ["Hangman", "Ephemeral", "Liminal"]
+	pass
+
 func _load_rules():
 	var file_path = "res://data/text_files/rules.json"
 	var file = FileAccess.open(file_path, FileAccess.READ)

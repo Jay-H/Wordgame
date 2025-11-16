@@ -342,6 +342,7 @@ fit_content = true
 horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
 offset_left = 6.0
 offset_top = 2668.0
 offset_right = 496.0

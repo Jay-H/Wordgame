@@ -154,7 +154,7 @@ func _on_low_graphics_switch_toggled(toggled_on: bool) -> void:
 func _on_single_player_pressed() -> void:
 	Haptics.stacatto_doublet()
 	await %MainMenuItems._fade_out()
-	%SinglePlayerMenuItems._fade_in()
+	%MomMode._fade_in()
 	pass # Replace with function body.
 
 
@@ -173,3 +173,13 @@ func _weather_function():
 	%SoakSpotControl._begin(5)
 	var tween = create_tween()
 	tween.tween_property(%RainParticles, "amount_ratio", 1.0, 25)
+
+
+func _on_cjenterprises_pressed() -> void:
+	if %InfoPanel.visible == true:
+		%InfoPanel.visible = false
+		return
+	if %InfoPanel.visible == false:
+		%InfoPanel.visible = true
+		return
+	pass # Replace with function body.

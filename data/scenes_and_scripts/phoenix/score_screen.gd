@@ -39,6 +39,13 @@ func _setup(dict, big_dictionary, firebase_id):
 	dictionary = dict
 	firebase_local_id = firebase_id
 	current_game = dictionary["selected_games"][dict["current_round"]]
+	var current_game_array = Globals._translate_game_type(current_game)
+	%GameLabel.text = ""
+	for i in current_game_array:
+		%GameLabel.text += str(i)
+		if i != current_game_array[current_game_array.size() - 1]:
+			%GameLabel.text += " | "
+		
 	var player_one_username = dict["player_one_dictionary"]["username"]
 	var player_two_username = dict["player_two_dictionary"]["username"]
 	if firebase_local_id == dict["player_one_firebase_id"]:

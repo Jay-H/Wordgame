@@ -53,7 +53,7 @@ var player_two_wrong_guesses = 0
 var player_one_delay_multiplier = 1.00
 var player_two_delay_multiplier = 1.00
 var delay_multiplier_factor = 1.01
-var turn_time_length = 10
+var turn_time_length = 12
 var timer_node
 var chaos_variant = false
 var chaos_shared_clues = false
@@ -243,6 +243,8 @@ func _send_dictionary_server_to_client(dictionary):
 
 func _new_letter_timer_starter(player):
 	if delay_variant:
+		# this part will make the letter new letter timer adjust based on how many letters there are in the word, to keep the total game time constant.
+		var adjusted_interval_increase_time = 40/word_to_find.length()
 		if player == p1id:
 			%P1NewLetterTimer.start(new_letter_interval_time)
 			%P1NewLetterTimer.timeout.connect(_new_letter_timer_timeout_function.bind(p1id))
