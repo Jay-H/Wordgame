@@ -87,7 +87,7 @@ func _on_peer_connected(id):
 	pass
 	
 func _on_peer_disconnected(id):
-	
+	print(str(id) + " has disconnected")
 	# the logic for ending a game if a player disconnects
 	if peerid_to_firebaseid_dictionary.has(id):
 		for i in running_matches:

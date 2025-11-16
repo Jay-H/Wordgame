@@ -54,6 +54,31 @@ var number_of_matches_currently_being_played
 var process_test = false
 @onready var arguments = OS.get_cmdline_args()
 
+func _notification(what):
+	if what == NOTIFICATION_APPLICATION_PAUSED:
+		await get_tree().create_timer(1.5).timeout
+		ENetConnection.EVENT_DISCONNECT
+		print("paused")
+	if what == NOTIFICATION_APPLICATION_RESUMED:
+		print("resumed")
+
+func _unhandled_input(event):
+	# Press 'P' to simulate a pause
+	if event.is_action_pressed("ui_text_p"):
+		print("--- DEBUG: Forcing PAUSE notification ---")
+		propagate_notification(NOTIFICATION_APPLICATION_PAUSED)
+
+	# Press 'R' to simulate a resume
+	if event.is_action_pressed("ui_text_r"):
+		print("--- DEBUG: Forcing RESUME notification ---")
+		propagate_notification(NOTIFICATION_APPLICATION_RESUMED)
+	
+	if event.is_action_pressed("ui_text_d"):
+		print("---DEBUG: Disconnecting from server... ---")
+		if multiplayer.multiplayer_peer:
+			multiplayer.multiplayer_peer.close()
+
+
 
 func _process(delta):
 	if opponent_disconnected:
@@ -77,6 +102,7 @@ func _process(delta):
 
 
 func _ready():
+	
 	Globals._load_rules()
 	print(arguments)
 	%LoginScreen.connect("login_successful", _on_login_successful)
