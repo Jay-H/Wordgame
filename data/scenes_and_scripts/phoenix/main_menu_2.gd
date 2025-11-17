@@ -58,41 +58,43 @@ var connected_to_server = false
 
 @onready var arguments = OS.get_cmdline_args()
 
-func _notification_disconnector():
-	var path = "users"
-	var db_ref = Database.get_database_reference(path)
-	db_ref.update(firebase_local_id, {"logged_in": false})
+func _on_os_pause():
+	print("d2")
+	rpc_id(1, "_lifeboat", firebase_local_id)
 	await get_tree().process_frame
 	await get_tree().process_frame
 	
 	pass
 
-func _notification_reconnector():
+func _on_os_resume():
 	var path = "users"
 	var db_ref = Database.get_database_reference(path)
 	db_ref.update(firebase_local_id, {"logged_in": true})
 	
 	
 func _on_disconnection_from_server():
+	print("d1")
 	connected_to_server = false
-	_notification_disconnector()
+	var path = "users"
+	var db_ref = Database.get_database_reference(path)
+	db_ref.update(firebase_local_id, {"logged_in": false})	
+	await get_tree().create_timer(1).timeout
 	pass
 
 func _notification(what):
 	if what == NOTIFICATION_APPLICATION_PAUSED:
-		_notification_disconnector()
+		_on_os_pause()
 		print("paused")
 		if true_menu_instance_reference != null:
 			true_menu_instance_reference._console_output("paused")
 	if what == NOTIFICATION_APPLICATION_RESUMED:
-		_notification_reconnector()
+		_on_os_resume()
 		print("resumed")
 		if true_menu_instance_reference != null:
 			true_menu_instance_reference._console_output("resumed")
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		print("wm_close_request")
-		await get_tree().create_timer(1).timeout
-		await _notification_disconnector()
+		await _on_disconnection_from_server()
 		get_tree().quit()
 	if what == NOTIFICATION_EXIT_TREE:
 		print("exit tree")
@@ -205,7 +207,7 @@ func connect_to_server():
 		Database.get_database_reference("users").update(firebase_local_id, {"last_peer_id": multiplayer.get_unique_id()})
 		multiplayer.server_disconnected.connect(_on_disconnection_from_server)
 		connected_to_server = true
-		_notification_reconnector()
+		_on_os_resume()
 	else:
 		print(error)
 	
@@ -498,3 +500,7 @@ func _end_single_player_game(node):
 #func _debug_vm(data):
 	##print(data)
 	#pass
+
+@rpc("authority","call_remote", "reliable")
+func _lifeboat(firebase_id):
+	pass

@@ -376,6 +376,11 @@ func _ask_server_for_info(info_dictionary):
 	rpc_id(multiplayer.get_remote_sender_id(), "_ask_server_for_info", info_dictionary)
 	pass
 
+@rpc("any_peer","call_remote", "reliable")
+func _lifeboat(firebase_id):
+	print("lifeboat made it")
+	Database.get_database_reference("users").update(firebase_id, {"logged_in": false})
+	pass
 
 #@rpc("any_peer", "call_remote", "reliable")	
 #func _debug_vm(data):
