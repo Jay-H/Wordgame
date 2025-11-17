@@ -183,3 +183,15 @@ func _on_cjenterprises_pressed() -> void:
 		%InfoPanel.visible = true
 		return
 	pass # Replace with function body.
+
+func _console_output(message):
+	%ConsoleOutput.text += "\n" + str(message)
+
+
+func _on_console_toggle_pressed() -> void:
+	%ConsoleOutput.text = ""
+	if %ConsoleOutput.visible == true:
+		%ConsoleOutput.visible = false
+	else:
+		%ConsoleOutput.visible = true
+	pass # Replace with function body.

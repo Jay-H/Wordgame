@@ -19,7 +19,7 @@ var score_screen = "res://data/scenes_and_scripts/phoenix/score_screen.tscn"
 var match_over_scene = "res://data/scenes_and_scripts/phoenix/match_over.tscn"
 var rules_scene = "res://data/scenes_and_scripts/phoenix/new_rules.tscn"
 var single_player_scramble_scene = "res://data/scenes_and_scripts/scramble/single_player_scramble_client_scene.tscn"
-
+var logged_in_to_firebase = false
 @onready var Database = get_node("/root/Firebase/Database")
 var my_client_id
 var firebase_local_id
@@ -33,11 +33,11 @@ var pre_match_info
 var my_info : Dictionary = { 
 	"country": "", "email": "@gmail.com", "experience": 0.0, "level": 0.0, "losses": 0.0, "matches_played": 0.0, "profilepic": 0.0, 
 	"rank": 0.0, "username": "", "wins": 0.0, "music_enabled": true, "sound_enabled": true, "auto_skip_rules": false, "low_graphics_mode": false,
-	"rank_points": 0 }
+	"rank_points": 0 , "logged_in": false, "last_peer_id": 0}
 var old_info : Dictionary = { 
 	"country": "", "email": "@gmail.com", "experience": 0.0, "level": 0.0, "losses": 0.0, "matches_played": 0.0, "profilepic": 0.0, 
 	"rank": 0.0, "username": "", "wins": 0.0, "music_enabled": true, "sound_enabled": true, "auto_skip_rules": false, "low_graphics_mode": false,
-	"rank_points": 0 }
+	"rank_points": 0, "logged_in": false, "last_peer_id": 0}
 var username
 var db_ref
 var path
@@ -48,19 +48,55 @@ var match_found_instance
 var rules_instance
 var score_screen_instance
 var match_over_screen_instance
+var login_screen_instance
+var true_menu_instance_reference
 var auth_data
 var number_of_players_online 
 var number_of_matches_currently_being_played
 var process_test = false
+var connected_to_server = false
+
 @onready var arguments = OS.get_cmdline_args()
+
+func _notification_disconnector():
+	var path = "users"
+	var db_ref = Database.get_database_reference(path)
+	db_ref.update(firebase_local_id, {"logged_in": false})
+	await get_tree().process_frame
+	await get_tree().process_frame
+	
+	pass
+
+func _notification_reconnector():
+	var path = "users"
+	var db_ref = Database.get_database_reference(path)
+	db_ref.update(firebase_local_id, {"logged_in": true})
+	
+	
+func _on_disconnection_from_server():
+	connected_to_server = false
+	_notification_disconnector()
+	pass
 
 func _notification(what):
 	if what == NOTIFICATION_APPLICATION_PAUSED:
-		await get_tree().create_timer(1.5).timeout
-		ENetConnection.EVENT_DISCONNECT
+		_notification_disconnector()
 		print("paused")
+		if true_menu_instance_reference != null:
+			true_menu_instance_reference._console_output("paused")
 	if what == NOTIFICATION_APPLICATION_RESUMED:
+		_notification_reconnector()
 		print("resumed")
+		if true_menu_instance_reference != null:
+			true_menu_instance_reference._console_output("resumed")
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		print("wm_close_request")
+		await get_tree().create_timer(1).timeout
+		await _notification_disconnector()
+		get_tree().quit()
+	if what == NOTIFICATION_EXIT_TREE:
+		print("exit tree")
+
 
 func _unhandled_input(event):
 	# Press 'P' to simulate a pause
@@ -77,7 +113,10 @@ func _unhandled_input(event):
 		print("---DEBUG: Disconnecting from server... ---")
 		if multiplayer.multiplayer_peer:
 			multiplayer.multiplayer_peer.close()
-
+			
+	if event.is_action_pressed("ui_text_a"):
+		print("---DEBUG: Reconnecting to server... ---")
+		connect_to_server()
 
 
 func _process(delta):
@@ -102,11 +141,11 @@ func _process(delta):
 
 
 func _ready():
-	
+	get_tree().set_auto_accept_quit(false)
 	Globals._load_rules()
 	print(arguments)
 	%LoginScreen.connect("login_successful", _on_login_successful)
-	connect_to_server() # this function will also set the "my_client_id" variable at the top, so now we have all the identifying information together. 
+	#connect_to_server() # this function will also set the "my_client_id" variable at the top, so now we have all the identifying information together. 
 	
 	
 #this function triggers from the login screen sending a signal.
@@ -114,26 +153,37 @@ func _ready():
 #it will set the variables at the top of this script and switch to the main menu which is called "true menu"	
 func _on_login_successful(auth):
 
-	rpc_id(1, "_send_firebase_info_to_server",auth)
+	#rpc_id(1, "_send_firebase_info_to_server",auth)
 	firebase_local_id = auth["localid"]
 	firebase_email = auth["email"]
-	await %LoginScreen.fade_out()
-	%LoginScreen.queue_free()
-	var true_menu_instance = (load(true_menu)).instantiate()
-	add_child(true_menu_instance)
-	true_menu_instance.fade_in()
-	true_menu_instance.username_changed.connect(_update_username)
-	true_menu_instance.find_game_pressed.connect(_find_game)
-	true_menu_instance.profilepic_changed.connect(_update_profilepic)
-	_settings_signals_manager(true_menu_instance)
-	
-	_database_initializer(auth)
-	auth_data = auth
+	await _database_initializer(auth)
+	if my_info["logged_in"] == true:
+		login_screen_instance._already_logged_in()
+	else:
+		logged_in_to_firebase = true
+		var path = "users"
+		var db_ref = Database.get_database_reference(path)
+		db_ref.update(firebase_local_id, {"logged_in": true})
+		await %LoginScreen.fade_out()
+		%LoginScreen.queue_free()
+		var true_menu_instance = (load(true_menu)).instantiate()
+		add_child(true_menu_instance)
+		true_menu_instance_reference = true_menu_instance
+		true_menu_instance.fade_in()
+		true_menu_instance.username_changed.connect(_update_username)
+		true_menu_instance.find_game_pressed.connect(_find_game)
+		true_menu_instance.profilepic_changed.connect(_update_profilepic)
+		_settings_signals_manager(true_menu_instance)
+		auth_data = auth
+		connect_to_server()
 
 	
 func _true_menu_fade_in():
 	var true_menu_instance = (load(true_menu)).instantiate()
+	print("running")
 	add_child(true_menu_instance)
+	true_menu_instance_reference = true_menu_instance
+	
 	_database_initializer(auth_data)
 	true_menu_instance.fade_in()
 	true_menu_instance.username_changed.connect(_update_username)
@@ -149,9 +199,13 @@ func connect_to_server():
 	if error == OK:
 		multiplayer.multiplayer_peer = peer
 		my_client_id = multiplayer.get_unique_id()
-
+		
 		if %LoginScreen != null:
 			%LoginScreen.connected_to_server = true
+		Database.get_database_reference("users").update(firebase_local_id, {"last_peer_id": multiplayer.get_unique_id()})
+		multiplayer.server_disconnected.connect(_on_disconnection_from_server)
+		connected_to_server = true
+		_notification_reconnector()
 	else:
 		print(error)
 	
@@ -182,7 +236,8 @@ func _database_initializer(auth):
 	client_settings_db_ref = Database.get_database_reference(general_client_settings_path, {})
 	client_settings_db_ref.new_data_update.connect(_client_settings_db_update)
 	client_settings_db_ref.patch_data_update.connect(_client_settings_db_update)
-	client_settings_db_ref.delete_data_update.connect(_client_settings_db_update)	
+	client_settings_db_ref.delete_data_update.connect(_client_settings_db_update)
+	await get_tree().create_timer(1).timeout #give time for all the signals to propagage and populate our "my_info"	
 	#db_ref.push_successful.connect(_on_db_data_update)
 	#db_ref.push_failed.connect(_on_db_data_update)
 	#db_ref.once_successful.connect(_on_db_data_update)
@@ -197,6 +252,11 @@ func _client_settings_db_update(argument):
 	pass
 	
 func _on_db_data_update(argument): 
+	if argument.key == "IPs":
+		if argument.data["selected_ip"] == "VM":
+			IP_ADDRESS = "136.112.186.218"
+		if argument.data["selected_ip"] == "Local":
+			IP_ADDRESS = "localhost"
 	
 	if argument.get("key") != "": # this is stupid, i dont know why the initial population has the key and value, but further updates just have the vale/"data"
 		my_info[str(argument.get("key"))] = argument.get("data")
@@ -402,6 +462,8 @@ func _settings_to_firebase(signal_name):
 	if signal_name == "low_graphics_disabled":
 		db_ref.update(firebase_local_id, {"low_graphics_mode": false})
 		pass
+	if signal_name == "logged_in":
+		db_ref.update(firebase_local_id, {"logged_in": true})
 	pass	
 
 func _skip_pressed(dict):

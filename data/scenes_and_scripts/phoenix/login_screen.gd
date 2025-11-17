@@ -3,9 +3,13 @@ extends Control
 var duration = 2
 var connected_to_server = false
 var shader_array = []
+var firebase_authorized = false
+var db_ref
+@onready var Database = get_node("/root/Firebase/Database")
+
 func _ready():
 	
-	
+	main_menu.login_screen_instance = self
 	%BottomParticles.emitting = false
 	await %SplashScreen.fade_process()
 	%SplashScreen.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -17,6 +21,7 @@ func _ready():
 		#
 	#if main_menu.arguments.has("user_2"):
 		#%QuickLoginB.pressed.emit()
+		
 func fade_in(duration):
 	%BottomParticles.emitting = true
 	shader_array = [%Login, %CreateAccount, %ChrisLabel]
@@ -47,21 +52,34 @@ func _process(_delta):
 
 func _on_login_pressed() -> void:
 	%login_btn.play()
-	if connected_to_server:
-		var email = %EmailBox.text
-		var password = %PasswordBox.text
-		if %EmailBox.text == "":
-			shake_effect(%EmailBox)
-		if %PasswordBox.text == "":
-			shake_effect(%PasswordBox)
-		if %EmailBox.text != "" and %PasswordBox.text != "":
-			Firebase.Auth.login_succeeded.connect(main_menu._verify_not_already_logged_in_firebase)
-			Firebase.Auth.login_failed.connect(_incorrect_login)
-			Firebase.Auth.login_with_email_and_password(email, password)
-			pass
+	var email = %EmailBox.text
+	var password = %PasswordBox.text
+	if %EmailBox.text == "":
+		shake_effect(%EmailBox)
+	if %PasswordBox.text == "":
+		shake_effect(%PasswordBox)
+	if %EmailBox.text != "" and %PasswordBox.text != "":
+		#Firebase.Auth.login_succeeded.connect(main_menu._verify_not_already_logged_in_firebase)
+		
+		Firebase.Auth.login_succeeded.connect(main_menu._on_login_successful)
+		Firebase.Auth.login_failed.connect(_incorrect_login)
+		Firebase.Auth.login_with_email_and_password(email, password)
+		pass
+		
 	else:
 		print("you can't login until connected to game server")
 
+func _login_test(auth):
+	var path = "users/" + str(auth["localid"])
+	db_ref = Database.get_database_reference(path, {})
+	db_ref.new_data_update.connect(main_menu._on_db_data_update)
+	db_ref.patch_data_update.connect(main_menu._on_db_data_update)
+	db_ref.delete_data_update.connect(main_menu._on_db_data_update)
+	pass
+
+func _on_db_data_update(resource):
+	pass
+	
 func _already_logged_in():
 	%EmailBox.text = "Already Logged In!"
 	shake_effect(%EmailBox)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bgncexbj6v6gn"]
 
-[ext_resource type="Script" uid="uid://ciuje32gujel8" path="res://data/scenes_and_scripts/multiplayertesting/serverhost.gd" id="1_bd6ue"]
+[ext_resource type="Script" uid="uid://0aj3dtooeeqy" path="res://data/scenes_and_scripts/multiplayertesting/serverhost.gd" id="1_bd6ue"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3

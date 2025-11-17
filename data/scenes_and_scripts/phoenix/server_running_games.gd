@@ -11,6 +11,10 @@ var match_found_time = 3
 var rules_time = 5
 var score_time = 3
 var skip_dict = {}
+var disconnected_limbo_firebase_ids = []
+
+func _ready():
+	serverhost.player_reconnected.connect(_reconnect_handler)
 
 func _process(_delta):
 	if players_looking_for_match.size() == 2: # this part is responsible for taking two players from the players looking for match array and passing them to new match function
@@ -263,7 +267,16 @@ func _skip_rules_pressed(dict):
 	
 	pass
 
+
+func _reconnect_handler(old, new, firebase):
+	print(old)
+	print(new)
+	print(firebase)
+	pass
+
 func _disconnect_handler(dict, disconnected_player_peer_id):
+	disconnected_limbo_firebase_ids.append(serverhost.peerid_to_firebaseid_dictionary[disconnected_player_peer_id])
+	print(disconnected_limbo_firebase_ids)
 	var connected_player_peer_id
 	var connected_player_player_number
 	if disconnected_player_peer_id == dict["player_one_peer_id"]:
@@ -273,7 +286,19 @@ func _disconnect_handler(dict, disconnected_player_peer_id):
 		connected_player_peer_id = dict["player_one_peer_id"]
 		connected_player_player_number = "one"
 	# following here will be making it so the still connected player automatically wins the match and gets all the round end rewards. 
-		dict["match_winner"] = connected_player_player_number
+	print("player_disconnected, 5 seconds to reconnect")
+	await get_tree().create_timer(1).timeout # we give a chance for reconnection
+	print("5")
+	await get_tree().create_timer(1).timeout # we give a chance for reconnection
+	print("4")
+	await get_tree().create_timer(1).timeout # we give a chance for reconnection
+	print("3")
+	await get_tree().create_timer(1).timeout # we give a chance for reconnection
+	print("2")
+	await get_tree().create_timer(1).timeout # we give a chance for reconnection
+	print("1")
+	await get_tree().create_timer(1).timeout	
+	dict["match_winner"] = connected_player_player_number
 	dict["end_by_disconnection"] = true
 	dict["current_round"] = 3
 	dict["round1winner"] = str(connected_player_player_number)

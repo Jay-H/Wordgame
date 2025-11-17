@@ -1,14 +1,19 @@
 extends Control
+
+signal player_reconnected(old_peer_id, new_peer_id, firebase_id)
+
 var PORT = 7777
 var MAX_PLAYERS = 1000
+
 @onready var Database = get_node("/root/Firebase/Database")
 
 var initial_user_data: Dictionary = { 
 	"country": "", "email": "@gmail.com", "experience": 0.0, "level": 0.0, "losses": 0.0, "matches_played": 0.0, "profilepic": 0.0, 
 	"rank": 0.0, "username": "", "wins": 0.0, "music_enabled": true, "sound_enabled": true, "auto_skip_rules": false, "low_graphics_mode": false, 
-	"rank_points": 0,
+	"rank_points": 0, "logged_in": false, "last_peer_id": 0,
 	}
 var peerid_to_firebaseid_dictionary = {}
+var firebaseid_to_peerid_dictionary = {}
 var logged_in_firebase_ids = []
 var players_looking_for_match = []
 var legendary_dictionary = {}
@@ -16,6 +21,7 @@ var running_matches = []
 var process_test = false
 var available_game_type_lists = {}
 var game_types_ref
+var user_information_ref
 var selected_game_list_name
 var selected_game_list
 var selected_game_list_2 = ["HangmanChaosVanilla", "HangmanChaosShared", "HangmanChaosEphemeral", "HangmanTurnbased", "HangmanDelay", "HangmanDelayEphemeral"]
@@ -44,11 +50,39 @@ func _on_FirebaseAuth_login_succeeded(auth):
 	timer_values_ref = Firebase.Database.get_database_reference("server_data/timer_values", {})
 	timer_values_ref.new_data_update.connect(_on_timer_ref_update)
 	timer_values_ref.patch_data_update.connect(_on_timer_ref_update)
-	timer_values_ref.delete_data_update.connect(_on_timer_ref_update)	
+	timer_values_ref.delete_data_update.connect(_on_timer_ref_update)
+	user_information_ref = Firebase.Database.get_database_reference("users", {})
+	user_information_ref.new_data_update.connect(_on_user_information_ref_update)
+	user_information_ref.patch_data_update.connect(_on_user_information_ref_update)
+	user_information_ref.delete_data_update.connect(_on_user_information_ref_update)	
 	pass	
 	
+func _on_user_information_ref_update(resource):
 	
-	
+	var key = resource.key
+	var data = resource.data
+	if data.has("logged_in"):
+		if data["logged_in"]:
+			logged_in_firebase_ids.append(key)
+		else:
+			logged_in_firebase_ids.erase(key)
+	if data.has("last_peer_id"):
+		data["last_peer_id"] = int(data["last_peer_id"])
+		if firebaseid_to_peerid_dictionary.has(key):
+			var old_peer_id = firebaseid_to_peerid_dictionary[key]
+			print("server")
+			print (%RunningGames.disconnected_limbo_firebase_ids)
+			if %RunningGames.disconnected_limbo_firebase_ids.has(old_peer_id):
+				print("got here")
+				player_reconnected.emit(old_peer_id, int(data["last_peer_id"]), peerid_to_firebaseid_dictionary[old_peer_id])			
+			peerid_to_firebaseid_dictionary.erase(old_peer_id)
+
+				
+		
+		firebaseid_to_peerid_dictionary[key] = data["last_peer_id"]
+		peerid_to_firebaseid_dictionary[data["last_peer_id"]] = key
+		
+
  # here we will let the client know that they are connected to the server for the purpose of allowing them to now login through firebase
 func _on_game_types_ref_update(resource):
 	if resource.key == "selected_game":
@@ -110,8 +144,8 @@ func _on_peer_disconnected(id):
 @rpc("any_peer", "call_remote", "reliable")
 func _send_firebase_info_to_server(auth):
 	var peer_id = multiplayer.get_remote_sender_id()
-	peerid_to_firebaseid_dictionary[peer_id] = auth["localid"]
-	logged_in_firebase_ids.append(auth["localid"])
+	#peerid_to_firebaseid_dictionary[peer_id] = auth["localid"]
+	#logged_in_firebase_ids.append(auth["localid"])
 	pass
 
 #_create_account and _create_account_succeeded will run and enter the multiplayer peer id and firebase id into a dictionary so that they are joined
