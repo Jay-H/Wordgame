@@ -581,3 +581,11 @@ func _initialize(dict):
 func tie_game_informer(tie_game_cycles):
 
 	pass
+
+func reconnect_function(old, new):
+	for i in [player_one_id, player_two_id]:
+		if i == old:
+			i = new
+	print (player_one_id)
+	print(player_two_id)
+	pass

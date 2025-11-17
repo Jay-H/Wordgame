@@ -12,6 +12,7 @@ var rules_time = 5
 var score_time = 3
 var skip_dict = {}
 var disconnected_limbo_firebase_ids = []
+var disconnected_scene_dictionary = {}
 
 func _ready():
 	serverhost.player_reconnected.connect(_reconnect_handler)
@@ -272,10 +273,22 @@ func _reconnect_handler(old, new, firebase):
 	print(old)
 	print(new)
 	print(firebase)
+	if disconnected_scene_dictionary.has(firebase):
+		disconnected_scene_dictionary[firebase][0] = "reconnected"
+		var dict = disconnected_scene_dictionary[firebase][1]
+		print(dict["timers_node_name"])
+		var timers_node = get_node(str(dict["timers_node_name"]))
+		var match_node = get_node(str(dict["match_node_name"]))
+		var current_game_scene = match_node.get_child(0)
+		for i in timers_node.get_children():
+			i.set_paused(false)
+		current_game_scene.reconnect_function(old, new)
+		
 	pass
 
 func _disconnect_handler(dict, disconnected_player_peer_id):
-	disconnected_limbo_firebase_ids.append(serverhost.peerid_to_firebaseid_dictionary[disconnected_player_peer_id])
+	var disconnected_firebase_id = serverhost.peerid_to_firebaseid_dictionary[disconnected_player_peer_id]
+	disconnected_limbo_firebase_ids.append(disconnected_firebase_id)
 	print(disconnected_limbo_firebase_ids)
 	var connected_player_peer_id
 	var connected_player_player_number
@@ -287,28 +300,29 @@ func _disconnect_handler(dict, disconnected_player_peer_id):
 		connected_player_player_number = "one"
 	# following here will be making it so the still connected player automatically wins the match and gets all the round end rewards. 
 	print("player_disconnected, 5 seconds to reconnect")
-	await get_tree().create_timer(1).timeout # we give a chance for reconnection
-	print("5")
-	await get_tree().create_timer(1).timeout # we give a chance for reconnection
-	print("4")
-	await get_tree().create_timer(1).timeout # we give a chance for reconnection
-	print("3")
-	await get_tree().create_timer(1).timeout # we give a chance for reconnection
-	print("2")
-	await get_tree().create_timer(1).timeout # we give a chance for reconnection
-	print("1")
-	await get_tree().create_timer(1).timeout	
-	dict["match_winner"] = connected_player_player_number
-	dict["end_by_disconnection"] = true
-	dict["current_round"] = 3
-	dict["round1winner"] = str(connected_player_player_number)
-	dict["round2winner"] = str(connected_player_player_number)
-	dict["round3winner"] = str(connected_player_player_number)
-	_end_match_prefunction(dict)
-	for i in serverhost.running_matches:
-		if i["match_node_name"] == dict["match_node_name"]:
-			serverhost.running_matches.erase(i)
-	rpc_id(connected_player_peer_id, "_on_opponent_disconnected", dict)
+	var timers_node = get_node(str(dict["timers_node_name"]))
+	var match_node = get_node(str(dict["match_node_name"]))
+	for i in timers_node.get_children():
+		i.set_paused(true)
+	disconnected_scene_dictionary[disconnected_firebase_id] = ["disconnected", dict]
+	#disconnected_scene_dictionary[str(match_node)] = {"status": "disconnected", "match_node_name": dict["match_node_name"], "firebase_ids": [dict["player_one_firebase_id"], dict["player_two_firebase_id"]]}
+	await get_tree().create_timer(5).timeout # we give a chance for reconnection
+	if disconnected_scene_dictionary[disconnected_firebase_id][0] == "disconnected":
+		disconnected_limbo_firebase_ids.erase(disconnected_firebase_id)
+		dict["match_winner"] = connected_player_player_number
+		dict["end_by_disconnection"] = true
+		dict["current_round"] = 3
+		dict["round1winner"] = str(connected_player_player_number)
+		dict["round2winner"] = str(connected_player_player_number)
+		dict["round3winner"] = str(connected_player_player_number)
+		_end_match_prefunction(dict)
+		for i in serverhost.running_matches:
+			if i["match_node_name"] == dict["match_node_name"]:
+				serverhost.running_matches.erase(i)
+		rpc_id(connected_player_peer_id, "_on_opponent_disconnected", dict)
+	else:
+		print("this spot ")
+		return
 	pass
 
 @rpc("any_peer", "call_remote", "reliable")

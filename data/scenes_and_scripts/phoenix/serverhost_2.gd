@@ -72,9 +72,9 @@ func _on_user_information_ref_update(resource):
 			var old_peer_id = firebaseid_to_peerid_dictionary[key]
 			print("server")
 			print (%RunningGames.disconnected_limbo_firebase_ids)
-			if %RunningGames.disconnected_limbo_firebase_ids.has(old_peer_id):
+			if %RunningGames.disconnected_limbo_firebase_ids.has(key):
 				print("got here")
-				player_reconnected.emit(old_peer_id, int(data["last_peer_id"]), peerid_to_firebaseid_dictionary[old_peer_id])			
+				player_reconnected.emit(old_peer_id, int(data["last_peer_id"]), key)			
 			peerid_to_firebaseid_dictionary.erase(old_peer_id)
 
 				

@@ -41,8 +41,8 @@ var old_info : Dictionary = {
 var username
 var db_ref
 var path
-#var IP_ADDRESS = "localhost"
-var IP_ADDRESS = "136.112.186.218" # VM
+var IP_ADDRESS = "localhost"
+#var IP_ADDRESS = "136.112.186.218" # VM
 var PORT = 7777
 var match_found_instance
 var rules_instance
@@ -124,7 +124,7 @@ func _unhandled_input(event):
 func _process(delta):
 	if opponent_disconnected:
 		if rules_instance != null:
-			await rules_instance.fade_out()
+			await rules_instance._fade_out()
 			rules_instance.queue_free()
 		if score_screen_instance != null:
 			await score_screen_instance._fade_out()
