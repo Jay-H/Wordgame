@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://chfjcn6xrhfym"]
+[gd_scene load_steps=2 format=3 uid="uid://chfjcn6xrhfym"]
+
+[ext_resource type="Script" uid="uid://cjmiwe8pejr8l" path="res://data/scenes_and_scripts/phoenix/timers.gd" id="1_vq5wn"]
 
 [node name="Timers" type="Control"]
 layout_mode = 3
@@ -7,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_vq5wn")
 
 [node name="RulesTimer" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -27,5 +30,13 @@ unique_name_in_owner = true
 one_shot = true
 
 [node name="MatchOverTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="BonusLetterTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="ReconnectionTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 one_shot = true

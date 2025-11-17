@@ -121,4 +121,5 @@ func _skip_rules_pressed(dict): # this is from the score screen -- > main menu b
 @rpc("authority", "call_remote", "reliable")
 func _on_opponent_disconnected(dict):
 	main_menu.opponent_disconnected = true
+	main_menu._reconnect_function(1,1)
 	pass

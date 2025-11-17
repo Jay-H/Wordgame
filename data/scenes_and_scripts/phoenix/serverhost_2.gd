@@ -76,9 +76,7 @@ func _on_user_information_ref_update(resource):
 				print("got here")
 				player_reconnected.emit(old_peer_id, int(data["last_peer_id"]), key)			
 			peerid_to_firebaseid_dictionary.erase(old_peer_id)
-
-				
-		
+			firebaseid_to_peerid_dictionary.erase(key)
 		firebaseid_to_peerid_dictionary[key] = data["last_peer_id"]
 		peerid_to_firebaseid_dictionary[data["last_peer_id"]] = key
 		
@@ -127,6 +125,7 @@ func _on_peer_disconnected(id):
 		for i in running_matches:
 			if i["player_one_peer_id"] == id or i["player_two_peer_id"] == id:
 				%RunningGames._disconnect_handler(i, id)
+				
 				
 	if peerid_to_firebaseid_dictionary.has(id):
 		logged_in_firebase_ids.erase(peerid_to_firebaseid_dictionary[id])
@@ -388,3 +387,15 @@ func _lifeboat(firebase_id):
 	#for i in multiplayer.get_peers():
 		#rpc_id(i, "_debug_vm", data)
 	#pass
+
+
+@rpc("any_peer", "call_local")
+func _disconnect_function(connected_player_peer_id, time_left):
+	rpc_id(connected_player_peer_id, "_disconnect_function", connected_player_peer_id, time_left)
+	pass
+	
+@rpc("any_peer", "call_local")
+func _reconnect_function(p1id, p2id):
+	rpc_id(p1id, "_reconnect_function", p1id, p2id)
+	rpc_id(p2id, "_reconnect_function", p1id, p2id)
+	pass

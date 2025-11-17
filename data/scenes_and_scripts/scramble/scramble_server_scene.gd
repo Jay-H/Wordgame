@@ -40,6 +40,8 @@ var big_dictionary = {"Player One Last Word Counter": 0, "Player Two Last Word C
 var number_of_connected_players = 0
 var player_one_id : int = 0
 var player_two_id : int = 0
+var player_one_firebase_id
+var player_two_firebase_id
 
 var possible_words_array = []
 var final_letters_array = []
@@ -81,15 +83,21 @@ func _ready():
 			find_good_letters()
 		if random_number == 0:
 			find_good_letters_not_seven()
-	
+	var parent = get_parent()
+	var running_games = parent.get_parent()	
+	var serverhost = running_games.get_parent()
 	if bonus_variant == true:
 		current_bonus_letter = bonus_letter_chooser()
-		
+	
+	player_one_firebase_id = phoenix_dictionary["player_one_firebase_id"]
+	player_two_firebase_id = phoenix_dictionary["player_two_firebase_id"]
+	
+	player_one_id = serverhost.firebaseid_to_peerid_dictionary[player_one_firebase_id]
+	player_two_id = serverhost.firebaseid_to_peerid_dictionary[player_two_firebase_id]
+	
+	#player_one_id = get_meta("userid1")
+	#player_two_id = get_meta("userid2")
 
-	player_one_id = get_meta("userid1")
-	player_two_id = get_meta("userid2")
-	var parent = get_parent()
-	serverhost = parent.get_parent()
 	print("server host is " + str(serverhost))
 
 func _process(delta):
@@ -509,7 +517,7 @@ func _on_player_connected(id):
 
 func _on_player_disconnected(id):
 	print("Player disconnected: %d" % id)
-	queue_free()
+	#queue_free()
 
 @rpc("any_peer", "call_local")
 func wrong_word_alert(amount):
@@ -581,11 +589,26 @@ func _initialize(dict):
 func tie_game_informer(tie_game_cycles):
 
 	pass
-
-func reconnect_function(old, new):
-	for i in [player_one_id, player_two_id]:
-		if i == old:
-			i = new
+	
+@rpc("authority", "call_local")
+func _reconnect_function(old, new):
+	if player_one_id == old:
+		player_one_id = new
+	if player_two_id == old:
+		player_two_id = new
+	big_dictionary["Player One ID"] = player_one_id
+	big_dictionary["Player Two ID"] = player_two_id
+	#for i in [player_one_id, player_two_id]:
+		#rpc_id(i, "_reconnect_function")
 	print (player_one_id)
 	print(player_two_id)
+	pass
+
+@rpc("authority", "call_local")
+func _disconnect_function(connected_player_peer_id, time_left):
+	pass
+
+func _local_disconnect_intermediary(connected_player_peer_id, time_left):
+
+	rpc_id(connected_player_peer_id, "_disconnect_function", connected_player_peer_id, time_left)
 	pass

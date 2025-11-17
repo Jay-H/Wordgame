@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8q3v652k20r7"]
+[gd_scene load_steps=6 format=3 uid="uid://c8q3v652k20r7"]
 
 [ext_resource type="Script" uid="uid://dsw6rm0p2wcvh" path="res://data/scenes_and_scripts/phoenix/main_menu_2.gd" id="1_we2cn"]
 [ext_resource type="PackedScene" uid="uid://ms43gnmmu3g3" path="res://data/scenes_and_scripts/phoenix/login_screen.tscn" id="2_we2cn"]
 [ext_resource type="Script" uid="uid://cbq3a06yqhqij" path="res://data/scenes_and_scripts/phoenix/client_running_games.gd" id="3_43mna"]
+[ext_resource type="Script" uid="uid://douucdndc6nhl" path="res://data/scenes_and_scripts/scramble/disconnection_cover.gd" id="4_xyokx"]
+[ext_resource type="FontFile" uid="uid://csa2vdskduyio" path="res://data/fonts/OtherFonts/Kiddie-Store.otf" id="5_sys2l"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -21,3 +23,75 @@ layout_mode = 1
 unique_name_in_owner = true
 anchors_preset = 0
 script = ExtResource("3_43mna")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="DisconnectionCover" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_xyokx")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/DisconnectionCover"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.866667)
+
+[node name="Label" type="Label" parent="CanvasLayer/DisconnectionCover/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -37.0
+offset_right = 20.0
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("5_sys2l")
+theme_override_font_sizes/font_size = 96
+text = "Opponent Disconnected
+
+They have    seconds to reconnect
+
+Otherwise you win!"
+horizontal_alignment = 1
+
+[node name="timeleft" type="Label" parent="CanvasLayer/DisconnectionCover/ColorRect/Label"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -222.0
+offset_top = -40.0
+offset_right = -158.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("5_sys2l")
+theme_override_font_sizes/font_size = 96
+text = "10"
+horizontal_alignment = 1
+
+[node name="timelefttimer" type="Timer" parent="CanvasLayer/DisconnectionCover/ColorRect/Label/timeleft"]
+unique_name_in_owner = true

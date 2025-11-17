@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://htad6c5wox1x"]
+[gd_scene load_steps=16 format=3 uid="uid://htad6c5wox1x"]
 
 [ext_resource type="Script" uid="uid://cnf5uewq3vhqq" path="res://data/scenes_and_scripts/scramble/scramble_client_scene.gd" id="1_50ayc"]
 [ext_resource type="AudioStream" uid="uid://pclwk720i0ch" path="res://data/music/Piano1.wav" id="2_8dyrl"]
@@ -7,6 +7,7 @@
 [ext_resource type="Shader" uid="uid://dwfv7tbunsf61" path="res://data/scenes_and_scripts/scramble/scramble_client_scene.gdshader" id="4_agcab"]
 [ext_resource type="Script" uid="uid://6jp6wyjp33aw" path="res://data/scenes_and_scripts/scramble/richtextletter.gd" id="4_mge6w"]
 [ext_resource type="Script" uid="uid://htbcgdaaygan" path="res://data/scenes_and_scripts/scramble/letter.gd" id="8_04gus"]
+[ext_resource type="Script" uid="uid://douucdndc6nhl" path="res://data/scenes_and_scripts/scramble/disconnection_cover.gd" id="12_1gm2h"]
 [ext_resource type="FontFile" uid="uid://dskmx2extevrw" path="res://data/fonts/times.ttf" id="12_8dyrl"]
 [ext_resource type="Shader" uid="uid://c0ptn8g2ds8f6" path="res://data/scenes_and_scripts/scramble/cloudscape.gdshader" id="16_utcc8"]
 [ext_resource type="FontFile" uid="uid://csa2vdskduyio" path="res://data/fonts/OtherFonts/Kiddie-Store.otf" id="21_714vc"]
@@ -973,6 +974,75 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="DisconnectionCover" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_1gm2h")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/DisconnectionCover"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.866667)
+
+[node name="Label" type="Label" parent="CanvasLayer/DisconnectionCover/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -37.0
+offset_right = 20.0
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("21_714vc")
+theme_override_font_sizes/font_size = 96
+text = "Opponent Disconnected
+
+They have    seconds to reconnect
+
+Otherwise you win!"
+horizontal_alignment = 1
+
+[node name="timeleft" type="Label" parent="CanvasLayer/DisconnectionCover/ColorRect/Label"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -222.0
+offset_top = -40.0
+offset_right = -158.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("21_714vc")
+theme_override_font_sizes/font_size = 96
+text = "10"
+horizontal_alignment = 1
+
+[node name="timelefttimer" type="Timer" parent="CanvasLayer/DisconnectionCover/ColorRect/Label/timeleft"]
+unique_name_in_owner = true
 
 [connection signal="pressed" from="CanvasLayer/SubmitShadow" to="." method="_on_submit_pressed"]
 [connection signal="pressed" from="CanvasLayer/ClearShadow" to="." method="_on_clear_pressed"]

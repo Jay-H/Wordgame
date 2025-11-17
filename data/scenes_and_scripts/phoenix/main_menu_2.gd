@@ -143,6 +143,7 @@ func _process(delta):
 
 
 func _ready():
+	%DisconnectionCover.visible = false
 	get_tree().set_auto_accept_quit(false)
 	Globals._load_rules()
 	print(arguments)
@@ -504,3 +505,14 @@ func _end_single_player_game(node):
 @rpc("authority","call_remote", "reliable")
 func _lifeboat(firebase_id):
 	pass
+
+@rpc("authority", "call_local")
+func _disconnect_function(connected_player_peer_id, time_left):
+	print("fhwuiefoiuwehfewfewf")
+	print("ran   connectd player: " + str(connected_player_peer_id))	
+	%DisconnectionCover._begin(time_left)
+	pass
+	
+@rpc("authority", "call_local")
+func _reconnect_function(p1id, p2id):
+	%DisconnectionCover._end()

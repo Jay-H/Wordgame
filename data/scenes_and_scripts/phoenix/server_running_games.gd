@@ -50,7 +50,7 @@ func _new_match(matched_players):
 	"player_one_peer_id": player_one_peer_id, "player_two_peer_id": player_two_peer_id, "player_one_firebase_id": player_one_firebase_id,
 	"player_two_firebase_id": player_two_firebase_id, "player_one_dictionary": player_one_dictionary, "player_two_dictionary": player_two_dictionary,
 	"match_node_name": match_node.name, "timers_node_name": timers_node.name, "selected_games": games_array, "match_stage": "initial", "current_round": 0,
-	"match_winner": "", "rules_skipped": false, "end_by_disconnection": false
+	"match_winner": "", "rules_skipped": false, "end_by_disconnection": false, "p1_reconnection_timer_length": 10, "p2_reconnection_timer_length": 10
 	}
 	#serverhost.running_matches.append(str(match_info_dictionary["match_node_name"]))
 	serverhost.running_matches.append(match_info_dictionary)
@@ -92,16 +92,18 @@ func _match_runner(dict):
 			await rules_timer.timeout
 			
 			dict["match_stage"] = "game"
-			if dict["player_one_dictionary"]["auto_skip_rules"] == true and dict["player_two_dictionary"]["auto_skip_rules"] == true:
-				dict["rules_skipped"] = true # this is to reset it for the next rules screen
-			else:
-				dict["rules_skipped"] = false
+
 
 			_start_game(dict)
+
 			var round_timer = get_node(str(dict["timers_node_name"]) + "/RoundTimer")
 			round_timer.start(999)
 			rpc_id(dict["player_one_peer_id"], "_start_game", dict)
-			rpc_id(dict["player_two_peer_id"], "_start_game", dict)		
+			rpc_id(dict["player_two_peer_id"], "_start_game", dict)
+			if dict["player_one_dictionary"]["auto_skip_rules"] == true and dict["player_two_dictionary"]["auto_skip_rules"] == true:
+				dict["rules_skipped"] = true # this is to reset it for the next rules screen
+			else:
+				dict["rules_skipped"] = false		
 			return
 		if dict["match_stage"] == "game":
 			var round_timer = get_node(str(dict["timers_node_name"]) + "/RoundTimer")
@@ -113,8 +115,10 @@ func _match_runner(dict):
 					round_timer.start(0.5))
 			else:
 				round_timer.start(round_time)
-			dict["match_stage"] = "score"
+			###### I MOVED  dict["match_stage"] = "score" from HERE WATCH OUT
 			await round_timer.timeout
+			dict["match_stage"] = "score"
+			print("timeout happened")
 			var winner = _end_game(dict)
 			var string = "round" + str(dict["current_round"] + 1) + "winner" # this is to register into the dictionary who won each round.
 			dict[string] = winner
@@ -254,75 +258,136 @@ func _skip_rules_pressed(dict):
 	print("server side skip rtules presed ")
 	if not skip_dict.has(str(dict["match_node_name"])):
 		skip_dict[str(dict["match_node_name"])] = []
-	if multiplayer.get_remote_sender_id() == dict["player_one_peer_id"]:
+		
+	var sender = multiplayer.get_remote_sender_id()
+	var firebase_id = serverhost.peerid_to_firebaseid_dictionary[sender]
+	if firebase_id == dict["player_one_firebase_id"]:
 		skip_dict[str(dict["match_node_name"])].append(multiplayer.get_remote_sender_id())
 		if skip_dict[str(dict["match_node_name"])].size() == 2:
 			skip_dict[str(dict["match_node_name"])] = []
 			dict["rules_skipped"] = true
-	if multiplayer.get_remote_sender_id() == dict["player_two_peer_id"]:
+			dict["player_one_peer_id"] = sender
+	if firebase_id == dict["player_two_firebase_id"]:
 		skip_dict[str(dict["match_node_name"])].append(multiplayer.get_remote_sender_id())
 		if skip_dict[str(dict["match_node_name"])].size() == 2:
 			skip_dict[str(dict["match_node_name"])] = []
-			dict["rules_skipped"] = true
+			dict["rules_skipped"] = true	
+			dict["player_two_peer_id"] = sender
+		
+		
+	#if multiplayer.get_remote_sender_id() == dict["player_one_peer_id"]:
+		#skip_dict[str(dict["match_node_name"])].append(multiplayer.get_remote_sender_id())
+		#if skip_dict[str(dict["match_node_name"])].size() == 2:
+			#skip_dict[str(dict["match_node_name"])] = []
+			#dict["rules_skipped"] = true
+	#if multiplayer.get_remote_sender_id() == dict["player_two_peer_id"]:
+		#skip_dict[str(dict["match_node_name"])].append(multiplayer.get_remote_sender_id())
+		#if skip_dict[str(dict["match_node_name"])].size() == 2:
+			#skip_dict[str(dict["match_node_name"])] = []
+			#dict["rules_skipped"] = true
 	_match_runner(dict)	
 	
 	pass
 
 
 func _reconnect_handler(old, new, firebase):
-	print(old)
-	print(new)
-	print(firebase)
+	print("reconnect handler run")
+	
 	if disconnected_scene_dictionary.has(firebase):
-		disconnected_scene_dictionary[firebase][0] = "reconnected"
 		var dict = disconnected_scene_dictionary[firebase][1]
+		for i in serverhost.running_matches:
+			if i["player_one_peer_id"] == old:
+				i["player_one_peer_id"] = new
+			if i["player_two_peer_id"] == old:
+				i["player_two_peer_id"] = new
+		disconnected_scene_dictionary[firebase][0] = "reconnected"
+		
+		disconnected_scene_dictionary.erase(firebase)
+		disconnected_limbo_firebase_ids.erase(firebase)
 		print(dict["timers_node_name"])
 		var timers_node = get_node(str(dict["timers_node_name"]))
 		var match_node = get_node(str(dict["match_node_name"]))
-		var current_game_scene = match_node.get_child(0)
+		var reconnection_timer = timers_node.get_node("ReconnectionTimer")
+		reconnection_timer.stop()
 		for i in timers_node.get_children():
-			i.set_paused(false)
-		current_game_scene.reconnect_function(old, new)
+			if i.name != "ReconnectionTimer":
+				i.set_paused(false)
+				
 		
+		serverhost._reconnect_function(dict["player_one_peer_id"], dict["player_two_peer_id"])
+		if match_node.get_child_count() > 0:
+			var current_game_scene = match_node.get_child(0)
+			if current_game_scene.has_method("_reconnect_function"):
+				current_game_scene._reconnect_function(old, new)
+		print(disconnected_limbo_firebase_ids)
+		print(disconnected_scene_dictionary)
 	pass
 
 func _disconnect_handler(dict, disconnected_player_peer_id):
+	print("disconnect handler")
+
+	
 	var disconnected_firebase_id = serverhost.peerid_to_firebaseid_dictionary[disconnected_player_peer_id]
 	disconnected_limbo_firebase_ids.append(disconnected_firebase_id)
 	print(disconnected_limbo_firebase_ids)
 	var connected_player_peer_id
+	var connected_player_firebase_id
 	var connected_player_player_number
+	var disconnected_player_player_number
 	if disconnected_player_peer_id == dict["player_one_peer_id"]:
 		connected_player_peer_id = dict["player_two_peer_id"]
+		connected_player_firebase_id = serverhost.peerid_to_firebaseid_dictionary[connected_player_peer_id]
 		connected_player_player_number = "two"
+		disconnected_player_player_number = "one"
 	else:
 		connected_player_peer_id = dict["player_one_peer_id"]
+		connected_player_firebase_id = serverhost.peerid_to_firebaseid_dictionary[connected_player_peer_id]
 		connected_player_player_number = "one"
+		disconnected_player_player_number = "two"
 	# following here will be making it so the still connected player automatically wins the match and gets all the round end rewards. 
-	print("player_disconnected, 5 seconds to reconnect")
 	var timers_node = get_node(str(dict["timers_node_name"]))
 	var match_node = get_node(str(dict["match_node_name"]))
 	for i in timers_node.get_children():
-		i.set_paused(true)
+		if i.name != "ReconnectionTimer":
+			i.set_paused(true)
+	
+	if connected_player_player_number == "one":
+		serverhost._disconnect_function(connected_player_peer_id, timers_node.p2_reconnection_timer_length)
+	if connected_player_player_number == "two":
+		serverhost._disconnect_function(connected_player_peer_id, timers_node.p1_reconnection_timer_length)		
+	#if match_node.get_child_count() > 0:
+		#var current_game_scene = match_node.get_child(0)
+		#if current_game_scene.has_method("_local_disconnect_intermediary"):
+			#if connected_player_player_number == "one":
+				#current_game_scene._local_disconnect_intermediary(connected_player_peer_id, timers_node.p2_reconnection_timer_length)
+			#if connected_player_player_number == "two":
+				#current_game_scene._local_disconnect_intermediary(connected_player_peer_id, timers_node.p1_reconnection_timer_length)		
 	disconnected_scene_dictionary[disconnected_firebase_id] = ["disconnected", dict]
-	#disconnected_scene_dictionary[str(match_node)] = {"status": "disconnected", "match_node_name": dict["match_node_name"], "firebase_ids": [dict["player_one_firebase_id"], dict["player_two_firebase_id"]]}
-	await get_tree().create_timer(5).timeout # we give a chance for reconnection
-	if disconnected_scene_dictionary[disconnected_firebase_id][0] == "disconnected":
-		disconnected_limbo_firebase_ids.erase(disconnected_firebase_id)
-		dict["match_winner"] = connected_player_player_number
-		dict["end_by_disconnection"] = true
-		dict["current_round"] = 3
-		dict["round1winner"] = str(connected_player_player_number)
-		dict["round2winner"] = str(connected_player_player_number)
-		dict["round3winner"] = str(connected_player_player_number)
-		_end_match_prefunction(dict)
-		for i in serverhost.running_matches:
-			if i["match_node_name"] == dict["match_node_name"]:
-				serverhost.running_matches.erase(i)
-		rpc_id(connected_player_peer_id, "_on_opponent_disconnected", dict)
+	
+	var reconnection_timer = timers_node.get_node("ReconnectionTimer")
+	if disconnected_player_player_number == "one":
+		reconnection_timer.start(timers_node.p1_reconnection_timer_length)
+		timers_node.p1_reconnection_timer_length -= 3
 	else:
-		print("this spot ")
-		return
+		reconnection_timer.start(timers_node.p2_reconnection_timer_length)
+		timers_node.p2_reconnection_timer_length -= 3
+	reconnection_timer.timeout.connect(_disconnector.bind(dict, disconnected_firebase_id, connected_player_peer_id, connected_player_player_number, connected_player_firebase_id))
+
+func _disconnector(dict, disconnected_firebase_id, connected_player_peer_id, connected_player_player_number, connected_player_firebase_id):
+	print("disconnector run")
+	disconnected_limbo_firebase_ids.erase(disconnected_firebase_id)
+	dict["match_winner"] = connected_player_player_number
+	dict["end_by_disconnection"] = true
+	dict["current_round"] = 3
+	dict["round1winner"] = str(connected_player_player_number)
+	dict["round2winner"] = str(connected_player_player_number)
+	dict["round3winner"] = str(connected_player_player_number)
+	_end_match_prefunction(dict)
+	for i in serverhost.running_matches:
+		if i["match_node_name"] == dict["match_node_name"]:
+			serverhost.running_matches.erase(i)
+	var new_id = serverhost.firebaseid_to_peerid_dictionary[connected_player_firebase_id]
+	rpc_id(new_id, "_on_opponent_disconnected", dict)
 	pass
 
 @rpc("any_peer", "call_remote", "reliable")

@@ -40,6 +40,7 @@ var sun_color = Color(1.0, 0.902, 0.502)
 var last_found_word_counter = 0
 var variant_button_status = "on" # on, off, dim
 func _ready():
+	%DisconnectionCover.visible = false
 	%CanvasModulate.color = Color.TRANSPARENT
 	%GameTimerLabel.modulate = Color.TRANSPARENT
 	#username = arguments[1]
@@ -888,3 +889,15 @@ func _on_variant_button_pressed() -> void:
 		return
 		
 	pass # Replace with function body.
+
+@rpc("authority", "call_local")
+func _disconnect_function(connected_player_peer_id, time_left):
+	print("fhwuiefoiuwehfewfewf")
+	print("ran   connectd player: " + str(connected_player_peer_id))	
+	%DisconnectionCover._begin(time_left)
+	pass
+	
+@rpc("authority", "call_local")
+func _reconnect_function():
+	%DisconnectionCover._end()
+	
