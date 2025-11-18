@@ -195,3 +195,11 @@ func _on_console_toggle_pressed() -> void:
 	else:
 		%ConsoleOutput.visible = true
 	pass # Replace with function body.
+
+
+func _on_debug_box_button_pressed() -> void:
+	if %DebugBox.visible == false:
+		%DebugBox.visible = true
+	else:
+		%DebugBox.visible = false
+	pass # Replace with function body.

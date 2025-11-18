@@ -3,6 +3,7 @@ extends Node
 signal database_update
 
 var opponent_disconnected = false
+var you_fully_disconnected = false
 var yoyoyoyoyo
 var country
 var experience
@@ -41,8 +42,8 @@ var old_info : Dictionary = {
 var username
 var db_ref
 var path
-var IP_ADDRESS = "localhost"
-#var IP_ADDRESS = "136.112.186.218" # VM
+#var IP_ADDRESS = "localhost"
+var IP_ADDRESS = "136.112.186.218" # VM
 var PORT = 7777
 var match_found_instance
 var rules_instance
@@ -59,8 +60,10 @@ var connected_to_server = false
 @onready var arguments = OS.get_cmdline_args()
 
 func _on_os_pause():
-	print("d2")
+
 	rpc_id(1, "_lifeboat", firebase_local_id)
+	if multiplayer.multiplayer_peer:
+		multiplayer.multiplayer_peer.close()
 	await get_tree().process_frame
 	await get_tree().process_frame
 	
@@ -70,10 +73,16 @@ func _on_os_resume():
 	var path = "users"
 	var db_ref = Database.get_database_reference(path)
 	db_ref.update(firebase_local_id, {"logged_in": true})
+	connect_to_server()
+	if you_fully_disconnected:
+		
+		you_fully_disconnected == false
+		_full_disconnect_resolver()
+
 	
 	
 func _on_disconnection_from_server():
-	print("d1")
+
 	connected_to_server = false
 	var path = "users"
 	var db_ref = Database.get_database_reference(path)
@@ -118,7 +127,7 @@ func _unhandled_input(event):
 			
 	if event.is_action_pressed("ui_text_a"):
 		print("---DEBUG: Reconnecting to server... ---")
-		connect_to_server()
+		_on_os_resume()
 
 
 func _process(delta):
@@ -183,10 +192,10 @@ func _on_login_successful(auth):
 	
 func _true_menu_fade_in():
 	var true_menu_instance = (load(true_menu)).instantiate()
-	print("running")
+	print("true menu fade in running")
 	add_child(true_menu_instance)
 	true_menu_instance_reference = true_menu_instance
-	
+	print(true_menu_instance_reference)
 	_database_initializer(auth_data)
 	true_menu_instance.fade_in()
 	true_menu_instance.username_changed.connect(_update_username)
@@ -206,9 +215,10 @@ func connect_to_server():
 		if %LoginScreen != null:
 			%LoginScreen.connected_to_server = true
 		Database.get_database_reference("users").update(firebase_local_id, {"last_peer_id": multiplayer.get_unique_id()})
+		Database.get_database_reference("users").update(firebase_local_id, {"logged_in": true})
 		multiplayer.server_disconnected.connect(_on_disconnection_from_server)
 		connected_to_server = true
-		_on_os_resume()
+		
 	else:
 		print(error)
 	
@@ -229,10 +239,10 @@ func _receive_new_profile_info(auth): # this signals the client that their regis
 
 func _database_initializer(auth):
 	
-	path = "users/" + str(auth["localid"])
+	path = "users/" + str(firebase_local_id)
 	var general_client_settings_path = "client_data"
 	var client_settings_db_ref
-	db_ref = Database.get_database_reference(path, {})
+	db_ref = Database.get_database_reference(path)
 	db_ref.new_data_update.connect(_on_db_data_update)
 	db_ref.patch_data_update.connect(_on_db_data_update)
 	db_ref.delete_data_update.connect(_on_db_data_update)
@@ -240,14 +250,16 @@ func _database_initializer(auth):
 	client_settings_db_ref.new_data_update.connect(_client_settings_db_update)
 	client_settings_db_ref.patch_data_update.connect(_client_settings_db_update)
 	client_settings_db_ref.delete_data_update.connect(_client_settings_db_update)
+
 	await get_tree().create_timer(1).timeout #give time for all the signals to propagage and populate our "my_info"	
 	#db_ref.push_successful.connect(_on_db_data_update)
 	#db_ref.push_failed.connect(_on_db_data_update)
 	#db_ref.once_successful.connect(_on_db_data_update)
 	#db_ref.once_failed.connect(_on_db_data_update)
 
+
 func _client_settings_db_update(argument):
-	print(argument)
+	
 	
 	if argument.key == "scramble_constants":
 		Globals.submit_mode = argument.data["submit_mode"]
@@ -255,6 +267,20 @@ func _client_settings_db_update(argument):
 	pass
 	
 func _on_db_data_update(argument): 
+	
+	if argument.get("key") == "":
+		print(argument)
+		var quick_dict = argument.get("data")
+		if quick_dict.has("full_disconnect"):
+			if quick_dict["full_disconnect"] == true:
+				you_fully_disconnected = true
+			if quick_dict["full_disconnect"] == false:
+				you_fully_disconnected = false
+	if argument.key == "full_disconnect":
+		print(argument)
+		if argument.data == true:
+			you_fully_disconnected = true
+			
 	if argument.key == "IPs":
 		if argument.data["selected_ip"] == "VM":
 			IP_ADDRESS = "136.112.186.218"
@@ -488,12 +514,12 @@ func _start_single_player_game(parameters):
 		single_player_node_instance.game_over.connect(_end_single_player_game)
 		single_player_node_instance._setup(parameters)
 		add_child(single_player_node_instance)
-		print(single_player_node_instance)
+		
 		
 	pass
 
 func _end_single_player_game(node):
-	print(node)
+	
 	_true_menu_fade_in()
 	node.queue_free()
 	
@@ -508,11 +534,28 @@ func _lifeboat(firebase_id):
 
 @rpc("authority", "call_local")
 func _disconnect_function(connected_player_peer_id, time_left):
-	print("fhwuiefoiuwehfewfewf")
-	print("ran   connectd player: " + str(connected_player_peer_id))	
+
 	%DisconnectionCover._begin(time_left)
 	pass
 	
 @rpc("authority", "call_local")
 func _reconnect_function(p1id, p2id):
 	%DisconnectionCover._end()
+
+func _full_disconnect_resolver():
+	print("full disconnect resolver running")
+	
+	for i in %RunningGames.get_children():
+		i.queue_free()
+	for i in [match_found_instance,rules_instance,score_screen_instance, match_over_screen_instance]:
+		if i != null:
+			i.queue_free()
+	await get_tree().process_frame
+	_true_menu_fade_in()
+	%DisconnectionCover.visible = false
+	await get_tree().create_timer(2).timeout
+	var db_ref = Database.get_database_reference("users")
+	db_ref.update(firebase_local_id, {"full_disconnect": false})
+
+	
+	pass

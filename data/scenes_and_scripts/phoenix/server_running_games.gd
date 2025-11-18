@@ -2,7 +2,7 @@ extends Control
 
 @onready var serverhost = get_parent()
 signal match_ended(dict)
-
+@onready var Database = get_node("/root/Firebase/Database")
 var players_looking_for_match = []
 var matched_players = []
 var timers_scene = "res://data/scenes_and_scripts/phoenix/timers.tscn"
@@ -375,6 +375,9 @@ func _disconnect_handler(dict, disconnected_player_peer_id):
 
 func _disconnector(dict, disconnected_firebase_id, connected_player_peer_id, connected_player_player_number, connected_player_firebase_id):
 	print("disconnector run")
+	var db_ref = Database.get_database_reference("users")
+	await get_tree().process_frame
+	db_ref.update(disconnected_firebase_id, {"full_disconnect": true})
 	disconnected_limbo_firebase_ids.erase(disconnected_firebase_id)
 	dict["match_winner"] = connected_player_player_number
 	dict["end_by_disconnection"] = true

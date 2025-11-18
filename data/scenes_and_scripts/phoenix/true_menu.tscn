@@ -438,8 +438,41 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_n284u")
 text = "profile."
 alignment = 0
 
+[node name="DebugBoxButton" type="Button" parent="CanvasLayer/MainMenuItems/MainMenuBox/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.233925, 0.233925, 0.233925, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.498543, 0.659041, 0.996016, 1)
+theme_override_fonts/font = ExtResource("8_ahs00")
+theme_override_font_sizes/font_size = 186
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_mljia")
+theme_override_styles/normal = SubResource("StyleBoxFlat_n284u")
+text = "debug."
+alignment = 0
+
 [node name="DebugBox" type="VBoxContainer" parent="CanvasLayer/MainMenuItems/MainMenuBox/VBoxContainer"]
 unique_name_in_owner = true
+visible = false
 modulate = Color(1, 1, 1, 0.227451)
 layout_mode = 2
 
@@ -2034,6 +2067,7 @@ one_shot = true
 [connection signal="pressed" from="CanvasLayer/MainMenuItems/MainMenuBox/VBoxContainer/VBoxContainer/SinglePlayer" to="." method="_on_single_player_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenuItems/MainMenuBox/VBoxContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenuItems/MainMenuBox/VBoxContainer/VBoxContainer/Profile" to="." method="_on_profile_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenuItems/MainMenuBox/VBoxContainer/VBoxContainer/DebugBoxButton" to="." method="_on_debug_box_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenuItems/MainMenuBox/VBoxContainer/DebugBox/Console Toggle" to="." method="_on_console_toggle_pressed"]
 [connection signal="pressed" from="CanvasLayer/ProfileMenuItems/VBoxContainer4/VBoxContainer2/VBoxContainer2/ChangeUsername" to="." method="_on_change_username_pressed"]
 [connection signal="pressed" from="CanvasLayer/ProfileMenuItems/VBoxContainer4/VBoxContainer3/ChangeProfilePicture" to="CanvasLayer/ProfileMenuItems" method="_on_change_profile_picture_pressed"]

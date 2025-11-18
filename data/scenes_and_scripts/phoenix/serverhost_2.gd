@@ -28,7 +28,10 @@ var selected_game_list_2 = ["HangmanChaosVanilla", "HangmanChaosShared", "Hangma
 var timer_values_ref
 var timer_values_dictionary = {"round_timer": 60, "match_found_timer": 5, "rules_screen_timer": 30, "score_timer": 10}
 
+
+
 func _ready():
+	
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	_start_server()
@@ -61,6 +64,9 @@ func _on_user_information_ref_update(resource):
 	
 	var key = resource.key
 	var data = resource.data
+	if typeof(data) == TYPE_BOOL:
+		return
+
 	if data.has("logged_in"):
 		if data["logged_in"]:
 			logged_in_firebase_ids.append(key)
