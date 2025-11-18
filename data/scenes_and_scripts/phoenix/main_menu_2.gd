@@ -42,8 +42,8 @@ var old_info : Dictionary = {
 var username
 var db_ref
 var path
-#var IP_ADDRESS = "localhost"
-var IP_ADDRESS = "136.112.186.218" # VM
+var IP_ADDRESS = "localhost"
+#var IP_ADDRESS = "136.112.186.218" # VM
 var PORT = 7777
 var match_found_instance
 var rules_instance
@@ -60,8 +60,9 @@ var connected_to_server = false
 @onready var arguments = OS.get_cmdline_args()
 
 func _on_os_pause():
-
+	print("yo")
 	rpc_id(1, "_lifeboat", firebase_local_id)
+	print("yo")
 	if multiplayer.multiplayer_peer:
 		multiplayer.multiplayer_peer.close()
 	await get_tree().process_frame
@@ -92,6 +93,7 @@ func _on_disconnection_from_server():
 
 func _notification(what):
 	if what == NOTIFICATION_APPLICATION_PAUSED:
+		print("paused")
 		_on_os_pause()
 		print("paused")
 		if true_menu_instance_reference != null:

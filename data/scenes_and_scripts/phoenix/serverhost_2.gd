@@ -38,6 +38,7 @@ func _ready():
 	Firebase.Auth.login_succeeded.connect(_on_FirebaseAuth_login_succeeded)
 	Firebase.Auth.login_with_email_and_password("server@server.com", "supersonic")
 	%RunningGames.connect("match_ended", _match_over_data_collection)
+
 	print("server has logged in")
 	pass
 	
@@ -66,25 +67,25 @@ func _on_user_information_ref_update(resource):
 	var data = resource.data
 	if typeof(data) == TYPE_BOOL:
 		return
-
-	if data.has("logged_in"):
-		if data["logged_in"]:
-			logged_in_firebase_ids.append(key)
-		else:
-			logged_in_firebase_ids.erase(key)
-	if data.has("last_peer_id"):
-		data["last_peer_id"] = int(data["last_peer_id"])
-		if firebaseid_to_peerid_dictionary.has(key):
-			var old_peer_id = firebaseid_to_peerid_dictionary[key]
-			print("server")
-			print (%RunningGames.disconnected_limbo_firebase_ids)
-			if %RunningGames.disconnected_limbo_firebase_ids.has(key):
-				print("got here")
-				player_reconnected.emit(old_peer_id, int(data["last_peer_id"]), key)			
-			peerid_to_firebaseid_dictionary.erase(old_peer_id)
-			firebaseid_to_peerid_dictionary.erase(key)
-		firebaseid_to_peerid_dictionary[key] = data["last_peer_id"]
-		peerid_to_firebaseid_dictionary[data["last_peer_id"]] = key
+	if typeof(data) == TYPE_DICTIONARY:
+		if data.has("logged_in"):
+			if data["logged_in"]:
+				logged_in_firebase_ids.append(key)
+			else:
+				logged_in_firebase_ids.erase(key)
+		if data.has("last_peer_id"):
+			data["last_peer_id"] = int(data["last_peer_id"])
+			if firebaseid_to_peerid_dictionary.has(key):
+				var old_peer_id = firebaseid_to_peerid_dictionary[key]
+				print("server")
+				print (%RunningGames.disconnected_limbo_firebase_ids)
+				if %RunningGames.disconnected_limbo_firebase_ids.has(key):
+					print("got here")
+					player_reconnected.emit(old_peer_id, int(data["last_peer_id"]), key)			
+				peerid_to_firebaseid_dictionary.erase(old_peer_id)
+				firebaseid_to_peerid_dictionary.erase(key)
+			firebaseid_to_peerid_dictionary[key] = data["last_peer_id"]
+			peerid_to_firebaseid_dictionary[data["last_peer_id"]] = key
 		
 
  # here we will let the client know that they are connected to the server for the purpose of allowing them to now login through firebase
@@ -131,14 +132,14 @@ func _on_peer_disconnected(id):
 		for i in running_matches:
 			if i["player_one_peer_id"] == id or i["player_two_peer_id"] == id:
 				%RunningGames._disconnect_handler(i, id)
+		Firebase.Database.get_database_reference("users").update(peerid_to_firebaseid_dictionary[id],{"logged_in": false})
 				
 				
 	if peerid_to_firebaseid_dictionary.has(id):
 		logged_in_firebase_ids.erase(peerid_to_firebaseid_dictionary[id])
 	if peerid_to_firebaseid_dictionary.has(id):
 		peerid_to_firebaseid_dictionary.erase(id)
-			
-	
+
 
 		
 	pass
@@ -381,18 +382,12 @@ func _ask_server_for_info(info_dictionary):
 	rpc_id(multiplayer.get_remote_sender_id(), "_ask_server_for_info", info_dictionary)
 	pass
 
-@rpc("any_peer","call_remote", "reliable")
+@rpc("any_peer","call_remote")
 func _lifeboat(firebase_id):
 	print("lifeboat made it")
 	Database.get_database_reference("users").update(firebase_id, {"logged_in": false})
 	pass
 
-#@rpc("any_peer", "call_remote", "reliable")	
-#func _debug_vm(data):
-	#await get_tree().create_timer(1).timeout
-	#for i in multiplayer.get_peers():
-		#rpc_id(i, "_debug_vm", data)
-	#pass
 
 
 @rpc("any_peer", "call_local")
