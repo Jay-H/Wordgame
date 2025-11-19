@@ -6,7 +6,7 @@ var PORT = 7777
 var MAX_PLAYERS = 1000
 
 @onready var Database = get_node("/root/Firebase/Database")
-
+@onready var RunningGames = get_node("RunningGames")
 var initial_user_data: Dictionary = { 
 	"country": "", "email": "@gmail.com", "experience": 0.0, "level": 0.0, "losses": 0.0, "matches_played": 0.0, "profilepic": 0.0, 
 	"rank": 0.0, "username": "", "wins": 0.0, "music_enabled": true, "sound_enabled": true, "auto_skip_rules": false, "low_graphics_mode": false, 
@@ -28,7 +28,7 @@ var selected_game_list_2 = ["HangmanChaosVanilla", "HangmanChaosShared", "Hangma
 var timer_values_ref
 var timer_values_dictionary = {"round_timer": 60, "match_found_timer": 5, "rules_screen_timer": 30, "score_timer": 10}
 var pending_full_disconnect_array = []
-
+var firebase_id_array = []
 
 func _ready():
 	
@@ -46,7 +46,7 @@ func _process(_delta):
 	pass
 	
 func _on_FirebaseAuth_login_succeeded(auth):
-
+	
 	game_types_ref = Firebase.Database.get_database_reference("server_data/game_types", {})
 	game_types_ref.new_data_update.connect(_on_game_types_ref_update)
 	game_types_ref.patch_data_update.connect(_on_game_types_ref_update)
@@ -62,7 +62,13 @@ func _on_FirebaseAuth_login_succeeded(auth):
 	pass	
 	
 func _on_user_information_ref_update(resource):
-	
+	printerr(resource)
+	if resource.key.length() == 28:
+		if not firebase_id_array.has(resource.key):
+			firebase_id_array.append(resource.key)
+	for i in firebase_id_array:
+		user_information_ref = Firebase.Database.get_database_reference("users", {})	
+		user_information_ref.update(i, {"logged_in": false})
 	var key = resource.key
 	var data = resource.data
 	if typeof(data) == TYPE_BOOL:
@@ -133,9 +139,14 @@ func _on_peer_connected(id):
 
 @rpc("any_peer")
 func _quick_firebase_id_getter(fbid):
-
+	
 	firebaseid_to_peerid_dictionary[fbid] = multiplayer.get_remote_sender_id()
 	peerid_to_firebaseid_dictionary[multiplayer.get_remote_sender_id()] = fbid
+	if pending_full_disconnect_array.has(fbid): # this is if the person fully disconnected from match, but app still open in background
+		rpc_id(firebaseid_to_peerid_dictionary[fbid], "_full_disconnect_resolver")
+		return
+	if %RunningGames.disconnected_limbo_firebase_ids.has(fbid): # this is if the person reconnects in time to continue the match
+		%RunningGames._reconnect_handler(fbid)
 
 	pass
 	
@@ -146,11 +157,9 @@ func _on_peer_disconnected(id):
 		var fbid = peerid_to_firebaseid_dictionary[id]
 		for i in running_matches:
 			if i["player_one_firebase_id"] == fbid or i["player_two_firebase_id"] == fbid:
-				%RunningGames._disconnect_handler(i, id)
-		
-		#for i in running_matches:
-			#if i["player_one_peer_id"] == id or i["player_two_peer_id"] == id:
-				#%RunningGames._disconnect_handler(i, id)
+				%RunningGames._disconnect_handler(i, fbid)
+				#This part seems to be working fine.
+
 		Firebase.Database.get_database_reference("users").update(peerid_to_firebaseid_dictionary[id],{"logged_in": false})
 				
 				
@@ -420,8 +429,22 @@ func _reconnect_function(p1id, p2id):
 	rpc_id(p2id, "_reconnect_function", p1id, p2id)
 	pass
 
+
+
+@rpc("any_peer", "call_local")
+func _full_disconnect_function(dict, connected_player_firebase_id, disconnected_player_firebase_id):
+	printerr("BALLING")
+	pending_full_disconnect_array.append(disconnected_player_firebase_id)
+	#the following RPC is just so that the connected player who won by disconnection fades the reconnection pending overlay
+	rpc_id(firebaseid_to_peerid_dictionary[dict["player_one_firebase_id"]], "_reconnect_function", 1, 2)
+	rpc_id(firebaseid_to_peerid_dictionary[dict["player_two_firebase_id"]], "_reconnect_function", 1, 2)
+	#rpc_id(firebaseid_to_peerid_dictionary[connected_player_firebase_id], "_reconnect_function", connected_player_firebase_id, disconnected_player_firebase_id)
+	
+	pass
+	
 @rpc("any_peer", "call_remote", "reliable")
 func _full_disconnect_resolver():
+	
 	pass
 
 @rpc("any_peer", "call_remote", "reliable")

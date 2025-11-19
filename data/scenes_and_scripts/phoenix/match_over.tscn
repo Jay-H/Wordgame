@@ -170,6 +170,7 @@ process_material = SubResource("ParticleProcessMaterial_cdx71")
 
 [node name="OldLevelLabel" type="RichTextLabel" parent="CanvasLayer/MainVBox/LevelVBox"]
 unique_name_in_owner = true
+clip_contents = false
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("5_1dqdh")
@@ -183,6 +184,7 @@ vertical_alignment = 1
 [node name="NewLevelLabel" type="RichTextLabel" parent="CanvasLayer/MainVBox/LevelVBox/OldLevelLabel"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_1dqdh")
+clip_contents = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -315,6 +317,7 @@ stretch_mode = 4
 
 [node name="OldRankLabel" type="RichTextLabel" parent="CanvasLayer/MainVBox/RankVBox"]
 unique_name_in_owner = true
+clip_contents = false
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("5_1dqdh")
@@ -326,6 +329,7 @@ horizontal_alignment = 1
 [node name="NewRankLabel" type="RichTextLabel" parent="CanvasLayer/MainVBox/RankVBox/OldRankLabel"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_spqgb")
+clip_contents = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

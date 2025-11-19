@@ -687,5 +687,5 @@ horizontal_alignment = 1
 [connection signal="gui_input" from="CanvasLayer/MainVBox/MainVariantVBox/SubVariantVBox/Variant2HBox" to="." method="_on_variant_2h_box_gui_input"]
 [connection signal="gui_input" from="CanvasLayer/MainVBox/MainVariantVBox/SubVariantVBox/Variant3HBox" to="." method="_on_variant_3h_box_gui_input"]
 [connection signal="gui_input" from="CanvasLayer/MainVBox/MainVariantVBox/SubVariantVBox/Variant4HBox" to="." method="_on_variant_4h_box_gui_input"]
-[connection signal="pressed" from="CanvasLayer/SkipButton" to="." method="_on_skip_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/SkipButton" to="." method="_on_skip_button_pressed" binds= [true]]
 [connection signal="pressed" from="CanvasLayer/InformationControl/InformationBackground/BackButton" to="." method="_on_back_button_pressed"]

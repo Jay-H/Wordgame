@@ -10,6 +10,8 @@ var game_initialized = false
 var initial_sequence_completed = false
 var big_dictionary
 var array_of_letter_nodes = []
+var player_one_firebase_id
+var player_two_firebase_id
 
 var reveal_letter_order_array = []
 var reveal_letter_order_dictionary : Dictionary
@@ -391,3 +393,7 @@ func _on_hangman_text_entry_text_submitted(word: String) -> void:
 					
 	rpc_id(1, "_send_word_to_server", word)
 	pass # Replace with function body.
+
+@rpc("authority", "call_local")
+func _reconnect_function(connected_player_array, reconnected_player_array):
+	pass

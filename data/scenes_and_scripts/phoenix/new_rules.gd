@@ -41,7 +41,8 @@ func _ready():
 		await get_tree().create_timer(1).timeout
 		var tween = create_tween()
 		tween.tween_property(%SkipButton, "modulate", Color.WHITE, 1)
-		_on_skip_button_pressed()
+		
+		_on_skip_button_pressed(false)
 	else:
 		await get_tree().create_timer(1).timeout
 		var tween = create_tween()
@@ -191,9 +192,10 @@ func _information_shower(variant_name):
 	pass
 
 
-func _on_skip_button_pressed() -> void:
+func _on_skip_button_pressed(send_to_server) -> void:
 	Haptics.hard_doublet()
-	skip_button_pressed.emit()
+	if send_to_server == true:
+		skip_button_pressed.emit()
 	%SkipButton.disabled = true
 	skip_pressed = true
 	#var tween = create_tween()

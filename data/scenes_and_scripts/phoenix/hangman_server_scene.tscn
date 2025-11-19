@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c5p4lhqhv2avn"]
 
-[ext_resource type="Script" uid="uid://c37xwugqx5ec8" path="res://data/scenes_and_scripts/phoenix/hangman_server_scene.gd" id="1_iga2l"]
+[ext_resource type="Script" uid="uid://b86opek0ej7mc" path="res://data/scenes_and_scripts/phoenix/hangman_server_scene2.gd" id="1_r74m1"]
 
 [node name="HangmanScene" type="Control"]
 layout_mode = 3
@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_iga2l")
+script = ExtResource("1_r74m1")
 
 [node name="P1NewLetterTimer" type="Timer" parent="."]
 unique_name_in_owner = true

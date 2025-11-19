@@ -61,6 +61,7 @@ var player_two_last_word_status = ""
 
 var timeleftint = 45
 var round_timer
+var bonus_timer
 var phoenix_dictionary
 
 var process_pause = false
@@ -72,7 +73,7 @@ func _ready():
 	print(Globals.player_save_data)
 	global_data = get_node("/root/GlobalData")
 	round_timer = get_node(str("../../" + phoenix_dictionary["timers_node_name"]) + "/RoundTimer")
-	
+	bonus_timer = get_node(str("../../" + phoenix_dictionary["timers_node_name"]) + "/BonusLetterTimer")
 	multiplayer.peer_connected.connect(_on_player_connected)
 	multiplayer.peer_disconnected.connect(_on_player_disconnected)
 	if wonder_variant: # if wonder variant, we guarantee a 7 letter word
@@ -113,7 +114,7 @@ func _process(delta):
 		process_pause = true
 		await get_tree().create_timer(0.5).timeout
 		timeleftint = int(round_timer.time_left)
-		current_bonus_time_value = (10 - int($BonusTimer.time_left))
+		current_bonus_time_value = (10 - int(bonus_timer.time_left))
 		rpc_id(player_one_id,"send_player_information")
 		rpc_id(player_two_id,"send_player_information")
 		send_player_information()
@@ -122,7 +123,7 @@ func _process(delta):
 func game_starter():
 	$MainTimer.start()
 	if current_bonus_letter != null:
-		%BonusTimer.start()
+		bonus_timer.start(10)
 	pass
 
 func find_good_letters(): # this one is for getting directly from a seven letter word.
@@ -310,7 +311,7 @@ func find_good_letters_not_seven(): # this one doesn't guarantee a seven letter 
 	print(final_letters_array)
 func bonus_letter_chooser():
 	current_bonus_time_value = 0
-	%BonusTimer.start()
+	bonus_timer.start(10)
 	var letter = global_data.alphabet[randi_range(0,25)]
 	current_bonus_letter_value = global_data.SCRABBLE_POINTS[letter]
 	return letter
@@ -591,18 +592,17 @@ func tie_game_informer(tie_game_cycles):
 	pass
 	
 @rpc("authority", "call_local")
-func _reconnect_function(old, new):
-	if player_one_id == old:
-		player_one_id = new
-	if player_two_id == old:
-		player_two_id = new
-	big_dictionary["Player One ID"] = player_one_id
-	big_dictionary["Player Two ID"] = player_two_id
-	#for i in [player_one_id, player_two_id]:
-		#rpc_id(i, "_reconnect_function")
-	print (player_one_id)
-	print(player_two_id)
-	pass
+func _reconnect_function(connected_player_array, reconnected_player_array):
+	if player_one_firebase_id == connected_player_array[1]:
+		player_one_id = connected_player_array[0]
+		player_two_id = reconnected_player_array[0]
+		big_dictionary["Player One ID"] = player_one_id
+		big_dictionary["Player Two ID"] = player_two_id
+	if player_one_firebase_id == reconnected_player_array[1]:
+		player_one_id = reconnected_player_array[0]
+		player_two_id = connected_player_array[0]
+		big_dictionary["Player One ID"] = player_one_id
+		big_dictionary["Player Two ID"] = player_two_id		
 
 @rpc("authority", "call_local")
 func _disconnect_function(connected_player_peer_id, time_left):

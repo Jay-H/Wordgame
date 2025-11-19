@@ -8,7 +8,7 @@ var db_ref
 @onready var Database = get_node("/root/Firebase/Database")
 
 func _ready():
-	
+
 	main_menu.login_screen_instance = self
 	%BottomParticles.emitting = false
 	await %SplashScreen.fade_process()

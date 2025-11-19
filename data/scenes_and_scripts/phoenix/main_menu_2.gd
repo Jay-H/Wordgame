@@ -3,7 +3,7 @@ extends Node
 signal database_update
 
 var opponent_disconnected = false
-var you_fully_disconnected = false
+
 var yoyoyoyoyo
 var country
 var experience
@@ -62,11 +62,12 @@ var connected_to_server = false
 func _on_os_pause():
 	print("yo")
 	rpc_id(1, "_lifeboat", firebase_local_id)
+	await get_tree().process_frame
+	await get_tree().process_frame
 	print("yo")
 	if multiplayer.multiplayer_peer:
 		multiplayer.multiplayer_peer.close()
-	await get_tree().process_frame
-	await get_tree().process_frame
+
 	
 	pass
 
@@ -75,10 +76,7 @@ func _on_os_resume():
 	var db_ref = Database.get_database_reference(path)
 	db_ref.update(firebase_local_id, {"logged_in": true})
 	connect_to_server()
-	if you_fully_disconnected:
-		
-		you_fully_disconnected == false
-		_full_disconnect_resolver()
+
 
 	
 	
@@ -170,6 +168,10 @@ func _on_login_successful(auth):
 	#rpc_id(1, "_send_firebase_info_to_server",auth)
 	firebase_local_id = auth["localid"]
 	firebase_email = auth["email"]
+	
+	#this is in in case you are still on the pending full disconnect list from server, so that this goes away.
+	rpc_id(1, "_full_disconnect_fulfilled", firebase_local_id) 
+	
 	await _database_initializer(auth)
 	if my_info["logged_in"] == true:
 		login_screen_instance._already_logged_in()
@@ -272,16 +274,7 @@ func _on_db_data_update(argument):
 	
 	if argument.get("key") == "":
 		print(argument)
-		var quick_dict = argument.get("data")
-		if quick_dict.has("full_disconnect"):
-			if quick_dict["full_disconnect"] == true:
-				you_fully_disconnected = true
-			if quick_dict["full_disconnect"] == false:
-				you_fully_disconnected = false
-	if argument.key == "full_disconnect":
-		print(argument)
-		if argument.data == true:
-			you_fully_disconnected = true
+
 			
 	if argument.key == "IPs":
 		if argument.data["selected_ip"] == "VM":
@@ -433,6 +426,12 @@ func _get_user_data_from_client(data):
 func _confirm_connected_to_server():
 	if %LoginScreen != null:
 		%LoginScreen.connected_to_server = true
+	rpc_id(1, "_quick_firebase_id_getter", firebase_local_id)
+	pass
+
+@rpc("authority")
+func _quick_firebase_id_getter(fbid):
+	
 	pass
 
 @rpc("authority", "call_remote", "reliable")
@@ -498,13 +497,15 @@ func _settings_to_firebase(signal_name):
 	pass	
 
 func _skip_pressed(dict):
-	$RunningGames._skip_rules_pressed(dict)
+	$RunningGames._skip_rules_pressed(dict, firebase_local_id)
 	pass
 
-@rpc("authority", "call_remote", "reliable")
+@rpc("authority", "call_local", "reliable")
 func _ask_server_for_info(info_dictionary):
-	number_of_players_online = info_dictionary["players"]
-	number_of_matches_currently_being_played = info_dictionary["matches"]
+	if info_dictionary.has("players"):
+		number_of_players_online = info_dictionary["players"]
+	if info_dictionary.has("matches"):
+		number_of_matches_currently_being_played = info_dictionary["matches"]
 	pass
 
 
@@ -544,6 +545,12 @@ func _disconnect_function(connected_player_peer_id, time_left):
 func _reconnect_function(p1id, p2id):
 	%DisconnectionCover._end()
 
+@rpc("authority", "call_local")
+func _full_disconnect_function(dict, connected_player_firebase_id, disconnected_player_firebase_id):
+	_full_disconnect_resolver()
+	pass
+
+@rpc("authority", "call_local", "reliable")
 func _full_disconnect_resolver():
 	print("full disconnect resolver running")
 	
@@ -556,8 +563,13 @@ func _full_disconnect_resolver():
 	_true_menu_fade_in()
 	%DisconnectionCover.visible = false
 	await get_tree().create_timer(2).timeout
-	var db_ref = Database.get_database_reference("users")
-	db_ref.update(firebase_local_id, {"full_disconnect": false})
+	rpc_id(1, "_full_disconnect_fulfilled", firebase_local_id)
+	#var db_ref = Database.get_database_reference("users")
+	#db_ref.update(firebase_local_id, {"full_disconnect": false})
 
 	
+	pass
+	
+@rpc("authority", "call_remote", "reliable")
+func _full_disconnect_fulfilled(firebase_id):
 	pass

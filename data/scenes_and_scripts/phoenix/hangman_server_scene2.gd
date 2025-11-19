@@ -57,12 +57,17 @@ var player_two_delay_multiplier = 1.00
 var delay_multiplier_factor = 1.01
 var turn_time_length = 12
 var timer_node
+var p1_turn_timer
+var p2_turn_timer
+var p1_new_letter_timer
+var p2_new_letter_timer
 var chaos_variant = false
 var chaos_shared_clues = false
 var turn_based_variant = false
 var ephemeral_hints_variant = true
 var delay_variant = true
 var big_dictionary
+var phoenix_dictionary
 var game_dictionary = {
 	"player_one_dictionary": {}, "player_two_dictionary": {}, "word_to_find": "", "player_one_time_to_new_letter": 0.0, 
 	"player_two_time_to_new_letter": 0.0, "player_one_last_guess": "_______", "player_two_last_guess": "_______", "player_one_wrong_guesses": 0,
@@ -86,7 +91,10 @@ func _ready():
 		_start_server()
 		multiplayer.peer_connected.connect(_on_peer_connected)
 	else:
-		
+		p1_turn_timer = get_node(str("../../" + phoenix_dictionary["timers_node_name"]) + "/HangmanP1TurnTimer")
+		p2_turn_timer = get_node(str("../../" + phoenix_dictionary["timers_node_name"]) + "/HangmanP2TurnTimer")
+		p1_new_letter_timer = get_node(str("../../" + phoenix_dictionary["timers_node_name"]) + "/HangmanP1NewLetterTimer")
+		p2_new_letter_timer = get_node(str("../../" + phoenix_dictionary["timers_node_name"]) + "/HangmanP2NewLetterTimer")		
 		word_list.shuffle()
 		game_dictionary["word_to_find"] = word_list[randi() % word_list.size()]
 		word_to_find = game_dictionary["word_to_find"]
@@ -112,9 +120,9 @@ func _ready():
 		%RoundTimer.start(100)
 		_cycler()
 		if turn_based_variant:
-			%P1TurnTimer.start(turn_time_length)
-			%P1TurnTimer.timeout.connect(_turn_time_ran_out)
-			%P2TurnTimer.timeout.connect(_turn_time_ran_out)
+			p1_turn_timer.start(turn_time_length)
+			p1_turn_timer.timeout.connect(_turn_time_ran_out)
+			p2_turn_timer.timeout.connect(_turn_time_ran_out)
 		print(game_dictionary)	
 	pass
 
@@ -145,9 +153,9 @@ func _on_peer_connected(id):
 			%RoundTimer.start(100)
 			_cycler()
 			if turn_based_variant:
-				%P1TurnTimer.start(turn_time_length)
-				%P1TurnTimer.timeout.connect(_turn_time_ran_out)
-				%P2TurnTimer.timeout.connect(_turn_time_ran_out)
+				p1_turn_timer.start(turn_time_length)
+				p1_turn_timer.timeout.connect(_turn_time_ran_out)
+				p2_turn_timer.timeout.connect(_turn_time_ran_out)
 			print(game_dictionary)
 
 func _cycler(): #repeating function which sends dictionary to clients every 0.5 seconds
@@ -161,15 +169,15 @@ func _cycler(): #repeating function which sends dictionary to clients every 0.5 
 		
 		
 func _process(_delta):
-	game_dictionary["player_one_time_to_new_letter"] = %P1NewLetterTimer.time_left
-	game_dictionary["player_two_time_to_new_letter"] = %P2NewLetterTimer.time_left
-	game_dictionary["player_one_turn_time"] = %P1TurnTimer.time_left
-	game_dictionary["player_two_turn_time"] = %P2TurnTimer.time_left
+	game_dictionary["player_one_time_to_new_letter"] = p1_new_letter_timer.time_left
+	game_dictionary["player_two_time_to_new_letter"] = p2_new_letter_timer.time_left
+	game_dictionary["player_one_turn_time"] = p1_turn_timer.time_left
+	game_dictionary["player_two_turn_time"] =p2_turn_timer.time_left
 	pass
 
 func _initialize(dict):
 
-
+	phoenix_dictionary = dict
 	game_dictionary["player_one_dictionary"] = dict["player_one_dictionary"]
 	game_dictionary["player_two_dictionary"] = dict["player_two_dictionary"]
 	player_one_firebase_id = dict["player_one_firebase_id"]
@@ -250,26 +258,26 @@ func _new_letter_timer_starter(player):
 		# this part will make the letter new letter timer adjust based on how many letters there are in the word, to keep the total game time constant.
 		var adjusted_interval_increase_time = 40/word_to_find.length()
 		if player == p1id:
-			%P1NewLetterTimer.start(new_letter_interval_time)
-			%P1NewLetterTimer.timeout.connect(_new_letter_timer_timeout_function.bind(p1id))
+			p1_new_letter_timer.start(new_letter_interval_time)
+			p1_new_letter_timer.timeout.connect(_new_letter_timer_timeout_function.bind(p1id))
 
 		if player == p2id:
-			%P2NewLetterTimer.start(new_letter_interval_time)
-			%P2NewLetterTimer.timeout.connect(_new_letter_timer_timeout_function.bind(p2id))	
+			p2_new_letter_timer.start(new_letter_interval_time)
+			p2_new_letter_timer.timeout.connect(_new_letter_timer_timeout_function.bind(p2id))	
 	pass
 
 func _new_letter_timer_timeout_function(player):
 	if player == p1id:
 		if player_one_number_of_revealed_letters < word_to_find.length() - 1:
 			player_one_number_of_revealed_letters += 1
-			%P1NewLetterTimer.start(new_letter_interval_time + (interval_increase_time * player_one_number_of_revealed_letters) )
+			p1_new_letter_timer.start(new_letter_interval_time + (interval_increase_time * player_one_number_of_revealed_letters) )
 			game_dictionary["player_one_revealed_letters"] += 1
 			rpc_id(p1id, "_send_dictionary_server_to_client", game_dictionary)
 			
 	if player == p2id:
 		if player_two_number_of_revealed_letters < word_to_find.length() - 1:
 			player_two_number_of_revealed_letters += 1
-			%P2NewLetterTimer.start(new_letter_interval_time + (interval_increase_time * player_two_number_of_revealed_letters))
+			p2_new_letter_timer.start(new_letter_interval_time + (interval_increase_time * player_two_number_of_revealed_letters))
 			game_dictionary["player_two_revealed_letters"] += 1
 			rpc_id(p2id, "_send_dictionary_server_to_client", game_dictionary)
 			
@@ -302,12 +310,12 @@ func _send_word_to_server(word):
 		var turn_based_result = _turn_based_letter_logic(word)
 		if game_dictionary["which_player_turn"] == "one":
 			game_dictionary["which_player_turn"] = "two"
-			%P2TurnTimer.start(turn_time_length)
-			%P1TurnTimer.stop()
+			p2_turn_timer.start(turn_time_length)
+			p1_turn_timer.stop()
 		else:
 			game_dictionary["which_player_turn"] = "one"
-			%P1TurnTimer.start(turn_time_length)
-			%P2TurnTimer.stop()
+			p1_turn_timer.start(turn_time_length)
+			p2_turn_timer.stop()
 	if chaos_shared_clues:
 		_chaos_shared_indices_populator(word)
 	rpc_id(p1id, "_send_dictionary_server_to_client", game_dictionary)
@@ -349,12 +357,12 @@ func _delay_calculator(id):
 	if id == p1id: 
 		player_one_wrong_guesses += 1
 		guesses = player_one_wrong_guesses
-		timer = %P1NewLetterTimer
+		timer = p1_new_letter_timer
 		number_of_revealed_letters = player_one_number_of_revealed_letters
 	if id == p2id:
 		player_two_wrong_guesses += 1
 		guesses = player_two_wrong_guesses
-		timer = %P2NewLetterTimer
+		timer = p2_new_letter_timer
 		number_of_revealed_letters = player_two_number_of_revealed_letters
 	if number_of_revealed_letters <= 2: # this makes it so there is no penalty to guessing rapidly early on, and doesn't record wrong guesses
 		if id == p1id:
@@ -382,12 +390,12 @@ func _delay_calculator(id):
 func _turn_time_ran_out():
 	if game_dictionary["which_player_turn"] == "one":
 		game_dictionary["which_player_turn"] = "two"
-		%P2TurnTimer.start(turn_time_length)
-		%P1TurnTimer.stop()
+		p2_turn_timer.start(turn_time_length)
+		p1_turn_timer.stop()
 	else:
 		game_dictionary["which_player_turn"] = "one"
-		%P1TurnTimer.start(turn_time_length)
-		%P2TurnTimer.stop()
+		p1_turn_timer.start(turn_time_length)
+		p2_turn_timer.stop()
 	game_dictionary["last_turn_ended_by_timeout"] = true
 	rpc_id(p1id, "_send_dictionary_server_to_client", game_dictionary)
 	rpc_id(p2id, "_send_dictionary_server_to_client", game_dictionary)

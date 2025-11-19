@@ -96,6 +96,7 @@ func _end_game(dict):
 
 @rpc("authority", "call_remote", "reliable")	
 func _end_match(dict):
+	printerr("client side _end_match run")
 	if dict["end_by_disconnection"]:
 		for i in get_children():
 			i.queue_free()
@@ -114,12 +115,13 @@ func _end_match(dict):
 
 
 @rpc("authority", "call_remote", "reliable")	
-func _skip_rules_pressed(dict): # this is from the score screen -- > main menu by signal --> to here by direct call
-	rpc_id(1, "_skip_rules_pressed", dict)
+func _skip_rules_pressed(dict, firebase_id): # this is from the score screen -- > main menu by signal --> to here by direct call
+	rpc_id(1, "_skip_rules_pressed", dict, firebase_id)
 	pass
 
 @rpc("authority", "call_remote", "reliable")
 func _on_opponent_disconnected(dict):
+	print("_client_side_on_opponent_disconnected_run")
 	main_menu.opponent_disconnected = true
 	main_menu._reconnect_function(1,1)
 	pass
