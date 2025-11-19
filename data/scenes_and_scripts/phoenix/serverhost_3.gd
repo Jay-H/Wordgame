@@ -39,7 +39,7 @@ func _ready():
 	Firebase.Auth.login_with_email_and_password("server@server.com", "supersonic")
 	%RunningGames.connect("match_ended", _match_over_data_collection)
 
-	print("server has logged in")
+	printerr("server has logged in")
 	pass
 	
 func _process(_delta):
@@ -62,7 +62,7 @@ func _on_FirebaseAuth_login_succeeded(auth):
 	pass	
 	
 func _on_user_information_ref_update(resource):
-	printerr(resource)
+	
 	if resource.key.length() == 28:
 		if not firebase_id_array.has(resource.key):
 			firebase_id_array.append(resource.key)
@@ -84,19 +84,16 @@ func _on_user_information_ref_update(resource):
 			if firebaseid_to_peerid_dictionary.has(key):
 				
 				var old_peer_id = firebaseid_to_peerid_dictionary[key]
-				print("server")
-				print (%RunningGames.disconnected_limbo_firebase_ids)
+
 				if %RunningGames.disconnected_limbo_firebase_ids.has(key):
-					print("got here")
+
 					player_reconnected.emit(old_peer_id, int(data["last_peer_id"]), key)			
 				peerid_to_firebaseid_dictionary.erase(old_peer_id)
 				firebaseid_to_peerid_dictionary.erase(key)
 			firebaseid_to_peerid_dictionary[key] = data["last_peer_id"]
-			peerid_to_firebaseid_dictionary[data["last_peer_id"]] = key
-			print("pending array =  **************    " + str(pending_full_disconnect_array))
-			print(key)
+
 			if pending_full_disconnect_array.has(key):
-				print("we ball")
+
 				rpc_id(firebaseid_to_peerid_dictionary[key], "_full_disconnect_resolver")
 				
 		
@@ -110,11 +107,7 @@ func _on_game_types_ref_update(resource):
 	if available_game_type_lists != null and selected_game_list_name != null:
 		if available_game_type_lists.has(selected_game_list_name):
 			selected_game_list = available_game_type_lists[str(selected_game_list_name)]	
-			
-		
-	
-	print(resource)
-	#print(resource["selected_game_list"])
+
  
 func _on_timer_ref_update(resource):
 	if resource.key == "match_found_timer":
@@ -132,9 +125,8 @@ func _on_timer_ref_update(resource):
 
 	
 func _on_peer_connected(id):
-	print(id)
+	print("connected id: " + str(id))
 	rpc_id(id, "_confirm_connected_to_server")
-	print("peers connected")
 	pass
 
 @rpc("any_peer")
@@ -433,7 +425,7 @@ func _reconnect_function(p1id, p2id):
 
 @rpc("any_peer", "call_local")
 func _full_disconnect_function(dict, connected_player_firebase_id, disconnected_player_firebase_id):
-	printerr("BALLING")
+
 	pending_full_disconnect_array.append(disconnected_player_firebase_id)
 	#the following RPC is just so that the connected player who won by disconnection fades the reconnection pending overlay
 	rpc_id(firebaseid_to_peerid_dictionary[dict["player_one_firebase_id"]], "_reconnect_function", 1, 2)

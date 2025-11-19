@@ -33,7 +33,7 @@ func _process(_delta):
 #this function takes the two matched players, and sets up a dictionary below with all the pertinent match info
 #it then sends this all through an rpc call to the client_running_games
 func _new_match(matched_players):
-	print(matched_players)
+	
 	
 	var player_one_peer_id = matched_players[0]
 	var player_two_peer_id = matched_players[1]
@@ -92,16 +92,17 @@ func _match_runner(dict):
 
 			return
 		if dict["match_stage"] == "rules":
-			print("match runner")
+			
 			var rules_timer = get_node(str(dict["timers_node_name"]) + "/RulesTimer")
 			if dict["rules_skipped"]:
 				
 				rules_timer.start(0.5)
 			else:
 				rules_timer.start(rules_time)
-			printerr("1")
+		
 			await rules_timer.timeout
-			printerr("2")
+	
+	
 			dict["match_stage"] = "game"
 
 
@@ -109,7 +110,7 @@ func _match_runner(dict):
 
 			var round_timer = get_node(str(dict["timers_node_name"]) + "/RoundTimer")
 			round_timer.start(999)
-			printerr("we here")
+
 			rpc_id(serverhost.firebaseid_to_peerid_dictionary[dict["player_one_firebase_id"]], "_start_game", dict)
 			rpc_id(serverhost.firebaseid_to_peerid_dictionary[dict["player_two_firebase_id"]], "_start_game", dict)
 			#rpc_id(dict["player_one_peer_id"], "_start_game", dict)
@@ -132,11 +133,11 @@ func _match_runner(dict):
 			###### I MOVED  dict["match_stage"] = "score" from HERE WATCH OUT
 			await round_timer.timeout
 			dict["match_stage"] = "score"
-			print("timeout happened")
+	
 			var winner = _end_game(dict)
 			var string = "round" + str(dict["current_round"] + 1) + "winner" # this is to register into the dictionary who won each round.
 			dict[string] = winner
-			print(dict)
+		
 			
 			rpc_id(serverhost.firebaseid_to_peerid_dictionary[dict["player_one_firebase_id"]], "_end_game", dict)
 			rpc_id(serverhost.firebaseid_to_peerid_dictionary[dict["player_two_firebase_id"]], "_end_game", dict)
@@ -187,7 +188,7 @@ func _start_game(dict):
 	game_instance.set_meta("userid1", dict["player_one_peer_id"])
 	game_instance.set_meta("userid2", dict["player_two_peer_id"])
 	#game_instance.name = str(dict["player_one_dictionary"]["email"]) + str(dict["player_two_dictionary"]["email"]) 
-	print(dict["match_node_name"])
+
 	
 	
 	match_container.add_child(game_instance)
@@ -198,7 +199,7 @@ func _start_game(dict):
 func _end_game(dict):
 	var match_container = get_node(str(dict["match_node_name"]))
 	var current_game = match_container.get_child(0)
-	print(current_game)
+
 	var big_dictionary = current_game.big_dictionary
 	var winner = _determine_winner(dict, big_dictionary)
 	current_game.queue_free()
@@ -245,7 +246,7 @@ func _end_match_prefunction(dict):
 	match_container.queue_free()
 	timers_node.queue_free()
 	_determine_match_winner(dict)	
-	print("match over")
+
 	match_ended.emit(dict)
 	pass
 	
@@ -275,7 +276,7 @@ func _determine_match_winner(dict):
 
 @rpc("any_peer", "call_remote", "reliable")	
 func _skip_rules_pressed(dict, firebase_id):
-	printerr("skip rules server side")
+
 	if not skip_dict.has(str(dict["match_node_name"])):
 		skip_dict[str(dict["match_node_name"])] = []
 	var this_firebase_id = firebase_id
@@ -287,40 +288,7 @@ func _skip_rules_pressed(dict, firebase_id):
 	_match_runner(dict)
 	
 	
-	
-	
-	
-	#print("server side skip rtules presed ")
-	#if not skip_dict.has(str(dict["match_node_name"])):
-		#skip_dict[str(dict["match_node_name"])] = []
-		#
-	#var sender = multiplayer.get_remote_sender_id()
-	#var firebase_id = serverhost.peerid_to_firebaseid_dictionary[sender]
-	#if firebase_id == dict["player_one_firebase_id"]:
-		#skip_dict[str(dict["match_node_name"])].append(multiplayer.get_remote_sender_id())
-		#if skip_dict[str(dict["match_node_name"])].size() == 2:
-			#skip_dict[str(dict["match_node_name"])] = []
-			#dict["rules_skipped"] = true
-			#dict["player_one_peer_id"] = sender
-	#if firebase_id == dict["player_two_firebase_id"]:
-		#skip_dict[str(dict["match_node_name"])].append(multiplayer.get_remote_sender_id())
-		#if skip_dict[str(dict["match_node_name"])].size() == 2:
-			#skip_dict[str(dict["match_node_name"])] = []
-			#dict["rules_skipped"] = true	
-			#dict["player_two_peer_id"] = sender
-		
-		
-	#if multiplayer.get_remote_sender_id() == dict["player_one_peer_id"]:
-		#skip_dict[str(dict["match_node_name"])].append(multiplayer.get_remote_sender_id())
-		#if skip_dict[str(dict["match_node_name"])].size() == 2:
-			#skip_dict[str(dict["match_node_name"])] = []
-			#dict["rules_skipped"] = true
-	#if multiplayer.get_remote_sender_id() == dict["player_two_peer_id"]:
-		#skip_dict[str(dict["match_node_name"])].append(multiplayer.get_remote_sender_id())
-		#if skip_dict[str(dict["match_node_name"])].size() == 2:
-			#skip_dict[str(dict["match_node_name"])] = []
-			#dict["rules_skipped"] = true
-	#_match_runner(dict)	
+
 	
 	pass
 
@@ -362,59 +330,9 @@ func _reconnect_handler(fbid):
 	
 	
 	
-	
-	#print("reconnect handler run")
-	#
-	#if disconnected_scene_dictionary.has(firebase):
-		#var dict = disconnected_scene_dictionary[firebase]
-		#var connected_id
-		#var connected_firebase
-		#var disconnected_firebase
-		#var disconnected_id
-		#for i in serverhost.running_matches:
-			#if i["player_one_firebase_id"] == firebase:
-				#disconnected_id = serverhost.firebaseid_to_peerid_dictionary[firebase]
-				#connected_id = serverhost.firebaseid_to_peerid_dictionary[i["player_two_firebase_id"]]
-				#disconnected_firebase = firebase
-				#connected_firebase = i["player_two_firebase_id"]
-			#if i["player_two_firebase_id"] == firebase:
-				#disconnected_id = serverhost.firebaseid_to_peerid_dictionary[firebase]
-				#connected_id = serverhost.firebaseid_to_peerid_dictionary[i["player_one_firebase_id"]]
-				#disconnected_firebase = firebase
-				#connected_firebase = i["player_one_firebase_id"]
-		##for i in serverhost.running_matches:
-			##
-			##if i["player_one_peer_id"] == old:
-				##i["player_one_peer_id"] = new
-				##connected_id = i["player_two_peer_id"] 
-			##if i["player_two_peer_id"] == old:
-				##i["player_two_peer_id"] = new
-				##connected_id = i["player_one_peer_id"] 
-		#
-		#disconnected_scene_dictionary.erase(disconnected_firebase)
-		#disconnected_limbo_firebase_ids.erase(disconnected_firebase)
-		#connected_limbo_peer_ids.erase(connected_id)
-		#connected_limbo_firebase_ids.erase(connected_firebase)
-#
-		#var timers_node = get_node(str(dict["timers_node_name"]))
-		#var match_node = get_node(str(dict["match_node_name"]))
-		#var reconnection_timer = timers_node.get_node("ReconnectionTimer")
-		#reconnection_timer.stop()
-		#for i in timers_node.get_children():
-			#if i.name != "ReconnectionTimer":
-				#i.set_paused(false)
-				#
-		#
-		#serverhost._reconnect_function(connected_id, disconnected_id)
-		#if match_node.get_child_count() > 0:
-			#var current_game_scene = match_node.get_child(0)
-			#if current_game_scene.has_method("_reconnect_function"):
-				#current_game_scene._reconnect_function(old, new)
-
-	pass
 
 func _disconnect_handler(dict, dc_fbid):
-	printerr("disconnect handler")
+
 	var disconnected_player_firebase_id = dc_fbid
 	var disconnected_player_number
 	var connected_player_firebase_id
@@ -479,13 +397,10 @@ func _disconnector(dict):
 	dict["round1winner"] = str(connected_player_number)
 	dict["round2winner"] = str(connected_player_number)
 	dict["round3winner"] = str(connected_player_number)
-	printerr(connected_player_firebase_id)
 	
 	serverhost._full_disconnect_function(dict, connected_player_firebase_id, disconnected_player_firebase_id)
 	_end_match_prefunction(dict)
-	
-	
-	#rpc_id(serverhost.firebaseid_to_peerid_dictionary[connected_player_firebase_id], "_on_opponent_disconnected", dict)	
+
 	var temp_array = []
 	for i in disconnected_dictionaries:
 		if i["player_one_firebase_id"] != connected_player_firebase_id and i["player_two_firebase_id"] != connected_player_firebase_id:
@@ -507,51 +422,7 @@ func _disconnector(dict):
 			temp_array.append(disconnected_limbo_firebase_ids[i])
 	disconnected_limbo_firebase_ids = temp_array		
 
-	printerr("_disconnector run")
-	
-	
-	
-	
-	
-	
-	
-	
-	#print("disconnector run")
-	
-	
-	
-	
-	
-	#serverhost.pending_full_disconnect_array.append(disconnected_firebase_id)
-#
-	#disconnected_limbo_firebase_ids.erase(disconnected_firebase_id)
-	#for i in disconnected_scene_dictionary:
-		#var quick_dict = disconnected_scene_dictionary[i]
-		#if quick_dict["player_one_firebase_id"] or quick_dict["player_two_firebase_id"] == disconnected_firebase_id:
-			#disconnected_scene_dictionary.erase(i)
-	#dict["match_winner"] = connected_player_player_number
-	#dict["end_by_disconnection"] = true
-	#dict["current_round"] = 3
-	#dict["round1winner"] = str(connected_player_player_number)
-	#dict["round2winner"] = str(connected_player_player_number)
-	#dict["round3winner"] = str(connected_player_player_number)
-	#var latest_connected_id
-	#if connected_player_player_number == "one":
-		#latest_connected_id = serverhost.firebaseid_to_peerid_dictionary[dict["player_one_firebase_id"]]
-	#if connected_player_player_number == "two":
-		#latest_connected_id = serverhost.firebaseid_to_peerid_dictionary[dict["player_two_firebase_id"]]
-	#_end_match_prefunction(dict)
-	#for i in serverhost.running_matches:
-		#var quick_dict = serverhost.running_matches[i]
-		#if quick_dict["match_node_name"] == dict["match_node_name"]:
-			#serverhost.running_matches.erase(i)
-	#
-	#connected_limbo_firebase_ids.erase(connected_player_firebase_id)
-	#connected_limbo_peer_ids.erase(connected_player_peer_id)	
-	#printerr("got to this point")
-	#printerr(connected_player_firebase_id)
-	#rpc_id(serverhost.firebaseid_to_peerid_dictionary[connected_player_firebase_id], "_on_opponent_disconnected", dict)
-	#pass
+
 
 @rpc("any_peer", "call_remote", "reliable")
 func _on_opponent_disconnected(dict):
