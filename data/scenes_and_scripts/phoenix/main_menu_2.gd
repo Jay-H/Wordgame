@@ -42,8 +42,8 @@ var old_info : Dictionary = {
 var username
 var db_ref
 var path
-#var IP_ADDRESS = "localhost"
-var IP_ADDRESS = "136.112.186.218" # VM
+var IP_ADDRESS = "localhost"
+#var IP_ADDRESS = "136.112.186.218" # VM
 var PORT = 7777
 var match_found_instance
 var rules_instance
@@ -183,7 +183,7 @@ func _on_login_successful(auth):
 		true_menu_instance_reference = true_menu_instance
 		true_menu_instance.fade_in()
 		true_menu_instance.username_changed.connect(_update_username)
-		true_menu_instance.find_game_pressed.connect(_find_game)
+		true_menu_instance.find_game_pressed.connect(_find_game.bind(firebase_local_id))
 		true_menu_instance.profilepic_changed.connect(_update_profilepic)
 		_settings_signals_manager(true_menu_instance)
 		auth_data = auth
@@ -199,7 +199,7 @@ func _true_menu_fade_in():
 	_database_initializer(auth_data)
 	true_menu_instance.fade_in()
 	true_menu_instance.username_changed.connect(_update_username)
-	true_menu_instance.find_game_pressed.connect(_find_game)
+	true_menu_instance.find_game_pressed.connect(_find_game.bind(firebase_local_id))
 	true_menu_instance.profilepic_changed.connect(_update_profilepic)
 	_settings_signals_manager(true_menu_instance)
 	pass
@@ -307,7 +307,7 @@ func _on_db_data_update(argument):
 			db_ref.update(firebase_local_id, {str(i): my_info[i]})
 	pass
 	database_update.emit()
-	rpc_id(1, "_get_user_data_from_client", my_info)
+	rpc_id(1, "_get_user_data_from_client", my_info, firebase_local_id)
 	pass
 
 @rpc("authority", "call_remote", "reliable")
@@ -322,7 +322,7 @@ func _update_username(username, firebase_local_id):
 	pass
 	
 @rpc("authority", "call_remote", "reliable")	
-func _find_game(): #this is the function for when you are looking for a game. It takes away the menu and puts the finding match screen.
+func _find_game(fbid): #this is the function for when you are looking for a game. It takes away the menu and puts the finding match screen.
 	await $TrueMenu._fade_out()
 	$TrueMenu.queue_free()
 	var finding_match_scene_instance = (load(finding_match_scene)).instantiate()
@@ -330,17 +330,20 @@ func _find_game(): #this is the function for when you are looking for a game. It
 	add_child(finding_match_scene_instance)
 	match_found_instance = finding_match_scene_instance
 	await finding_match_scene_instance._fade_in()
-	finding_match_scene_instance.back_to_menu_pressed.connect(_cancel_find_game)
-	rpc_id(1, "_find_game")
+	finding_match_scene_instance.back_to_menu_pressed.connect(_cancel_find_game.bind(firebase_local_id))
+	rpc_id(1, "_find_game", fbid)
 	pass
 
 @rpc("authority", "call_remote", "reliable")	
-func _cancel_find_game():
-	rpc_id(1, "_cancel_find_game")
+func _cancel_find_game(firebase_local_id):
+	rpc_id(1, "_cancel_find_game", firebase_local_id)
 	await $FindingMatch._fade_out()
 	$FindingMatch.queue_free()
 	_true_menu_fade_in()
 	pass
+
+func _quick_disable_back_to_menu():
+	$FindingMatch/CanvasLayer/BackToMenu.disabled = true
 
 func _match_found_screen(my_info, opponent_info):
 	pre_match_info = my_info
@@ -413,6 +416,14 @@ func _match_over_screen(dict):
 	add_child(match_over_screen_instance)
 	await match_over_screen_instance._fade_in()
 	match_over_screen_instance.timer.timeout.connect(_fade_out_match_over_screen) # we use a timer on the match_over_screen node itself for this last stage
+	
+	#The following is in case the game ended with a disconnect, the still connected player needs to remove all the nodes that are still in the background.
+	for i in %RunningGames.get_children():
+		i.queue_free()
+	for i in [match_found_instance,rules_instance,score_screen_instance]:
+		if i != null:
+			i.queue_free()
+	await get_tree().process_frame
 	pass
 
 func _fade_out_match_over_screen():
@@ -426,7 +437,7 @@ func _fade_out_match_over_screen():
 
 
 @rpc("authority", "call_remote", "reliable")	
-func _get_user_data_from_client(data):
+func _get_user_data_from_client(data, fbid):
 	pass
 
 @rpc("authority", "call_remote", "reliable")
@@ -562,10 +573,8 @@ func _full_disconnect_resolver():
 	await get_tree().process_frame
 	_true_menu_fade_in()
 	%DisconnectionCover.visible = false
-	await get_tree().create_timer(2).timeout
-	rpc_id(1, "_full_disconnect_fulfilled", firebase_local_id)
-	#var db_ref = Database.get_database_reference("users")
-	#db_ref.update(firebase_local_id, {"full_disconnect": false})
+
+	
 
 	
 	pass

@@ -12,6 +12,11 @@ var my_player_number
 func _process(_delta):
 	pass
 
+@rpc("any_peer", "call_local")
+func _quick_disable_back_to_menu():
+	main_menu._quick_disable_back_to_menu()
+	pass
+
 @rpc("authority", "call_remote", "reliable")	
 func _client_match_informer(dict):
 	match_information_dictionary = dict

@@ -95,9 +95,7 @@ func _ready():
 	
 	player_one_id = serverhost.firebaseid_to_peerid_dictionary[player_one_firebase_id]
 	player_two_id = serverhost.firebaseid_to_peerid_dictionary[player_two_firebase_id]
-	
-	#player_one_id = get_meta("userid1")
-	#player_two_id = get_meta("userid2")
+
 
 	print("server host is " + str(serverhost))
 

@@ -25,9 +25,15 @@ func _process(_delta):
 		matched_players.append(players_looking_for_match[0])
 		matched_players.append(players_looking_for_match[1])
 		players_looking_for_match = []
+		#RPC below is to stop the person from cancelling once matched, as fast as possible, to prevent bugs
+		rpc_id(serverhost.firebaseid_to_peerid_dictionary[matched_players[0]], "_quick_disable_back_to_menu")
+		rpc_id(serverhost.firebaseid_to_peerid_dictionary[matched_players[1]], "_quick_disable_back_to_menu")
 		_new_match(matched_players)
 		matched_players = []
 	
+	pass
+@rpc("any_peer", "call_local")
+func _quick_disable_back_to_menu():
 	pass
 
 #this function takes the two matched players, and sets up a dictionary below with all the pertinent match info
@@ -35,12 +41,12 @@ func _process(_delta):
 func _new_match(matched_players):
 	
 	
-	var player_one_peer_id = matched_players[0]
-	var player_two_peer_id = matched_players[1]
-	var player_one_firebase_id = serverhost.peerid_to_firebaseid_dictionary[player_one_peer_id]
-	var player_two_firebase_id = serverhost.peerid_to_firebaseid_dictionary[player_two_peer_id]
-	var player_one_dictionary = serverhost.legendary_dictionary[player_one_peer_id]
-	var player_two_dictionary = serverhost.legendary_dictionary[player_two_peer_id]
+	var player_one_firebase_id = matched_players[0]
+	var player_two_firebase_id = matched_players[1]
+	var player_one_peer_id = serverhost.firebaseid_to_peerid_dictionary[player_one_firebase_id]
+	var player_two_peer_id = serverhost.firebaseid_to_peerid_dictionary[player_two_firebase_id]
+	var player_one_dictionary = serverhost.legendary_dictionary[player_one_firebase_id]
+	var player_two_dictionary = serverhost.legendary_dictionary[player_two_firebase_id]
 	var match_node = Control.new()
 	var timers_node = (load(timers_scene)).instantiate()
 	

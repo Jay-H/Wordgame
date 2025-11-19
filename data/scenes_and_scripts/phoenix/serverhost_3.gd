@@ -48,6 +48,7 @@ func _misc_to_firebase():
 	var quick_ref = Firebase.Database.get_database_reference("server_data")	
 	quick_ref.update("running_tallies", {"players_online": connected_players})
 	quick_ref.update("running_tallies", {"running_matches": running_matches.size()})
+	
 func _process(_delta):
 	
 	pass
@@ -73,37 +74,7 @@ func _on_user_information_ref_update(resource):
 	if resource.key.length() == 28:
 		if not firebase_id_array.has(resource.key):
 			firebase_id_array.append(resource.key)
-	#for i in firebase_id_array:
-		#user_information_ref = Firebase.Database.get_database_reference("users", {})	
-		#user_information_ref.update(i, {"logged_in": false})
-	#var key = resource.key
-	#var data = resource.data
-	#if typeof(data) == TYPE_BOOL:
-		#return
-	#if typeof(data) == TYPE_DICTIONARY:
-		#if data.has("logged_in"):
-			#if data["logged_in"]:
-				#logged_in_firebase_ids.append(key)
-			#else:
-				#logged_in_firebase_ids.erase(key)
-		#if data.has("last_peer_id"):
-			#data["last_peer_id"] = int(data["last_peer_id"])
-			#if firebaseid_to_peerid_dictionary.has(key):
-				#
-				#var old_peer_id = firebaseid_to_peerid_dictionary[key]
-#
-				#if %RunningGames.disconnected_limbo_firebase_ids.has(key):
-#
-					#player_reconnected.emit(old_peer_id, int(data["last_peer_id"]), key)			
-				##peerid_to_firebaseid_dictionary.erase(old_peer_id)
-				##firebaseid_to_peerid_dictionary.erase(key)
-			#firebaseid_to_peerid_dictionary[key] = data["last_peer_id"]
-			#
-			#if pending_full_disconnect_array.has(key):
-#
-				#rpc_id(firebaseid_to_peerid_dictionary[key], "_full_disconnect_resolver")
-				
-		
+
 
  # here we will let the client know that they are connected to the server for the purpose of allowing them to now login through firebase
 func _on_game_types_ref_update(resource):
@@ -145,6 +116,7 @@ func _quick_firebase_id_getter(fbid):
 	peerid_to_firebaseid_dictionary[multiplayer.get_remote_sender_id()] = fbid
 	if pending_full_disconnect_array.has(fbid): # this is if the person fully disconnected from match, but app still open in background
 		rpc_id(firebaseid_to_peerid_dictionary[fbid], "_full_disconnect_resolver")
+		pending_full_disconnect_array.erase(fbid)
 		return
 	if %RunningGames.disconnected_limbo_firebase_ids.has(fbid): # this is if the person reconnects in time to continue the match
 		%RunningGames._reconnect_handler(fbid)
@@ -240,19 +212,22 @@ func _update_profilepic(picture, firebase_local_id):
 	pass
 
 @rpc("any_peer", "call_remote", "reliable")	
-func _get_user_data_from_client(data):
-	legendary_dictionary[multiplayer.get_remote_sender_id()] = data
-
+func _get_user_data_from_client(data, fbid):
+	legendary_dictionary[fbid] = data
+	#legendary_dictionary[multiplayer.get_remote_sender_id()] = data
+	
 @rpc("any_peer", "call_remote", "reliable")	
-func _find_game():
+func _find_game(fbid):
 	print("received find game rpc")
-	%RunningGames.players_looking_for_match.append(multiplayer.get_remote_sender_id())
+	if not %RunningGames.players_looking_for_match.has(fbid): # we prevent matching with yourself -_-
+		%RunningGames.players_looking_for_match.append(fbid)
+
 
 	
 @rpc("any_peer", "call_remote", "reliable")	
-func _cancel_find_game():
-	var peer_id = multiplayer.get_remote_sender_id()
-	%RunningGames.players_looking_for_match.erase(peer_id)
+func _cancel_find_game(firebase_local_id):
+	
+	%RunningGames.players_looking_for_match.erase(firebase_local_id)
 	pass
 
 func _match_over_data_collection(dict):
@@ -265,8 +240,8 @@ func _match_over_data_collection(dict):
 		dict["player_one_dictionary"]["losses"] += 1	
 	dict["player_one_dictionary"]["matches_played"] += 1
 	dict["player_two_dictionary"]["matches_played"] += 1	
-	legendary_dictionary[dict["player_one_peer_id"]] = dict["player_one_dictionary"] 
-	legendary_dictionary[dict["player_two_peer_id"]] = dict["player_two_dictionary"] 
+	legendary_dictionary[dict["player_one_firebase_id"]] = dict["player_one_dictionary"] 
+	legendary_dictionary[dict["player_two_firebase_id"]] = dict["player_two_dictionary"] 
 	_sync_legendary_to_firebase(dict["player_one_dictionary"], dict["player_one_firebase_id"])
 	_sync_legendary_to_firebase(dict["player_two_dictionary"], dict["player_two_firebase_id"])
 	%RunningGames._end_match(dict)
@@ -434,7 +409,7 @@ func _full_disconnect_function(dict, connected_player_firebase_id, disconnected_
 	#the following RPC is just so that the connected player who won by disconnection fades the reconnection pending overlay
 	rpc_id(firebaseid_to_peerid_dictionary[dict["player_one_firebase_id"]], "_reconnect_function", 1, 2)
 	rpc_id(firebaseid_to_peerid_dictionary[dict["player_two_firebase_id"]], "_reconnect_function", 1, 2)
-	#rpc_id(firebaseid_to_peerid_dictionary[connected_player_firebase_id], "_reconnect_function", connected_player_firebase_id, disconnected_player_firebase_id)
+	
 	
 	pass
 	
