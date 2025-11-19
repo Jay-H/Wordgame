@@ -52,10 +52,12 @@ var match_over_screen_instance
 var login_screen_instance
 var true_menu_instance_reference
 var auth_data
-var number_of_players_online 
-var number_of_matches_currently_being_played
+var number_of_players_online : int = 0
+var number_of_matches_currently_being_played : int = 0
 var process_test = false
 var connected_to_server = false
+
+
 
 @onready var arguments = OS.get_cmdline_args()
 
@@ -141,12 +143,6 @@ func _process(delta):
 		if match_found_instance != null:
 			await match_found_instance._fade_out()
 			match_found_instance.queue_free()
-		
-	if process_test == false:
-		process_test = true
-		await get_tree().create_timer(1).timeout
-		rpc_id(1, "_ask_server_for_info", {})
-		process_test = false
 
 
 
@@ -246,6 +242,7 @@ func _database_initializer(auth):
 	path = "users/" + str(firebase_local_id)
 	var general_client_settings_path = "client_data"
 	var client_settings_db_ref
+	var running_tallies_db_ref
 	db_ref = Database.get_database_reference(path)
 	db_ref.new_data_update.connect(_on_db_data_update)
 	db_ref.patch_data_update.connect(_on_db_data_update)
@@ -254,13 +251,23 @@ func _database_initializer(auth):
 	client_settings_db_ref.new_data_update.connect(_client_settings_db_update)
 	client_settings_db_ref.patch_data_update.connect(_client_settings_db_update)
 	client_settings_db_ref.delete_data_update.connect(_client_settings_db_update)
-
+	running_tallies_db_ref = Database.get_database_reference("server_data/running_tallies")
+	running_tallies_db_ref.new_data_update.connect(_running_tallies_db_update)
+	running_tallies_db_ref.patch_data_update.connect(_running_tallies_db_update)
+	running_tallies_db_ref.delete_data_update.connect(_running_tallies_db_update)
 	await get_tree().create_timer(1).timeout #give time for all the signals to propagage and populate our "my_info"	
 	#db_ref.push_successful.connect(_on_db_data_update)
 	#db_ref.push_failed.connect(_on_db_data_update)
 	#db_ref.once_successful.connect(_on_db_data_update)
 	#db_ref.once_failed.connect(_on_db_data_update)
 
+func _running_tallies_db_update(argument):
+	if argument.key == "":
+		var quick_dict = argument.data
+		if quick_dict.has("players_online"):
+			number_of_players_online = int(quick_dict["players_online"])
+		if quick_dict.has("running_matches"):
+			number_of_matches_currently_being_played = int(quick_dict["running_matches"])
 
 func _client_settings_db_update(argument):
 	
@@ -500,13 +507,6 @@ func _skip_pressed(dict):
 	$RunningGames._skip_rules_pressed(dict, firebase_local_id)
 	pass
 
-@rpc("authority", "call_local", "reliable")
-func _ask_server_for_info(info_dictionary):
-	if info_dictionary.has("players"):
-		number_of_players_online = info_dictionary["players"]
-	if info_dictionary.has("matches"):
-		number_of_matches_currently_being_played = info_dictionary["matches"]
-	pass
 
 
 func _start_single_player_game(parameters):

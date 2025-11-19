@@ -29,6 +29,7 @@ var timer_values_ref
 var timer_values_dictionary = {"round_timer": 60, "match_found_timer": 5, "rules_screen_timer": 30, "score_timer": 10}
 var pending_full_disconnect_array = []
 var firebase_id_array = []
+var connected_players : int = 0
 
 func _ready():
 	
@@ -40,9 +41,15 @@ func _ready():
 	%RunningGames.connect("match_ended", _match_over_data_collection)
 
 	printerr("server has logged in")
+
 	pass
-	
+
+func _misc_to_firebase():
+	var quick_ref = Firebase.Database.get_database_reference("server_data")	
+	quick_ref.update("running_tallies", {"players_online": connected_players})
+	quick_ref.update("running_tallies", {"running_matches": running_matches.size()})
 func _process(_delta):
+	
 	pass
 	
 func _on_FirebaseAuth_login_succeeded(auth):
@@ -127,6 +134,8 @@ func _on_timer_ref_update(resource):
 func _on_peer_connected(id):
 	print("connected id: " + str(id))
 	rpc_id(id, "_confirm_connected_to_server")
+	connected_players += 1
+	_misc_to_firebase()
 	pass
 
 @rpc("any_peer")
@@ -143,6 +152,8 @@ func _quick_firebase_id_getter(fbid):
 	pass
 	
 func _on_peer_disconnected(id):
+	
+	connected_players -= 1
 	print(str(id) + " has disconnected")
 	# the logic for ending a game if a player disconnects
 	if peerid_to_firebaseid_dictionary.has(id):
@@ -159,7 +170,7 @@ func _on_peer_disconnected(id):
 		logged_in_firebase_ids.erase(peerid_to_firebaseid_dictionary[id])
 	if peerid_to_firebaseid_dictionary.has(id):
 		peerid_to_firebaseid_dictionary.erase(id)
-
+	_misc_to_firebase()
 
 		
 	pass
@@ -394,13 +405,6 @@ func _experience_rank_level(dict):
 	pass
 
 
-
-@rpc("any_peer", "call_remote", "reliable")
-func _ask_server_for_info(info_dictionary):
-	info_dictionary["players"] = logged_in_firebase_ids.size()
-	info_dictionary["matches"] = running_matches.size()
-	rpc_id(multiplayer.get_remote_sender_id(), "_ask_server_for_info", info_dictionary)
-	pass
 
 @rpc("any_peer","call_remote")
 func _lifeboat(firebase_id):

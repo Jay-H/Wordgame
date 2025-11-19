@@ -42,9 +42,13 @@ unique_name_in_owner = true
 one_shot = true
 
 [node name="HangmanP1TurnTimer" type="Timer" parent="."]
+unique_name_in_owner = true
 
 [node name="HangmanP1NewLetterTimer" type="Timer" parent="."]
+unique_name_in_owner = true
 
 [node name="HangmanP2TurnTimer" type="Timer" parent="."]
+unique_name_in_owner = true
 
 [node name="HangmanP2NewLetterTimer" type="Timer" parent="."]
+unique_name_in_owner = true
