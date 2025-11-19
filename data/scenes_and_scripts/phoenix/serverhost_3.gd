@@ -73,35 +73,35 @@ func _on_user_information_ref_update(resource):
 	if resource.key.length() == 28:
 		if not firebase_id_array.has(resource.key):
 			firebase_id_array.append(resource.key)
-	for i in firebase_id_array:
-		user_information_ref = Firebase.Database.get_database_reference("users", {})	
-		user_information_ref.update(i, {"logged_in": false})
-	var key = resource.key
-	var data = resource.data
-	if typeof(data) == TYPE_BOOL:
-		return
-	if typeof(data) == TYPE_DICTIONARY:
-		if data.has("logged_in"):
-			if data["logged_in"]:
-				logged_in_firebase_ids.append(key)
-			else:
-				logged_in_firebase_ids.erase(key)
-		if data.has("last_peer_id"):
-			data["last_peer_id"] = int(data["last_peer_id"])
-			if firebaseid_to_peerid_dictionary.has(key):
-				
-				var old_peer_id = firebaseid_to_peerid_dictionary[key]
-
-				if %RunningGames.disconnected_limbo_firebase_ids.has(key):
-
-					player_reconnected.emit(old_peer_id, int(data["last_peer_id"]), key)			
-				peerid_to_firebaseid_dictionary.erase(old_peer_id)
-				firebaseid_to_peerid_dictionary.erase(key)
-			firebaseid_to_peerid_dictionary[key] = data["last_peer_id"]
-
-			if pending_full_disconnect_array.has(key):
-
-				rpc_id(firebaseid_to_peerid_dictionary[key], "_full_disconnect_resolver")
+	#for i in firebase_id_array:
+		#user_information_ref = Firebase.Database.get_database_reference("users", {})	
+		#user_information_ref.update(i, {"logged_in": false})
+	#var key = resource.key
+	#var data = resource.data
+	#if typeof(data) == TYPE_BOOL:
+		#return
+	#if typeof(data) == TYPE_DICTIONARY:
+		#if data.has("logged_in"):
+			#if data["logged_in"]:
+				#logged_in_firebase_ids.append(key)
+			#else:
+				#logged_in_firebase_ids.erase(key)
+		#if data.has("last_peer_id"):
+			#data["last_peer_id"] = int(data["last_peer_id"])
+			#if firebaseid_to_peerid_dictionary.has(key):
+				#
+				#var old_peer_id = firebaseid_to_peerid_dictionary[key]
+#
+				#if %RunningGames.disconnected_limbo_firebase_ids.has(key):
+#
+					#player_reconnected.emit(old_peer_id, int(data["last_peer_id"]), key)			
+				##peerid_to_firebaseid_dictionary.erase(old_peer_id)
+				##firebaseid_to_peerid_dictionary.erase(key)
+			#firebaseid_to_peerid_dictionary[key] = data["last_peer_id"]
+			#
+			#if pending_full_disconnect_array.has(key):
+#
+				#rpc_id(firebaseid_to_peerid_dictionary[key], "_full_disconnect_resolver")
 				
 		
 
@@ -140,7 +140,7 @@ func _on_peer_connected(id):
 
 @rpc("any_peer")
 func _quick_firebase_id_getter(fbid):
-	
+	printerr("quick getter running")
 	firebaseid_to_peerid_dictionary[fbid] = multiplayer.get_remote_sender_id()
 	peerid_to_firebaseid_dictionary[multiplayer.get_remote_sender_id()] = fbid
 	if pending_full_disconnect_array.has(fbid): # this is if the person fully disconnected from match, but app still open in background
