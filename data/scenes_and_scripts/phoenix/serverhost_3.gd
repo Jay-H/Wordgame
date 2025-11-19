@@ -74,7 +74,10 @@ func _on_user_information_ref_update(resource):
 	if resource.key.length() == 28:
 		if not firebase_id_array.has(resource.key):
 			firebase_id_array.append(resource.key)
-
+	# this part is so that the logged_in is set to false on every user, just while testing
+	user_information_ref = Firebase.Database.get_database_reference("users")
+	for i in firebase_id_array:
+		user_information_ref.update(str(i), {"logged_in": false})
 
  # here we will let the client know that they are connected to the server for the purpose of allowing them to now login through firebase
 func _on_game_types_ref_update(resource):
