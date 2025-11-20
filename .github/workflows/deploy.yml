@@ -21,7 +21,8 @@ jobs:
       - name: Pull latest changes
         run: |
           cd /home/christopherhaddad12/my_game_server/Wordgame
-          git pull origin master
+          git fetch origin
+          git reset --hard origin/master
 
       # 3. rerun godot!
       - name: Rerun Headless Godot
