@@ -1,0 +1,375 @@
+[gd_scene load_steps=6 format=3 uid="uid://dygswbv0g5ciy"]
+
+[ext_resource type="Script" uid="uid://vak4v2l48aqj" path="res://data/scenes_and_scripts/phoenix/babel_client_scene.gd" id="1_3wo3d"]
+[ext_resource type="FontFile" uid="uid://brx8ufgx2sv54" path="res://data/fonts/OtherFonts/Kiddie-Store.ttf" id="2_axhci"]
+
+[sub_resource type="Gradient" id="Gradient_m61bn"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.31016, 0.358289, 0.644385, 0.68984)
+colors = PackedColorArray(0.928345, 1, 0.999517, 1, 0.877616, 0.877616, 0.877616, 1, 1, 0.933333, 1, 1, 0.878431, 0.878431, 0.878431, 1, 1, 1, 0.866667, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vrxft"]
+gradient = SubResource("Gradient_m61bn")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m61bn"]
+
+[node name="BabelScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3wo3d")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Division" type="TextureRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_vrxft")
+
+[node name="FallingLettersControl" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PrototypeFallingLetter" type="Label" parent="CanvasLayer/FallingLettersControl"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 495.0
+offset_top = 158.0
+offset_right = 638.0
+offset_bottom = 327.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_axhci")
+theme_override_font_sizes/font_size = 200
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/FallingLettersControl/PrototypeFallingLetter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_m61bn")
+action_mode = 0
+
+[node name="NewLetterTimer" type="Timer" parent="CanvasLayer/FallingLettersControl"]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1550.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="TowerHBox" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1000, 1250)
+layout_mode = 2
+theme_override_constants/separation = 250
+
+[node name="LeftTower" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/TowerHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+
+[node name="PrototypeFallingLetter2" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/LeftTower"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_axhci")
+theme_override_font_sizes/font_size = 200
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PrototypeFallingLetter3" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/LeftTower"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_axhci")
+theme_override_font_sizes/font_size = 200
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PrototypeFallingLetter4" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/LeftTower"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_axhci")
+theme_override_font_sizes/font_size = 200
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PrototypeFallingLetter5" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/LeftTower"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_axhci")
+theme_override_font_sizes/font_size = 200
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PrototypeFallingLetter6" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/LeftTower"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_axhci")
+theme_override_font_sizes/font_size = 200
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PrototypeFallingLetter7" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/LeftTower"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_axhci")
+theme_override_font_sizes/font_size = 200
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PrototypeFallingLetter8" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/LeftTower"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_axhci")
+theme_override_font_sizes/font_size = 200
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PrototypeFallingLetter9" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/LeftTower"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_axhci")
+theme_override_font_sizes/font_size = 200
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MiddleTower" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/TowerHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+
+[node name="PrototypeFallingLetter2" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/MiddleTower"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_axhci")
+theme_override_font_sizes/font_size = 200
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PrototypeFallingLetter3" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/MiddleTower"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_axhci")
+theme_override_font_sizes/font_size = 200
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PrototypeFallingLetter4" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/MiddleTower"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_axhci")
+theme_override_font_sizes/font_size = 200
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PrototypeFallingLetter5" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/MiddleTower"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_axhci")
+theme_override_font_sizes/font_size = 200
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PrototypeFallingLetter6" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/MiddleTower"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_axhci")
+theme_override_font_sizes/font_size = 200
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PrototypeFallingLetter7" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/MiddleTower"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_axhci")
+theme_override_font_sizes/font_size = 200
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PrototypeFallingLetter8" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/MiddleTower"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_axhci")
+theme_override_font_sizes/font_size = 200
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PrototypeFallingLetter9" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/MiddleTower"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_axhci")
+theme_override_font_sizes/font_size = 200
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightTower" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/TowerHBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+
+[node name="PrototypeFallingLetter2" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/RightTower"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_axhci")
+theme_override_font_sizes/font_size = 200
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PrototypeFallingLetter3" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/RightTower"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_axhci")
+theme_override_font_sizes/font_size = 200
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PrototypeFallingLetter4" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/RightTower"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_axhci")
+theme_override_font_sizes/font_size = 200
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PrototypeFallingLetter5" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/RightTower"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_axhci")
+theme_override_font_sizes/font_size = 200
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PrototypeFallingLetter6" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/RightTower"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_axhci")
+theme_override_font_sizes/font_size = 200
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PrototypeFallingLetter7" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/RightTower"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_axhci")
+theme_override_font_sizes/font_size = 200
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PrototypeFallingLetter8" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/RightTower"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_axhci")
+theme_override_font_sizes/font_size = 200
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PrototypeFallingLetter9" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/RightTower"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_axhci")
+theme_override_font_sizes/font_size = 200
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SubmitButtonsHBox" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LeftSubmit" type="Button" parent="CanvasLayer/VBoxContainer/SubmitButtonsHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 116
+text = "Submit"
+
+[node name="MiddleSubmit" type="Button" parent="CanvasLayer/VBoxContainer/SubmitButtonsHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 116
+text = "Submit"
+
+[node name="RightSubmit" type="Button" parent="CanvasLayer/VBoxContainer/SubmitButtonsHBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 116
+text = "Submit"
+
+[node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer"]
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/SubmitButtonsHBox/LeftSubmit" to="." method="_on_left_submit_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/SubmitButtonsHBox/MiddleSubmit" to="." method="_on_middle_submit_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/SubmitButtonsHBox/RightSubmit" to="." method="_on_right_submit_pressed"]

@@ -1,103 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://dygswbv0g5ciy"]
+[gd_scene load_steps=3 format=3 uid="uid://d2hiqvjk1sabr"]
 
-[ext_resource type="Script" uid="uid://bfxvb8pmjtjru" path="res://data/scenes_and_scripts/phoenix/babel_server_scene.gd" id="1_m61bn"]
-[ext_resource type="FontFile" uid="uid://brx8ufgx2sv54" path="res://data/fonts/OtherFonts/Kiddie-Store.ttf" id="2_vrxft"]
+[ext_resource type="Script" uid="uid://d24e65yorb10l" path="res://data/scenes_and_scripts/phoenix/babel_server_scene.gd" id="1_aaku6"]
+[ext_resource type="FontFile" uid="uid://brx8ufgx2sv54" path="res://data/fonts/OtherFonts/Kiddie-Store.ttf" id="2_3ds2c"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m61bn"]
-
-[node name="BabelServerScene" type="Control"]
+[node name="BabelScene" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_m61bn")
+script = ExtResource("1_aaku6")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer"]
-
-[node name="TowerHBox" type="HBoxContainer" parent="CanvasLayer"]
+[node name="PrototypeFallingLetter" type="Label" parent="."]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(1000, 0)
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -400.0
-offset_right = 400.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_horizontal = 4
-theme_override_constants/separation = 250
-
-[node name="LeftTower" type="VBoxContainer" parent="CanvasLayer/TowerHBox"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(250, 1250)
-layout_mode = 2
-
-[node name="MiddleTower" type="VBoxContainer" parent="CanvasLayer/TowerHBox"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(250, 1250)
-layout_mode = 2
-
-[node name="RightTower" type="VBoxContainer" parent="CanvasLayer/TowerHBox"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(250, 1250)
-layout_mode = 2
-
-[node name="FallingLettersControl" type="Control" parent="CanvasLayer"]
-unique_name_in_owner = true
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PrototypeFallingLetter" type="Label" parent="CanvasLayer/FallingLettersControl"]
-unique_name_in_owner = true
-layout_mode = 0
 offset_left = 495.0
 offset_top = 158.0
 offset_right = 638.0
 offset_bottom = 327.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_vrxft")
+theme_override_fonts/font = ExtResource("2_3ds2c")
 theme_override_font_sizes/font_size = 200
 text = "A"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="CanvasLayer/FallingLettersControl/PrototypeFallingLetter"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_m61bn")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_m61bn")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_m61bn")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_m61bn")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_m61bn")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_m61bn")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_m61bn")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_m61bn")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_m61bn")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_m61bn")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_m61bn")
-action_mode = 0
-
-[node name="NewLetterTimer" type="Timer" parent="CanvasLayer/FallingLettersControl"]
+[node name="NewLetterTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 one_shot = true

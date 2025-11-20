@@ -114,7 +114,7 @@ func _on_peer_connected(id):
 
 @rpc("any_peer")
 func _quick_firebase_id_getter(fbid):
-	printerr("quick getter running")
+	printerr("quick getter running YAYAYAYA")
 	firebaseid_to_peerid_dictionary[fbid] = multiplayer.get_remote_sender_id()
 	peerid_to_firebaseid_dictionary[multiplayer.get_remote_sender_id()] = fbid
 	if pending_full_disconnect_array.has(fbid): # this is if the person fully disconnected from match, but app still open in background

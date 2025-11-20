@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b836ehk27i7xl"]
 
-[ext_resource type="Script" uid="uid://c8lvttasd7ouk" path="res://data/scenes_and_scripts/multiplayertesting/serverclientsplitter.gd" id="1_6itfu"]
+[ext_resource type="Script" uid="uid://davt4lc0p1d41" path="res://data/scenes_and_scripts/multiplayertesting/serverclientsplitter.gd" id="1_6itfu"]
 
 [node name="Serverclientsplitter" type="Control"]
 layout_mode = 3

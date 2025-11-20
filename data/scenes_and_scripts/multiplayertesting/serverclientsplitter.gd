@@ -1,7 +1,7 @@
 extends Control
 
-@onready var firstsceneserver = "res://data/scenes_and_scripts/phoenix/serverhost2.tscn"
-@onready var firstsceneclient = "res://data/scenes_and_scripts/phoenix/main_menu_2.tscn"
+@onready var firstsceneserver = "res://data/scenes_and_scripts/phoenix/babel_server_scene.tscn"
+@onready var firstsceneclient = "res://data/scenes_and_scripts/phoenix/babel_client_scene.tscn"
 
 func _ready():
 	
