@@ -1,6 +1,7 @@
 extends Node
 
 signal database_update
+signal ip_updated
 
 var opponent_disconnected = false
 
@@ -25,6 +26,7 @@ var logged_in_to_firebase = false
 var my_client_id
 var firebase_local_id
 var firebase_email
+var peer
 
 #this one is used for the match over screen to retain a copy of the pre match dictionary for comparison for experience, level etc.
 var pre_match_info
@@ -44,7 +46,9 @@ var db_ref
 var path
 #var IP_ADDRESS = "localhost"
 var IP_ADDRESS = "136.112.186.218" # VM
+var new_ip = "bad string"
 var PORT = 7777
+var my_peer_id
 var match_found_instance
 var rules_instance
 var score_screen_instance
@@ -62,22 +66,18 @@ var connected_to_server = false
 @onready var arguments = OS.get_cmdline_args()
 
 func _on_os_pause():
-	print("yo")
-	rpc_id(1, "_lifeboat", firebase_local_id)
-	await get_tree().process_frame
-	await get_tree().process_frame
-	print("yo")
+	
 	if multiplayer.multiplayer_peer:
 		multiplayer.multiplayer_peer.close()
+		multiplayer.multiplayer_peer = null
+		OS.delay_msec(100)
 
-	
-	pass
 
 func _on_os_resume():
-	var path = "users"
-	var db_ref = Database.get_database_reference(path)
-	db_ref.update(firebase_local_id, {"logged_in": true})
-	connect_to_server()
+	if multiplayer.multiplayer_peer == null: 
+		connect_to_server()
+	else:
+		pass
 
 
 	
@@ -85,10 +85,6 @@ func _on_os_resume():
 func _on_disconnection_from_server():
 
 	connected_to_server = false
-	var path = "users"
-	var db_ref = Database.get_database_reference(path)
-	db_ref.update(firebase_local_id, {"logged_in": false})	
-	await get_tree().create_timer(1).timeout
 	pass
 
 func _notification(what):
@@ -154,7 +150,7 @@ func _ready():
 	print(arguments)
 	%LoginScreen.connect("login_successful", _on_login_successful)
 	#connect_to_server() # this function will also set the "my_client_id" variable at the top, so now we have all the identifying information together. 
-	
+	ip_updated.connect(connect_to_server)
 	
 #this function triggers from the login screen sending a signal.
 #this signal includes the localid and email which are used on firebase
@@ -206,17 +202,16 @@ func _true_menu_fade_in():
 	
 #this function simply connects to the server. 
 func connect_to_server():
-	var peer = ENetMultiplayerPeer.new()
-	var error = peer.create_client(IP_ADDRESS, PORT)
+	peer = ENetMultiplayerPeer.new()
+	var error = peer.create_client(new_ip, PORT)
+	printerr(error)
 	if error == OK:
 		multiplayer.multiplayer_peer = peer
 		my_client_id = multiplayer.get_unique_id()
-		
+		printerr(new_ip)
 		if %LoginScreen != null:
 			%LoginScreen.connected_to_server = true
 		Database.get_database_reference("users").update(firebase_local_id, {"last_peer_id": multiplayer.get_unique_id()})
-		Database.get_database_reference("users").update(firebase_local_id, {"logged_in": true})
-		multiplayer.server_disconnected.connect(_on_disconnection_from_server)
 		connected_to_server = true
 		
 	else:
@@ -274,7 +269,15 @@ func _client_settings_db_update(argument):
 	
 	if argument.key == "scramble_constants":
 		Globals.submit_mode = argument.data["submit_mode"]
-		
+	if argument.key == "IPs":
+		printerr("received IP argument from firebase")
+		if argument.data["selected_ip"] == "VM":
+			new_ip = "136.112.186.218"
+			ip_updated.emit()
+		if argument.data["selected_ip"] == "Local":
+			new_ip = "localhost"
+			ip_updated.emit()
+		printerr(new_ip)	
 	pass
 	
 func _on_db_data_update(argument): 
@@ -283,12 +286,7 @@ func _on_db_data_update(argument):
 		print(argument)
 
 			
-	if argument.key == "IPs":
-		if argument.data["selected_ip"] == "VM":
-			IP_ADDRESS = "136.112.186.218"
-		if argument.data["selected_ip"] == "Local":
-			IP_ADDRESS = "localhost"
-	
+
 	if argument.get("key") != "": # this is stupid, i dont know why the initial population has the key and value, but further updates just have the vale/"data"
 		my_info[str(argument.get("key"))] = argument.get("data")
 		old_info[str(argument.get("key"))] = argument.get("data")

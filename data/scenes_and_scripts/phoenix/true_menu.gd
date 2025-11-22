@@ -19,6 +19,10 @@ signal low_graphics_disabled
 func _process(delta):
 	%PlayersOnline.text = "Players Online: " + str(main_menu.number_of_players_online)
 	%MatchesRunning.text = "Matches Running: " + str(main_menu.number_of_matches_currently_being_played)
+	if main_menu.connected_to_server:
+		%ConnectionStatus.text = "Connected to server. IP:" + str(main_menu.new_ip)
+	else:
+		%ConnectionStatus.text = "No connection to server. IP:" + str(main_menu.new_ip)
 	pass
 
 func _ready():

@@ -1,4 +1,5 @@
 extends Control
+var debug_mode = true
 var debug_peers_connected
 var debug_first_timer_started = false
 var PORT = 7777
@@ -11,8 +12,10 @@ var letter_node_dictionary = {}
 var current_letter_index = 0
 var player_one_words = []
 var player_two_words = []
+var player_one_score = 0
+var player_two_score = 0
 var game_over_by_word_count = false
-
+var big_dictionary = {"Player One Score": 0, "Player Two Score": 0, "Player One Best Word": "xx", "Player Two Best Word": "xx"}
 func _debug_initializer():
 		# Create a new ENet multiplayer peer.
 	var peer = ENetMultiplayerPeer.new()
@@ -46,11 +49,12 @@ func _process(_delta):
 		if debug_first_timer_started == false:
 			
 			debug_first_timer_started = true
-			%NewLetterTimer.start(1)
+			%NewLetterTimer.start(0.25)
 			print("started")
 
 func _ready():
-	_debug_initializer()
+	if debug_mode:
+		_debug_initializer()
 	%NewLetterTimer.timeout.connect(_random_letter_generator)
 	pass
 
@@ -58,7 +62,7 @@ func _random_letter_generator():
 
 	var letter_index = current_letter_index
 	current_letter_index += 1
-	%NewLetterTimer.start(randi_range(1,1))
+	%NewLetterTimer.start(randf_range(0.2,0.5))
 	var font_size = randi_range(180,230)
 	var time_to_fall = randf_range(5, 15)
 	var letter_node = %PrototypeFallingLetter.duplicate()
@@ -94,20 +98,48 @@ func _inform_clients_letter_pressed(letter_index):
 func _submit_word(word):
 	var peer_id = multiplayer.get_remote_sender_id()
 	if GlobalData.is_valid_word(word):
+		var word_score = _word_scorer(word)
 		print("valid word")
 		
 		if peer_id == player_one_peer_id:
 			player_one_words.append(word)
+			player_one_score += word_score
+			big_dictionary["Player One Score"] += word_score
+			if word.length() > big_dictionary["Player One Best Word"].length():
+				big_dictionary["Player One Best Word"] = word
 		else:
 			player_two_words.append(word)
+			player_two_score += word_score
+			big_dictionary["Player Two Score"] += word_score
+			if word.length() > big_dictionary["Player Two Best Word"].length():
+				big_dictionary["Player Two Best Word"] = word
 			
 		rpc_id(peer_id, "_valid_word_informer", word)
 	else:
 		rpc_id(peer_id, "_invalid_word_informer", word)
+	print(big_dictionary)	
 	if player_one_words.size() == 3 or player_two_words.size() == 3: # end condition number 1
 		game_over_by_word_count = true
 	pass
-	
+
+func _word_scorer(word):
+	var word_length = word.length()
+	var score = 0
+	if word_length == 3:
+		score = 10
+	if word_length == 4:
+		score = 15
+	if word_length == 5:
+		score = 25
+	if word_length == 6:
+		score = 40
+	if  word_length == 7:
+		score = 65
+	if word_length == 8:
+		score = 100
+	return(score)
+
+
 @rpc("any_peer")
 func _valid_word_informer(word):
 	pass

@@ -476,6 +476,15 @@ visible = false
 modulate = Color(1, 1, 1, 0.227451)
 layout_mode = 2
 
+[node name="ConnectionStatus" type="Label" parent="CanvasLayer/MainMenuItems/MainMenuBox/VBoxContainer/DebugBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.138187, 0.211115, 0.55465, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("6_ylplv")
+theme_override_font_sizes/font_size = 71
+text = "Connected to server?"
+
 [node name="Console Toggle" type="Button" parent="CanvasLayer/MainMenuItems/MainMenuBox/VBoxContainer/DebugBox"]
 unique_name_in_owner = true
 layout_mode = 2

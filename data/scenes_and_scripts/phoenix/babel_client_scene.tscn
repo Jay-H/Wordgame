@@ -1,7 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://dygswbv0g5ciy"]
+[gd_scene load_steps=35 format=3 uid="uid://dygswbv0g5ciy"]
 
 [ext_resource type="Script" uid="uid://vak4v2l48aqj" path="res://data/scenes_and_scripts/phoenix/babel_client_scene.gd" id="1_3wo3d"]
-[ext_resource type="FontFile" uid="uid://brx8ufgx2sv54" path="res://data/fonts/OtherFonts/Kiddie-Store.ttf" id="2_axhci"]
+[ext_resource type="Texture2D" uid="uid://duf36u28j13hn" path="res://data/images/textures/grunge-paper-background.jpg" id="2_yofqq"]
+[ext_resource type="FontFile" uid="uid://l48himniyjjs" path="res://data/fonts/diogenes/DIOGENES.ttf" id="3_75hco"]
+[ext_resource type="FontFile" uid="uid://bcl4an852552" path="res://data/fonts/archeologicaps/Archeologicaps.ttf" id="3_x4rh1"]
+[ext_resource type="Texture2D" uid="uid://owbbscukeg4e" path="res://data/images/babel_pieces/DoodleTowerPiece2.png" id="4_x4rh1"]
+[ext_resource type="FontFile" uid="uid://88gme5bahjsd" path="res://data/fonts/DraconianMechanicalPencil001.ttf" id="5_yofqq"]
+[ext_resource type="Texture2D" uid="uid://1e58p78naek3" path="res://data/images/babel_pieces/DoodleTowerPiece1.png" id="6_4gm18"]
+[ext_resource type="Texture2D" uid="uid://dkiqsfl4hlubr" path="res://data/images/textures/scribbles/artisans/DoodleArtisan3.png" id="6_j1p4s"]
+[ext_resource type="Texture2D" uid="uid://dkuq8lxub8gf1" path="res://data/images/BlurredCircleParticle.png" id="7_qw3uy"]
+[ext_resource type="Texture2D" uid="uid://ecot7ur32us8" path="res://data/images/babel_pieces/DoodleTowerPiece3.png" id="7_x4rh1"]
+[ext_resource type="Texture2D" uid="uid://dwwkcqqitlach" path="res://data/images/textures/scribbles/DoodleBrokenTower.png" id="8_75hco"]
 
 [sub_resource type="Gradient" id="Gradient_m61bn"]
 interpolation_mode = 1
@@ -12,6 +21,98 @@ colors = PackedColorArray(0.928345, 1, 0.999517, 1, 0.877616, 0.877616, 0.877616
 gradient = SubResource("Gradient_m61bn")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m61bn"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b7a1k"]
+texture = ExtResource("4_x4rh1")
+modulate_color = Color(1, 1, 1, 0.392157)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j1p4s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_75hco"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sbleq"]
+load_path = "res://.godot/imported/DoodleTowerPiece2.png-22fce875e4fe0a518364ff78a8e4cfd0.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p61r5"]
+texture = SubResource("CompressedTexture2D_sbleq")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u2tem"]
+texture = ExtResource("6_4gm18")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_82pmy"]
+texture = ExtResource("7_x4rh1")
+
+[sub_resource type="Curve" id="Curve_qw3uy"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 360), 0.0, 0.0, 0, 0, Vector2(1, -360), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_75hco"]
+curve = SubResource("Curve_qw3uy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4gm18"]
+particle_flag_disable_z = true
+angle_min = -4.99999
+angle_max = 5.00001
+angle_curve = SubResource("CurveTexture_75hco")
+direction = Vector3(0, -10000, 0)
+spread = 33.576
+initial_velocity_min = 309.64
+initial_velocity_max = 502.53
+gravity = Vector3(0, 500, 0)
+
+[sub_resource type="Curve" id="Curve_75hco"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.817416, 0.935502), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_b7a1k"]
+curve = SubResource("Curve_75hco")
+
+[sub_resource type="Gradient" id="Gradient_4gm18"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_x4rh1"]
+gradient = SubResource("Gradient_4gm18")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b7a1k"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 93.91
+initial_velocity_max = 137.06
+gravity = Vector3(0, 0, 0)
+scale_min = 0.05
+scale_max = 0.06
+color_ramp = SubResource("GradientTexture1D_x4rh1")
+alpha_curve = SubResource("CurveTexture_b7a1k")
+sub_emitter_mode = 2
+sub_emitter_amount_at_end = 1
+
+[sub_resource type="Gradient" id="Gradient_75hco"]
+offsets = PackedFloat32Array(0.21123, 0.44385, 1)
+colors = PackedColorArray(1, 0.505882, 0, 0.592157, 1, 0.0235294, 0, 0.423529, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_b7a1k"]
+gradient = SubResource("Gradient_75hco")
+fill = 1
+fill_from = Vector2(0.525641, 0.495726)
+fill_to = Vector2(0.769231, 0.239316)
+
+[sub_resource type="Curve" id="Curve_4gm18"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.595506, 0.785006), -1.11209, -1.11209, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_x4rh1"]
+curve = SubResource("Curve_4gm18")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sbleq"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 45.69
+initial_velocity_max = 134.52
+gravity = Vector3(0, 30, 0)
+scale_min = 0.5
+alpha_curve = SubResource("CurveTexture_x4rh1")
 
 [node name="BabelScene" type="Control"]
 layout_mode = 3
@@ -24,12 +125,23 @@ script = ExtResource("1_3wo3d")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="WhiteColorRect" type="ColorRect" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0.607843)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_yofqq")
+expand_mode = 2
+stretch_mode = 5
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer"]
 offset_right = 40.0
@@ -37,12 +149,22 @@ offset_bottom = 40.0
 
 [node name="Division" type="TextureRect" parent="CanvasLayer"]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_vrxft")
+
+[node name="DivisionControl" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="FallingLettersControl" type="Control" parent="CanvasLayer"]
 unique_name_in_owner = true
@@ -52,18 +174,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="PrototypeFallingLetter" type="Label" parent="CanvasLayer/FallingLettersControl"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 495.0
-offset_top = 158.0
-offset_right = 638.0
-offset_bottom = 327.0
+offset_left = 480.0
+offset_top = 358.0
+offset_right = 661.0
+offset_bottom = 616.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_axhci")
+theme_override_fonts/font = ExtResource("3_x4rh1")
 theme_override_font_sizes/font_size = 200
-text = "A"
+text = "o"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -87,289 +210,617 @@ theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_m61bn")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_m61bn")
 action_mode = 0
 
-[node name="NewLetterTimer" type="Timer" parent="CanvasLayer/FallingLettersControl"]
+[node name="TowerLetterPlaceholder" type="Panel" parent="CanvasLayer/FallingLettersControl"]
 unique_name_in_owner = true
-one_shot = true
+custom_minimum_size = Vector2(138, 145)
+offset_left = 614.0
+offset_top = 941.0
+offset_right = 964.0
+offset_bottom = 1086.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_b7a1k")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
-anchors_preset = 12
+[node name="Letter" type="Label" parent="CanvasLayer/FallingLettersControl/TowerLetterPlaceholder"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -82.0
+offset_right = 82.0
+offset_bottom = 149.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.868985, 0.868985, 0.868985, 1)
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("3_x4rh1")
+theme_override_font_sizes/font_size = 115
+text = "A"
+horizontal_alignment = 1
+
+[node name="BigTowerBox" type="HBoxContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1119.06, 1500)
+anchors_preset = -1
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_top = -1550.0
+offset_left = -620.0
+offset_top = -1500.0
+offset_right = 620.0
+offset_bottom = -124.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 95
+alignment = 1
 
-[node name="TowerHBox" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(1000, 1250)
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/BigTowerBox"]
 layout_mode = 2
-theme_override_constants/separation = 250
+alignment = 2
 
-[node name="LeftTower" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/TowerHBox"]
+[node name="LeftTower" type="VBoxContainer" parent="CanvasLayer/BigTowerBox/VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(250, 0)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 5
 size_flags_vertical = 8
+mouse_filter = 2
+alignment = 1
 
-[node name="PrototypeFallingLetter2" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/LeftTower"]
+[node name="TowerLetterPlaceholder" type="Panel" parent="CanvasLayer/BigTowerBox/VBoxContainer/LeftTower"]
+custom_minimum_size = Vector2(138, 145)
 layout_mode = 2
+
+[node name="Letter" type="Label" parent="CanvasLayer/BigTowerBox/VBoxContainer/LeftTower/TowerLetterPlaceholder"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -44.5
+offset_top = -20.0
+offset_right = 44.5
+offset_bottom = 220.0
+grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_axhci")
-theme_override_font_sizes/font_size = 200
+theme_override_fonts/font = ExtResource("3_75hco")
+theme_override_font_sizes/font_size = 140
 text = "A"
 horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="PrototypeFallingLetter3" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/LeftTower"]
+[node name="Button" type="Button" parent="CanvasLayer/BigTowerBox/VBoxContainer/LeftTower/TowerLetterPlaceholder/Letter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_m61bn")
+action_mode = 0
+
+[node name="TowerLetterPlaceholder2" type="Panel" parent="CanvasLayer/BigTowerBox/VBoxContainer/LeftTower"]
+custom_minimum_size = Vector2(138, 145)
 layout_mode = 2
+
+[node name="Letter" type="Label" parent="CanvasLayer/BigTowerBox/VBoxContainer/LeftTower/TowerLetterPlaceholder2"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -44.5
+offset_top = -20.0
+offset_right = 44.5
+offset_bottom = 220.0
+grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_axhci")
-theme_override_font_sizes/font_size = 200
+theme_override_fonts/font = ExtResource("3_75hco")
+theme_override_font_sizes/font_size = 140
 text = "A"
 horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="PrototypeFallingLetter4" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/LeftTower"]
+[node name="Button" type="Button" parent="CanvasLayer/BigTowerBox/VBoxContainer/LeftTower/TowerLetterPlaceholder2/Letter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_m61bn")
+action_mode = 0
+
+[node name="TowerLetterPlaceholder3" type="Panel" parent="CanvasLayer/BigTowerBox/VBoxContainer/LeftTower"]
+custom_minimum_size = Vector2(138, 145)
 layout_mode = 2
+
+[node name="Letter" type="Label" parent="CanvasLayer/BigTowerBox/VBoxContainer/LeftTower/TowerLetterPlaceholder3"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -44.5
+offset_top = -20.0
+offset_right = 44.5
+offset_bottom = 220.0
+grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_axhci")
-theme_override_font_sizes/font_size = 200
+theme_override_fonts/font = ExtResource("3_75hco")
+theme_override_font_sizes/font_size = 140
 text = "A"
 horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="PrototypeFallingLetter5" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/LeftTower"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_axhci")
-theme_override_font_sizes/font_size = 200
-text = "A"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Button" type="Button" parent="CanvasLayer/BigTowerBox/VBoxContainer/LeftTower/TowerLetterPlaceholder3/Letter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_m61bn")
+action_mode = 0
 
-[node name="PrototypeFallingLetter6" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/LeftTower"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_axhci")
-theme_override_font_sizes/font_size = 200
-text = "A"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PrototypeFallingLetter7" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/LeftTower"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_axhci")
-theme_override_font_sizes/font_size = 200
-text = "A"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PrototypeFallingLetter8" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/LeftTower"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_axhci")
-theme_override_font_sizes/font_size = 200
-text = "A"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PrototypeFallingLetter9" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/LeftTower"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_axhci")
-theme_override_font_sizes/font_size = 200
-text = "A"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MiddleTower" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/TowerHBox"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-
-[node name="PrototypeFallingLetter2" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/MiddleTower"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_axhci")
-theme_override_font_sizes/font_size = 200
-text = "A"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PrototypeFallingLetter3" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/MiddleTower"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_axhci")
-theme_override_font_sizes/font_size = 200
-text = "A"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PrototypeFallingLetter4" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/MiddleTower"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_axhci")
-theme_override_font_sizes/font_size = 200
-text = "A"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PrototypeFallingLetter5" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/MiddleTower"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_axhci")
-theme_override_font_sizes/font_size = 200
-text = "A"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PrototypeFallingLetter6" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/MiddleTower"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_axhci")
-theme_override_font_sizes/font_size = 200
-text = "A"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PrototypeFallingLetter7" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/MiddleTower"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_axhci")
-theme_override_font_sizes/font_size = 200
-text = "A"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PrototypeFallingLetter8" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/MiddleTower"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_axhci")
-theme_override_font_sizes/font_size = 200
-text = "A"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PrototypeFallingLetter9" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/MiddleTower"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_axhci")
-theme_override_font_sizes/font_size = 200
-text = "A"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="RightTower" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/TowerHBox"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-
-[node name="PrototypeFallingLetter2" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/RightTower"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_axhci")
-theme_override_font_sizes/font_size = 200
-text = "A"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PrototypeFallingLetter3" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/RightTower"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_axhci")
-theme_override_font_sizes/font_size = 200
-text = "A"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PrototypeFallingLetter4" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/RightTower"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_axhci")
-theme_override_font_sizes/font_size = 200
-text = "A"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PrototypeFallingLetter5" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/RightTower"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_axhci")
-theme_override_font_sizes/font_size = 200
-text = "A"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PrototypeFallingLetter6" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/RightTower"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_axhci")
-theme_override_font_sizes/font_size = 200
-text = "A"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PrototypeFallingLetter7" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/RightTower"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_axhci")
-theme_override_font_sizes/font_size = 200
-text = "A"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PrototypeFallingLetter8" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/RightTower"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_axhci")
-theme_override_font_sizes/font_size = 200
-text = "A"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PrototypeFallingLetter9" type="Label" parent="CanvasLayer/VBoxContainer/TowerHBox/RightTower"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_axhci")
-theme_override_font_sizes/font_size = 200
-text = "A"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SubmitButtonsHBox" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="LeftSubmit" type="Button" parent="CanvasLayer/VBoxContainer/SubmitButtonsHBox"]
+[node name="LeftSubmit" type="Button" parent="CanvasLayer/BigTowerBox/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 0.129412)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.391853, 0.301462, 1.44392e-07, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_yofqq")
 theme_override_font_sizes/font_size = 116
+theme_override_styles/focus = SubResource("StyleBoxEmpty_j1p4s")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_j1p4s")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_75hco")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_j1p4s")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_j1p4s")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_j1p4s")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_j1p4s")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_j1p4s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_j1p4s")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_j1p4s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_j1p4s")
 text = "Submit"
 
-[node name="MiddleSubmit" type="Button" parent="CanvasLayer/VBoxContainer/SubmitButtonsHBox"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/BigTowerBox"]
+layout_mode = 2
+alignment = 2
+
+[node name="MiddleTower" type="VBoxContainer" parent="CanvasLayer/BigTowerBox/VBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 8
+mouse_filter = 2
+alignment = 1
+
+[node name="TowerLetterPlaceholder3" type="Panel" parent="CanvasLayer/BigTowerBox/VBoxContainer2/MiddleTower"]
+custom_minimum_size = Vector2(138, 145)
+layout_mode = 2
+
+[node name="Letter" type="Label" parent="CanvasLayer/BigTowerBox/VBoxContainer2/MiddleTower/TowerLetterPlaceholder3"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -44.5
+offset_top = -20.0
+offset_right = 44.5
+offset_bottom = 220.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_75hco")
+theme_override_font_sizes/font_size = 140
+text = "A"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/BigTowerBox/VBoxContainer2/MiddleTower/TowerLetterPlaceholder3/Letter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_m61bn")
+action_mode = 0
+
+[node name="TowerLetterPlaceholder4" type="Panel" parent="CanvasLayer/BigTowerBox/VBoxContainer2/MiddleTower"]
+custom_minimum_size = Vector2(138, 145)
+layout_mode = 2
+
+[node name="Letter" type="Label" parent="CanvasLayer/BigTowerBox/VBoxContainer2/MiddleTower/TowerLetterPlaceholder4"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -44.5
+offset_top = -20.0
+offset_right = 44.5
+offset_bottom = 220.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_75hco")
+theme_override_font_sizes/font_size = 140
+text = "W"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/BigTowerBox/VBoxContainer2/MiddleTower/TowerLetterPlaceholder4/Letter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_m61bn")
+action_mode = 0
+
+[node name="TowerLetterPlaceholder5" type="Panel" parent="CanvasLayer/BigTowerBox/VBoxContainer2/MiddleTower"]
+custom_minimum_size = Vector2(138, 145)
+layout_mode = 2
+
+[node name="Letter" type="Label" parent="CanvasLayer/BigTowerBox/VBoxContainer2/MiddleTower/TowerLetterPlaceholder5"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -44.5
+offset_top = -20.0
+offset_right = 44.5
+offset_bottom = 220.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_75hco")
+theme_override_font_sizes/font_size = 140
+text = "A"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/BigTowerBox/VBoxContainer2/MiddleTower/TowerLetterPlaceholder5/Letter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_m61bn")
+action_mode = 0
+
+[node name="MiddleSubmit" type="Button" parent="CanvasLayer/BigTowerBox/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 0.129412)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.391853, 0.301462, 1.44392e-07, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_yofqq")
 theme_override_font_sizes/font_size = 116
+theme_override_styles/focus = SubResource("StyleBoxEmpty_j1p4s")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_j1p4s")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_75hco")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_j1p4s")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_j1p4s")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_j1p4s")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_j1p4s")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_j1p4s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_j1p4s")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_j1p4s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_j1p4s")
 text = "Submit"
 
-[node name="RightSubmit" type="Button" parent="CanvasLayer/VBoxContainer/SubmitButtonsHBox"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/BigTowerBox"]
+layout_mode = 2
+alignment = 2
+
+[node name="RightTower" type="VBoxContainer" parent="CanvasLayer/BigTowerBox/VBoxContainer3"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 8
+theme_override_constants/separation = -7
+alignment = 1
+
+[node name="TowerLetterPlaceholder5" type="Panel" parent="CanvasLayer/BigTowerBox/VBoxContainer3/RightTower"]
+custom_minimum_size = Vector2(138, 145)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_p61r5")
+
+[node name="Letter" type="Label" parent="CanvasLayer/BigTowerBox/VBoxContainer3/RightTower/TowerLetterPlaceholder5"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -44.5
+offset_top = -20.0
+offset_right = 44.5
+offset_bottom = 220.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/font = ExtResource("3_75hco")
+theme_override_font_sizes/font_size = 140
+text = "A"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/BigTowerBox/VBoxContainer3/RightTower/TowerLetterPlaceholder5/Letter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_m61bn")
+action_mode = 0
+
+[node name="TowerLetterPlaceholder6" type="Panel" parent="CanvasLayer/BigTowerBox/VBoxContainer3/RightTower"]
+custom_minimum_size = Vector2(138, 145)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_u2tem")
+
+[node name="Letter" type="Label" parent="CanvasLayer/BigTowerBox/VBoxContainer3/RightTower/TowerLetterPlaceholder6"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -44.5
+offset_top = -20.0
+offset_right = 44.5
+offset_bottom = 220.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_75hco")
+theme_override_font_sizes/font_size = 140
+text = "A"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/BigTowerBox/VBoxContainer3/RightTower/TowerLetterPlaceholder6/Letter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_m61bn")
+action_mode = 0
+
+[node name="TowerLetterPlaceholder7" type="Panel" parent="CanvasLayer/BigTowerBox/VBoxContainer3/RightTower"]
+custom_minimum_size = Vector2(138, 145)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_82pmy")
+
+[node name="Letter" type="Label" parent="CanvasLayer/BigTowerBox/VBoxContainer3/RightTower/TowerLetterPlaceholder7"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -44.5
+offset_top = -20.0
+offset_right = 44.5
+offset_bottom = 220.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_75hco")
+theme_override_font_sizes/font_size = 140
+text = "A"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/BigTowerBox/VBoxContainer3/RightTower/TowerLetterPlaceholder7/Letter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_m61bn")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_m61bn")
+action_mode = 0
+
+[node name="RightSubmit" type="Button" parent="CanvasLayer/BigTowerBox/VBoxContainer3"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 0.129412)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.391853, 0.301462, 1.44392e-07, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_yofqq")
 theme_override_font_sizes/font_size = 116
+theme_override_styles/focus = SubResource("StyleBoxEmpty_j1p4s")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_j1p4s")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_75hco")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_j1p4s")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_j1p4s")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_j1p4s")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_j1p4s")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_j1p4s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_j1p4s")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_j1p4s")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_j1p4s")
 text = "Submit"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer"]
 
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/SubmitButtonsHBox/LeftSubmit" to="." method="_on_left_submit_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/SubmitButtonsHBox/MiddleSubmit" to="." method="_on_middle_submit_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/SubmitButtonsHBox/RightSubmit" to="." method="_on_right_submit_pressed"]
+[node name="ArtisanParticles" type="GPUParticles2D" parent="CanvasLayer"]
+unique_name_in_owner = true
+position = Vector2(1061, 580)
+emitting = false
+amount = 10
+texture = ExtResource("6_j1p4s")
+lifetime = 10.07
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_4gm18")
+
+[node name="MeteorParticles" type="GPUParticles2D" parent="CanvasLayer"]
+unique_name_in_owner = true
+position = Vector2(831, 699)
+amount = 100
+texture = ExtResource("7_qw3uy")
+lifetime = 0.5
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_b7a1k")
+
+[node name="SparksParticles" type="GPUParticles2D" parent="CanvasLayer"]
+unique_name_in_owner = true
+position = Vector2(265, 287)
+emitting = false
+amount = 100
+texture = SubResource("GradientTexture2D_b7a1k")
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_sbleq")
+
+[node name="BrokenTower" type="TextureRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+offset_left = 494.0
+offset_top = 1529.0
+offset_right = 794.0
+offset_bottom = 2664.0
+mouse_filter = 2
+texture = ExtResource("8_75hco")
+expand_mode = 1
+
+[node name="MovingLettersControl" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 7.0
+offset_right = 5.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[connection signal="pressed" from="CanvasLayer/BigTowerBox/VBoxContainer/LeftSubmit" to="." method="_on_left_submit_pressed"]
+[connection signal="pressed" from="CanvasLayer/BigTowerBox/VBoxContainer2/MiddleSubmit" to="." method="_on_middle_submit_pressed"]
+[connection signal="pressed" from="CanvasLayer/BigTowerBox/VBoxContainer3/RightSubmit" to="." method="_on_right_submit_pressed"]
